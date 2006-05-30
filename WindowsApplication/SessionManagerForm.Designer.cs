@@ -49,10 +49,14 @@ namespace uk.org.riseley.puttySessionManager
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SessionManagerForm));
             this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.SessionTreeControl();
+            this.sysTrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // systrayIcon
             // 
+            this.systrayIcon.ContextMenuStrip = this.sysTrayContextMenu;
             resources.ApplyResources(this.systrayIcon, "systrayIcon");
             this.systrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
@@ -63,6 +67,19 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionTreeControl.SessionEventHandler(this.sessionTreeControl1_LaunchSession);
             this.sessionTreeControl1.ShowAbout += new System.EventHandler(this.sessionTreeControl1_ShowAbout);
             this.sessionTreeControl1.ShowOptions += new System.EventHandler(this.sessionTreeControl1_ShowOptions);
+            // 
+            // sysTrayContextMenu
+            // 
+            this.sysTrayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.sysTrayContextMenu.Name = "sysTrayContextMenu";
+            resources.ApplyResources(this.sysTrayContextMenu, "sysTrayContextMenu");
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // SessionManagerForm
             // 
@@ -77,6 +94,7 @@ namespace uk.org.riseley.puttySessionManager
             this.Opacity = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyValueDouble;
             this.TopMost = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SessionManagerForm_FormClosing_1);
+            this.sysTrayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -85,6 +103,8 @@ namespace uk.org.riseley.puttySessionManager
 
         private System.Windows.Forms.NotifyIcon systrayIcon;
         private uk.org.riseley.puttySessionManager.SessionTreeControl sessionTreeControl1;
+        private System.Windows.Forms.ContextMenuStrip sysTrayContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

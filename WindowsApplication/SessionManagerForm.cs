@@ -59,9 +59,10 @@ namespace uk.org.riseley.puttySessionManager
 
         private void confirmExit()
         {
-            if (MessageBox.Show("Exit application?"
+            if (MessageBox.Show(this, "Exit application?"
                                    , "Exit"
-                                   , MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                   , MessageBoxButtons.YesNo
+                                   , MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Application.Exit();
             }
