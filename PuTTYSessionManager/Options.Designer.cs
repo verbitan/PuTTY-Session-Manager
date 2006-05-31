@@ -67,7 +67,6 @@ namespace uk.org.riseley.puttySessionManager
             this.openFileDialog.FileName = "putty.exe";
             this.openFileDialog.Filter = "putty.exe|putty.exe|All Files|*.*";
             this.openFileDialog.InitialDirectory = "C:\\Program Files\\PuTTY\\";
-            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // groupBox1
             // 
@@ -85,7 +84,6 @@ namespace uk.org.riseley.puttySessionManager
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // checkBox2
             // 

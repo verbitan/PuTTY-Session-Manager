@@ -31,19 +31,20 @@ namespace uk.org.riseley.puttySessionManager
         public SessionManagerForm()
         {
             InitializeComponent();
-            LoadSize();
+            LoadLayout();
         }
 
-        private void LoadSize()
+        private void LoadLayout()
         {
             this.ClientSize = Properties.Settings.Default.WindowSize;
             this.Location = Properties.Settings.Default.Location;
+            displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
         }
 
         private void SaveSize()
         {
             Properties.Settings.Default.WindowSize = this.ClientSize;
-            Properties.Settings.Default.Location = this.Location;  
+            Properties.Settings.Default.Location = this.Location;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,6 +137,23 @@ namespace uk.org.riseley.puttySessionManager
         {
             Options o = new Options();
             o.ShowDialog();
+        }
+
+        private void sysTrayContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+
+        private void displayTreeToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
+        {
+            sessionTreeControl1.Enabled = displayTreeToolStripMenuItem.Checked;
+            sessionTreeControl1.Visible = displayTreeToolStripMenuItem.Checked;
+            sessionListControl1.Enabled = !displayTreeToolStripMenuItem.Checked;
+            sessionListControl1.Visible = !displayTreeToolStripMenuItem.Checked;
+
+            Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
+
         }
     }
 }

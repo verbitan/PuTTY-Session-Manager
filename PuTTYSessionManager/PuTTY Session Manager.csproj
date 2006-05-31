@@ -81,6 +81,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SessionListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SessionListControl.Designer.cs">
+      <DependentUpon>SessionListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="SessionManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,10 @@
     <EmbeddedResource Include="Options.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionListControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SessionManagerForm.resx">
       <DependentUpon>SessionManagerForm.cs</DependentUpon>

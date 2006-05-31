@@ -124,6 +124,15 @@
     <value>116, 4</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="displayTreeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="displayTreeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Display Tree</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -131,7 +140,7 @@
     <value>Exit</value>
   </data>
   <data name="sysTrayContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 48</value>
+    <value>153, 76</value>
   </data>
   <data name="&gt;&gt;sysTrayContextMenu.Name" xml:space="preserve">
     <value>sysTrayContextMenu</value>
@@ -231,6 +240,36 @@
   <data name="&gt;&gt;sessionTreeControl1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="sessionListControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="sessionListControl1.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="sessionListControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="sessionListControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 545</value>
+  </data>
+  <data name="sessionListControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="sessionListControl1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;sessionListControl1.Name" xml:space="preserve">
+    <value>sessionListControl1</value>
+  </data>
+  <data name="&gt;&gt;sessionListControl1.Type" xml:space="preserve">
+    <value>uk.org.riseley.puttySessionManager.SessionListControl, PuTTY Session Manager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;sessionListControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sessionListControl1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -311,6 +350,18 @@
   </data>
   <data name="&gt;&gt;systrayIcon.Type" xml:space="preserve">
     <value>System.Windows.Forms.NotifyIcon, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;displayTreeToolStripMenuItem.Name" xml:space="preserve">
+    <value>displayTreeToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;displayTreeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
     <value>exitToolStripMenuItem</value>

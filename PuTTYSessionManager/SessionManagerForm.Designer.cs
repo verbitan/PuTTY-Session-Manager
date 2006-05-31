@@ -48,9 +48,12 @@ namespace uk.org.riseley.puttySessionManager
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SessionManagerForm));
             this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.SessionTreeControl();
             this.sysTrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.displayTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.SessionTreeControl();
+            this.sessionListControl1 = new uk.org.riseley.puttySessionManager.SessionListControl();
             this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +63,36 @@ namespace uk.org.riseley.puttySessionManager
             resources.ApplyResources(this.systrayIcon, "systrayIcon");
             this.systrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // sysTrayContextMenu
+            // 
+            this.sysTrayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.displayTreeToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
+            this.sysTrayContextMenu.Name = "sysTrayContextMenu";
+            resources.ApplyResources(this.sysTrayContextMenu, "sysTrayContextMenu");
+            this.sysTrayContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.sysTrayContextMenu_Opening);
+            // 
+            // displayTreeToolStripMenuItem
+            // 
+            this.displayTreeToolStripMenuItem.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DisplayTree;
+            this.displayTreeToolStripMenuItem.CheckOnClick = true;
+            this.displayTreeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.displayTreeToolStripMenuItem.Name = "displayTreeToolStripMenuItem";
+            resources.ApplyResources(this.displayTreeToolStripMenuItem, "displayTreeToolStripMenuItem");
+            this.displayTreeToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.displayTreeToolStripMenuItem_CheckStateChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // sessionTreeControl1
             // 
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
@@ -68,24 +101,20 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionTreeControl1.ShowAbout += new System.EventHandler(this.sessionTreeControl1_ShowAbout);
             this.sessionTreeControl1.ShowOptions += new System.EventHandler(this.sessionTreeControl1_ShowOptions);
             // 
-            // sysTrayContextMenu
+            // sessionListControl1
             // 
-            this.sysTrayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.sysTrayContextMenu.Name = "sysTrayContextMenu";
-            resources.ApplyResources(this.sysTrayContextMenu, "sysTrayContextMenu");
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
+            this.sessionListControl1.Name = "sessionListControl1";
+            this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionListControl.SessionEventHandler(this.sessionTreeControl1_LaunchSession);
+            this.sessionListControl1.ShowAbout += new System.EventHandler(this.sessionTreeControl1_ShowAbout);
+            this.sessionListControl1.ShowOptions += new System.EventHandler(this.sessionTreeControl1_ShowOptions);
             // 
             // SessionManagerForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.sessionTreeControl1);
+            this.Controls.Add(this.sessionListControl1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Opacity", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyValueDouble", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("TopMost", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "AlwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
@@ -105,6 +134,9 @@ namespace uk.org.riseley.puttySessionManager
         private uk.org.riseley.puttySessionManager.SessionTreeControl sessionTreeControl1;
         private System.Windows.Forms.ContextMenuStrip sysTrayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem displayTreeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private SessionListControl sessionListControl1;
     }
 }
 

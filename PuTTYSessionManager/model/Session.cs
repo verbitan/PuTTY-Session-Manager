@@ -23,6 +23,10 @@ namespace uk.org.riseley.puttySessionManager.model
 {
     public class Session
     {
+        public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
+        public const string PUTTY_PSM_FOLDER_VALUE = "PsmPath";
+        public const string SESSIONS_FOLDER_NAME = "Sessions";
+
         private string sessionName = "";
 
         public string SessionName
@@ -59,6 +63,11 @@ namespace uk.org.riseley.puttySessionManager.model
             SessionDisplayText = regKey.Replace("%20", " ");
             FolderName = folderName;
             IsFolder = isFolder;
+        }
+
+        public override string ToString()
+        {
+            return SessionDisplayText;
         }
 
     }

@@ -37,9 +37,7 @@ namespace uk.org.riseley.puttySessionManager
         private const int IMAGE_INDEX_FOLDER = 0;
         private const int IMAGE_INDEX_SELECTED_FOLDER = 1;
         private const int IMAGE_INDEX_SESSION = 2;
-        private const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
-        private const string PUTTY_PSM_FOLDER_VALUE = "PsmPath";
-        private const string SESSIONS_FOLDER_NAME = "Sessions";
+        
 
         public SessionTreeControl()
         {
@@ -194,7 +192,7 @@ namespace uk.org.riseley.puttySessionManager
             {
                 node.Remove();
                 s = ((Session)parentNode.Tag);
-                if ( s.IsFolder && !(s.SessionDisplayText.Equals(SESSIONS_FOLDER_NAME)))
+                if ( s.IsFolder && !(s.SessionDisplayText.Equals(Session.SESSIONS_FOLDER_NAME)))
                 {
                     cleanFolders(parentNode);
                 }
@@ -218,7 +216,7 @@ namespace uk.org.riseley.puttySessionManager
         private void LoadTree()
         {
 
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY);
 
             // Suppress repainting the TreeView until all the objects have been created.
             treeView.BeginUpdate();
@@ -238,7 +236,7 @@ namespace uk.org.riseley.puttySessionManager
             foreach (string keyName in rk.GetSubKeyNames())
             {
                 RegistryKey sessKey = rk.OpenSubKey(keyName);
-                String pempath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_VALUE);
+                String pempath = (String)sessKey.GetValue(Session.PUTTY_PSM_FOLDER_VALUE);
                 Session s = new Session(keyName, pempath, false);
                 TreeNode newNode = new TreeNode(s.SessionDisplayText);
                 newNode.Tag = s;
@@ -379,8 +377,8 @@ namespace uk.org.riseley.puttySessionManager
 
         private void saveFolderToRegistry(Session s)
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
-            rk.SetValue(PUTTY_PSM_FOLDER_VALUE, s.FolderName, RegistryValueKind.String);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
+            rk.SetValue(Session.PUTTY_PSM_FOLDER_VALUE, s.FolderName, RegistryValueKind.String);
             rk.Close();
         }
 
