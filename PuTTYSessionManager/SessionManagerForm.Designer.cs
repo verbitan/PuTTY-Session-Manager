@@ -52,6 +52,7 @@ namespace uk.org.riseley.puttySessionManager
             this.displayTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.SessionTreeControl();
             this.sessionListControl1 = new uk.org.riseley.puttySessionManager.SessionListControl();
             this.sysTrayContextMenu.SuspendLayout();
@@ -66,12 +67,12 @@ namespace uk.org.riseley.puttySessionManager
             // sysTrayContextMenu
             // 
             this.sysTrayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadSessionToolStripMenuItem,
             this.displayTreeToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.sysTrayContextMenu.Name = "sysTrayContextMenu";
             resources.ApplyResources(this.sysTrayContextMenu, "sysTrayContextMenu");
-            this.sysTrayContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.sysTrayContextMenu_Opening);
             // 
             // displayTreeToolStripMenuItem
             // 
@@ -93,6 +94,11 @@ namespace uk.org.riseley.puttySessionManager
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // loadSessionToolStripMenuItem
+            // 
+            this.loadSessionToolStripMenuItem.Name = "loadSessionToolStripMenuItem";
+            resources.ApplyResources(this.loadSessionToolStripMenuItem, "loadSessionToolStripMenuItem");
+            // 
             // sessionTreeControl1
             // 
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
@@ -105,6 +111,7 @@ namespace uk.org.riseley.puttySessionManager
             // 
             resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
             this.sessionListControl1.Name = "sessionListControl1";
+            this.sessionListControl1.RefreshSessions += new System.EventHandler(this.sessionListControl1_RefreshSessions);
             this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionListControl.SessionEventHandler(this.sessionTreeControl1_LaunchSession);
             this.sessionListControl1.ShowAbout += new System.EventHandler(this.sessionTreeControl1_ShowAbout);
             this.sessionListControl1.ShowOptions += new System.EventHandler(this.sessionTreeControl1_ShowOptions);
@@ -137,6 +144,7 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.ToolStripMenuItem displayTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private SessionListControl sessionListControl1;
+        private System.Windows.Forms.ToolStripMenuItem loadSessionToolStripMenuItem;
     }
 }
 

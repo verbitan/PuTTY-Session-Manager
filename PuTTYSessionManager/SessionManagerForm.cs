@@ -39,6 +39,7 @@ namespace uk.org.riseley.puttySessionManager
             this.ClientSize = Properties.Settings.Default.WindowSize;
             this.Location = Properties.Settings.Default.Location;
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
+            setDisplay();
         }
 
         private void SaveSize()
@@ -139,21 +140,37 @@ namespace uk.org.riseley.puttySessionManager
             o.ShowDialog();
         }
 
-        private void sysTrayContextMenu_Opening(object sender, CancelEventArgs e)
-        {
-
-        }
-
-
         private void displayTreeToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
         {
+            setDisplay();
+        }
+
+        private void setDisplay()
+        {
+            this.SuspendLayout();
             sessionTreeControl1.Enabled = displayTreeToolStripMenuItem.Checked;
             sessionTreeControl1.Visible = displayTreeToolStripMenuItem.Checked;
             sessionListControl1.Enabled = !displayTreeToolStripMenuItem.Checked;
             sessionListControl1.Visible = !displayTreeToolStripMenuItem.Checked;
 
-            Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
+            if (sessionListControl1.Enabled)
+            {
+                sessionListControl1.getSessionMenuItems(loadSessionToolStripMenuItem);
+                loadSessionToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                loadSessionToolStripMenuItem.Visible = false;
+            }
 
+            Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
+            this.ResumeLayout(true);
+        }
+
+        private void sessionListControl1_RefreshSessions(object sender, EventArgs e)
+        {
+            sessionListControl1.getSessionMenuItems(loadSessionToolStripMenuItem);
+            loadSessionToolStripMenuItem.Visible = true;            
         }
     }
 }

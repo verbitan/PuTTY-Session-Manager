@@ -24,6 +24,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using uk.org.riseley.puttySessionManager.model;
+using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
@@ -34,6 +35,7 @@ namespace uk.org.riseley.puttySessionManager
 
         public event System.EventHandler ShowOptions;
         public event System.EventHandler ShowAbout;
+        public event System.EventHandler RefreshSessions;
 
         protected virtual void OnLaunchSession(SessionEventArgs se)
         {
@@ -56,6 +58,14 @@ namespace uk.org.riseley.puttySessionManager
             if (ShowAbout != null)
             {
                 ShowAbout(this, e);
+            }
+        }
+
+        protected virtual void OnRefreshSessions(System.EventArgs e)
+        {
+            if (RefreshSessions != null)
+            {
+                RefreshSessions(this, e);
             }
         }
 
@@ -105,9 +115,19 @@ namespace uk.org.riseley.puttySessionManager
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            Session s = (Session)((ListBox)sender).SelectedItem;
-            if ( s != null )
-                OnLaunchSession(new SessionEventArgs(s.SessionDisplayText));
+            string sessionName = null;
+
+            if ( sender is ListBox ) {
+                Session s = (Session)((ListBox)sender).SelectedItem;
+                sessionName = s.SessionDisplayText;
+            }
+            else if (sender is ToolStripMenuItem)
+            {
+                sessionName = ((ToolStripMenuItem)sender).Text;
+            }
+
+            if ( sessionName != null)
+                OnLaunchSession(new SessionEventArgs(sessionName));
             else
                 OnLaunchSession(new SessionEventArgs());
         }
@@ -120,11 +140,24 @@ namespace uk.org.riseley.puttySessionManager
         private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadList();
+            OnRefreshSessions(System.EventArgs.Empty);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OnShowAbout(System.EventArgs.Empty);
+        }
+
+        public void getSessionMenuItems(ToolStripMenuItem parent)
+        {
+            parent.DropDownItems.Clear();
+            
+            IEnumerator ie = listBox1.Items.GetEnumerator();
+
+            while (ie.MoveNext()) 
+            {
+                parent.DropDownItems.Add(new ToolStripMenuItem(((Session)ie.Current).SessionDisplayText, null, listBox1_DoubleClick));
+            }
         }
     }
 }

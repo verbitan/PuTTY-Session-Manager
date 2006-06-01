@@ -124,23 +124,29 @@
     <value>116, 4</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="loadSessionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="loadSessionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Load Session</value>
+  </data>
   <data name="displayTreeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>147, 22</value>
   </data>
   <data name="displayTreeToolStripMenuItem.Text" xml:space="preserve">
     <value>Display Tree</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>144, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>147, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="sysTrayContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 76</value>
+    <value>148, 76</value>
   </data>
   <data name="&gt;&gt;sysTrayContextMenu.Name" xml:space="preserve">
     <value>sysTrayContextMenu</value>
@@ -219,6 +225,9 @@
   <data name="sessionTreeControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="sessionTreeControl1.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="sessionTreeControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -227,6 +236,9 @@
   </data>
   <data name="sessionTreeControl1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="sessionTreeControl1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;sessionTreeControl1.Name" xml:space="preserve">
     <value>sessionTreeControl1</value>
@@ -339,6 +351,9 @@
         AAf//AAH//wAB//+AAf//wAP
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>Manual</value>
   </data>
@@ -367,6 +382,12 @@
     <value>exitToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;loadSessionToolStripMenuItem.Name" xml:space="preserve">
+    <value>loadSessionToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;loadSessionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
