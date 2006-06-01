@@ -118,5 +118,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["AlwaysOnTop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DisplayTree {
+            get {
+                return ((bool)(this["DisplayTree"]));
+            }
+            set {
+                this["DisplayTree"] = value;
+            }
+        }
     }
 }
