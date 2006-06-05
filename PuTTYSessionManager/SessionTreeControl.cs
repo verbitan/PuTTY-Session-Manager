@@ -24,6 +24,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using uk.org.riseley.puttySessionManager.model;
+using System.Collections;
 
 
 namespace uk.org.riseley.puttySessionManager
@@ -114,6 +115,9 @@ namespace uk.org.riseley.puttySessionManager
 
                     // Cleanup any hanging folders
                     cleanFolders(oldParent);
+
+                    // Fire a refresh event
+                    OnRefreshSessions(System.EventArgs.Empty);
                 }
 
                 // If it is a copy operation, clone the dragged node 
@@ -263,11 +267,24 @@ namespace uk.org.riseley.puttySessionManager
 
         private void launchSessionMenuItem_Click(object sender, EventArgs e)
         {
-            Session s = (Session)treeView.SelectedNode.Tag;
-            if (s.IsFolder == false)
+            string sessionName = null;
+
+            if (sender is ToolStripMenuItem)
             {
-                OnLaunchSession(new SessionEventArgs(s.SessionDisplayText));
+                sessionName = ((ToolStripMenuItem)sender).Text;
             }
+            else 
+            {
+                Session s = (Session)treeView.SelectedNode.Tag;
+                sessionName = s.SessionDisplayText;
+            }
+            
+            if (sessionName != null)
+                OnLaunchSession(new SessionEventArgs(sessionName));
+            else
+                OnLaunchSession(new SessionEventArgs());
+            
+            
         }
 
         private void treeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -434,7 +451,31 @@ namespace uk.org.riseley.puttySessionManager
 
         public override void getSessionMenuItems(ToolStripMenuItem parent)
         {
+            parent.DropDownItems.Clear();
+            addSessionMenuItemsFolder(parent, treeView.Nodes[0].Nodes);     
         }
+
+        private void addSessionMenuItemsFolder(ToolStripMenuItem parent, TreeNodeCollection nodes)
+        {
+            IEnumerator ie = nodes.GetEnumerator();
+
+            while (ie.MoveNext())
+            {
+                TreeNode node = (TreeNode)ie.Current;
+                Session s = (Session)node.Tag;
+                if (s.IsFolder)
+                {
+                    ToolStripMenuItem folder = new ToolStripMenuItem(s.SessionDisplayText);
+                    parent.DropDownItems.Add(folder);
+                    addSessionMenuItemsFolder(folder, node.Nodes);
+                }
+                else
+                {
+                    parent.DropDownItems.Add(new ToolStripMenuItem(s.SessionDisplayText, null, launchSessionMenuItem_Click));
+                }
+            }
+        }
+
 
     }
 }

@@ -147,23 +147,21 @@ namespace uk.org.riseley.puttySessionManager
             if (sessionListControl1.Enabled)
             {
                 currentSessionControl = sessionListControl1;
-                sessionListControl1.getSessionMenuItems(loadSessionToolStripMenuItem);
-                loadSessionToolStripMenuItem.Visible = true;
             }
             else
             {
                 currentSessionControl = sessionTreeControl1;
-                loadSessionToolStripMenuItem.Visible = false;
             }
+
+            currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);
 
             Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
             this.ResumeLayout(true);
         }
 
-        private void sessiontControl_RefreshSessions(object sender, EventArgs e)
+        private void sessionControl_RefreshSessions(object sender, EventArgs e)
         {
-            currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);
-            loadSessionToolStripMenuItem.Visible = true;            
+            currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
         }
     }
 }

@@ -49,10 +49,10 @@ namespace uk.org.riseley.puttySessionManager
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SessionManagerForm));
             this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.sysTrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.loadSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displayTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.SessionTreeControl();
             this.sessionListControl1 = new uk.org.riseley.puttySessionManager.SessionListControl();
             this.sysTrayContextMenu.SuspendLayout();
@@ -72,7 +72,14 @@ namespace uk.org.riseley.puttySessionManager
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.sysTrayContextMenu.Name = "sysTrayContextMenu";
+            this.sysTrayContextMenu.ShowCheckMargin = true;
+            this.sysTrayContextMenu.ShowImageMargin = false;
             resources.ApplyResources(this.sysTrayContextMenu, "sysTrayContextMenu");
+            // 
+            // loadSessionToolStripMenuItem
+            // 
+            this.loadSessionToolStripMenuItem.Name = "loadSessionToolStripMenuItem";
+            resources.ApplyResources(this.loadSessionToolStripMenuItem, "loadSessionToolStripMenuItem");
             // 
             // displayTreeToolStripMenuItem
             // 
@@ -94,16 +101,12 @@ namespace uk.org.riseley.puttySessionManager
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // loadSessionToolStripMenuItem
-            // 
-            this.loadSessionToolStripMenuItem.Name = "loadSessionToolStripMenuItem";
-            resources.ApplyResources(this.loadSessionToolStripMenuItem, "loadSessionToolStripMenuItem");
-            // 
             // sessionTreeControl1
             // 
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
             this.sessionTreeControl1.Name = "sessionTreeControl1";
-            this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionTreeControl.SessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionTreeControl1.RefreshSessions += new System.EventHandler(this.sessionControl_RefreshSessions);
+            this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.SessionEventHandler(this.sessionControl_LaunchSession);
             this.sessionTreeControl1.ShowAbout += new System.EventHandler(this.sessionControl_ShowAbout);
             this.sessionTreeControl1.ShowOptions += new System.EventHandler(this.sessionControl_ShowOptions);
             // 
@@ -111,8 +114,8 @@ namespace uk.org.riseley.puttySessionManager
             // 
             resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
             this.sessionListControl1.Name = "sessionListControl1";
-            this.sessionListControl1.RefreshSessions += new System.EventHandler(this.sessiontControl_RefreshSessions);
-            this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionListControl.SessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionListControl1.RefreshSessions += new System.EventHandler(this.sessionControl_RefreshSessions);
+            this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.SessionEventHandler(this.sessionControl_LaunchSession);
             this.sessionListControl1.ShowAbout += new System.EventHandler(this.sessionControl_ShowAbout);
             this.sessionListControl1.ShowOptions += new System.EventHandler(this.sessionControl_ShowOptions);
             // 
