@@ -28,7 +28,7 @@ namespace uk.org.riseley.puttySessionManager
 {
     public partial class SessionManagerForm : Form
     {
-        private Options optionsDialog = new Options();
+        private Options optionsDialog;
         private AboutBox aboutDialog  = new AboutBox();
 
         private SessionControl currentSessionControl;
@@ -41,9 +41,12 @@ namespace uk.org.riseley.puttySessionManager
 
         private void LoadLayout()
         {
+            optionsDialog = new Options(this);
             this.ClientSize = Properties.Settings.Default.WindowSize;
-            this.Location = Properties.Settings.Default.Location;
+            this.Location   = Properties.Settings.Default.Location;
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
+            if ( Properties.Settings.Default.HotkeyEnabled )
+                HotkeyController.RegisterHotkey(this);
             setDisplay();
         }
 
@@ -76,15 +79,15 @@ namespace uk.org.riseley.puttySessionManager
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
-                this.WindowState = FormWindowState.Minimized;
-            else
-                this.WindowState = FormWindowState.Normal;
+            this.Visible = !this.Visible;
+            if ( this.Visible == true && this.WindowState == FormWindowState.Minimized )
+                 this.WindowState = FormWindowState.Normal;
         }
 
 
         private void SessionManagerForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
+            HotkeyController.UnregisterHotKey(this);
             SaveSize();
             Properties.Settings.Default.Save();
         }
@@ -162,6 +165,13 @@ namespace uk.org.riseley.puttySessionManager
         private void sessionControl_RefreshSessions(object sender, EventArgs e)
         {
             currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == HotkeyController.WM_HOTKEY)
+                sessionControl_LaunchSession(this,new SessionEventArgs());
+            base.WndProc(ref m);
         }
     }
 }

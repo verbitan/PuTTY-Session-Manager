@@ -22,13 +22,16 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager
 {
     public partial class Options : Form
     {
-        public Options()
+        private Form parentWindow;
+        public Options(Form parent)
         {
+            parentWindow = parent;
             InitializeComponent();
         }
 
@@ -53,6 +56,27 @@ namespace uk.org.riseley.puttySessionManager
             this.Close();
         }
 
-           
+        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (hotkeyCheckBox.Checked == false)
+            {
+                bool result = HotkeyController.UnregisterHotKey(parentWindow);
+                if (result == false)
+                    MessageBox.Show(this, "Failed to unregister hotkey"
+                                   , "Warning"
+                                   , MessageBoxButtons.OK
+                                   , MessageBoxIcon.Warning);
+            }
+            else
+            {
+                bool result = HotkeyController.RegisterHotkey(parentWindow);
+                if (result == false)
+                    MessageBox.Show(this, "Failed to register hotkey"
+                                   , "Warning"
+                                   , MessageBoxButtons.OK
+                                   , MessageBoxIcon.Warning);
+            }
+        }
+          
     }
 }

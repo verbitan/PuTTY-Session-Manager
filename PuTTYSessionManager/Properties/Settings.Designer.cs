@@ -130,5 +130,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["DisplayTree"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HotkeyEnabled {
+            get {
+                return ((bool)(this["HotkeyEnabled"]));
+            }
+            set {
+                this["HotkeyEnabled"] = value;
+            }
+        }
     }
 }
