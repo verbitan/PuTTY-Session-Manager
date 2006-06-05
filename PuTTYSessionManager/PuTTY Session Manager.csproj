@@ -68,6 +68,7 @@
     <Compile Include="FolderForm.Designer.cs">
       <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\ISessionControl.cs" />
     <Compile Include="model\Session.cs" />
     <Compile Include="model\SessionEventArgs.cs" />
     <Compile Include="Options.cs">
@@ -80,6 +81,12 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SessionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SessionControl.Designer.cs">
+      <DependentUpon>SessionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="SessionListControl.cs">
       <SubType>UserControl</SubType>
@@ -106,6 +113,10 @@
     <EmbeddedResource Include="Options.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SessionListControl.resx">
       <SubType>Designer</SubType>

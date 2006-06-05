@@ -28,55 +28,17 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionListControl : UserControl
+    public partial class SessionListControl : SessionControl, uk.org.riseley.puttySessionManager.ISessionControl
     {
-        public event SessionEventHandler LaunchSession;
-        public delegate void SessionEventHandler(object sender, SessionEventArgs se);
-
-        public event System.EventHandler ShowOptions;
-        public event System.EventHandler ShowAbout;
-        public event System.EventHandler RefreshSessions;
-
-        protected virtual void OnLaunchSession(SessionEventArgs se)
-        {
-            if (LaunchSession != null)
-            {
-                LaunchSession(this, se);
-            }
-        }
-
-        protected virtual void OnShowOptions(System.EventArgs e)
-        {
-            if (ShowOptions != null)
-            {
-                ShowOptions(this, e);
-            }
-        }
-
-        protected virtual void OnShowAbout(System.EventArgs e)
-        {
-            if (ShowAbout != null)
-            {
-                ShowAbout(this, e);
-            }
-        }
-
-        protected virtual void OnRefreshSessions(System.EventArgs e)
-        {
-            if (RefreshSessions != null)
-            {
-                RefreshSessions(this, e);
-            }
-        }
-
+        
         public SessionListControl()
         {
             InitializeComponent();
-            LoadList();
+            LoadSessions();
         }
 
 
-        private void LoadList()
+        protected override void LoadSessions()
         {
 
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY);
@@ -132,23 +94,7 @@ namespace uk.org.riseley.puttySessionManager
                 OnLaunchSession(new SessionEventArgs());
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnShowOptions(System.EventArgs.Empty);
-        }
-
-        private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadList();
-            OnRefreshSessions(System.EventArgs.Empty);
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnShowAbout(System.EventArgs.Empty);
-        }
-
-        public void getSessionMenuItems(ToolStripMenuItem parent)
+        public override void getSessionMenuItems(ToolStripMenuItem parent)
         {
             parent.DropDownItems.Clear();
             

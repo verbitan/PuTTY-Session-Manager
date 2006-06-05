@@ -56,16 +56,11 @@ namespace uk.org.riseley.puttySessionManager
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lockSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
             this.nodeContextMenuStrip.SuspendLayout();
-            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // nodeContextMenuStrip
@@ -75,9 +70,11 @@ namespace uk.org.riseley.puttySessionManager
             this.newSessionMenuItem,
             this.toolStripSeparator2,
             this.newFolderMenuItem,
-            this.renameFolderMenuItem});
+            this.renameFolderMenuItem,
+            this.toolStripSeparator3,
+            this.lockSessionsToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(159, 120);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(159, 126);
             // 
             // launchSessionMenuItem
             // 
@@ -114,16 +111,10 @@ namespace uk.org.riseley.puttySessionManager
             this.renameFolderMenuItem.Text = "Rename Folder";
             this.renameFolderMenuItem.Click += new System.EventHandler(this.renameFolderMenuItem_Click);
             // 
-            // contextMenuStrip
+            // toolStripSeparator3
             // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lockSessionsToolStripMenuItem,
-            this.refreshSessionsToolStripMenuItem,
-            this.optionsToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.aboutToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(168, 98);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
             // 
             // lockSessionsToolStripMenuItem
             // 
@@ -131,35 +122,9 @@ namespace uk.org.riseley.puttySessionManager
             this.lockSessionsToolStripMenuItem.CheckOnClick = true;
             this.lockSessionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lockSessionsToolStripMenuItem.Name = "lockSessionsToolStripMenuItem";
-            this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.lockSessionsToolStripMenuItem.Text = "Lock Sessions";
             this.lockSessionsToolStripMenuItem.Click += new System.EventHandler(this.lockSessionsToolStripMenuItem_Click);
-            // 
-            // refreshSessionsToolStripMenuItem
-            // 
-            this.refreshSessionsToolStripMenuItem.Name = "refreshSessionsToolStripMenuItem";
-            this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.refreshSessionsToolStripMenuItem.Text = "Refresh Sessions";
-            this.refreshSessionsToolStripMenuItem.Click += new System.EventHandler(this.refreshSessionsToolStripMenuItem_Click);
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // treeImageList
             // 
@@ -171,7 +136,6 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // treeView
             // 
-            this.treeView.ContextMenuStrip = this.contextMenuStrip;
             this.treeView.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TreeFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TreeFont;
@@ -203,7 +167,6 @@ namespace uk.org.riseley.puttySessionManager
             this.Name = "SessionTreeControl";
             this.Size = new System.Drawing.Size(205, 414);
             this.nodeContextMenuStrip.ResumeLayout(false);
-            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -211,18 +174,14 @@ namespace uk.org.riseley.puttySessionManager
         #endregion
 
         private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem lockSessionsToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip nodeContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem launchSessionMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newSessionMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newFolderMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem refreshSessionsToolStripMenuItem;
         private System.Windows.Forms.ImageList treeImageList;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem renameFolderMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem lockSessionsToolStripMenuItem;
     }
 }

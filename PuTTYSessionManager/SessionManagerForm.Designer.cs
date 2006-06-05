@@ -103,18 +103,18 @@ namespace uk.org.riseley.puttySessionManager
             // 
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
             this.sessionTreeControl1.Name = "sessionTreeControl1";
-            this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionTreeControl.SessionEventHandler(this.sessionTreeControl1_LaunchSession);
-            this.sessionTreeControl1.ShowAbout += new System.EventHandler(this.sessionTreeControl1_ShowAbout);
-            this.sessionTreeControl1.ShowOptions += new System.EventHandler(this.sessionTreeControl1_ShowOptions);
+            this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionTreeControl.SessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionTreeControl1.ShowAbout += new System.EventHandler(this.sessionControl_ShowAbout);
+            this.sessionTreeControl1.ShowOptions += new System.EventHandler(this.sessionControl_ShowOptions);
             // 
             // sessionListControl1
             // 
             resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
             this.sessionListControl1.Name = "sessionListControl1";
-            this.sessionListControl1.RefreshSessions += new System.EventHandler(this.sessionListControl1_RefreshSessions);
-            this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionListControl.SessionEventHandler(this.sessionTreeControl1_LaunchSession);
-            this.sessionListControl1.ShowAbout += new System.EventHandler(this.sessionTreeControl1_ShowAbout);
-            this.sessionListControl1.ShowOptions += new System.EventHandler(this.sessionTreeControl1_ShowOptions);
+            this.sessionListControl1.RefreshSessions += new System.EventHandler(this.sessiontControl_RefreshSessions);
+            this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionListControl.SessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionListControl1.ShowAbout += new System.EventHandler(this.sessionControl_ShowAbout);
+            this.sessionListControl1.ShowOptions += new System.EventHandler(this.sessionControl_ShowOptions);
             // 
             // SessionManagerForm
             // 

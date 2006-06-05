@@ -31,7 +31,7 @@ namespace uk.org.riseley.puttySessionManager
 
 
 
-    public partial class SessionTreeControl : UserControl
+    public partial class SessionTreeControl : SessionControl, uk.org.riseley.puttySessionManager.ISessionControl
     {
 
         private const int IMAGE_INDEX_FOLDER = 0;
@@ -42,39 +42,8 @@ namespace uk.org.riseley.puttySessionManager
         public SessionTreeControl()
         {
             InitializeComponent();
-            LoadTree();
+            LoadSessions();
         }
-
-        public event SessionEventHandler LaunchSession;
-        public delegate void SessionEventHandler(object sender, SessionEventArgs se);
-
-        public event System.EventHandler ShowOptions;
-        public event System.EventHandler ShowAbout;
-
-        protected virtual void OnLaunchSession(SessionEventArgs se)
-        {
-            if (LaunchSession != null)
-            {
-                LaunchSession(this, se);
-            }
-        }
-
-        protected virtual void OnShowOptions(System.EventArgs e)
-        {
-            if (ShowOptions != null)
-            {
-                ShowOptions(this, e);
-            }
-        }
-
-        protected virtual void OnShowAbout(System.EventArgs e)
-        {
-            if (ShowAbout != null)
-            {
-                ShowAbout(this, e);
-            }
-        }
-
 
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
@@ -213,7 +182,7 @@ namespace uk.org.riseley.puttySessionManager
             return ContainsNode(node1, node2.Parent);
         }
 
-        private void LoadTree()
+        protected override void LoadSessions()
         {
 
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY);
@@ -328,16 +297,6 @@ namespace uk.org.riseley.puttySessionManager
 
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnShowOptions(System.EventArgs.Empty);
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnShowAbout(System.EventArgs.Empty);
-        }
-
         private void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -368,11 +327,6 @@ namespace uk.org.riseley.puttySessionManager
 
             }
 
-        }
-
-        private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadTree();
         }
 
         private void saveFolderToRegistry(Session s)
@@ -476,6 +430,10 @@ namespace uk.org.riseley.puttySessionManager
                 treeView.EndUpdate();
             }
 
+        }
+
+        public override void getSessionMenuItems(ToolStripMenuItem parent)
+        {
         }
 
     }

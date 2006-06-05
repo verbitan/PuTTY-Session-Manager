@@ -28,6 +28,11 @@ namespace uk.org.riseley.puttySessionManager
 {
     public partial class SessionManagerForm : Form
     {
+        private Options optionsDialog = new Options();
+        private AboutBox aboutDialog  = new AboutBox();
+
+        private SessionControl currentSessionControl;
+
         public SessionManagerForm()
         {
             InitializeComponent();
@@ -46,12 +51,6 @@ namespace uk.org.riseley.puttySessionManager
         {
             Properties.Settings.Default.WindowSize = this.ClientSize;
             Properties.Settings.Default.Location = this.Location;
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutBox ab = new AboutBox();
-            ab.ShowDialog();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,13 +74,6 @@ namespace uk.org.riseley.puttySessionManager
             confirmExit();
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Options o = new Options();
-            o.ShowDialog();
-        }
-
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal)
@@ -98,7 +90,7 @@ namespace uk.org.riseley.puttySessionManager
         }
 
 
-        private void sessionTreeControl1_LaunchSession(object sender, SessionEventArgs se)
+        private void sessionControl_LaunchSession(object sender, SessionEventArgs se)
         {
             String puttyExec = Properties.Settings.Default.PuttyLocation;
             System.Diagnostics.Process p = new System.Diagnostics.Process();
@@ -128,16 +120,14 @@ namespace uk.org.riseley.puttySessionManager
 
         }
 
-        private void sessionTreeControl1_ShowAbout(object sender, EventArgs e)
+        private void sessionControl_ShowAbout(object sender, EventArgs e)
         {
-            AboutBox ab = new AboutBox();
-            ab.ShowDialog();
+            aboutDialog.ShowDialog();
         }
 
-        private void sessionTreeControl1_ShowOptions(object sender, EventArgs e)
+        private void sessionControl_ShowOptions(object sender, EventArgs e)
         {
-            Options o = new Options();
-            o.ShowDialog();
+            optionsDialog.ShowDialog();
         }
 
         private void displayTreeToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
@@ -153,13 +143,16 @@ namespace uk.org.riseley.puttySessionManager
             sessionListControl1.Enabled = !displayTreeToolStripMenuItem.Checked;
             sessionListControl1.Visible = !displayTreeToolStripMenuItem.Checked;
 
+            
             if (sessionListControl1.Enabled)
             {
+                currentSessionControl = sessionListControl1;
                 sessionListControl1.getSessionMenuItems(loadSessionToolStripMenuItem);
                 loadSessionToolStripMenuItem.Visible = true;
             }
             else
             {
+                currentSessionControl = sessionTreeControl1;
                 loadSessionToolStripMenuItem.Visible = false;
             }
 
@@ -167,9 +160,9 @@ namespace uk.org.riseley.puttySessionManager
             this.ResumeLayout(true);
         }
 
-        private void sessionListControl1_RefreshSessions(object sender, EventArgs e)
+        private void sessiontControl_RefreshSessions(object sender, EventArgs e)
         {
-            sessionListControl1.getSessionMenuItems(loadSessionToolStripMenuItem);
+            currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);
             loadSessionToolStripMenuItem.Visible = true;            
         }
     }
