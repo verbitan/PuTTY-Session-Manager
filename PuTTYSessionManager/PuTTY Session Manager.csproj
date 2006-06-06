@@ -20,7 +20,7 @@
     <PublishUrl>..\PSMInstaller\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>1</UpdateInterval>
     <UpdateIntervalUnits>Weeks</UpdateIntervalUnits>
@@ -31,7 +31,7 @@
     <ProductName>PuTTY Session Manager</ProductName>
     <PublisherName>PuTTY</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>1.0.0.1</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
