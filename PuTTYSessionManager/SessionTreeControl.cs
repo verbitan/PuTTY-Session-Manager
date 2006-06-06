@@ -390,6 +390,9 @@ namespace uk.org.riseley.puttySessionManager
                 // Refresh the paths of all the child nodes
                 updateFolders(selectedNode, foldernode);
 
+                // Fire a refresh event
+                OnRefreshSessions(System.EventArgs.Empty);
+
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
             }
@@ -442,6 +445,9 @@ namespace uk.org.riseley.puttySessionManager
                 
                 // Refresh the paths of all the child nodes
                 updateFolders(selectedNode, parent);
+
+                // Fire a refresh event
+                OnRefreshSessions(System.EventArgs.Empty);
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
