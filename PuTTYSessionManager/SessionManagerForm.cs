@@ -45,8 +45,8 @@ namespace uk.org.riseley.puttySessionManager
             this.ClientSize = Properties.Settings.Default.WindowSize;
             this.Location   = Properties.Settings.Default.Location;
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
-            if ( Properties.Settings.Default.HotkeyEnabled )
-                HotkeyController.RegisterHotkey(this);
+            if (Properties.Settings.Default.HotkeyNewEnabled)
+                HotkeyController.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);                  
             setDisplay();
         }
 
@@ -68,13 +68,9 @@ namespace uk.org.riseley.puttySessionManager
                                    , MessageBoxButtons.YesNo
                                    , MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                systrayIcon.Visible = false;
                 Application.Exit();
             }
-        }
-
-        private void SessionManagerForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            confirmExit();
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -85,11 +81,19 @@ namespace uk.org.riseley.puttySessionManager
         }
 
 
-        private void SessionManagerForm_FormClosing_1(object sender, FormClosingEventArgs e)
+        private void SessionManagerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            HotkeyController.UnregisterHotKey(this);
-            SaveSize();
-            Properties.Settings.Default.Save();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Visible = false;
+            }
+            else
+            {
+                HotkeyController.UnregisterHotKey(this);
+                SaveSize();
+                Properties.Settings.Default.Save();
+            }
         }
 
 
@@ -170,8 +174,22 @@ namespace uk.org.riseley.puttySessionManager
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == HotkeyController.WM_HOTKEY)
-                sessionControl_LaunchSession(this,new SessionEventArgs());
+                processHotKey((int) m.WParam);               
             base.WndProc(ref m);
         }
+
+        private void processHotKey(int id)
+        {
+            switch (id)
+            {
+                case (int) HotkeyController.HotKeyId.HKID_NEW:
+                    sessionControl_LaunchSession(this, new SessionEventArgs());
+                    break;
+                default:
+                    sessionControl_LaunchSession(this, new SessionEventArgs());
+                    break;
+            }
+        }
+
     }
 }

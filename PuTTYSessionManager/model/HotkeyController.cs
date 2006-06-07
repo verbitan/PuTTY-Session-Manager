@@ -229,25 +229,40 @@ namespace uk.org.riseley.puttySessionManager.model
             }
         }
 
-        public static bool RegisterHotkey(Form form, char winkey)
+        public static bool RegisterHotkey(Form form, char winkey, HotKeyId id)
         {
-            bool result = User32.RegisterHotKey(form.Handle, form.GetType().GetHashCode(), (int) User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
+            bool result = User32.RegisterHotKey(form.Handle, (int) id, (int) User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
             return result;
         }
 
         public static bool RegisterHotkey(Form form)
         {
-            return RegisterHotkey(form, DEFAULT_HOTKEY);
+            return RegisterHotkey(form, DEFAULT_HOTKEY, HotKeyId.HKID_NEW );
+        }
+
+        public static bool UnregisterHotKey(Form form, HotKeyId id)
+        {
+            bool result = User32.UnregisterHotKey(form.Handle, (int)id);
+            return result;
         }
 
         public static bool UnregisterHotKey(Form form)
         {
-            bool result = User32.UnregisterHotKey(form.Handle, form.GetType().GetHashCode());
-            return result;
+            return UnregisterHotKey(form, HotKeyId.HKID_NEW );
         }
 
         public static int WM_HOTKEY = (int) User32.Msgs.WM_HOTKEY;
         
         private static char DEFAULT_HOTKEY = 'N';
+
+        public enum HotKeyId
+        {
+            HKID_NEW = 0,
+            HKID_SESSION_1 = 1,
+            HKID_SESSION_2 = 2,
+            HKID_SESSION_3 = 3,
+            HKID_SESSION_4 = 4,
+            HKID_SESSION_5 = 5
+        }
     }
 }

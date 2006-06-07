@@ -134,12 +134,36 @@ namespace uk.org.riseley.puttySessionManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool HotkeyEnabled {
+        public bool HotkeyNewEnabled {
             get {
-                return ((bool)(this["HotkeyEnabled"]));
+                return ((bool)(this["HotkeyNewEnabled"]));
             }
             set {
-                this["HotkeyEnabled"] = value;
+                this["HotkeyNewEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("N")]
+        public string HotkeyNewSession {
+            get {
+                return ((string)(this["HotkeyNewSession"]));
+            }
+            set {
+                this["HotkeyNewSession"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HotkeyFavouriteEnabled {
+            get {
+                return ((bool)(this["HotkeyFavouriteEnabled"]));
+            }
+            set {
+                this["HotkeyFavouriteEnabled"] = value;
             }
         }
     }

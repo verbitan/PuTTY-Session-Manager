@@ -29,10 +29,13 @@ namespace uk.org.riseley.puttySessionManager
     public partial class Options : Form
     {
         private Form parentWindow;
-        public Options(Form parent)
+        private HotkeyChooser hkChooser;
+
+        public Options(Form parentWindow)
         {
-            parentWindow = parent;
+            this.parentWindow = parentWindow;
             InitializeComponent();
+            hkChooser = new HotkeyChooser(parentWindow);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -56,26 +59,9 @@ namespace uk.org.riseley.puttySessionManager
             this.Close();
         }
 
-        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (hotkeyCheckBox.Checked == false)
-            {
-                bool result = HotkeyController.UnregisterHotKey(parentWindow);
-                if (result == false)
-                    MessageBox.Show(this, "Failed to unregister hotkey"
-                                   , "Warning"
-                                   , MessageBoxButtons.OK
-                                   , MessageBoxIcon.Warning);
-            }
-            else
-            {
-                bool result = HotkeyController.RegisterHotkey(parentWindow);
-                if (result == false)
-                    MessageBox.Show(this, "Failed to register hotkey"
-                                   , "Warning"
-                                   , MessageBoxButtons.OK
-                                   , MessageBoxIcon.Warning);
-            }
+            hkChooser.ShowDialog();
         }
           
     }
