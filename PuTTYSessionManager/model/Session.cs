@@ -21,10 +21,8 @@ using System.Text;
 
 namespace uk.org.riseley.puttySessionManager.model
 {
-    public class Session
+    public class Session : IEquatable<Session> ,IComparable<Session>
     {
-        public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
-        public const string PUTTY_PSM_FOLDER_VALUE = "PsmPath";
         public const string SESSIONS_FOLDER_NAME = "Sessions";
 
         private string sessionName = "";
@@ -70,5 +68,16 @@ namespace uk.org.riseley.puttySessionManager.model
             return SessionDisplayText;
         }
 
+        public int CompareTo(Session s)
+        {
+            return this.SessionName.CompareTo(s.SessionName);
+        }
+
+        public bool Equals(Session s)
+        {
+            return (this.SessionName.Equals(s.SessionName) &&
+                    this.IsFolder == s.IsFolder &&
+                    this.FolderName.Equals(s.FolderName));
+        }
     }
 }

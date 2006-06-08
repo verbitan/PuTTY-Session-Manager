@@ -142,7 +142,7 @@ namespace uk.org.riseley.puttySessionManager
             if (s.IsFolder == false)
             {
                 s.FolderName = parent.FullPath;
-                saveFolderToRegistry(s);
+                getSessionController().saveFolderToRegistry(s);
             }
             else
             {
@@ -189,8 +189,6 @@ namespace uk.org.riseley.puttySessionManager
         protected override void LoadSessions()
         {
 
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY);
-
             // Suppress repainting the TreeView until all the objects have been created.
             treeView.BeginUpdate();
 
@@ -206,25 +204,22 @@ namespace uk.org.riseley.puttySessionManager
             if (rootNode.Tag == null)
                 rootNode.Tag = new Session(rootPath, rootPath, true);
 
-            foreach (string keyName in rk.GetSubKeyNames())
+            foreach (Session s in getSessionController().getSessionList())
             {
-                RegistryKey sessKey = rk.OpenSubKey(keyName);
-                String pempath = (String)sessKey.GetValue(Session.PUTTY_PSM_FOLDER_VALUE);
-                Session s = new Session(keyName, pempath, false);
                 TreeNode newNode = new TreeNode(s.SessionDisplayText);
                 newNode.Tag = s;
                 newNode.ContextMenuStrip = nodeContextMenuStrip;
                 newNode.ImageIndex = IMAGE_INDEX_SESSION;
                 newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
 
-                if (pempath == null || pempath.Equals("") || pempath.Equals(rootPath))
+                if (s.FolderName == null || s.FolderName.Equals("") || s.FolderName.Equals(rootPath))
                 {
                     rootNode.Nodes.Add(newNode);
                 }
                 else
                 {
                     TreeNode currnode = rootNode;
-                    foreach (string folder in pempath.Split(pathSep.ToCharArray()))
+                    foreach (string folder in s.FolderName.Split(pathSep.ToCharArray()))
                     {
                         // Is this folder the root folder,
                         // if so, skip to the next one
@@ -238,7 +233,7 @@ namespace uk.org.riseley.puttySessionManager
                         }
                         else
                         {
-                            Session sess = new Session(folder, pempath, true);
+                            Session sess = new Session(folder, s.FolderName, true);
                             currnode.Nodes.Add(folder, sess.SessionDisplayText);
                             currnode = currnode.Nodes[folder];
                             currnode.Tag = sess;
@@ -251,9 +246,8 @@ namespace uk.org.riseley.puttySessionManager
 
                     currnode.Nodes.Add(newNode);
                 }
-                sessKey.Close();
             }
-            rk.Close();
+
             this.treeView.Sort();
             // Begin repainting the TreeView.
             treeView.EndUpdate();
@@ -344,13 +338,6 @@ namespace uk.org.riseley.puttySessionManager
 
             }
 
-        }
-
-        private void saveFolderToRegistry(Session s)
-        {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
-            rk.SetValue(Session.PUTTY_PSM_FOLDER_VALUE, s.FolderName, RegistryValueKind.String);
-            rk.Close();
         }
 
         private void newFolderMenuItem_Click(object sender, EventArgs e)

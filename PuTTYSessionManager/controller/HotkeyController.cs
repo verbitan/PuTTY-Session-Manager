@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Text;
 
-namespace uk.org.riseley.puttySessionManager.model
+namespace uk.org.riseley.puttySessionManager.controller
 {
     public class HotkeyController
     {

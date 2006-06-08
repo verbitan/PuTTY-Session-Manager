@@ -34,9 +34,11 @@ namespace uk.org.riseley.puttySessionManager
         public event System.EventHandler ShowOptions;
         public event System.EventHandler ShowAbout;
         public event System.EventHandler RefreshSessions;
+        private SessionController sc;
 
         public SessionControl()
         {
+           sc = new SessionController();
            InitializeComponent();
         }
 
@@ -68,6 +70,7 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (RefreshSessions != null)
             {
+                reloadSessions();
                 RefreshSessions(this, e);
             }
         }
@@ -79,7 +82,6 @@ namespace uk.org.riseley.puttySessionManager
 
         protected void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadSessions();
             OnRefreshSessions(System.EventArgs.Empty);
         }
 
@@ -94,6 +96,17 @@ namespace uk.org.riseley.puttySessionManager
 
         protected virtual void LoadSessions()
         {
+        }
+
+        protected SessionController getSessionController()
+        {
+            return sc;
+        }
+
+        public void reloadSessions()
+        {
+            sc.invalidateSessionList();
+            LoadSessions();
         }
     }
 }

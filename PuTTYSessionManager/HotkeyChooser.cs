@@ -23,6 +23,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
+using uk.org.riseley.puttySessionManager.controller;
+
 
 namespace uk.org.riseley.puttySessionManager
 {

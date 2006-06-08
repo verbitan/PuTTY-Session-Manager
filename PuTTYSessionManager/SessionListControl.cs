@@ -28,7 +28,7 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionListControl : SessionControl, uk.org.riseley.puttySessionManager.ISessionControl
+    public partial class SessionListControl : SessionControl, ISessionControl
     {
         
         public SessionListControl()
@@ -40,28 +40,14 @@ namespace uk.org.riseley.puttySessionManager
 
         protected override void LoadSessions()
         {
-
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(Session.PUTTY_SESSIONS_REG_KEY);
-
             // Suppress repainting the ListBox until all the objects have been created.
             listBox1.BeginUpdate();
 
             // Clear out the current tree
             listBox1.Items.Clear();
 
-            foreach (string keyName in rk.GetSubKeyNames())
-            {
-                RegistryKey sessKey = rk.OpenSubKey(keyName);
-
-                String pempath = (String)sessKey.GetValue(Session.PUTTY_PSM_FOLDER_VALUE);
-
-                Session s = new Session(keyName, pempath, false);
-
-                listBox1.Items.Add(s);
-
-                sessKey.Close();
-            }
-            rk.Close();
+            // Add the contents of the list to the list box
+            listBox1.Items.AddRange(getSessionController().getSessionList().ToArray());
 
             // Sort the list
             listBox1.Sorted = true;
@@ -97,12 +83,10 @@ namespace uk.org.riseley.puttySessionManager
         public override void getSessionMenuItems(ToolStripMenuItem parent)
         {
             parent.DropDownItems.Clear();
-            
-            IEnumerator ie = listBox1.Items.GetEnumerator();
 
-            while (ie.MoveNext()) 
+            foreach (Session s in getSessionController().getSessionList())
             {
-                parent.DropDownItems.Add(new ToolStripMenuItem(((Session)ie.Current).SessionDisplayText, null, listBox1_DoubleClick));
+               parent.DropDownItems.Add(new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick));
             }
         }
     }

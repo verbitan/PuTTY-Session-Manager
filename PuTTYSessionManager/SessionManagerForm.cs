@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
+using uk.org.riseley.puttySessionManager.controller;
 
 namespace uk.org.riseley.puttySessionManager
 {
@@ -32,6 +33,7 @@ namespace uk.org.riseley.puttySessionManager
         private AboutBox aboutDialog  = new AboutBox();
 
         private SessionControl currentSessionControl;
+        private SessionControl hiddenSessionControl;
 
         public SessionManagerForm()
         {
@@ -145,20 +147,20 @@ namespace uk.org.riseley.puttySessionManager
         private void setDisplay()
         {
             this.SuspendLayout();
-            sessionTreeControl1.Enabled = displayTreeToolStripMenuItem.Checked;
-            sessionTreeControl1.Visible = displayTreeToolStripMenuItem.Checked;
-            sessionListControl1.Enabled = !displayTreeToolStripMenuItem.Checked;
-            sessionListControl1.Visible = !displayTreeToolStripMenuItem.Checked;
-
-            
-            if (sessionListControl1.Enabled)
+            if (displayTreeToolStripMenuItem.Checked == true)
             {
-                currentSessionControl = sessionListControl1;
+                currentSessionControl = sessionTreeControl1;
+                hiddenSessionControl = sessionListControl1;
             }
             else
             {
-                currentSessionControl = sessionTreeControl1;
+                currentSessionControl = sessionListControl1;
+                hiddenSessionControl = sessionTreeControl1;            
             }
+            currentSessionControl.Enabled = true;
+            currentSessionControl.Visible = true;
+            hiddenSessionControl.Enabled = false;
+            hiddenSessionControl.Visible = false;                     
 
             currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);
 
@@ -168,6 +170,7 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionControl_RefreshSessions(object sender, EventArgs e)
         {
+            hiddenSessionControl.reloadSessions();
             currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
         }
 
