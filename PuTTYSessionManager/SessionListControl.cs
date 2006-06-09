@@ -31,10 +31,9 @@ namespace uk.org.riseley.puttySessionManager
     public partial class SessionListControl : SessionControl, ISessionControl
     {
         
-        public SessionListControl()
+        public SessionListControl() : base()
         {
             InitializeComponent();
-            LoadSessions();
         }
 
 

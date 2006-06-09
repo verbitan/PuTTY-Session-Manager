@@ -15,32 +15,51 @@ namespace uk.org.riseley.puttySessionManager.model
         public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
         public const string PUTTY_PSM_FOLDER_VALUE = "PsmPath";
 
-        private bool isSessionListCurrent = false;
-        private List<Session> sessionList;
+        private static List<Session> sessionList = new List<Session>();
 
-        public SessionController()
+        private static SessionController instance = null;
+
+        public event EventHandler SessionsRefreshed;
+
+        public static SessionController getInstance()
         {
-            isSessionListCurrent = false;
+            if (instance == null)
+                instance = new SessionController();
+            return instance;
+        }
+
+        private SessionController()
+        {
         }
 
         public List<Session> getSessionList()
         {
-            if (isSessionListCurrent == false)
-            {
-                sessionList = getSessionListFromRegistry();
-                isSessionListCurrent = true;
-            }
-            return sessionList;
+           return sessionList;
+        }
+
+        public Session findSesssion(string sessionName)
+        {
+            Session s = new Session ( sessionName ,"", false);
+            int index = sessionList.BinarySearch(s);
+            if ( index >= 0 )
+                s = sessionList[index];
+            else
+                s = null;
+            return s;
         }
 
         public void invalidateSessionList()
         {
-            isSessionListCurrent = false;
+            lock (sessionList)
+            {
+                sessionList = getSessionListFromRegistry();
+            }
+            OnSessionsRefreshed(EventArgs.Empty);
         }
 
         private List<Session> getSessionListFromRegistry()
         {
-            List<Session> sessionList = new List<Session>();
+            List<Session> sl = new List<Session>();
 
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY);
 
@@ -52,13 +71,13 @@ namespace uk.org.riseley.puttySessionManager.model
 
                 Session s = new Session(keyName, psmpath, false);
                 
-                sessionList.Add(s);
+                sl.Add(s);
             }
             rk.Close();
 
-            sessionList.Sort();
+            sl.Sort();
 
-            return sessionList;
+            return sl;
         }
 
         public void saveFolderToRegistry(Session s)
@@ -67,6 +86,13 @@ namespace uk.org.riseley.puttySessionManager.model
             rk.SetValue(PUTTY_PSM_FOLDER_VALUE, s.FolderName, RegistryValueKind.String);
             rk.Close();
         }
+
+        protected virtual void OnSessionsRefreshed(EventArgs e)
+        {
+            if (SessionsRefreshed != null)
+                SessionsRefreshed(this, e);
+        }
+
     }
 
     

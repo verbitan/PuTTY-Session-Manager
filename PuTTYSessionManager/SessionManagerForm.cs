@@ -35,6 +35,8 @@ namespace uk.org.riseley.puttySessionManager
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
 
+        private SessionController sc = SessionController.getInstance();
+
         public SessionManagerForm()
         {
             InitializeComponent();
@@ -48,7 +50,8 @@ namespace uk.org.riseley.puttySessionManager
             this.Location   = Properties.Settings.Default.Location;
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
             if (Properties.Settings.Default.HotkeyNewEnabled)
-                HotkeyController.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);                  
+                HotkeyController.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);
+            sc.invalidateSessionList();
             setDisplay();
         }
 
@@ -170,7 +173,6 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionControl_RefreshSessions(object sender, EventArgs e)
         {
-            hiddenSessionControl.reloadSessions();
             currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
         }
 
@@ -183,15 +185,29 @@ namespace uk.org.riseley.puttySessionManager
 
         private void processHotKey(int id)
         {
+            String sessionName = "";
             switch (id)
             {
                 case (int) HotkeyController.HotKeyId.HKID_NEW:
-                    sessionControl_LaunchSession(this, new SessionEventArgs());
+                    sessionName = "";
                     break;
-                default:
-                    sessionControl_LaunchSession(this, new SessionEventArgs());
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_1:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession1);
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_2:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession2); 
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_3:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession3); 
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_4:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession4); 
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_5:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession5); 
                     break;
             }
+            sessionControl_LaunchSession(this, new SessionEventArgs(sessionName));
         }
 
     }

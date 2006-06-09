@@ -31,11 +31,30 @@ namespace uk.org.riseley.puttySessionManager
     public partial class HotkeyChooser : Form
     {
         private Form parentWindow;
+        private SessionController sc;
+
         public HotkeyChooser(Form parent)
         {
             parentWindow = parent;
+            sc = SessionController.getInstance();
             InitializeComponent();
             hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
+            System.EventHandler scHandler = new EventHandler(this.SessionsRefreshed);
+            sc.SessionsRefreshed += scHandler;
+        }
+
+        private void loadLists()
+        {
+            comboBox1.Items.AddRange(sc.getSessionList().ToArray());
+            comboBox1.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession1);
+            comboBox2.Items.AddRange(sc.getSessionList().ToArray());
+            comboBox2.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession2);
+            comboBox3.Items.AddRange(sc.getSessionList().ToArray());
+            comboBox3.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession3);
+            comboBox4.Items.AddRange(sc.getSessionList().ToArray());
+            comboBox4.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession4);
+            comboBox5.Items.AddRange(sc.getSessionList().ToArray());
+            comboBox5.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession5);
         }
 
 
@@ -90,6 +109,71 @@ namespace uk.org.riseley.puttySessionManager
                 }
                 
             }
-        }       
+        }
+
+        public void SessionsRefreshed(Object sender, EventArgs e)
+        {
+            loadLists();
+        }
+
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session s = (Session)((ComboBox)sender).SelectedItem;
+
+            if (s == null || checkBox1.Checked == false)
+                return;
+
+            if (sender.Equals(comboBox1))
+            {
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_1);
+                if ( HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_1, HotkeyController.HotKeyId.HKID_SESSION_1) )
+                    Properties.Settings.Default.FavouriteSession1 = s.SessionName;
+            }
+            else if (sender.Equals(comboBox2))
+            {
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_2);
+                if ( HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_2, HotkeyController.HotKeyId.HKID_SESSION_2) )
+                    Properties.Settings.Default.FavouriteSession2 = s.SessionName;
+            }
+            else if (sender.Equals(comboBox3))
+            {
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_3);
+                if ( HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_3, HotkeyController.HotKeyId.HKID_SESSION_3) )
+                    Properties.Settings.Default.FavouriteSession3 = s.SessionName;
+            }
+            else if (sender.Equals(comboBox4))
+            {
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_4);
+                if ( HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_4, HotkeyController.HotKeyId.HKID_SESSION_4) )
+                    Properties.Settings.Default.FavouriteSession4 = s.SessionName;
+            }
+            else if (sender.Equals(comboBox5))
+            {
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_5);
+                if (HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_5, HotkeyController.HotKeyId.HKID_SESSION_5))
+                    Properties.Settings.Default.FavouriteSession5 = s.SessionName;
+            }
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_1, HotkeyController.HotKeyId.HKID_SESSION_1);
+                HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_2, HotkeyController.HotKeyId.HKID_SESSION_2);
+                HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_3, HotkeyController.HotKeyId.HKID_SESSION_3);
+                HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_4, HotkeyController.HotKeyId.HKID_SESSION_4);
+                HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_5, HotkeyController.HotKeyId.HKID_SESSION_5);
+            }
+            else
+            {
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_1);
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_2);
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_3);
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_4);
+                HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_5);
+            }
+        }
     }
 }

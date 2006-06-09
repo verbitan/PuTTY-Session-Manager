@@ -166,5 +166,65 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["HotkeyFavouriteEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession1 {
+            get {
+                return ((string)(this["FavouriteSession1"]));
+            }
+            set {
+                this["FavouriteSession1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession2 {
+            get {
+                return ((string)(this["FavouriteSession2"]));
+            }
+            set {
+                this["FavouriteSession2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession3 {
+            get {
+                return ((string)(this["FavouriteSession3"]));
+            }
+            set {
+                this["FavouriteSession3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession4 {
+            get {
+                return ((string)(this["FavouriteSession4"]));
+            }
+            set {
+                this["FavouriteSession4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession5 {
+            get {
+                return ((string)(this["FavouriteSession5"]));
+            }
+            set {
+                this["FavouriteSession5"] = value;
+            }
+        }
     }
 }

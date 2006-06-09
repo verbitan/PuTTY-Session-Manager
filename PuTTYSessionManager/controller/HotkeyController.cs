@@ -229,6 +229,12 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
         }
 
+        public static bool RegisterHotkey(Form form, HotKey hk, HotKeyId id)
+        {
+            return RegisterHotkey ( form ,(char)hk, id );
+        }
+
+
         public static bool RegisterHotkey(Form form, char winkey, HotKeyId id)
         {
             bool result = User32.RegisterHotKey(form.Handle, (int) id, (int) User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
@@ -263,6 +269,15 @@ namespace uk.org.riseley.puttySessionManager.controller
             HKID_SESSION_3 = 3,
             HKID_SESSION_4 = 4,
             HKID_SESSION_5 = 5
+        }
+
+        public enum HotKey
+        {
+            HK_SESSION_1 = '1',
+            HK_SESSION_2 = '2',
+            HK_SESSION_3 = '3',
+            HK_SESSION_4 = '4',
+            HK_SESSION_5 = '5'
         }
     }
 }

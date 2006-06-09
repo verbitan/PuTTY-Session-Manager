@@ -40,10 +40,9 @@ namespace uk.org.riseley.puttySessionManager
         private const int IMAGE_INDEX_SESSION = 2;
         
 
-        public SessionTreeControl()
+        public SessionTreeControl() : base()
         {
             InitializeComponent();
-            LoadSessions();
         }
 
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)

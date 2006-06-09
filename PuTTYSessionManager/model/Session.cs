@@ -21,6 +21,7 @@ using System.Text;
 
 namespace uk.org.riseley.puttySessionManager.model
 {
+
     public class Session : IEquatable<Session> ,IComparable<Session>
     {
         public const string SESSIONS_FOLDER_NAME = "Sessions";
@@ -58,7 +59,7 @@ namespace uk.org.riseley.puttySessionManager.model
         public Session(string regKey, string folderName, bool isFolder)
         {
             SessionName = regKey;
-            SessionDisplayText = regKey.Replace("%20", " ");
+            SessionDisplayText = convertSessionKeyToDisplay(regKey);
             FolderName = folderName;
             IsFolder = isFolder;
         }
@@ -75,9 +76,12 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public bool Equals(Session s)
         {
-            return (this.SessionName.Equals(s.SessionName) &&
-                    this.IsFolder == s.IsFolder &&
-                    this.FolderName.Equals(s.FolderName));
+            return (this.SessionName.Equals(s.SessionName));
+        }
+
+        public static String convertSessionKeyToDisplay(string key)
+        {
+            return key.Replace("%20", " ");
         }
     }
 }

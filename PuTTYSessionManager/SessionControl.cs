@@ -34,12 +34,15 @@ namespace uk.org.riseley.puttySessionManager
         public event System.EventHandler ShowOptions;
         public event System.EventHandler ShowAbout;
         public event System.EventHandler RefreshSessions;
+        
         private SessionController sc;
 
         public SessionControl()
         {
-           sc = new SessionController();
-           InitializeComponent();
+            sc = SessionController.getInstance();
+            InitializeComponent();
+            System.EventHandler scHandler = new EventHandler(this.SessionsRefreshed);
+            sc.SessionsRefreshed += scHandler;
         }
 
         protected virtual void OnLaunchSession(SessionEventArgs se)
@@ -70,7 +73,7 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (RefreshSessions != null)
             {
-                reloadSessions();
+                sc.invalidateSessionList();
                 RefreshSessions(this, e);
             }
         }
@@ -103,9 +106,8 @@ namespace uk.org.riseley.puttySessionManager
             return sc;
         }
 
-        public void reloadSessions()
+        public void SessionsRefreshed(Object sender, EventArgs e)
         {
-            sc.invalidateSessionList();
             LoadSessions();
         }
     }

@@ -103,6 +103,7 @@ namespace uk.org.riseley.puttySessionManager
             this.checkBox1.TabIndex = 20;
             this.checkBox1.Text = "Enable Favourite Session Hotkeys";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label5
             // 
@@ -123,6 +124,7 @@ namespace uk.org.riseley.puttySessionManager
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(295, 21);
             this.comboBox5.TabIndex = 18;
+            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -143,6 +145,7 @@ namespace uk.org.riseley.puttySessionManager
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(295, 21);
             this.comboBox4.TabIndex = 16;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -163,6 +166,7 @@ namespace uk.org.riseley.puttySessionManager
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(295, 21);
             this.comboBox3.TabIndex = 14;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -183,6 +187,7 @@ namespace uk.org.riseley.puttySessionManager
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(295, 21);
             this.comboBox2.TabIndex = 12;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -196,6 +201,7 @@ namespace uk.org.riseley.puttySessionManager
             // comboBox1
             // 
             this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox1.DisplayMember = "Default Settings";
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox1.FormattingEnabled = true;
@@ -203,6 +209,7 @@ namespace uk.org.riseley.puttySessionManager
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(295, 21);
             this.comboBox1.TabIndex = 10;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // hotkeyLabel
             // 
