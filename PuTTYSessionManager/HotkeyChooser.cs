@@ -24,6 +24,7 @@ using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.controller;
+using System.Text.RegularExpressions;
 
 
 namespace uk.org.riseley.puttySessionManager
@@ -88,6 +89,15 @@ namespace uk.org.riseley.puttySessionManager
                                    , MessageBoxIcon.Warning);                    
                     hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
                     hotkeyCheckBox.Checked = false;
+                } else if ( Regex.IsMatch ( hotKeyTextBox.Text, @"(?!([deflmruDERLMRU]))[a-zA-Z]" ) == false ) 
+                {
+                    MessageBox.Show(this, "Hotkey can only be A-Z but not D,E,F,L,M,R or U"
+                                   , "Warning"
+                                   , MessageBoxButtons.OK
+                                   , MessageBoxIcon.Warning);                    
+                    hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
+                    hotkeyCheckBox.Checked = false;
+                
                 }
                 else
                 {
@@ -120,7 +130,7 @@ namespace uk.org.riseley.puttySessionManager
         {
             Session s = (Session)((ComboBox)sender).SelectedItem;
 
-            if (s == null || checkBox1.Checked == false)
+            if (s == null || Properties.Settings.Default.HotkeyFavouriteEnabled == false)
                 return;
 
             if (sender.Equals(comboBox1))
@@ -158,7 +168,7 @@ namespace uk.org.riseley.puttySessionManager
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+            if (favSessCheckBox.Checked == true)
             {
                 HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_1, HotkeyController.HotKeyId.HKID_SESSION_1);
                 HotkeyController.RegisterHotkey(parentWindow, HotkeyController.HotKey.HK_SESSION_2, HotkeyController.HotKeyId.HKID_SESSION_2);

@@ -46,7 +46,7 @@ namespace uk.org.riseley.puttySessionManager
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.favSessCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,7 +68,7 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.favSessCheckBox);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.comboBox5);
             this.groupBox1.Controls.Add(this.label4);
@@ -90,20 +90,20 @@ namespace uk.org.riseley.puttySessionManager
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
-            // checkBox1
+            // favSessCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox1.Location = new System.Drawing.Point(6, 35);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox1.Size = new System.Drawing.Size(188, 17);
-            this.checkBox1.TabIndex = 20;
-            this.checkBox1.Text = "Enable Favourite Session Hotkeys";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.favSessCheckBox.AutoSize = true;
+            this.favSessCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.favSessCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.favSessCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.favSessCheckBox.Location = new System.Drawing.Point(6, 35);
+            this.favSessCheckBox.Name = "favSessCheckBox";
+            this.favSessCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.favSessCheckBox.Size = new System.Drawing.Size(188, 17);
+            this.favSessCheckBox.TabIndex = 20;
+            this.favSessCheckBox.Text = "Enable Favourite Session Hotkeys";
+            this.favSessCheckBox.UseVisualStyleBackColor = true;
+            this.favSessCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label5
             // 
@@ -308,7 +308,7 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.Label hotkeyLabel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox favSessCheckBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label4;
