@@ -110,5 +110,22 @@ namespace uk.org.riseley.puttySessionManager
         {
             LoadSessions();
         }
+        
+        public bool ContextMenuVisible
+        {
+            get
+            {
+                return (this.ContextMenuStrip == null? false:true);
+            }
+
+            set
+            {
+                if (value == false)
+                    this.ContextMenuStrip = null;
+                else
+                    this.ContextMenuStrip = this.contextMenuStrip;
+            }
+        }
+
     }
 }

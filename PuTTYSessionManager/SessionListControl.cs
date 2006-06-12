@@ -88,5 +88,21 @@ namespace uk.org.riseley.puttySessionManager
                parent.DropDownItems.Add(new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick));
             }
         }
+
+        public bool AllowMultiSelect
+        {
+            get
+            {
+                return (listBox1.SelectionMode == SelectionMode.One ? false : true);
+            }
+            set
+            {
+                if (value == true)
+                    listBox1.SelectionMode = SelectionMode.MultiExtended;
+                else
+                    listBox1.SelectionMode = SelectionMode.One;
+            }
+
+        }
     }
 }

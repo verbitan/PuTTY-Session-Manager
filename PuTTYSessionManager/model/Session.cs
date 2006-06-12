@@ -60,8 +60,12 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             SessionName = regKey;
             SessionDisplayText = convertSessionKeyToDisplay(regKey);
-            FolderName = folderName;
+            if (folderName == null || folderName.Equals(""))
+                FolderName = SESSIONS_FOLDER_NAME;
+            else
+                FolderName = folderName;
             IsFolder = isFolder;
+            cellValues = new String[] { SessionDisplayText, FolderName };
         }
 
         public override string ToString()
@@ -83,5 +87,12 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             return key.Replace("%20", " ");
         }
+
+        private string[] cellValues;
+        public string[] getCellValues()
+        {
+            return cellValues; 
+        }
+
     }
 }

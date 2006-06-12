@@ -125,28 +125,37 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="loadSessionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="loadSessionToolStripMenuItem.Text" xml:space="preserve">
     <value>Load Session</value>
   </data>
   <data name="displayTreeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="displayTreeToolStripMenuItem.Text" xml:space="preserve">
     <value>Display Tree</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 6</value>
+    <value>149, 6</value>
+  </data>
+  <data name="sessionEditorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="sessionEditorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Session Editor</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="sysTrayContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 76</value>
+    <value>153, 126</value>
   </data>
   <data name="&gt;&gt;sysTrayContextMenu.Name" xml:space="preserve">
     <value>sysTrayContextMenu</value>
@@ -386,6 +395,18 @@
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sessionEditorToolStripMenuItem.Name" xml:space="preserve">
+    <value>sessionEditorToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;sessionEditorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SessionManagerForm</value>

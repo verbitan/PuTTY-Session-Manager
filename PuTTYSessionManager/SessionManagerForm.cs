@@ -31,6 +31,7 @@ namespace uk.org.riseley.puttySessionManager
     {
         private Options optionsDialog;
         private AboutBox aboutDialog  = new AboutBox();
+        private SessionEditor sessionEditor = new SessionEditor();
 
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
@@ -208,6 +209,11 @@ namespace uk.org.riseley.puttySessionManager
                     break;
             }
             sessionControl_LaunchSession(this, new SessionEventArgs(sessionName));
+        }
+
+        private void sessionEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sessionEditor.ShowDialog();
         }
 
     }

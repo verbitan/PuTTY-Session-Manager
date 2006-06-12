@@ -30,6 +30,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
         private SessionController()
         {
+            invalidateSessionList();
         }
 
         public List<Session> getSessionList()

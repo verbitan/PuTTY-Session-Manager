@@ -99,6 +99,12 @@
     <Compile Include="SessionControl.Designer.cs">
       <DependentUpon>SessionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="SessionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SessionEditor.Designer.cs">
+      <DependentUpon>SessionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="SessionListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,6 +138,10 @@
     <EmbeddedResource Include="SessionControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SessionListControl.resx">
       <SubType>Designer</SubType>
