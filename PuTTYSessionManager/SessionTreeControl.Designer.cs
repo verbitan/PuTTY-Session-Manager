@@ -51,8 +51,10 @@ namespace uk.org.riseley.puttySessionManager
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SessionTreeControl));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Sessions");
             this.nodeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.launchSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchFolderAndSubfoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,40 +68,56 @@ namespace uk.org.riseley.puttySessionManager
             // nodeContextMenuStrip
             // 
             this.nodeContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.launchSessionMenuItem,
             this.newSessionMenuItem,
+            this.launchSessionMenuItem,
+            this.launchFolderToolStripMenuItem,
+            this.launchFolderAndSubfoldersToolStripMenuItem,
             this.toolStripSeparator2,
             this.newFolderMenuItem,
             this.renameFolderMenuItem,
             this.toolStripSeparator3,
             this.lockSessionsToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(159, 126);
-            // 
-            // launchSessionMenuItem
-            // 
-            this.launchSessionMenuItem.Name = "launchSessionMenuItem";
-            this.launchSessionMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.launchSessionMenuItem.Text = "Launch Session";
-            this.launchSessionMenuItem.Click += new System.EventHandler(this.launchSessionMenuItem_Click);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 192);
             // 
             // newSessionMenuItem
             // 
             this.newSessionMenuItem.Name = "newSessionMenuItem";
-            this.newSessionMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.newSessionMenuItem.Size = new System.Drawing.Size(227, 22);
             this.newSessionMenuItem.Text = "New Session";
             this.newSessionMenuItem.Click += new System.EventHandler(this.newSessionMenuItem_Click);
+            // 
+            // launchSessionMenuItem
+            // 
+            this.launchSessionMenuItem.Name = "launchSessionMenuItem";
+            this.launchSessionMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchSessionMenuItem.Text = "Launch Session";
+            this.launchSessionMenuItem.Click += new System.EventHandler(this.launchSessionMenuItem_Click);
+            // 
+            // launchFolderToolStripMenuItem
+            // 
+            this.launchFolderToolStripMenuItem.Name = "launchFolderToolStripMenuItem";
+            this.launchFolderToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchFolderToolStripMenuItem.Text = "Launch Folder ";
+            this.launchFolderToolStripMenuItem.Click += new System.EventHandler(this.launchFolderToolStripMenuItem_Click);
+            // 
+            // launchFolderAndSubfoldersToolStripMenuItem
+            // 
+            this.launchFolderAndSubfoldersToolStripMenuItem.Name = "launchFolderAndSubfoldersToolStripMenuItem";
+            this.launchFolderAndSubfoldersToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchFolderAndSubfoldersToolStripMenuItem.Text = "Launch Folder and Subfolders";
+            this.launchFolderAndSubfoldersToolStripMenuItem.Click += new System.EventHandler(this.launchFolderAndSubfoldersToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(224, 6);
             // 
             // newFolderMenuItem
             // 
             this.newFolderMenuItem.Enabled = false;
             this.newFolderMenuItem.Name = "newFolderMenuItem";
-            this.newFolderMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.newFolderMenuItem.Size = new System.Drawing.Size(227, 22);
             this.newFolderMenuItem.Text = "New Folder";
             this.newFolderMenuItem.Click += new System.EventHandler(this.newFolderMenuItem_Click);
             // 
@@ -107,14 +125,14 @@ namespace uk.org.riseley.puttySessionManager
             // 
             this.renameFolderMenuItem.Enabled = false;
             this.renameFolderMenuItem.Name = "renameFolderMenuItem";
-            this.renameFolderMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.renameFolderMenuItem.Size = new System.Drawing.Size(227, 22);
             this.renameFolderMenuItem.Text = "Rename Folder";
             this.renameFolderMenuItem.Click += new System.EventHandler(this.renameFolderMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(224, 6);
             // 
             // lockSessionsToolStripMenuItem
             // 
@@ -122,7 +140,7 @@ namespace uk.org.riseley.puttySessionManager
             this.lockSessionsToolStripMenuItem.CheckOnClick = true;
             this.lockSessionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lockSessionsToolStripMenuItem.Name = "lockSessionsToolStripMenuItem";
-            this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.lockSessionsToolStripMenuItem.Text = "Lock Sessions";
             this.lockSessionsToolStripMenuItem.Click += new System.EventHandler(this.lockSessionsToolStripMenuItem_Click);
             // 
@@ -183,5 +201,7 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.ToolStripMenuItem renameFolderMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem lockSessionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchFolderAndSubfoldersToolStripMenuItem;
     }
 }

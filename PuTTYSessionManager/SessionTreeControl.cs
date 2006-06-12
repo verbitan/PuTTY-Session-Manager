@@ -313,30 +313,36 @@ namespace uk.org.riseley.puttySessionManager
             {
                 treeView.SelectedNode = e.Node;
                 Session s = (Session)e.Node.Tag;
-                if (s.IsFolder == false && 
-                    lockSessionsToolStripMenuItem.Checked == false )
+                if (s.IsFolder == false )
                 {
-                    newFolderMenuItem.Enabled = true;
+                    newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameFolderMenuItem.Enabled = false;
-                }
-                else if ( s.IsFolder == true && 
-                       lockSessionsToolStripMenuItem.Checked == false )
+                    launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
+                    launchFolderToolStripMenuItem.Enabled = false;
+                    launchSessionMenuItem.Enabled = true;
+                } 
+                else 
                 {
-                    newFolderMenuItem.Enabled = false;
-                    if (treeView.SelectedNode.Parent == null )
+                    launchSessionMenuItem.Enabled = false;
+                    launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
+                    launchFolderToolStripMenuItem.Enabled = true;
+
+                    if (lockSessionsToolStripMenuItem.Checked == true )
+                    {
+                        newFolderMenuItem.Enabled    = false;
                         renameFolderMenuItem.Enabled = false;
-                    else
-                        renameFolderMenuItem.Enabled = true;
+                    }
+                    else 
+                    {
+                        newFolderMenuItem.Enabled = false;
+
+                        if (treeView.SelectedNode.Parent == null )
+                            renameFolderMenuItem.Enabled = false;
+                        else
+                            renameFolderMenuItem.Enabled = true;
+                    }
                 }
-                else {
-                    newFolderMenuItem.Enabled = false;
-                    renameFolderMenuItem.Enabled = false;
-                }
-
-
-
             }
-
         }
 
         private void newFolderMenuItem_Click(object sender, EventArgs e)
@@ -466,6 +472,42 @@ namespace uk.org.riseley.puttySessionManager
                     parent.DropDownItems.Add(new ToolStripMenuItem(s.SessionDisplayText, null, launchSessionMenuItem_Click));
                 }
             }
+        }
+
+        private void launchFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem)
+            {
+                launchFolderSessions(treeView.SelectedNode, false);
+            }                        
+        }
+
+
+        private void launchFolderSessions(TreeNode folder, bool launchSubfolders)
+        {
+            IEnumerator ie = folder.Nodes.GetEnumerator();
+
+            while (ie.MoveNext())
+            {
+                TreeNode node = (TreeNode)ie.Current;
+                Session s = (Session)node.Tag;
+                if (s.IsFolder && launchSubfolders)
+                {
+                    launchFolderSessions(node, launchSubfolders);
+                }
+                else if ( s.IsFolder == false )
+                {
+                    OnLaunchSession(new SessionEventArgs(s.SessionDisplayText));
+                }
+            }
+        }
+
+        private void launchFolderAndSubfoldersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem)
+            {
+                launchFolderSessions(treeView.SelectedNode, true);
+            } 
         }
 
 
