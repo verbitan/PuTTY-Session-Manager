@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * Copyright (C) 2006 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
@@ -16,14 +16,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 using System;
-namespace uk.org.riseley.puttySessionManager
+
+namespace uk.org.riseley.puttySessionManager.model
 {
-    interface ISessionControl
+    public class RefreshSessionsEventArgs : EventArgs 
     {
-        void getSessionMenuItems(System.Windows.Forms.ToolStripMenuItem parent);
-        event SessionControl.LaunchSessionEventHandler LaunchSession;
-        event SessionControl.RefreshSessionEventHandler RefreshSessions;
-        event EventHandler ShowAbout;
-        event EventHandler ShowOptions;
+        public RefreshSessionsEventArgs()
+            : this(true)
+        {    
+            
+        }
+
+        public RefreshSessionsEventArgs(bool refreshSource)
+        {
+            this.refreshSource = refreshSource;
+        }
+
+        private bool refreshSource;
+    
+        public bool RefreshSource {
+            get 
+            {
+                return this.refreshSource;
+            }
+       
+        }
+
     }
 }

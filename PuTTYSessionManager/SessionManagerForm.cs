@@ -52,7 +52,7 @@ namespace uk.org.riseley.puttySessionManager
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
             if (Properties.Settings.Default.HotkeyNewEnabled)
                 HotkeyController.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);
-            sc.invalidateSessionList();
+            sc.invalidateSessionList(this, true); 
             setDisplay();
         }
 
@@ -103,7 +103,7 @@ namespace uk.org.riseley.puttySessionManager
         }
 
 
-        private void sessionControl_LaunchSession(object sender, SessionEventArgs se)
+        private void sessionControl_LaunchSession(object sender, LaunchSessionEventArgs se)
         {
             String puttyExec = Properties.Settings.Default.PuttyLocation;
             System.Diagnostics.Process p = new System.Diagnostics.Process();
@@ -208,7 +208,7 @@ namespace uk.org.riseley.puttySessionManager
                     sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession5); 
                     break;
             }
-            sessionControl_LaunchSession(this, new SessionEventArgs(sessionName));
+            sessionControl_LaunchSession(this, new LaunchSessionEventArgs(sessionName));
         }
 
         private void sessionEditorToolStripMenuItem_Click(object sender, EventArgs e)

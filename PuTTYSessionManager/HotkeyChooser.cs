@@ -40,7 +40,7 @@ namespace uk.org.riseley.puttySessionManager
             sc = SessionController.getInstance();
             InitializeComponent();
             hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
-            System.EventHandler scHandler = new EventHandler(this.SessionsRefreshed);
+            SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
         }
 

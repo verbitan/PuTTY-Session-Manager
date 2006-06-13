@@ -74,9 +74,9 @@ namespace uk.org.riseley.puttySessionManager
             }
 
             if ( sessionName != null)
-                OnLaunchSession(new SessionEventArgs(sessionName));
+                OnLaunchSession(new LaunchSessionEventArgs(sessionName));
             else
-                OnLaunchSession(new SessionEventArgs());
+                OnLaunchSession(new LaunchSessionEventArgs());
         }
 
         public override void getSessionMenuItems(ToolStripMenuItem parent)

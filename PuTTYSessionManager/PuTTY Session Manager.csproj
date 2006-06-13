@@ -30,7 +30,7 @@
     <ProductName>PuTTY Session Manager</ProductName>
     <PublisherName>PuTTY</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>1.0.0.1</ApplicationVersion>
+    <ApplicationVersion>0.1.0.1</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -41,6 +41,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -78,10 +80,11 @@
     <Compile Include="FolderForm.Designer.cs">
       <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\RefreshSessionsEventArgs.cs" />
     <Compile Include="model\ISessionControl.cs" />
+    <Compile Include="model\LaunchSessionEventArgs.cs" />
     <Compile Include="model\Session.cs" />
     <Compile Include="controller\SessionController.cs" />
-    <Compile Include="model\SessionEventArgs.cs" />
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -19,15 +19,14 @@ using System;
 
 namespace uk.org.riseley.puttySessionManager.model
 {
-    public class SessionEventArgs : EventArgs 
+    public class LaunchSessionEventArgs : EventArgs 
     {
-        public SessionEventArgs()
+        public LaunchSessionEventArgs()
             : this("")
         {    
-            
         }
 
-        public SessionEventArgs(string sessionName)
+        public LaunchSessionEventArgs(string sessionName)
         {
             this.sessionName = sessionName;
         }

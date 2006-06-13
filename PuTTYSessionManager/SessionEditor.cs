@@ -18,7 +18,7 @@ namespace uk.org.riseley.puttySessionManager
             InitializeComponent();
             sc = SessionController.getInstance();
             LoadSessions();
-            System.EventHandler scHandler = new EventHandler(this.SessionsRefreshed);
+            SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
         }
 

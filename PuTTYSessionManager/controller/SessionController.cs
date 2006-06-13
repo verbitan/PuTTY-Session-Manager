@@ -19,7 +19,8 @@ namespace uk.org.riseley.puttySessionManager.model
 
         private static SessionController instance = null;
 
-        public event EventHandler SessionsRefreshed;
+        public event SessionsRefreshedEventHandler SessionsRefreshed;
+        public delegate void SessionsRefreshedEventHandler(object sender, RefreshSessionsEventArgs re);
 
         public static SessionController getInstance()
         {
@@ -30,7 +31,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
         private SessionController()
         {
-            invalidateSessionList();
+            invalidateSessionList(this, true);
         }
 
         public List<Session> getSessionList()
@@ -49,13 +50,13 @@ namespace uk.org.riseley.puttySessionManager.model
             return s;
         }
 
-        public void invalidateSessionList()
+        public void invalidateSessionList(Object sender, bool refreshSender)
         {
             lock (sessionList)
             {
                 sessionList = getSessionListFromRegistry();
             }
-            OnSessionsRefreshed(EventArgs.Empty);
+            OnSessionsRefreshed(sender,new RefreshSessionsEventArgs(refreshSender));
         }
 
         private List<Session> getSessionListFromRegistry()
@@ -88,10 +89,10 @@ namespace uk.org.riseley.puttySessionManager.model
             rk.Close();
         }
 
-        protected virtual void OnSessionsRefreshed(EventArgs e)
+        protected virtual void OnSessionsRefreshed(Object sender , RefreshSessionsEventArgs e)
         {
             if (SessionsRefreshed != null)
-                SessionsRefreshed(this, e);
+                SessionsRefreshed(sender, e);
         }
 
     }

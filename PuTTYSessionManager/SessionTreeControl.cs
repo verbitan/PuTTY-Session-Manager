@@ -29,9 +29,6 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-
-
-
     public partial class SessionTreeControl : SessionControl, uk.org.riseley.puttySessionManager.ISessionControl
     {
 
@@ -39,7 +36,6 @@ namespace uk.org.riseley.puttySessionManager
         private const int IMAGE_INDEX_SELECTED_FOLDER = 1;
         private const int IMAGE_INDEX_SESSION = 2;
         
-
         public SessionTreeControl() : base()
         {
             InitializeComponent();
@@ -116,7 +112,7 @@ namespace uk.org.riseley.puttySessionManager
                     cleanFolders(oldParent);
 
                     // Fire a refresh event
-                    OnRefreshSessions(System.EventArgs.Empty);
+                    OnRefreshSessions(new RefreshSessionsEventArgs(false));
                 }
 
                 // If it is a copy operation, clone the dragged node 
@@ -255,7 +251,7 @@ namespace uk.org.riseley.puttySessionManager
 
         private void newSessionMenuItem_Click(object sender, EventArgs e)
         {
-            OnLaunchSession(new SessionEventArgs());
+            OnLaunchSession(new LaunchSessionEventArgs());
         }
 
         private void launchSessionMenuItem_Click(object sender, EventArgs e)
@@ -273,9 +269,9 @@ namespace uk.org.riseley.puttySessionManager
             }
             
             if (sessionName != null)
-                OnLaunchSession(new SessionEventArgs(sessionName));
+                OnLaunchSession(new LaunchSessionEventArgs(sessionName));
             else
-                OnLaunchSession(new SessionEventArgs());
+                OnLaunchSession(new LaunchSessionEventArgs());
             
             
         }
@@ -285,7 +281,7 @@ namespace uk.org.riseley.puttySessionManager
             Session s = (Session)e.Node.Tag;
             if (s.IsFolder == false)
             {
-                OnLaunchSession(new SessionEventArgs(s.SessionDisplayText));
+                OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
             }
         }
 
@@ -383,7 +379,7 @@ namespace uk.org.riseley.puttySessionManager
                 updateFolders(selectedNode, foldernode);
 
                 // Fire a refresh event
-                OnRefreshSessions(System.EventArgs.Empty);
+                OnRefreshSessions(new RefreshSessionsEventArgs(false));
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
@@ -439,7 +435,7 @@ namespace uk.org.riseley.puttySessionManager
                 updateFolders(selectedNode, parent);
 
                 // Fire a refresh event
-                OnRefreshSessions(System.EventArgs.Empty);
+                OnRefreshSessions(new RefreshSessionsEventArgs(false));
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
@@ -497,7 +493,7 @@ namespace uk.org.riseley.puttySessionManager
                 }
                 else if ( s.IsFolder == false )
                 {
-                    OnLaunchSession(new SessionEventArgs(s.SessionDisplayText));
+                    OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
                 }
             }
         }

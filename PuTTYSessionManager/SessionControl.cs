@@ -28,24 +28,26 @@ namespace uk.org.riseley.puttySessionManager
 {
     public partial class SessionControl : UserControl, uk.org.riseley.puttySessionManager.ISessionControl
     {
-        public event SessionEventHandler LaunchSession;
-        public delegate void SessionEventHandler(object sender, SessionEventArgs se);
+        public event LaunchSessionEventHandler LaunchSession;
+        public delegate void LaunchSessionEventHandler(object sender, LaunchSessionEventArgs se);
+
+        public event RefreshSessionEventHandler RefreshSessions;
+        public delegate void RefreshSessionEventHandler(object sender, RefreshSessionsEventArgs re);
 
         public event System.EventHandler ShowOptions;
         public event System.EventHandler ShowAbout;
-        public event System.EventHandler RefreshSessions;
-        
+
         private SessionController sc;
 
         public SessionControl()
         {
             sc = SessionController.getInstance();
             InitializeComponent();
-            System.EventHandler scHandler = new EventHandler(this.SessionsRefreshed);
+            SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
         }
 
-        protected virtual void OnLaunchSession(SessionEventArgs se)
+        protected virtual void OnLaunchSession(LaunchSessionEventArgs se)
         {
             if (LaunchSession != null)
             {
@@ -69,11 +71,11 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
-        protected virtual void OnRefreshSessions(System.EventArgs e)
+        protected virtual void OnRefreshSessions(RefreshSessionsEventArgs e)
         {
             if (RefreshSessions != null)
             {
-                sc.invalidateSessionList();
+                sc.invalidateSessionList(this, e.RefreshSource);
                 RefreshSessions(this, e);
             }
         }
@@ -85,7 +87,7 @@ namespace uk.org.riseley.puttySessionManager
 
         protected void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OnRefreshSessions(System.EventArgs.Empty);
+            OnRefreshSessions(new RefreshSessionsEventArgs(true));
         }
 
         protected void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -106,9 +108,10 @@ namespace uk.org.riseley.puttySessionManager
             return sc;
         }
 
-        public void SessionsRefreshed(Object sender, EventArgs e)
+        public void SessionsRefreshed(Object sender, RefreshSessionsEventArgs e)
         {
-            LoadSessions();
+            if ( !(sender.Equals(this) && e.RefreshSource == false) )
+                LoadSessions();
         }
         
         public bool ContextMenuVisible
