@@ -124,7 +124,7 @@ namespace uk.org.riseley.puttySessionManager
 
                 // Expand the node at the location 
                 // to show the dropped node.
-                targetNode.Expand();
+                //targetNode.Expand();
             }
         }
 
@@ -474,7 +474,8 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (sender is ToolStripMenuItem)
             {
-                launchFolderSessions(treeView.SelectedNode, false);
+                if (confirmNumberOfSessions(treeView.SelectedNode, false)) 
+                    launchFolderSessions(treeView.SelectedNode, false);
             }                        
         }
 
@@ -502,8 +503,43 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (sender is ToolStripMenuItem)
             {
-                launchFolderSessions(treeView.SelectedNode, true);
+                if ( confirmNumberOfSessions ( treeView.SelectedNode, true) )
+                    launchFolderSessions(treeView.SelectedNode, true);
             } 
+        }
+
+        private bool confirmNumberOfSessions ( TreeNode folder, bool countSubfolders )
+        {
+            int warningLevel = (int)Properties.Settings.Default.SubfolderSessionWarning;
+            int sessionCount = 0;
+            bool result = true;
+            
+            sessionCount = getSessionCount(sessionCount, folder, countSubfolders);
+            
+            if (sessionCount > warningLevel)
+                result = (MessageBox.Show(this
+                                   , "This will launch " + sessionCount +
+                                     " sessions. Are you sure?"
+                                   , "Confirm"
+                                   , MessageBoxButtons.YesNo
+                                   , MessageBoxIcon.Question) == DialogResult.Yes);
+            return result;    
+
+        }
+
+        private int getSessionCount ( int currentCount , TreeNode folder, bool countSubfolders ) 
+        {          
+            IEnumerator ie = folder.Nodes.GetEnumerator();
+            TreeNode currentNode = null;
+            while (ie.MoveNext()) 
+            {
+                currentNode = (TreeNode)ie.Current;
+                if (currentNode.Nodes.Count == 0)
+                    currentCount++;
+                else if (countSubfolders == true)
+                    currentCount = getSessionCount(currentCount, currentNode, countSubfolders);
+            }
+            return currentCount;
         }
 
 

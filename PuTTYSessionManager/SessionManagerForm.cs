@@ -216,5 +216,9 @@ namespace uk.org.riseley.puttySessionManager
             sessionEditor.ShowDialog();
         }
 
+        private void sessionControl_RefreshSessions(object sender, RefreshSessionsEventArgs re)
+        {
+
+        }
     }
 }

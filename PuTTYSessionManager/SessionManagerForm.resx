@@ -139,6 +139,12 @@
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
   </data>
+  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="sessionEditorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -155,7 +161,7 @@
     <value>Exit</value>
   </data>
   <data name="sysTrayContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 126</value>
+    <value>153, 148</value>
   </data>
   <data name="&gt;&gt;sysTrayContextMenu.Name" xml:space="preserve">
     <value>sysTrayContextMenu</value>
@@ -253,7 +259,7 @@
     <value>sessionTreeControl1</value>
   </data>
   <data name="&gt;&gt;sessionTreeControl1.Type" xml:space="preserve">
-    <value>uk.org.riseley.puttySessionManager.SessionTreeControl, PuTTY Session Manager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>uk.org.riseley.puttySessionManager.SessionTreeControl, PuTTY Session Manager, Version=0.1.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sessionTreeControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -283,7 +289,7 @@
     <value>sessionListControl1</value>
   </data>
   <data name="&gt;&gt;sessionListControl1.Type" xml:space="preserve">
-    <value>uk.org.riseley.puttySessionManager.SessionListControl, PuTTY Session Manager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>uk.org.riseley.puttySessionManager.SessionListControl, PuTTY Session Manager, Version=0.1.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sessionListControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -360,6 +366,9 @@
         AAf//AAH//wAB//+AAf//wAP
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>Manual</value>
   </data>
@@ -390,10 +399,10 @@
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
-    <value>exitToolStripMenuItem</value>
+  <data name="&gt;&gt;optionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>optionsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;optionsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sessionEditorToolStripMenuItem.Name" xml:space="preserve">
@@ -407,6 +416,12 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
+    <value>exitToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SessionManagerForm</value>
