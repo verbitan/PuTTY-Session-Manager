@@ -151,6 +151,10 @@
   <data name="sessionEditorToolStripMenuItem.Text" xml:space="preserve">
     <value>Session Editor</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="sessionEditorToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
   </data>
@@ -232,7 +236,6 @@
   <data name="systrayIcon.Text" xml:space="preserve">
     <value>PuTTY Session Manager</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="systrayIcon.Visible" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -365,9 +368,6 @@
         P//gAD//4AAAB+AAAAPwAAAB+AAAAP/AAAD/8AAA//gAAP/8AAH//AAH//wAB//8AAf//AAH//wAB//8
         AAf//AAH//wAB//+AAf//wAP
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>Manual</value>

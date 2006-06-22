@@ -58,6 +58,15 @@ namespace uk.org.riseley.puttySessionManager
             comboBox5.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession5);
         }
 
+        private void clearLists()
+        {
+            comboBox1.Items.Clear();
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+            comboBox4.Items.Clear();
+            comboBox5.Items.Clear();
+        }
+
 
         private void okButton_Click(object sender, EventArgs e)
         {
@@ -123,6 +132,7 @@ namespace uk.org.riseley.puttySessionManager
 
         public void SessionsRefreshed(Object sender, EventArgs e)
         {
+            clearLists();
             loadLists();
         }
 
