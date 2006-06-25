@@ -1,6 +1,6 @@
 namespace uk.org.riseley.puttySessionManager
 {
-    partial class SessionEditor
+    partial class SessionEditorForm
     {
         /// <summary>
         /// Required designer variable.

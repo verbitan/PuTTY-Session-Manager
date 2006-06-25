@@ -31,7 +31,7 @@ namespace uk.org.riseley.puttySessionManager
     {
         private Options optionsDialog;
         private AboutBox aboutDialog  = new AboutBox();
-        private SessionEditor sessionEditor = new SessionEditor();
+        private SessionEditorForm sessionEditor = new SessionEditorForm();
 
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
