@@ -108,6 +108,12 @@
     <Compile Include="SessionEditor.Designer.cs">
       <DependentUpon>SessionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="SessionEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SessionEditorControl.Designer.cs">
+      <DependentUpon>SessionEditorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="SessionListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -145,6 +151,10 @@
     <EmbeddedResource Include="SessionEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionEditorControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionEditorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SessionListControl.resx">
       <SubType>Designer</SubType>
@@ -191,6 +201,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="changelog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="gpl.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
