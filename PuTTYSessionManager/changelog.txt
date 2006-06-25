@@ -1,0 +1,13 @@
+PuTTY Session Manager v0.1.0.1 ( 22-06-2006 )
+=============================================
+Initial release of PuTTY Session Manager
+ - Foldered Session Management
+ - Alternative session list 
+ - Session hotkeys
+ 
+ 
+================================================ 
+$Rev::                   $:  
+$Author::                $:  
+$Date::                  $:  
+================================================
