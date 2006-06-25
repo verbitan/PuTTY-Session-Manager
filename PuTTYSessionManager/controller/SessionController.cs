@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Permissions;
+using System.IO;
 using Microsoft.Win32;
+
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
 ViewAndModify = uk.org.riseley.puttySessionManager.model.SessionController.PUTTY_SESSIONS_REG_KEY)]
@@ -95,6 +97,46 @@ namespace uk.org.riseley.puttySessionManager.model
                 SessionsRefreshed(sender, e);
         }
 
+        public bool saveSessionsToFile(Session[] sessionArray, String fileName)
+        {
+            using (StreamWriter sw = File.CreateText(fileName))
+            {
+                writeSessionExportHeader(sw);
+                foreach (Session s in sessionArray)
+                {
+                    saveSession(s, sw);
+                }
+                sw.Close();
+            }
+            return true;
+        }
+
+        private void saveSession(Session s, StreamWriter sw)
+        {
+            sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName + "]");
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            foreach (string valueName in rk.GetValueNames())
+            {
+                RegistryValueKind valueKind = rk.GetValueKind(valueName);
+                if ( valueKind.Equals (RegistryValueKind.String)) {
+                    sw.WriteLine( "\"" + valueName + "\"=\"" + rk.GetValue(valueName).ToString() + "\"" );
+                } else if ( valueKind.Equals ( RegistryValueKind.DWord )) {
+                    sw.WriteLine("\"" + valueName + "\"=dword:" + rk.GetValue(valueName).ToString() + "\"");
+                }
+
+            }
+            sw.WriteLine();
+            rk.Close();
+
+        }
+
+        private void writeSessionExportHeader(StreamWriter sw)
+        {
+            sw.WriteLine("Windows Registry Editor Version 5.00");
+            sw.WriteLine();
+            sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "]");
+            sw.WriteLine();
+        }
     }
 
     

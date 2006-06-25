@@ -17,6 +17,16 @@ namespace uk.org.riseley.puttySessionManager
         {
             InitializeComponent();
             sc = SessionController.getInstance();           
-        }        
+        }
+
+        private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
+        {
+            if (DialogResult.OK == saveFileDialog1.ShowDialog(this))
+            {
+                sc.saveSessionsToFile ( sessionEditorControl1.getSelectedSessions(),
+                                        saveFileDialog1.FileName);
+            }
+
+        }   
     }
 }
