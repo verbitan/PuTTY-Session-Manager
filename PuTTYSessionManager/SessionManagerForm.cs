@@ -42,6 +42,8 @@ namespace uk.org.riseley.puttySessionManager
         {
             InitializeComponent();
             LoadLayout();
+            SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
+            sc.SessionsRefreshed += scHandler;
         }
 
         private void LoadLayout()
@@ -172,11 +174,6 @@ namespace uk.org.riseley.puttySessionManager
             this.ResumeLayout(true);
         }
 
-        private void sessionControl_RefreshSessions(object sender, EventArgs e)
-        {
-            currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
-        }
-
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == HotkeyController.WM_HOTKEY)
@@ -216,9 +213,10 @@ namespace uk.org.riseley.puttySessionManager
             sessionEditor.ShowDialog();
         }
 
-        private void sessionControl_RefreshSessions(object sender, RefreshSessionsEventArgs re)
+        public void SessionsRefreshed(object sender, RefreshSessionsEventArgs re)
         {
-
+            currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
         }
+
     }
 }

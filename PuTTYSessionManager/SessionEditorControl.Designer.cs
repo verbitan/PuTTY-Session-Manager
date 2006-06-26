@@ -1,3 +1,20 @@
+/* 
+ * Copyright (C) 2006 David Riseley 
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 namespace uk.org.riseley.puttySessionManager
 {
     partial class SessionEditorControl
@@ -29,11 +46,11 @@ namespace uk.org.riseley.puttySessionManager
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
+            this.copySessionAttribButton = new System.Windows.Forms.Button();
+            this.newSessionButton = new System.Windows.Forms.Button();
+            this.deleteSesssionsButton = new System.Windows.Forms.Button();
+            this.closeButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.sessionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sessionPathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,11 +66,11 @@ namespace uk.org.riseley.puttySessionManager
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.90388F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.15337F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.exportButton, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.copySessionAttribButton, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.newSessionButton, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.deleteSesssionsButton, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.closeButton, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -64,57 +81,58 @@ namespace uk.org.riseley.puttySessionManager
             this.tableLayoutPanel1.Size = new System.Drawing.Size(489, 378);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // button1
+            // exportButton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.Location = new System.Drawing.Point(3, 347);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Export Sessions";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.exportButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.exportButton.Location = new System.Drawing.Point(3, 347);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(75, 23);
+            this.exportButton.TabIndex = 0;
+            this.exportButton.Text = "Export Sessions";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
-            // button2
+            // copySessionAttribButton
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.Location = new System.Drawing.Point(84, 347);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(137, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Copy Session Attributes";
-            this.button2.UseVisualStyleBackColor = true;
+            this.copySessionAttribButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.copySessionAttribButton.Location = new System.Drawing.Point(84, 347);
+            this.copySessionAttribButton.Name = "copySessionAttribButton";
+            this.copySessionAttribButton.Size = new System.Drawing.Size(137, 23);
+            this.copySessionAttribButton.TabIndex = 1;
+            this.copySessionAttribButton.Text = "Copy Session Attributes";
+            this.copySessionAttribButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // newSessionButton
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.Location = new System.Drawing.Point(229, 347);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "New Session";
-            this.button3.UseVisualStyleBackColor = true;
+            this.newSessionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.newSessionButton.Location = new System.Drawing.Point(229, 347);
+            this.newSessionButton.Name = "newSessionButton";
+            this.newSessionButton.Size = new System.Drawing.Size(88, 23);
+            this.newSessionButton.TabIndex = 2;
+            this.newSessionButton.Text = "New Session";
+            this.newSessionButton.UseVisualStyleBackColor = true;
+            this.newSessionButton.Click += new System.EventHandler(this.newSessionButton_Click);
             // 
-            // button4
+            // deleteSesssionsButton
             // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.Location = new System.Drawing.Point(328, 347);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Delete Sessions";
-            this.button4.UseVisualStyleBackColor = true;
+            this.deleteSesssionsButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.deleteSesssionsButton.Location = new System.Drawing.Point(328, 347);
+            this.deleteSesssionsButton.Name = "deleteSesssionsButton";
+            this.deleteSesssionsButton.Size = new System.Drawing.Size(98, 23);
+            this.deleteSesssionsButton.TabIndex = 3;
+            this.deleteSesssionsButton.Text = "Delete Sessions";
+            this.deleteSesssionsButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // closeButton
             // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button5.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button5.Location = new System.Drawing.Point(435, 347);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(50, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Close";
-            this.button5.UseVisualStyleBackColor = true;
+            this.closeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.closeButton.Location = new System.Drawing.Point(435, 347);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(50, 23);
+            this.closeButton.TabIndex = 4;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -169,11 +187,11 @@ namespace uk.org.riseley.puttySessionManager
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button exportButton;
+        private System.Windows.Forms.Button copySessionAttribButton;
+        private System.Windows.Forms.Button newSessionButton;
+        private System.Windows.Forms.Button deleteSesssionsButton;
+        private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn sessionNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sessionPathColumn;

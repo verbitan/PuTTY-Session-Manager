@@ -16,6 +16,9 @@ namespace uk.org.riseley.puttySessionManager.model
     {
         public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
         public const string PUTTY_PSM_FOLDER_VALUE = "PsmPath";
+        private const string PUTTY_HOSTNAME_VALUE = "HostName";
+        private const string PUTTY_USERNAME_VALUE = "UserName";
+        private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
 
         private static List<Session> sessionList = new List<Session>();
 
@@ -38,14 +41,19 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public List<Session> getSessionList()
         {
-           return sessionList;
+            return sessionList;
+        }
+
+        public Session findDefaultSession()
+        {
+            return findSesssion(PUTTY_DEFAULT_SESSION);
         }
 
         public Session findSesssion(string sessionName)
         {
-            Session s = new Session ( sessionName ,"", false);
+            Session s = new Session(sessionName, "", false);
             int index = sessionList.BinarySearch(s);
-            if ( index >= 0 )
+            if (index >= 0)
                 s = sessionList[index];
             else
                 s = null;
@@ -58,7 +66,7 @@ namespace uk.org.riseley.puttySessionManager.model
             {
                 sessionList = getSessionListFromRegistry();
             }
-            OnSessionsRefreshed(sender,new RefreshSessionsEventArgs(refreshSender));
+            OnSessionsRefreshed(sender, new RefreshSessionsEventArgs(refreshSender));
         }
 
         private List<Session> getSessionListFromRegistry()
@@ -74,7 +82,7 @@ namespace uk.org.riseley.puttySessionManager.model
                 sessKey.Close();
 
                 Session s = new Session(keyName, psmpath, false);
-                
+
                 sl.Add(s);
             }
             rk.Close();
@@ -91,7 +99,7 @@ namespace uk.org.riseley.puttySessionManager.model
             rk.Close();
         }
 
-        protected virtual void OnSessionsRefreshed(Object sender , RefreshSessionsEventArgs e)
+        protected virtual void OnSessionsRefreshed(Object sender, RefreshSessionsEventArgs e)
         {
             if (SessionsRefreshed != null)
                 SessionsRefreshed(sender, e);
@@ -99,6 +107,8 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public bool saveSessionsToFile(Session[] sessionArray, String fileName)
         {
+            if (sessionArray.Length == 0)
+                return false;
             using (StreamWriter sw = File.CreateText(fileName))
             {
                 writeSessionExportHeader(sw);
@@ -118,10 +128,15 @@ namespace uk.org.riseley.puttySessionManager.model
             foreach (string valueName in rk.GetValueNames())
             {
                 RegistryValueKind valueKind = rk.GetValueKind(valueName);
-                if ( valueKind.Equals (RegistryValueKind.String)) {
-                    sw.WriteLine( "\"" + valueName + "\"=\"" + rk.GetValue(valueName).ToString() + "\"" );
-                } else if ( valueKind.Equals ( RegistryValueKind.DWord )) {
-                    sw.WriteLine("\"" + valueName + "\"=dword:" + rk.GetValue(valueName).ToString() + "\"");
+                if (valueKind.Equals(RegistryValueKind.String))
+                {
+                    sw.WriteLine("\"" + valueName + "\"=\"" + rk.GetValue(valueName).ToString().Replace("\\", "\\\\") + "\"");
+                }
+                else if (valueKind.Equals(RegistryValueKind.DWord))
+                {
+                    Object o = rk.GetValue(valueName);
+                    string hex = ((int)o).ToString("x8");
+                    sw.WriteLine("\"" + valueName + "\"=dword:" + hex);
                 }
 
             }
@@ -137,8 +152,58 @@ namespace uk.org.riseley.puttySessionManager.model
             sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "]");
             sw.WriteLine();
         }
+
+        public bool createNewSession(NewSessionRequest nsr)
+        {
+            // Check the template session is still there
+            RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionTemplate.SessionName, false);
+            if (template == null)
+                return false;
+
+            // Check no-one has created a new session with the same name
+            RegistryKey newSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionName, false);
+            if (newSession != null)
+                return false;
+
+            // Create the new session 
+            newSession = Registry.CurrentUser.CreateSubKey (PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionName.Replace(" ", "%20"));
+
+
+            // Copy the values
+            bool hostnameSet = false;
+            object value;
+            foreach (string valueName in template.GetValueNames())
+            {
+                
+                if ( valueName.Equals ( PUTTY_HOSTNAME_VALUE ) ) 
+                {
+                    hostnameSet = true;
+                    value = nsr.Hostname;
+                } else if ( nsr.CopyDefaultUsername == false &&
+                            valueName.Equals (PUTTY_USERNAME_VALUE) )
+                {
+                    value = "";
+                } else 
+                {
+                    value = template.GetValue(valueName);
+                }
+
+                newSession.SetValue(valueName,value,template.GetValueKind(valueName));
+            }
+
+            // Set the hostname if it hasn't already been set
+            if ( hostnameSet == false )
+                newSession.SetValue(PUTTY_HOSTNAME_VALUE, nsr.Hostname, RegistryValueKind.String);
+
+            template.Close();
+            newSession.Close();
+
+            invalidateSessionList(this, true);
+
+            return true;
+        }
     }
 
-    
+
 
 }

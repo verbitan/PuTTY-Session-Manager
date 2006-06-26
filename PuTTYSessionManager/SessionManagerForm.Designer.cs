@@ -129,7 +129,7 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionTreeControl1.ContextMenuVisible = true;
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
             this.sessionTreeControl1.Name = "sessionTreeControl1";
-            this.sessionTreeControl1.RefreshSessions += new uk.org.riseley.puttySessionManager.SessionControl.RefreshSessionEventHandler(this.sessionControl_RefreshSessions);
+            this.sessionTreeControl1.RefreshSessions += new uk.org.riseley.puttySessionManager.SessionControl.RefreshSessionEventHandler(this.SessionsRefreshed);
             this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
             this.sessionTreeControl1.ShowAbout += new System.EventHandler(this.sessionControl_ShowAbout);
             this.sessionTreeControl1.ShowOptions += new System.EventHandler(this.sessionControl_ShowOptions);
@@ -140,7 +140,7 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionListControl1.ContextMenuVisible = true;
             resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
             this.sessionListControl1.Name = "sessionListControl1";
-            this.sessionListControl1.RefreshSessions += new uk.org.riseley.puttySessionManager.SessionControl.RefreshSessionEventHandler(this.sessionControl_RefreshSessions);
+            this.sessionListControl1.RefreshSessions += new uk.org.riseley.puttySessionManager.SessionControl.RefreshSessionEventHandler(this.SessionsRefreshed);
             this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
             this.sessionListControl1.ShowAbout += new System.EventHandler(this.sessionControl_ShowAbout);
             this.sessionListControl1.ShowOptions += new System.EventHandler(this.sessionControl_ShowOptions);

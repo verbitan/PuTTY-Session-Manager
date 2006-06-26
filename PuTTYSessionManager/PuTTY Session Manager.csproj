@@ -80,11 +80,18 @@
     <Compile Include="FolderForm.Designer.cs">
       <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\NewSessionRequest.cs" />
     <Compile Include="model\RefreshSessionsEventArgs.cs" />
     <Compile Include="model\ISessionControl.cs" />
     <Compile Include="model\LaunchSessionEventArgs.cs" />
     <Compile Include="model\Session.cs" />
     <Compile Include="controller\SessionController.cs" />
+    <Compile Include="NewSessionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewSessionForm.Designer.cs">
+      <DependentUpon>NewSessionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +146,10 @@
     <EmbeddedResource Include="FolderForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FolderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewSessionForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewSessionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">
       <SubType>Designer</SubType>
