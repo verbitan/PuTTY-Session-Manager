@@ -26,12 +26,12 @@ using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class NewSessionForm : Form
+    public partial class CopySessionForm : Form
     {
         private Form parentWindow;
         private SessionController sc;
 
-        public NewSessionForm(Form parent)
+        public CopySessionForm(Form parent)
         {
             parentWindow = parent;
             sc = SessionController.getInstance();
@@ -57,27 +57,14 @@ namespace uk.org.riseley.puttySessionManager
             loadList();
         }
 
-        private void hostnameTextBox_TextChanged(object sender, EventArgs e)
+        public void getCopySessionRequest()
         {
-            if (hostnameTextBox.Text.Length < sessionnameTextBox.MaxLength)
-                sessionnameTextBox.Text = hostnameTextBox.Text;
-            else
-                sessionnameTextBox.Text = hostnameTextBox.Text.Substring(0,sessionnameTextBox.MaxLength);
-        }
-
-        public NewSessionRequest getNewSessionRequest()
-        {
-            NewSessionRequest nsr = new NewSessionRequest((Session)sessionComboBox.SelectedItem
-                                        , copyUsernameCheckBox.Checked
-                                        , hostnameTextBox.Text
-                                        , sessionnameTextBox.Text);
-            return nsr;
-
+            
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (sessionnameTextBox.Text.Equals(""))
+            /*if (sessionnameTextBox.Text.Equals(""))
             {
                 MessageBox.Show("You must specify a session name."
                   , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -96,14 +83,8 @@ namespace uk.org.riseley.puttySessionManager
                             ,"Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
                     DialogResult = DialogResult.None;
              
-            }
+            }*/
 
-        }
-
-        private void NewSessionForm_Shown(object sender, EventArgs e)
-        {
-            sessionnameTextBox.Clear();
-            hostnameTextBox.Clear();
         }
 
     }

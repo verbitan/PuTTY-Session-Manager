@@ -46,13 +46,23 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public Session findDefaultSession()
         {
-            return findSesssion(PUTTY_DEFAULT_SESSION);
+            return findSession(PUTTY_DEFAULT_SESSION);
         }
 
-        public Session findSesssion(string sessionName)
+        public Session findDefaultSession(List<Session> sl)
+        {
+            return findSession(sl, PUTTY_DEFAULT_SESSION);
+        }
+
+        public Session findSession(string sessionName)
+        {
+            return findSession(sessionList, sessionName);
+        }
+
+        public Session findSession(List<Session> sl, string sessionName)
         {
             Session s = new Session(sessionName, "", false);
-            int index = sessionList.BinarySearch(s);
+            int index = sl.BinarySearch(s);
             if (index >= 0)
                 s = sessionList[index];
             else
@@ -197,6 +207,25 @@ namespace uk.org.riseley.puttySessionManager.model
 
             template.Close();
             newSession.Close();
+
+            invalidateSessionList(this, true);
+
+            return true;
+        }
+
+        public bool deleteSessions(List<Session> sl)
+        {
+            // Can't delete the default session
+            if (findSession(sl, PUTTY_DEFAULT_SESSION) != null)
+            {
+                return false;
+            }
+
+            // 
+            foreach (Session s in sl)
+            {
+                Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
+            }
 
             invalidateSessionList(this, true);
 

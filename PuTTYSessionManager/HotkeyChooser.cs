@@ -47,15 +47,15 @@ namespace uk.org.riseley.puttySessionManager
         private void loadLists()
         {
             comboBox1.Items.AddRange(sc.getSessionList().ToArray());
-            comboBox1.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession1);
+            comboBox1.SelectedItem = sc.findSession(Properties.Settings.Default.FavouriteSession1);
             comboBox2.Items.AddRange(sc.getSessionList().ToArray());
-            comboBox2.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession2);
+            comboBox2.SelectedItem = sc.findSession(Properties.Settings.Default.FavouriteSession2);
             comboBox3.Items.AddRange(sc.getSessionList().ToArray());
-            comboBox3.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession3);
+            comboBox3.SelectedItem = sc.findSession(Properties.Settings.Default.FavouriteSession3);
             comboBox4.Items.AddRange(sc.getSessionList().ToArray());
-            comboBox4.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession4);
+            comboBox4.SelectedItem = sc.findSession(Properties.Settings.Default.FavouriteSession4);
             comboBox5.Items.AddRange(sc.getSessionList().ToArray());
-            comboBox5.SelectedItem = sc.findSesssion(Properties.Settings.Default.FavouriteSession5);
+            comboBox5.SelectedItem = sc.findSession(Properties.Settings.Default.FavouriteSession5);
         }
 
         private void clearLists()

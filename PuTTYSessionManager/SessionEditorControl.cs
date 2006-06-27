@@ -33,6 +33,7 @@ namespace uk.org.riseley.puttySessionManager
         public event System.EventHandler ExportSessions;
         public event System.EventHandler NewSession;
         public event System.EventHandler DeleteSessions;
+        public event System.EventHandler CopySessionAttributes;
 
         public SessionEditorControl()
         {
@@ -84,6 +85,14 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
+        protected virtual void OnCopySessionAttributes(System.EventArgs e)
+        {
+            if (CopySessionAttributes != null)
+            {
+                CopySessionAttributes(this, e);
+            }
+        }
+
         private void exportButton_Click(object sender, EventArgs e)
         {
             OnExportSessions(e);
@@ -104,9 +113,27 @@ namespace uk.org.riseley.puttySessionManager
             return sarr;
         }
 
+        public List<Session> getSelectedSessionsList()
+        {
+            List<Session> sl = new List<Session> ();
+            sl.AddRange(getSelectedSessions());
+            return sl;
+        }
+
+
         private void newSessionButton_Click(object sender, EventArgs e)
         {
             OnNewSession(e);
+        }
+
+        private void deleteSesssionsButton_Click(object sender, EventArgs e)
+        {
+            OnDeleteSessions(e);
+        }
+
+        private void copySessionAttribButton_Click(object sender, EventArgs e)
+        {
+            OnCopySessionAttributes(e);
         }
 
     }

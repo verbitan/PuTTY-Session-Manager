@@ -101,6 +101,7 @@ namespace uk.org.riseley.puttySessionManager
             this.copySessionAttribButton.TabIndex = 1;
             this.copySessionAttribButton.Text = "Copy Session Attributes";
             this.copySessionAttribButton.UseVisualStyleBackColor = true;
+            this.copySessionAttribButton.Click += new System.EventHandler(this.copySessionAttribButton_Click);
             // 
             // newSessionButton
             // 
@@ -122,6 +123,7 @@ namespace uk.org.riseley.puttySessionManager
             this.deleteSesssionsButton.TabIndex = 3;
             this.deleteSesssionsButton.Text = "Delete Sessions";
             this.deleteSesssionsButton.UseVisualStyleBackColor = true;
+            this.deleteSesssionsButton.Click += new System.EventHandler(this.deleteSesssionsButton_Click);
             // 
             // closeButton
             // 

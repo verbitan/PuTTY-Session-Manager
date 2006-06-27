@@ -30,12 +30,14 @@ namespace uk.org.riseley.puttySessionManager
     {
         private SessionController sc;
         private NewSessionForm nsf;
+        private CopySessionForm csf;
 
         public SessionEditorForm()
         {
             InitializeComponent();
             sc = SessionController.getInstance();
             nsf = new NewSessionForm(this);
+            csf = new CopySessionForm(this);
         }
 
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
@@ -76,6 +78,41 @@ namespace uk.org.riseley.puttySessionManager
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
+        }
+
+        private void sessionEditorControl1_DeleteSessions(object sender, EventArgs e)
+        {
+            List<Session> sl = sessionEditorControl1.getSelectedSessionsList();
+            if (sc.findDefaultSession(sl) != null)
+            {
+                MessageBox.Show("Cannot delete default session"
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DialogResult dr = MessageBox.Show("Do you want to backup " + sl.Count + " sessions to a file?"
+                    , "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if ( dr == DialogResult.Yes)
+            {
+                sessionEditorControl1_ExportSessions(sender, e);
+            } 
+            else if ( dr == DialogResult.Cancel ) 
+            {
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to delete " + sl.Count + " sessions?"
+                    , "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                bool result = sc.deleteSessions(sessionEditorControl1.getSelectedSessionsList());
+                if (result == false)
+                    MessageBox.Show("Failed to delete sessions"
+                    , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void sessionEditorControl1_CopySessionAttributes(object sender, EventArgs e)
+        {
+            csf.ShowDialog();
         }   
     }
 }
