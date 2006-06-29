@@ -30,13 +30,15 @@ namespace uk.org.riseley.puttySessionManager
 {
     public partial class SessionListControl : SessionControl, ISessionControl
     {
-        
+
+        ToolStripMenuItem[] tsmiArray;
+
         public SessionListControl() : base()
         {
             InitializeComponent();
         }
 
-
+        
         protected override void LoadSessions()
         {
             // Suppress repainting the ListBox until all the objects have been created.
@@ -58,6 +60,13 @@ namespace uk.org.riseley.puttySessionManager
             // Begin repainting the TreeView.
             listBox1.EndUpdate();
 
+            tsmiArray = new ToolStripMenuItem[getSessionController().getSessionList().Count];
+            int i=0;
+            foreach (Session s in getSessionController().getSessionList())
+            {
+                tsmiArray[i] = new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick);
+                i++;
+            }
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -82,11 +91,8 @@ namespace uk.org.riseley.puttySessionManager
         public override void getSessionMenuItems(ToolStripMenuItem parent)
         {
             parent.DropDownItems.Clear();
-
-            foreach (Session s in getSessionController().getSessionList())
-            {
-               parent.DropDownItems.Add(new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick));
-            }
+            if ( tsmiArray != null )
+                parent.DropDownItems.AddRange(tsmiArray);            
         }
 
         public bool AllowMultiSelect

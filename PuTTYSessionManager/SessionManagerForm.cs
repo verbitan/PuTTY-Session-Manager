@@ -152,7 +152,7 @@ namespace uk.org.riseley.puttySessionManager
 
         private void setDisplay()
         {
-            this.SuspendLayout();
+
             if (displayTreeToolStripMenuItem.Checked == true)
             {
                 currentSessionControl = sessionTreeControl1;
@@ -163,15 +163,20 @@ namespace uk.org.riseley.puttySessionManager
                 currentSessionControl = sessionListControl1;
                 hiddenSessionControl = sessionTreeControl1;            
             }
+
+            this.SuspendLayout();
+            
             currentSessionControl.Enabled = true;
             currentSessionControl.Visible = true;
             hiddenSessionControl.Enabled = false;
             hiddenSessionControl.Visible = false;                     
+                       
+            this.ResumeLayout(true);
 
             currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);
 
             Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
-            this.ResumeLayout(true);
+
         }
 
         protected override void WndProc(ref Message m)
