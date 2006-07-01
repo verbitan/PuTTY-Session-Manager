@@ -4,6 +4,7 @@ using System.Text;
 using System.Security.Permissions;
 using System.IO;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
@@ -21,6 +22,7 @@ namespace uk.org.riseley.puttySessionManager.model
         private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
 
         private static List<Session> sessionList = new List<Session>();
+        private static List<string> folderList = new List<string>();
 
         private static SessionController instance = null;
 
@@ -44,9 +46,19 @@ namespace uk.org.riseley.puttySessionManager.model
             return sessionList;
         }
 
+        public List<string> getFolderList()
+        {
+            return folderList;
+        }
+
         public Session findDefaultSession()
         {
             return findSession(PUTTY_DEFAULT_SESSION);
+        }
+
+        public string findDefaultFolder()
+        {
+            return Session.SESSIONS_FOLDER_NAME;
         }
 
         public Session findDefaultSession(List<Session> sl)
@@ -75,6 +87,7 @@ namespace uk.org.riseley.puttySessionManager.model
             lock (sessionList)
             {
                 sessionList = getSessionListFromRegistry();
+                folderList = getFolderListFromSessions(sessionList);
             }
             OnSessionsRefreshed(sender, new RefreshSessionsEventArgs(refreshSender));
         }
@@ -94,13 +107,35 @@ namespace uk.org.riseley.puttySessionManager.model
                 Session s = new Session(keyName, psmpath, false);
 
                 sl.Add(s);
+
             }
             rk.Close();
 
             sl.Sort();
 
+
             return sl;
         }
+
+        private List<string> getFolderListFromSessions(List<Session> sl)
+        {
+            List<string> fl = new List<string>();
+
+            // Add the default folder
+            fl.Add(Session.SESSIONS_FOLDER_NAME);
+
+            foreach (Session s in sl)
+            {
+                if (fl.Contains(s.FolderName) == false)
+                    fl.Add(s.FolderName);
+            }
+
+            fl.Sort();
+
+            return fl;
+        
+        }
+
 
         public void saveFolderToRegistry(Session s)
         {
@@ -181,6 +216,8 @@ namespace uk.org.riseley.puttySessionManager.model
 
             // Copy the values
             bool hostnameSet = false;
+            bool foldernameSet = false;
+
             object value;
             foreach (string valueName in template.GetValueNames())
             {
@@ -189,11 +226,18 @@ namespace uk.org.riseley.puttySessionManager.model
                 {
                     hostnameSet = true;
                     value = nsr.Hostname;
-                } else if ( nsr.CopyDefaultUsername == false &&
+                } 
+                else if ( valueName.Equals ( PUTTY_PSM_FOLDER_VALUE ) )
+                {
+                    foldernameSet = true;
+                    value = nsr.SessionFolder;
+                }
+                else if ( nsr.CopyDefaultUsername == false &&
                             valueName.Equals (PUTTY_USERNAME_VALUE) )
                 {
                     value = "";
-                } else 
+                } 
+                else 
                 {
                     value = template.GetValue(valueName);
                 }
@@ -204,6 +248,10 @@ namespace uk.org.riseley.puttySessionManager.model
             // Set the hostname if it hasn't already been set
             if ( hostnameSet == false )
                 newSession.SetValue(PUTTY_HOSTNAME_VALUE, nsr.Hostname, RegistryValueKind.String);
+
+            // Set the foldername if it hasn't already been set
+            if ( foldernameSet == false )
+                newSession.SetValue(PUTTY_PSM_FOLDER_VALUE, nsr.SessionFolder, RegistryValueKind.String);
 
             template.Close();
             newSession.Close();
@@ -231,6 +279,30 @@ namespace uk.org.riseley.puttySessionManager.model
 
             return true;
         }
+
+        public String launchSession(String sessionName)
+        {
+            String puttyExec = Properties.Settings.Default.PuttyLocation;
+            Process p = new Process();
+            p.StartInfo.FileName = puttyExec;
+            p.StartInfo.Arguments = "-load \"" + sessionName + "\"";
+
+            bool result = false;
+            String errMsg = "";
+            try
+            {
+                result = p.Start();
+            }
+            catch (Exception ex)
+            {
+                result = false;
+                errMsg = ex.Message;
+            }
+            p.Close();
+
+            return errMsg;
+        }
+
     }
 
 

@@ -107,32 +107,14 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionControl_LaunchSession(object sender, LaunchSessionEventArgs se)
         {
-            String puttyExec = Properties.Settings.Default.PuttyLocation;
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = puttyExec;
-            p.StartInfo.Arguments = "-load \"" + se.sessionName + "\"";
 
-            bool result = false;
-            String errMsg = "";
-            try
-            {
-                result = p.Start();
-            }
-            catch (Exception ex)
-            {
-                result = false;
-                errMsg = ex.Message;
-                //throw;
-            }
-            if (!result)
+            String errMsg = sc.launchSession(se.sessionName);
+            if (errMsg.Equals("") == false)
             {
                 MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
                                 errMsg
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            p.Close();
-
         }
 
         private void sessionControl_ShowAbout(object sender, EventArgs e)

@@ -21,22 +21,21 @@ using System.Text;
 
 namespace uk.org.riseley.puttySessionManager.model
 {
-    public class NewSessionRequest
+    public class CopySessionRequest
     {
-        public NewSessionRequest(Session sessionTemplate
-                                , string sessionFolder                                
-                                , string hostname
-                                , string sessionName
-                                , bool copyDefaultUsername
-                                , bool launchSession )
+        public CopySessionRequest(Session st, bool cdu, string hn, string sn)
         {
-            this.sessionTemplate = sessionTemplate;
-            this.copyDefaultUsername = copyDefaultUsername;
-            this.hostname = hostname;
-            this.sessionName = sessionName;
-            this.sessionFolder = sessionFolder;
-            this.launchSession = launchSession;
+            sessionTemplate = st;
+            copyDefaultUsername = cdu;
+            hostname = hn;
+            sessionName = sn;
         }
+
+        public enum CopySessionOptions { COPY_ALL, COPY_INCLUDE, COPY_EXCLUDE };
+
+        //private List<string> 
+
+
 
         private Session sessionTemplate;
 
@@ -63,19 +62,6 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             get { return sessionName; }
         }
-
-        private string sessionFolder;
-
-        public string SessionFolder
-        {
-            get { return sessionFolder; }
-        }
-
-        private bool launchSession;
-
-        public bool LaunchSession
-        {
-            get { return launchSession; }
-        }
+                
     }
 }

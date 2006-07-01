@@ -76,6 +76,19 @@ namespace uk.org.riseley.puttySessionManager
                 if (result == false)
                     MessageBox.Show("Failed to create new session: " + nsr.SessionName
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    if ( nsr.LaunchSession == true )
+                    {
+                         String errMsg = sc.launchSession(nsr.SessionName);
+                         if (errMsg.Equals("") == false)
+                         {
+                             MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
+                                 errMsg
+                                 , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                         }
+                    }   
+                }
 
             }
         }

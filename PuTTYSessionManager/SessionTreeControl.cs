@@ -36,10 +36,13 @@ namespace uk.org.riseley.puttySessionManager
         private const int IMAGE_INDEX_SELECTED_FOLDER = 1;
         private const int IMAGE_INDEX_SESSION = 2;
 
+        private NewSessionForm newSessionForm; 
+
         public SessionTreeControl()
             : base()
         {
             InitializeComponent();
+            newSessionForm = new NewSessionForm(null);
         }
 
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
@@ -284,12 +287,14 @@ namespace uk.org.riseley.puttySessionManager
                 treeView.AllowDrop = false;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
+                saveNewSessionToolStripMenuItem.Enabled = false;
             }
             else
             {
                 treeView.AllowDrop = true;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
+                saveNewSessionToolStripMenuItem.Enabled = true;
             }
 
 
@@ -534,6 +539,51 @@ namespace uk.org.riseley.puttySessionManager
             return currentCount;
         }
 
+        private void saveNewSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
 
+            // Get the session
+            Session s = (Session)selectedNode.Tag;
+
+            // Setup the session request
+            NewSessionRequest nsr;
+            if (s.IsFolder == false)
+            {
+                nsr = new NewSessionRequest(s, s.FolderName, "", "", true, true);
+            }
+            else
+            {
+                nsr = new NewSessionRequest(null,s.FolderName, "", "",true, true);
+            }
+
+            // Set the options in the form
+            newSessionForm.setNewSessionRequest(nsr);
+
+            // Show the dialog
+            if (newSessionForm.ShowDialog() == DialogResult.OK)
+            {
+                nsr = newSessionForm.getNewSessionRequest();
+                bool result = getSessionController().createNewSession(nsr);
+                if (result == false)
+                    MessageBox.Show("Failed to create new session: " + nsr.SessionName
+                    , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    if (nsr.LaunchSession == true)
+                    {
+                        String errMsg = getSessionController().launchSession(nsr.SessionName);
+                        if (errMsg.Equals("") == false)
+                        {
+                            MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
+                                errMsg
+                                , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+
+            }
+        }
     }
 }

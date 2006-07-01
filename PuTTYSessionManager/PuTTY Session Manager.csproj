@@ -86,6 +86,7 @@
     <Compile Include="FolderForm.Designer.cs">
       <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\CopySessionRequest.cs" />
     <Compile Include="model\NewSessionRequest.cs" />
     <Compile Include="model\RefreshSessionsEventArgs.cs" />
     <Compile Include="model\ISessionControl.cs" />

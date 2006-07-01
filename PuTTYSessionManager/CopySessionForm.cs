@@ -87,5 +87,10 @@ namespace uk.org.riseley.puttySessionManager
 
         }
 
+        private void copyAllRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            attributesGroupBox.Enabled = !(copyAllRadioButton.Checked);
+        }
+
     }
 }

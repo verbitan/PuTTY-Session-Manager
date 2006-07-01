@@ -44,11 +44,14 @@ namespace uk.org.riseley.puttySessionManager
         {
             sessionComboBox.Items.AddRange(sc.getSessionList().ToArray());
             sessionComboBox.SelectedItem = sc.findDefaultSession();
+            sessionFolderComboBox.Items.AddRange(sc.getFolderList().ToArray());
+            sessionFolderComboBox.SelectedItem = sc.findDefaultFolder();
         }
 
         private void clearList()
         {
             sessionComboBox.Items.Clear();
+            sessionFolderComboBox.Items.Clear();
         }
 
         public void SessionsRefreshed(Object sender, EventArgs e)
@@ -68,11 +71,32 @@ namespace uk.org.riseley.puttySessionManager
         public NewSessionRequest getNewSessionRequest()
         {
             NewSessionRequest nsr = new NewSessionRequest((Session)sessionComboBox.SelectedItem
-                                        , copyUsernameCheckBox.Checked
+                                        , sessionFolderComboBox.Text
                                         , hostnameTextBox.Text
-                                        , sessionnameTextBox.Text);
+                                        , sessionnameTextBox.Text
+                                        , copyUsernameCheckBox.Checked
+                                        , launchSessionCheckBox.Checked);
             return nsr;
 
+        }
+
+        public void setNewSessionRequest(NewSessionRequest nsr)
+        {
+            if (nsr.SessionTemplate != null)
+            {
+                sessionComboBox.SelectedItem = nsr.SessionTemplate;
+                sessionFolderComboBox.SelectedItem = nsr.SessionTemplate.FolderName;
+            }
+            else
+            {
+                sessionComboBox.SelectedItem = sc.findDefaultSession();
+                if (nsr.SessionFolder != null && !(nsr.SessionFolder.Equals("")))
+                {
+                    sessionFolderComboBox.SelectedItem = nsr.SessionFolder;
+                }
+            }
+            launchSessionCheckBox.Checked = nsr.LaunchSession;
+            copyUsernameCheckBox.Checked = nsr.CopyDefaultUsername;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -106,5 +130,9 @@ namespace uk.org.riseley.puttySessionManager
             hostnameTextBox.Clear();
         }
 
+        private void sessionComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            sessionFolderComboBox.SelectedItem = ((Session)sessionComboBox.SelectedItem).FolderName;
+        }
     }
 }
