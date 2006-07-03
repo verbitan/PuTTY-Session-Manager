@@ -51,6 +51,15 @@ namespace uk.org.riseley.puttySessionManager.model
             return folderList;
         }
 
+        public List<string> getSessionAttributes(Session s)
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            List<string> attributes = new List<string>();
+            attributes.AddRange(rk.GetValueNames());
+            attributes.Sort();
+            return attributes;
+        }
+
         public Session findDefaultSession()
         {
             return findSession(PUTTY_DEFAULT_SESSION);

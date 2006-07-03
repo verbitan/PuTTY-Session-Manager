@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
+using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
@@ -44,11 +45,13 @@ namespace uk.org.riseley.puttySessionManager
         {
             sessionComboBox.Items.AddRange(sc.getSessionList().ToArray());
             sessionComboBox.SelectedItem = sc.findDefaultSession();
+            attributeListBox.Items.AddRange(sc.getSessionAttributes(sc.findDefaultSession()).ToArray());
         }
 
         private void clearList()
         {
             sessionComboBox.Items.Clear();
+            attributeListBox.Items.Clear();
         }
 
         public void SessionsRefreshed(Object sender, EventArgs e)
@@ -90,6 +93,43 @@ namespace uk.org.riseley.puttySessionManager
         private void copyAllRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             attributesGroupBox.Enabled = !(copyAllRadioButton.Checked);
+        }
+
+        private void sessionComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            // Suspend redraw
+            SuspendLayout();
+            
+            // Save the list of selected items
+            string[] selectedItems = new string[attributeListBox.SelectedItems.Count];
+            attributeListBox.SelectedItems.CopyTo(selectedItems, 0);
+         
+            // Clear the existing list
+            attributeListBox.Items.Clear();
+
+            // Import the attributes from the new selected session
+            attributeListBox.Items.AddRange(sc.getSessionAttributes((Session)sessionComboBox.SelectedItem).ToArray());
+
+            // Attempt to reselect the item
+            foreach ( string s in selectedItems )
+            {
+                attributeListBox.SelectedItems.Add(s);
+            }
+
+            // Resume redraw
+            ResumeLayout();
+
+        }
+
+        private void selectAllButton_Click(object sender, EventArgs e)
+        {
+            for( int i=0 ; i < attributeListBox.Items.Count ; i++ )
+                attributeListBox.SelectedIndices.Add(i);
+        }
+
+        private void selectNoneButton_Click(object sender, EventArgs e)
+        {
+            attributeListBox.SelectedIndices.Clear();
         }
 
     }
