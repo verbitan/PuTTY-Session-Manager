@@ -54,10 +54,8 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionNameLabel = new System.Windows.Forms.Label();
             this.sessionnameTextBox = new System.Windows.Forms.TextBox();
             this.copyUsernameCheckBox = new System.Windows.Forms.CheckBox();
-            this.copyUsernameLabel = new System.Windows.Forms.Label();
             this.sessionFolderLabel = new System.Windows.Forms.Label();
             this.sessionFolderComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.launchSessionCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -72,15 +70,13 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // sessionComboBox
             // 
-            this.sessionComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.sessionComboBox.DisplayMember = "Default Settings";
             this.sessionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sessionComboBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.sessionComboBox.FormattingEnabled = true;
             this.sessionComboBox.Location = new System.Drawing.Point(148, 30);
             this.sessionComboBox.Name = "sessionComboBox";
             this.sessionComboBox.Size = new System.Drawing.Size(295, 21);
-            this.sessionComboBox.TabIndex = 12;
+            this.sessionComboBox.TabIndex = 7;
             this.sessionComboBox.SelectionChangeCommitted += new System.EventHandler(this.sessionComboBox_SelectionChangeCommitted);
             // 
             // hostnameTextBox
@@ -106,7 +102,7 @@ namespace uk.org.riseley.puttySessionManager
             this.okButton.Location = new System.Drawing.Point(148, 173);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 16;
+            this.okButton.TabIndex = 5;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
@@ -117,7 +113,7 @@ namespace uk.org.riseley.puttySessionManager
             this.cancelButton.Location = new System.Drawing.Point(229, 173);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 17;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
@@ -136,28 +132,20 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionnameTextBox.MaxLength = 60;
             this.sessionnameTextBox.Name = "sessionnameTextBox";
             this.sessionnameTextBox.Size = new System.Drawing.Size(295, 20);
-            this.sessionnameTextBox.TabIndex = 18;
+            this.sessionnameTextBox.TabIndex = 2;
             // 
             // copyUsernameCheckBox
             // 
             this.copyUsernameCheckBox.AutoSize = true;
             this.copyUsernameCheckBox.Checked = true;
             this.copyUsernameCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.copyUsernameCheckBox.Location = new System.Drawing.Point(198, 139);
+            this.copyUsernameCheckBox.Location = new System.Drawing.Point(97, 143);
             this.copyUsernameCheckBox.Name = "copyUsernameCheckBox";
             this.copyUsernameCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.copyUsernameCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.copyUsernameCheckBox.TabIndex = 20;
+            this.copyUsernameCheckBox.Size = new System.Drawing.Size(138, 17);
+            this.copyUsernameCheckBox.TabIndex = 3;
+            this.copyUsernameCheckBox.Text = "Copy Default Username";
             this.copyUsernameCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // copyUsernameLabel
-            // 
-            this.copyUsernameLabel.AutoSize = true;
-            this.copyUsernameLabel.Location = new System.Drawing.Point(73, 139);
-            this.copyUsernameLabel.Name = "copyUsernameLabel";
-            this.copyUsernameLabel.Size = new System.Drawing.Size(119, 13);
-            this.copyUsernameLabel.TabIndex = 21;
-            this.copyUsernameLabel.Text = "Copy Default Username";
             // 
             // sessionFolderLabel
             // 
@@ -170,48 +158,38 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // sessionFolderComboBox
             // 
-            this.sessionFolderComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.sessionFolderComboBox.DisplayMember = "Default Settings";
             this.sessionFolderComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sessionFolderComboBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.sessionFolderComboBox.FormattingEnabled = true;
             this.sessionFolderComboBox.Location = new System.Drawing.Point(148, 57);
             this.sessionFolderComboBox.Name = "sessionFolderComboBox";
             this.sessionFolderComboBox.Size = new System.Drawing.Size(295, 21);
-            this.sessionFolderComboBox.TabIndex = 22;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(235, 140);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Launch Session Now";
+            this.sessionFolderComboBox.TabIndex = 8;
             // 
             // launchSessionCheckBox
             // 
             this.launchSessionCheckBox.AutoSize = true;
             this.launchSessionCheckBox.Checked = true;
             this.launchSessionCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.launchSessionCheckBox.Location = new System.Drawing.Point(349, 140);
+            this.launchSessionCheckBox.Location = new System.Drawing.Point(241, 143);
             this.launchSessionCheckBox.Name = "launchSessionCheckBox";
             this.launchSessionCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.launchSessionCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.launchSessionCheckBox.TabIndex = 24;
+            this.launchSessionCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.launchSessionCheckBox.TabIndex = 4;
+            this.launchSessionCheckBox.Text = "Launch Session Now";
             this.launchSessionCheckBox.UseVisualStyleBackColor = true;
             // 
             // NewSessionForm
             // 
+            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(459, 220);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.launchSessionCheckBox);
             this.Controls.Add(this.sessionFolderLabel);
             this.Controls.Add(this.sessionFolderComboBox);
-            this.Controls.Add(this.copyUsernameLabel);
             this.Controls.Add(this.copyUsernameCheckBox);
             this.Controls.Add(this.sessionNameLabel);
             this.Controls.Add(this.sessionnameTextBox);
@@ -244,10 +222,8 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.Label sessionNameLabel;
         private System.Windows.Forms.TextBox sessionnameTextBox;
         private System.Windows.Forms.CheckBox copyUsernameCheckBox;
-        private System.Windows.Forms.Label copyUsernameLabel;
         private System.Windows.Forms.Label sessionFolderLabel;
         private System.Windows.Forms.ComboBox sessionFolderComboBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox launchSessionCheckBox;
     }
 }

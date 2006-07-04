@@ -217,11 +217,13 @@ namespace uk.org.riseley.puttySessionManager.model
             // Check no-one has created a new session with the same name
             RegistryKey newSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionName, false);
             if (newSession != null)
+            {
+                newSession.Close();
                 return false;
+            }
 
             // Create the new session 
             newSession = Registry.CurrentUser.CreateSubKey (PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionName.Replace(" ", "%20"));
-
 
             // Copy the values
             bool hostnameSet = false;
@@ -312,6 +314,49 @@ namespace uk.org.riseley.puttySessionManager.model
             return errMsg;
         }
 
+        public bool renameSession(Session s, string newSessionName)
+        {
+            // Check the old session isn't the default session
+            if (s.SessionName.Equals(PUTTY_DEFAULT_SESSION))
+                return false;
+            
+            // Check the current session is still there
+            RegistryKey current = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
+            if (current == null)
+                return false;
+
+            // Check no-one has created a new session with the same name
+            RegistryKey newSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionName, false);
+            if (newSession != null)
+            {
+                newSession.Close();
+                return false;
+            }
+
+            // Create the new session
+            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionName);
+            if (newSession == null)
+                return false;
+
+            // Copy all the attributes
+            object value;
+            foreach (string valueName in current.GetValueNames())
+            {
+                value = current.GetValue(valueName);
+                newSession.SetValue(valueName, value, current.GetValueKind(valueName));
+            }
+
+            // Close the new session
+            newSession.Close();
+
+            // Close the current session;
+            current.Close();
+
+            // Delete the current session
+            Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+
+            return true;
+        }
     }
 
 

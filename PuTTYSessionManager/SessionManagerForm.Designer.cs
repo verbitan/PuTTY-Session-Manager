@@ -84,12 +84,14 @@ namespace uk.org.riseley.puttySessionManager
             this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.sysTrayContextMenu.Name = "sysTrayContextMenu";
+            this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
             resources.ApplyResources(this.sysTrayContextMenu, "sysTrayContextMenu");
             // 
             // loadSessionToolStripMenuItem
             // 
+            this.loadSessionToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.loadSessionToolStripMenuItem.Name = "loadSessionToolStripMenuItem";
             resources.ApplyResources(this.loadSessionToolStripMenuItem, "loadSessionToolStripMenuItem");
             // 

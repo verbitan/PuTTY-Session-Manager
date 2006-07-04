@@ -322,6 +322,7 @@ namespace uk.org.riseley.puttySessionManager
                 if (s.IsFolder == false)
                 {
                     newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
+                    renameSessionToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameFolderMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
@@ -329,6 +330,7 @@ namespace uk.org.riseley.puttySessionManager
                 }
                 else
                 {
+                    renameSessionToolStripMenuItem.Enabled = false;
                     launchSessionMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
@@ -412,6 +414,21 @@ namespace uk.org.riseley.puttySessionManager
             return true;
         }
 
+        private bool validateSessionName(string sessionName)
+        {
+            if (sessionName.Equals(""))
+            {
+                MessageBox.Show("Session name must be supplied", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (getSessionController().findSession(sessionName) != null)
+            {
+                MessageBox.Show("Session name must be unique", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         private void renameFolderMenuItem_Click(object sender, EventArgs e)
         {
             // Find the selected node
@@ -439,6 +456,7 @@ namespace uk.org.riseley.puttySessionManager
                 Session sess = new Session(folder, newpath, true);
                 selectedNode.Tag = sess;
                 selectedNode.Text = sess.SessionDisplayText;
+                selectedNode.Name = sess.getKey();
                 parent.Nodes.Add(selectedNode);
 
                 // Refresh the paths of all the child nodes
@@ -470,12 +488,15 @@ namespace uk.org.riseley.puttySessionManager
                 if (s.IsFolder)
                 {
                     ToolStripMenuItem folder = new ToolStripMenuItem(s.SessionDisplayText);
+                    folder.DisplayStyle = ToolStripItemDisplayStyle.Text;
                     parent.DropDownItems.Add(folder);
                     addSessionMenuItemsFolder(folder, node.Nodes);
                 }
                 else
                 {
-                    parent.DropDownItems.Add(new ToolStripMenuItem(s.SessionDisplayText, null, launchSessionSystrayMenuItem_Click));
+                    ToolStripMenuItem session = new ToolStripMenuItem(s.SessionDisplayText, null, launchSessionSystrayMenuItem_Click);
+                    session.DisplayStyle = ToolStripItemDisplayStyle.Text;
+                    parent.DropDownItems.Add(session);
                 }
             }
         }
@@ -623,6 +644,57 @@ namespace uk.org.riseley.puttySessionManager
         private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             getSessionController().invalidateSessionList(this, true);
+        }
+
+        private void renameSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
+
+            // Get the session
+            Session s = (Session)selectedNode.Tag;
+
+            // Check we are not renaming the default session
+            if ( getSessionController().findDefaultSession().SessionName.Equals(s.SessionName) )
+            {
+                MessageBox.Show("Cannot rename the default session"
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+            }
+
+            // Display the session name requester
+            SessionNameForm snf = new SessionNameForm(selectedNode.Text);
+
+            if (snf.ShowDialog() == DialogResult.OK && validateSessionName(snf.getSessionName()))
+            {
+                // Try to rename the session
+                bool result = getSessionController().renameSession(s, snf.getSessionName());
+
+                // Check it worked
+                if (result == false)
+                {
+                    MessageBox.Show("Failed to rename session"
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Create the new session object
+                Session newSession = new Session(snf.getSessionName(), s.FolderName, false);
+                                
+                // Suppress repainting the TreeView until all the objects have been created.
+                treeView.BeginUpdate();
+
+                // Update the selected node
+                selectedNode.Tag = newSession;
+                selectedNode.Text = newSession.SessionDisplayText;
+                selectedNode.Name = newSession.getKey();
+
+                // Fire a refresh event
+                sc.invalidateSessionList(this, false);
+
+                // Begin repainting the TreeView.
+                treeView.EndUpdate();
+            }
         }
     }
 }

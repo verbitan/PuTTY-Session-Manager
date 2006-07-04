@@ -68,6 +68,12 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="controller\HotkeyController.cs" />
+    <Compile Include="SessionNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SessionNameForm.Designer.cs">
+      <DependentUpon>SessionNameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CopySessionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,10 @@
     <EmbeddedResource Include="AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionNameForm.resx">
+      <DependentUpon>SessionNameForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CopySessionForm.resx">
       <DependentUpon>CopySessionForm.cs</DependentUpon>
