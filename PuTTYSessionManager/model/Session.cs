@@ -26,6 +26,9 @@ namespace uk.org.riseley.puttySessionManager.model
     {
         public const string SESSIONS_FOLDER_NAME = "Sessions";
 
+        private const string KEY_SESSION = "SESSION|";
+        private const string KEY_FOLDER = "FOLDER|";
+
         private string sessionName = "";
 
         public string SessionName
@@ -93,6 +96,20 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             return cellValues; 
         }
+
+        public string getKey()
+        {
+            if (IsFolder == true)
+                return KEY_FOLDER + FolderName;
+            else
+                return KEY_SESSION + SessionName;
+        }
+
+        public static string getFolderKey(string folder)
+        {
+            return KEY_FOLDER + folder;
+        }
+
 
     }
 }

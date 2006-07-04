@@ -125,43 +125,61 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="loadSessionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="loadSessionToolStripMenuItem.Text" xml:space="preserve">
     <value>Load Session</value>
   </data>
   <data name="displayTreeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="displayTreeToolStripMenuItem.Text" xml:space="preserve">
     <value>Display Tree</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>164, 6</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options</value>
   </data>
+  <data name="refreshSessionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="refreshSessionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Refresh Sessions</value>
+  </data>
   <data name="sessionEditorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="sessionEditorToolStripMenuItem.Text" xml:space="preserve">
     <value>Session Editor</value>
   </data>
+  <data name="sessionHotkeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="sessionHotkeysToolStripMenuItem.Text" xml:space="preserve">
+    <value>Session Hotkeys</value>
+  </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>164, 6</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="sysTrayContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 148</value>
+    <value>168, 214</value>
   </data>
   <data name="&gt;&gt;sysTrayContextMenu.Name" xml:space="preserve">
     <value>sysTrayContextMenu</value>
@@ -259,7 +277,7 @@
     <value>sessionTreeControl1</value>
   </data>
   <data name="&gt;&gt;sessionTreeControl1.Type" xml:space="preserve">
-    <value>uk.org.riseley.puttySessionManager.SessionTreeControl, PuTTY Session Manager, Version=0.1.0.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>uk.org.riseley.puttySessionManager.SessionTreeControl, PuTTY Session Manager, Version=0.2.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sessionTreeControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -289,7 +307,7 @@
     <value>sessionListControl1</value>
   </data>
   <data name="&gt;&gt;sessionListControl1.Type" xml:space="preserve">
-    <value>uk.org.riseley.puttySessionManager.SessionListControl, PuTTY Session Manager, Version=0.1.0.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>uk.org.riseley.puttySessionManager.SessionListControl, PuTTY Session Manager, Version=0.2.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sessionListControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -402,10 +420,22 @@
   <data name="&gt;&gt;optionsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;refreshSessionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>refreshSessionsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;refreshSessionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;sessionEditorToolStripMenuItem.Name" xml:space="preserve">
     <value>sessionEditorToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sessionEditorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sessionHotkeysToolStripMenuItem.Name" xml:space="preserve">
+    <value>sessionHotkeysToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;sessionHotkeysToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
@@ -413,6 +443,12 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>aboutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
     <value>exitToolStripMenuItem</value>

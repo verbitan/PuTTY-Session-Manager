@@ -34,6 +34,7 @@ namespace uk.org.riseley.puttySessionManager
         public event System.EventHandler NewSession;
         public event System.EventHandler DeleteSessions;
         public event System.EventHandler CopySessionAttributes;
+        public event System.EventHandler CloseSessionEditor;
 
         public SessionEditorControl()
         {
@@ -61,7 +62,7 @@ namespace uk.org.riseley.puttySessionManager
             dataGridView1.ResumeLayout();
         }
 
-        protected virtual void OnExportSessions(System.EventArgs e)
+        protected virtual void OnExportSessions(EventArgs e)
         {
             if (ExportSessions != null)
             {
@@ -69,7 +70,7 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
-        protected virtual void OnNewSession(System.EventArgs e)
+        protected virtual void OnNewSession(EventArgs e)
         {
             if (NewSession != null)
             {
@@ -77,7 +78,7 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
-        protected virtual void OnDeleteSessions(System.EventArgs e)
+        protected virtual void OnDeleteSessions(EventArgs e)
         {
             if (DeleteSessions != null)
             {
@@ -85,11 +86,19 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
-        protected virtual void OnCopySessionAttributes(System.EventArgs e)
+        protected virtual void OnCopySessionAttributes(EventArgs e)
         {
             if (CopySessionAttributes != null)
             {
                 CopySessionAttributes(this, e);
+            }
+        }
+
+        protected virtual void OnCloseSessionEditor(EventArgs e)
+        {
+            if (CloseSessionEditor != null)
+            {
+                CloseSessionEditor(this, e);
             }
         }
 
@@ -134,6 +143,11 @@ namespace uk.org.riseley.puttySessionManager
         private void copySessionAttribButton_Click(object sender, EventArgs e)
         {
             OnCopySessionAttributes(e);
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            OnCloseSessionEditor(e);
         }
 
     }

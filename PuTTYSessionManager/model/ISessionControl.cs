@@ -22,8 +22,5 @@ namespace uk.org.riseley.puttySessionManager
     {
         void getSessionMenuItems(System.Windows.Forms.ToolStripMenuItem parent);
         event SessionControl.LaunchSessionEventHandler LaunchSession;
-        event SessionControl.RefreshSessionEventHandler RefreshSessions;
-        event EventHandler ShowAbout;
-        event EventHandler ShowOptions;
     }
 }

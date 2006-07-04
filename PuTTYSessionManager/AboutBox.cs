@@ -21,6 +21,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace uk.org.riseley.puttySessionManager
 {
@@ -128,5 +129,10 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
         #endregion
+
+        private void sfLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(sfLinkLabel.Text);
+        }
     }
 }

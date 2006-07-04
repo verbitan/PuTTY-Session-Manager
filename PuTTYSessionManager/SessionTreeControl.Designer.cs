@@ -52,17 +52,19 @@ namespace uk.org.riseley.puttySessionManager
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Sessions");
             this.nodeContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveNewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchFolderAndSubfoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveNewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lockSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
+            this.refreshSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,14 +75,16 @@ namespace uk.org.riseley.puttySessionManager
             this.launchSessionMenuItem,
             this.launchFolderToolStripMenuItem,
             this.launchFolderAndSubfoldersToolStripMenuItem,
+            this.refreshSessionsToolStripMenuItem,
             this.toolStripSeparator2,
-            this.saveNewSessionToolStripMenuItem,
             this.newFolderMenuItem,
             this.renameFolderMenuItem,
+            this.saveNewSessionToolStripMenuItem,
+            this.renameSessionToolStripMenuItem,
             this.toolStripSeparator3,
             this.lockSessionsToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 214);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 258);
             // 
             // newSessionMenuItem
             // 
@@ -88,14 +92,6 @@ namespace uk.org.riseley.puttySessionManager
             this.newSessionMenuItem.Size = new System.Drawing.Size(227, 22);
             this.newSessionMenuItem.Text = "New Session";
             this.newSessionMenuItem.Click += new System.EventHandler(this.newSessionMenuItem_Click);
-            // 
-            // saveNewSessionToolStripMenuItem
-            // 
-            this.saveNewSessionToolStripMenuItem.Enabled = false;
-            this.saveNewSessionToolStripMenuItem.Name = "saveNewSessionToolStripMenuItem";
-            this.saveNewSessionToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.saveNewSessionToolStripMenuItem.Text = "Save New Session";
-            this.saveNewSessionToolStripMenuItem.Click += new System.EventHandler(this.saveNewSessionToolStripMenuItem_Click);
             // 
             // launchSessionMenuItem
             // 
@@ -122,6 +118,14 @@ namespace uk.org.riseley.puttySessionManager
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(224, 6);
+            // 
+            // saveNewSessionToolStripMenuItem
+            // 
+            this.saveNewSessionToolStripMenuItem.Enabled = false;
+            this.saveNewSessionToolStripMenuItem.Name = "saveNewSessionToolStripMenuItem";
+            this.saveNewSessionToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.saveNewSessionToolStripMenuItem.Text = "Save New Session";
+            this.saveNewSessionToolStripMenuItem.Click += new System.EventHandler(this.saveNewSessionToolStripMenuItem_Click);
             // 
             // newFolderMenuItem
             // 
@@ -186,6 +190,21 @@ namespace uk.org.riseley.puttySessionManager
             this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
             // 
+            // refreshSessionsToolStripMenuItem
+            // 
+            this.refreshSessionsToolStripMenuItem.Name = "refreshSessionsToolStripMenuItem";
+            this.refreshSessionsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.refreshSessionsToolStripMenuItem.Text = "Refresh Sessions";
+            this.refreshSessionsToolStripMenuItem.Click += new System.EventHandler(this.refreshSessionsToolStripMenuItem_Click);
+            // 
+            // renameSessionToolStripMenuItem
+            // 
+            this.renameSessionToolStripMenuItem.Enabled = false;
+            this.renameSessionToolStripMenuItem.Name = "renameSessionToolStripMenuItem";
+            this.renameSessionToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.renameSessionToolStripMenuItem.Text = "Rename Session";
+            // 
             // SessionTreeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,5 +233,7 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.ToolStripMenuItem launchFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchFolderAndSubfoldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveNewSessionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshSessionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renameSessionToolStripMenuItem;
     }
 }

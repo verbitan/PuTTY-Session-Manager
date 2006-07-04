@@ -72,7 +72,7 @@ namespace uk.org.riseley.puttySessionManager
             if (nsf.ShowDialog() == DialogResult.OK)
             {
                 NewSessionRequest nsr = nsf.getNewSessionRequest();
-                bool result = sc.createNewSession(nsr);
+                bool result = sc.createNewSession(nsr, this);
                 if (result == false)
                     MessageBox.Show("Failed to create new session: " + nsr.SessionName
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -126,6 +126,20 @@ namespace uk.org.riseley.puttySessionManager
         private void sessionEditorControl1_CopySessionAttributes(object sender, EventArgs e)
         {
             csf.ShowDialog();
-        }   
+        }
+
+        private void SessionEditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Visible = false;
+            }
+        }
+
+        private void sessionEditorControl1_CloseSessionEditor(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
     }
 }

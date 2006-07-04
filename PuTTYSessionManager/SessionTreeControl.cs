@@ -116,7 +116,7 @@ namespace uk.org.riseley.puttySessionManager
                     cleanFolders(oldParent);
 
                     // Fire a refresh event
-                    OnRefreshSessions(new RefreshSessionsEventArgs(false));
+                    sc.invalidateSessionList(this, false);
                 }
 
                 // If it is a copy operation, clone the dragged node 
@@ -145,8 +145,10 @@ namespace uk.org.riseley.puttySessionManager
             }
             else
             {
-                System.Collections.IEnumerator nodeEnumerator = node.Nodes.GetEnumerator();
+                s.FolderName = parent.FullPath;
+                node.Name = s.getKey();
 
+                System.Collections.IEnumerator nodeEnumerator = node.Nodes.GetEnumerator();
                 while (nodeEnumerator.MoveNext())
                 {
                     TreeNode currNode = (TreeNode)(nodeEnumerator.Current);
@@ -212,6 +214,9 @@ namespace uk.org.riseley.puttySessionManager
                 newNode.ImageIndex = IMAGE_INDEX_SESSION;
                 newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
 
+                // Setup the key so that we can find the node again
+                newNode.Name = s.getKey();
+
                 if (s.FolderName == null || s.FolderName.Equals("") || s.FolderName.Equals(rootPath))
                 {
                     rootNode.Nodes.Add(newNode);
@@ -219,23 +224,31 @@ namespace uk.org.riseley.puttySessionManager
                 else
                 {
                     TreeNode currnode = rootNode;
+                    string path = null;
                     foreach (string folder in s.FolderName.Split(pathSep.ToCharArray()))
                     {
                         // Is this folder the root folder,
                         // if so, skip to the next one
                         if (folder.Equals(rootPath))
-                            continue;
-
-                        // Does this folder exist as a child of the current node
-                        if (currnode.Nodes.ContainsKey(folder))
                         {
-                            currnode = currnode.Nodes[folder];
+                            path = folder;
+                            continue;
                         }
                         else
                         {
-                            Session sess = new Session(folder, s.FolderName, true);
-                            currnode.Nodes.Add(folder, sess.SessionDisplayText);
-                            currnode = currnode.Nodes[folder];
+                            path = path + pathSep + folder;
+                        }
+
+                        // Does this folder exist as a child of the current node
+                        if (currnode.Nodes.ContainsKey(Session.getFolderKey(path)))
+                        {
+                            currnode = currnode.Nodes[Session.getFolderKey(path)];
+                        }
+                        else
+                        {
+                            Session sess = new Session(folder, path, true);
+                            currnode.Nodes.Add(sess.getKey(), sess.SessionDisplayText);
+                            currnode = currnode.Nodes[sess.getKey()];
                             currnode.Tag = sess;
                             currnode.ContextMenuStrip = nodeContextMenuStrip;
                             currnode.ImageIndex = IMAGE_INDEX_FOLDER;
@@ -376,7 +389,7 @@ namespace uk.org.riseley.puttySessionManager
                 updateFolders(selectedNode, foldernode);
 
                 // Fire a refresh event
-                OnRefreshSessions(new RefreshSessionsEventArgs(false));
+                sc.invalidateSessionList(this, false);
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
@@ -432,7 +445,7 @@ namespace uk.org.riseley.puttySessionManager
                 updateFolders(selectedNode, parent);
 
                 // Fire a refresh event
-                OnRefreshSessions(new RefreshSessionsEventArgs(false));
+                sc.invalidateSessionList(this, false);
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
@@ -549,6 +562,7 @@ namespace uk.org.riseley.puttySessionManager
 
             // Setup the session request
             NewSessionRequest nsr;
+
             if (s.IsFolder == false)
             {
                 nsr = new NewSessionRequest(s, s.FolderName, "", "", true, true);
@@ -565,12 +579,32 @@ namespace uk.org.riseley.puttySessionManager
             if (newSessionForm.ShowDialog() == DialogResult.OK)
             {
                 nsr = newSessionForm.getNewSessionRequest();
-                bool result = getSessionController().createNewSession(nsr);
+                bool result = getSessionController().createNewSession(nsr, this);
                 if (result == false)
                     MessageBox.Show("Failed to create new session: " + nsr.SessionName
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
+                    TreeNode[] ta = treeView.Nodes.Find(Session.getFolderKey(nsr.SessionFolder), true);
+                    if (ta.Length > 0)
+                    {
+                        Session newSession = new Session(nsr.SessionName, nsr.SessionFolder, false);
+                        TreeNode newNode = new TreeNode(newSession.SessionDisplayText);
+                        newNode.Tag = newSession;
+                        newNode.ContextMenuStrip = nodeContextMenuStrip;
+                        newNode.ImageIndex = IMAGE_INDEX_SESSION;
+                        newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
+
+                        // Setup the key so that we can find the node again
+                        newNode.Name = newSession.getKey();
+
+                        // Add the new node
+                        ta[0].Nodes.Add(newNode);
+
+                        // Select the new node
+                        ta[0].Expand();
+                    }
+
                     if (nsr.LaunchSession == true)
                     {
                         String errMsg = getSessionController().launchSession(nsr.SessionName);
@@ -584,6 +618,11 @@ namespace uk.org.riseley.puttySessionManager
                 }
 
             }
+        }
+
+        private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            getSessionController().invalidateSessionList(this, true);
         }
     }
 }

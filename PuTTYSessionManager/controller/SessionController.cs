@@ -207,7 +207,7 @@ namespace uk.org.riseley.puttySessionManager.model
             sw.WriteLine();
         }
 
-        public bool createNewSession(NewSessionRequest nsr)
+        public bool createNewSession(NewSessionRequest nsr, object sender)
         {
             // Check the template session is still there
             RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionTemplate.SessionName, false);
@@ -265,7 +265,7 @@ namespace uk.org.riseley.puttySessionManager.model
             template.Close();
             newSession.Close();
 
-            invalidateSessionList(this, true);
+            invalidateSessionList(sender, false);
 
             return true;
         }

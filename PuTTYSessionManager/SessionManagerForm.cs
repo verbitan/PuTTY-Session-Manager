@@ -30,8 +30,9 @@ namespace uk.org.riseley.puttySessionManager
     public partial class SessionManagerForm : Form
     {
         private Options optionsDialog;
-        private AboutBox aboutDialog  = new AboutBox();
-        private SessionEditorForm sessionEditor = new SessionEditorForm();
+        private AboutBox aboutDialog;
+        private SessionEditorForm sessionEditor;
+        private HotkeyChooser hotKeyChooser;
 
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
@@ -41,6 +42,8 @@ namespace uk.org.riseley.puttySessionManager
         public SessionManagerForm()
         {
             InitializeComponent();
+
+
             LoadLayout();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
@@ -49,6 +52,10 @@ namespace uk.org.riseley.puttySessionManager
         private void LoadLayout()
         {
             optionsDialog = new Options(this);
+            aboutDialog = new AboutBox();
+            sessionEditor = new SessionEditorForm();
+            hotKeyChooser = new HotkeyChooser(this);
+
             this.ClientSize = Properties.Settings.Default.WindowSize;
             this.Location   = Properties.Settings.Default.Location;
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
@@ -77,6 +84,10 @@ namespace uk.org.riseley.puttySessionManager
                                    , MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 systrayIcon.Visible = false;
+                optionsDialog.Close();
+                aboutDialog.Close();
+                sessionEditor.Close();
+                hotKeyChooser.Close();
                 Application.Exit();
             }
         }
@@ -115,16 +126,6 @@ namespace uk.org.riseley.puttySessionManager
                                 errMsg
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void sessionControl_ShowAbout(object sender, EventArgs e)
-        {
-            aboutDialog.ShowDialog();
-        }
-
-        private void sessionControl_ShowOptions(object sender, EventArgs e)
-        {
-            optionsDialog.ShowDialog();
         }
 
         private void displayTreeToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
@@ -195,15 +196,34 @@ namespace uk.org.riseley.puttySessionManager
             sessionControl_LaunchSession(this, new LaunchSessionEventArgs(sessionName));
         }
 
-        private void sessionEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            sessionEditor.ShowDialog();
-        }
-
         public void SessionsRefreshed(object sender, RefreshSessionsEventArgs re)
         {
             currentSessionControl.getSessionMenuItems(loadSessionToolStripMenuItem);          
         }
 
+        private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sc.invalidateSessionList(this, true); 
+        }
+
+        private void sessionControl_ShowAbout(object sender, EventArgs e)
+        {
+            aboutDialog.ShowDialog();
+        }
+
+        private void sessionControl_ShowOptions(object sender, EventArgs e)
+        {
+            optionsDialog.ShowDialog();
+        }
+
+        private void sessionEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sessionEditor.Show();
+        }
+
+        private void sessionHotkeysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            hotKeyChooser.Show();
+        }
     }
 }

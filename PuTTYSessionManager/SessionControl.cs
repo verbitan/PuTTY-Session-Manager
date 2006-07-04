@@ -31,13 +31,7 @@ namespace uk.org.riseley.puttySessionManager
         public event LaunchSessionEventHandler LaunchSession;
         public delegate void LaunchSessionEventHandler(object sender, LaunchSessionEventArgs se);
 
-        public event RefreshSessionEventHandler RefreshSessions;
-        public delegate void RefreshSessionEventHandler(object sender, RefreshSessionsEventArgs re);
-
-        public event System.EventHandler ShowOptions;
-        public event System.EventHandler ShowAbout;
-
-        private SessionController sc;
+        protected SessionController sc;
 
         public SessionControl()
         {
@@ -53,46 +47,6 @@ namespace uk.org.riseley.puttySessionManager
             {
                 LaunchSession(this, se);
             }
-        }
-
-        protected virtual void OnShowOptions(System.EventArgs e)
-        {
-            if (ShowOptions != null)
-            {
-                ShowOptions(this, e);
-            }
-        }
-
-        protected virtual void OnShowAbout(System.EventArgs e)
-        {
-            if (ShowAbout != null)
-            {
-                ShowAbout(this, e);
-            }
-        }
-
-        protected virtual void OnRefreshSessions(RefreshSessionsEventArgs e)
-        {
-            if (RefreshSessions != null)
-            {
-                sc.invalidateSessionList(this, e.RefreshSource);
-                RefreshSessions(this, e);
-            }
-        }
-
-        protected void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnShowOptions(System.EventArgs.Empty);
-        }
-
-        protected void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnRefreshSessions(new RefreshSessionsEventArgs(true));
-        }
-
-        protected void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnShowAbout(System.EventArgs.Empty);
         }
 
         public virtual void getSessionMenuItems(ToolStripMenuItem parent)
@@ -130,5 +84,9 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
+        private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sc.invalidateSessionList(this, true);
+        }
     }
 }

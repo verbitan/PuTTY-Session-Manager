@@ -57,12 +57,6 @@ namespace uk.org.riseley.puttySessionManager
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            hkChooser.ShowDialog();
-        }
-          
+        } 
     }
 }

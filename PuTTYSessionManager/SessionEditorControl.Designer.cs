@@ -135,6 +135,7 @@ namespace uk.org.riseley.puttySessionManager
             this.closeButton.TabIndex = 4;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // dataGridView1
             // 

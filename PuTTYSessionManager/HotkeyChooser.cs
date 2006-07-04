@@ -195,5 +195,14 @@ namespace uk.org.riseley.puttySessionManager
                 HotkeyController.UnregisterHotKey(parentWindow, HotkeyController.HotKeyId.HKID_SESSION_5);
             }
         }
+
+        private void HotkeyChooser_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Visible = false;
+            }
+        }
     }
 }

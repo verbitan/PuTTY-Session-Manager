@@ -291,6 +291,7 @@ namespace uk.org.riseley.puttySessionManager
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Session Hotkeys";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HotkeyChooser_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel.ResumeLayout(false);

@@ -66,6 +66,7 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionEditorControl1.ExportSessions += new System.EventHandler(this.sessionEditorControl1_ExportSessions);
             this.sessionEditorControl1.CopySessionAttributes += new System.EventHandler(this.sessionEditorControl1_CopySessionAttributes);
             this.sessionEditorControl1.NewSession += new System.EventHandler(this.sessionEditorControl1_NewSession);
+            this.sessionEditorControl1.CloseSessionEditor += new System.EventHandler(this.sessionEditorControl1_CloseSessionEditor);
             this.sessionEditorControl1.DeleteSessions += new System.EventHandler(this.sessionEditorControl1_DeleteSessions);
             // 
             // SessionEditorForm
@@ -77,6 +78,7 @@ namespace uk.org.riseley.puttySessionManager
             this.MinimumSize = new System.Drawing.Size(553, 187);
             this.Name = "SessionEditorForm";
             this.Text = "Session Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SessionEditorForm_FormClosing);
             this.ResumeLayout(false);
 
         }
