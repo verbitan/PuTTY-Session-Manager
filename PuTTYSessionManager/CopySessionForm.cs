@@ -31,6 +31,8 @@ namespace uk.org.riseley.puttySessionManager
     {
         private Form parentWindow;
         private SessionController sc;
+        private CopySessionRequest csr;
+        private Dictionary<CopySessionRequest.AttribGroups,CheckBox> checkboxDictionary;
 
         public CopySessionForm(Form parent)
         {
@@ -39,6 +41,36 @@ namespace uk.org.riseley.puttySessionManager
             InitializeComponent();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
+            csr = new CopySessionRequest();
+            tagCheckboxes();
+            createDictonary();
+        }
+
+        private void tagCheckboxes()
+        {
+            coloursCheckBox.Tag = CopySessionRequest.AttribGroups.COLOURS;
+            userNameCheckBox.Tag = CopySessionRequest.AttribGroups.DEFAULT_USERNAME;
+            scrollBackCheckBox.Tag = CopySessionRequest.AttribGroups.SCROLLBACK;
+            fontCheckBox.Tag = CopySessionRequest.AttribGroups.FONT;
+            protocoCheckBox.Tag = CopySessionRequest.AttribGroups.PROTOCOL_PORT;
+            portForwardCheckBox.Tag = CopySessionRequest.AttribGroups.SSH_PORT_FORWARDS;
+            keepalivesCheckBox.Tag = CopySessionRequest.AttribGroups.KEEP_ALIVES;
+            selectionCheckBox.Tag = CopySessionRequest.AttribGroups.SELECTION_CHARS;
+            folderCheckBox.Tag = CopySessionRequest.AttribGroups.SESSION_FOLDER;
+        }
+
+        private void createDictonary()
+        {
+            checkboxDictionary = new Dictionary<CopySessionRequest.AttribGroups, CheckBox>();
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)coloursCheckBox.Tag, coloursCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)userNameCheckBox.Tag, userNameCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)scrollBackCheckBox.Tag, scrollBackCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)fontCheckBox.Tag, fontCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)protocoCheckBox.Tag, protocoCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)portForwardCheckBox.Tag, portForwardCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)keepalivesCheckBox.Tag, keepalivesCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)selectionCheckBox.Tag, selectionCheckBox);
+            checkboxDictionary.Add((CopySessionRequest.AttribGroups)folderCheckBox.Tag, folderCheckBox);
         }
 
         private void loadList()
@@ -134,6 +166,25 @@ namespace uk.org.riseley.puttySessionManager
         private void selectNoneButton_Click(object sender, EventArgs e)
         {
             attributeListBox.SelectedIndices.Clear();
+        }
+
+        private void attributeListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string [] selectedAttribs = new string[attributeListBox.SelectedItems.Count];
+            attributeListBox.SelectedItems.CopyTo(selectedAttribs,0);
+            List<string> sl = new List<string>();
+            sl.AddRange(selectedAttribs);
+            csr.SelectedAttributes = sl;
+
+            foreach ( CheckBox cb in checkboxDictionary.Values )
+            {
+                cb.CheckState = csr.getGroupStatus((CopySessionRequest.AttribGroups)cb.Tag);
+            }
+        }
+
+        private void checkBox_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

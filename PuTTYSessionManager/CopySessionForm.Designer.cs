@@ -52,6 +52,8 @@ namespace uk.org.riseley.puttySessionManager
             this.copyAllRadioButton = new System.Windows.Forms.RadioButton();
             this.includeRadioButton = new System.Windows.Forms.RadioButton();
             this.attributesGroupBox = new System.Windows.Forms.GroupBox();
+            this.selectNoneButton = new System.Windows.Forms.Button();
+            this.selectAllButton = new System.Windows.Forms.Button();
             this.attributeListBox = new System.Windows.Forms.ListBox();
             this.folderCheckBox = new System.Windows.Forms.CheckBox();
             this.portForwardCheckBox = new System.Windows.Forms.CheckBox();
@@ -63,8 +65,6 @@ namespace uk.org.riseley.puttySessionManager
             this.scrollBackCheckBox = new System.Windows.Forms.CheckBox();
             this.coloursCheckBox = new System.Windows.Forms.CheckBox();
             this.excludeRadioButton = new System.Windows.Forms.RadioButton();
-            this.selectAllButton = new System.Windows.Forms.Button();
-            this.selectNoneButton = new System.Windows.Forms.Button();
             this.attributesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -158,6 +158,26 @@ namespace uk.org.riseley.puttySessionManager
             this.attributesGroupBox.TabStop = false;
             this.attributesGroupBox.Text = "Attributes";
             // 
+            // selectNoneButton
+            // 
+            this.selectNoneButton.Location = new System.Drawing.Point(279, 197);
+            this.selectNoneButton.Name = "selectNoneButton";
+            this.selectNoneButton.Size = new System.Drawing.Size(75, 23);
+            this.selectNoneButton.TabIndex = 11;
+            this.selectNoneButton.Text = "Select None";
+            this.selectNoneButton.UseVisualStyleBackColor = true;
+            this.selectNoneButton.Click += new System.EventHandler(this.selectNoneButton_Click);
+            // 
+            // selectAllButton
+            // 
+            this.selectAllButton.Location = new System.Drawing.Point(198, 197);
+            this.selectAllButton.Name = "selectAllButton";
+            this.selectAllButton.Size = new System.Drawing.Size(75, 23);
+            this.selectAllButton.TabIndex = 10;
+            this.selectAllButton.Text = "Select All";
+            this.selectAllButton.UseVisualStyleBackColor = true;
+            this.selectAllButton.Click += new System.EventHandler(this.selectAllButton_Click);
+            // 
             // attributeListBox
             // 
             this.attributeListBox.FormattingEnabled = true;
@@ -167,6 +187,7 @@ namespace uk.org.riseley.puttySessionManager
             this.attributeListBox.Size = new System.Drawing.Size(268, 173);
             this.attributeListBox.Sorted = true;
             this.attributeListBox.TabIndex = 9;
+            this.attributeListBox.SelectedValueChanged += new System.EventHandler(this.attributeListBox_SelectedValueChanged);
             // 
             // folderCheckBox
             // 
@@ -266,6 +287,7 @@ namespace uk.org.riseley.puttySessionManager
             this.coloursCheckBox.TabIndex = 0;
             this.coloursCheckBox.Text = "Colours";
             this.coloursCheckBox.UseVisualStyleBackColor = true;
+            this.coloursCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // excludeRadioButton
             // 
@@ -277,26 +299,6 @@ namespace uk.org.riseley.puttySessionManager
             this.excludeRadioButton.TabIndex = 21;
             this.excludeRadioButton.Text = "Exclude hostname and selected attributes";
             this.excludeRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // selectAllButton
-            // 
-            this.selectAllButton.Location = new System.Drawing.Point(198, 197);
-            this.selectAllButton.Name = "selectAllButton";
-            this.selectAllButton.Size = new System.Drawing.Size(75, 23);
-            this.selectAllButton.TabIndex = 10;
-            this.selectAllButton.Text = "Select All";
-            this.selectAllButton.UseVisualStyleBackColor = true;
-            this.selectAllButton.Click += new System.EventHandler(this.selectAllButton_Click);
-            // 
-            // selectNoneButton
-            // 
-            this.selectNoneButton.Location = new System.Drawing.Point(279, 197);
-            this.selectNoneButton.Name = "selectNoneButton";
-            this.selectNoneButton.Size = new System.Drawing.Size(75, 23);
-            this.selectNoneButton.TabIndex = 11;
-            this.selectNoneButton.Text = "Select None";
-            this.selectNoneButton.UseVisualStyleBackColor = true;
-            this.selectNoneButton.Click += new System.EventHandler(this.selectNoneButton_Click);
             // 
             // CopySessionForm
             // 
