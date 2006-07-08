@@ -62,7 +62,12 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public Session findDefaultSession()
         {
-            return findSession(PUTTY_DEFAULT_SESSION);
+            return findDefaultSession(sessionList, true);
+        }
+
+        public Session findDefaultSession(bool defaultSessionOnly)
+        {
+            return findDefaultSession(sessionList, defaultSessionOnly);
         }
 
         public string findDefaultFolder()
@@ -70,9 +75,16 @@ namespace uk.org.riseley.puttySessionManager.model
             return Session.SESSIONS_FOLDER_NAME;
         }
 
-        public Session findDefaultSession(List<Session> sl)
+        public Session findDefaultSession(List<Session> sl, bool defaultSessionOnly)
         {
-            return findSession(sl, PUTTY_DEFAULT_SESSION);
+            Session s = findSession(sl, PUTTY_DEFAULT_SESSION);
+
+            // If we can't find the default session
+            // return the first one in the list
+            if (defaultSessionOnly == false && s == null && sl.Count > 0)
+                s = sl[0];
+
+            return s;
         }
 
         public Session findSession(string sessionName)
@@ -107,6 +119,10 @@ namespace uk.org.riseley.puttySessionManager.model
 
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY);
 
+            // Check we have some sessions
+            if (rk == null)
+                return sl;
+
             foreach (string keyName in rk.GetSubKeyNames())
             {
                 RegistryKey sessKey = rk.OpenSubKey(keyName);
@@ -119,9 +135,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
             }
             rk.Close();
-
             sl.Sort();
-
 
             return sl;
         }
@@ -356,6 +370,15 @@ namespace uk.org.riseley.puttySessionManager.model
             Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
 
             return true;
+        }
+
+        public bool isDefaultSessionName ( String sessionName )
+        {
+            if ( sessionName.Replace ( " ", "%20").Equals( PUTTY_DEFAULT_SESSION ))
+                return true;
+            else 
+                return false;
+
         }
     }
 

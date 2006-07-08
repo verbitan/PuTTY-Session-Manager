@@ -42,6 +42,12 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
         {
+            if (sessionEditorControl1.getSelectedSessions().Length == 0)
+            {
+                MessageBox.Show("You must select some sessions to export!"
+                    , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (DialogResult.OK == saveFileDialog1.ShowDialog(this))
             {
 
@@ -96,11 +102,17 @@ namespace uk.org.riseley.puttySessionManager
         private void sessionEditorControl1_DeleteSessions(object sender, EventArgs e)
         {
             List<Session> sl = sessionEditorControl1.getSelectedSessionsList();
-            if (sc.findDefaultSession(sl) != null)
+            if (sl.Count == 0)
             {
-                MessageBox.Show("Cannot delete default session"
-                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You must select some sessions to delete!"
+                    , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+            if (sc.findDefaultSession(sl, true) != null)
+            {
+                if ( MessageBox.Show("Are you sure you want to delete the default session?"
+                        , "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No )
+                    return;
             }
             DialogResult dr = MessageBox.Show("Do you want to backup " + sl.Count + " sessions to a file?"
                     , "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -125,7 +137,11 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionEditorControl1_CopySessionAttributes(object sender, EventArgs e)
         {
-            csf.ShowDialog();
+            if ( sessionEditorControl1.getSelectedSessions().Length > 0 )
+                csf.ShowDialog();
+            else
+                MessageBox.Show("You must select some target sessions!"
+                    , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void SessionEditorForm_FormClosing(object sender, FormClosingEventArgs e)

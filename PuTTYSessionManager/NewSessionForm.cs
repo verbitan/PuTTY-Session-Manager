@@ -43,7 +43,7 @@ namespace uk.org.riseley.puttySessionManager
         private void loadList()
         {
             sessionComboBox.Items.AddRange(sc.getSessionList().ToArray());
-            sessionComboBox.SelectedItem = sc.findDefaultSession();
+            sessionComboBox.SelectedItem = sc.findDefaultSession(false);
             sessionFolderComboBox.Items.AddRange(sc.getFolderList().ToArray());
             sessionFolderComboBox.SelectedItem = sc.findDefaultFolder();
         }
@@ -84,12 +84,14 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (nsr.SessionTemplate != null)
             {
-                sessionComboBox.SelectedItem = nsr.SessionTemplate;
+                // use the session controller to find the session as the objects held
+                // held in the session control may not be the same
+                sessionComboBox.SelectedItem = sc.findSession(nsr.SessionTemplate.SessionName);
                 sessionFolderComboBox.SelectedItem = nsr.SessionTemplate.FolderName;
             }
             else
             {
-                sessionComboBox.SelectedItem = sc.findDefaultSession();
+                sessionComboBox.SelectedItem = sc.findDefaultSession(false);
                 if (nsr.SessionFolder != null && !(nsr.SessionFolder.Equals("")))
                 {
                     sessionFolderComboBox.SelectedItem = nsr.SessionFolder;
@@ -114,12 +116,19 @@ namespace uk.org.riseley.puttySessionManager
                   , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
+            else if (sc.isDefaultSessionName(sessionnameTextBox.Text))
+            {
+                MessageBox.Show("You cannot have " + sessionnameTextBox.Text 
+                    + " as the session name."
+               , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.None;
+            }
             else
             {
-                if (MessageBox.Show("Are you sure you want to create: " + sessionnameTextBox.Text 
-                            ,"Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
+                if (MessageBox.Show("Are you sure you want to create: " + sessionnameTextBox.Text
+                            , "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
                     DialogResult = DialogResult.None;
-             
+
             }
 
         }
@@ -128,6 +137,15 @@ namespace uk.org.riseley.puttySessionManager
         {
             sessionnameTextBox.Clear();
             hostnameTextBox.Clear();
+            if (sessionComboBox.Items.Count == 0)
+            {
+                MessageBox.Show("You must have at least one saved session to copy from.\n" +
+                                "Please create a session in PuTTY first"
+                  , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.Cancel;
+                this.Visible = false;
+            }
+
         }
 
         private void sessionComboBox_SelectionChangeCommitted(object sender, EventArgs e)

@@ -44,8 +44,12 @@ namespace uk.org.riseley.puttySessionManager
         private void loadList()
         {
             sessionComboBox.Items.AddRange(sc.getSessionList().ToArray());
-            sessionComboBox.SelectedItem = sc.findDefaultSession();
-            attributeListBox.Items.AddRange(sc.getSessionAttributes(sc.findDefaultSession()).ToArray());
+            Session s = sc.findDefaultSession(false);
+            if (s != null)
+            {
+                sessionComboBox.SelectedItem = s;
+                attributeListBox.Items.AddRange(sc.getSessionAttributes(s).ToArray());
+            }
         }
 
         private void clearList()

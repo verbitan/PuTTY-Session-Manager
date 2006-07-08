@@ -204,7 +204,11 @@ namespace uk.org.riseley.puttySessionManager
 
             // Create the root node tag if it doesn't already exist
             if (rootNode.Tag == null)
-                rootNode.Tag = new Session(rootPath, rootPath, true);
+            {
+                Session rootSession = new Session(rootPath, rootPath, true);
+                rootNode.Tag = rootSession;
+                rootNode.Name = rootSession.getKey();
+            }
 
             foreach (Session s in getSessionController().getSessionList())
             {
@@ -424,6 +428,11 @@ namespace uk.org.riseley.puttySessionManager
             else if (getSessionController().findSession(sessionName) != null)
             {
                 MessageBox.Show("Session name must be unique", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (getSessionController().isDefaultSessionName(sessionName))
+            {
+                MessageBox.Show("You cannot rename the session to \"Default Settings\"", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -655,7 +664,8 @@ namespace uk.org.riseley.puttySessionManager
             Session s = (Session)selectedNode.Tag;
 
             // Check we are not renaming the default session
-            if ( getSessionController().findDefaultSession().SessionName.Equals(s.SessionName) )
+            Session defaultSession = getSessionController().findDefaultSession();
+            if (defaultSession != null && defaultSession.SessionName.Equals(s.SessionName))
             {
                 MessageBox.Show("Cannot rename the default session"
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);

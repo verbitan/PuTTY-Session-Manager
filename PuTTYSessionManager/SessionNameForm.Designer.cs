@@ -66,7 +66,7 @@ namespace uk.org.riseley.puttySessionManager
             // sessionNameTextBox
             // 
             this.sessionNameTextBox.Location = new System.Drawing.Point(94, 17);
-            this.sessionNameTextBox.MaxLength = 100;
+            this.sessionNameTextBox.MaxLength = 60;
             this.sessionNameTextBox.Name = "sessionNameTextBox";
             this.sessionNameTextBox.Size = new System.Drawing.Size(188, 20);
             this.sessionNameTextBox.TabIndex = 0;
