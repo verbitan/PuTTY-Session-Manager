@@ -52,6 +52,7 @@ namespace uk.org.riseley.puttySessionManager
             this.copyAllRadioButton = new System.Windows.Forms.RadioButton();
             this.includeRadioButton = new System.Windows.Forms.RadioButton();
             this.attributesGroupBox = new System.Windows.Forms.GroupBox();
+            this.invertButton = new System.Windows.Forms.Button();
             this.selectNoneButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.attributeListBox = new System.Windows.Forms.ListBox();
@@ -123,7 +124,7 @@ namespace uk.org.riseley.puttySessionManager
             this.copyAllRadioButton.TabStop = true;
             this.copyAllRadioButton.Text = "Copy all attributes except hostname";
             this.copyAllRadioButton.UseVisualStyleBackColor = true;
-            this.copyAllRadioButton.CheckedChanged += new System.EventHandler(this.copyAllRadioButton_CheckedChanged);
+            this.copyAllRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // includeRadioButton
             // 
@@ -135,9 +136,11 @@ namespace uk.org.riseley.puttySessionManager
             this.includeRadioButton.TabIndex = 19;
             this.includeRadioButton.Text = "Copy only selected attributes";
             this.includeRadioButton.UseVisualStyleBackColor = true;
+            this.includeRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // attributesGroupBox
             // 
+            this.attributesGroupBox.Controls.Add(this.invertButton);
             this.attributesGroupBox.Controls.Add(this.selectNoneButton);
             this.attributesGroupBox.Controls.Add(this.selectAllButton);
             this.attributesGroupBox.Controls.Add(this.attributeListBox);
@@ -158,9 +161,19 @@ namespace uk.org.riseley.puttySessionManager
             this.attributesGroupBox.TabStop = false;
             this.attributesGroupBox.Text = "Attributes";
             // 
+            // invertButton
+            // 
+            this.invertButton.Location = new System.Drawing.Point(233, 197);
+            this.invertButton.Name = "invertButton";
+            this.invertButton.Size = new System.Drawing.Size(89, 23);
+            this.invertButton.TabIndex = 12;
+            this.invertButton.Text = "Invert Selection";
+            this.invertButton.UseVisualStyleBackColor = true;
+            this.invertButton.Click += new System.EventHandler(this.invertButton_Click);
+            // 
             // selectNoneButton
             // 
-            this.selectNoneButton.Location = new System.Drawing.Point(279, 197);
+            this.selectNoneButton.Location = new System.Drawing.Point(331, 197);
             this.selectNoneButton.Name = "selectNoneButton";
             this.selectNoneButton.Size = new System.Drawing.Size(75, 23);
             this.selectNoneButton.TabIndex = 11;
@@ -170,7 +183,7 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // selectAllButton
             // 
-            this.selectAllButton.Location = new System.Drawing.Point(198, 197);
+            this.selectAllButton.Location = new System.Drawing.Point(150, 197);
             this.selectAllButton.Name = "selectAllButton";
             this.selectAllButton.Size = new System.Drawing.Size(75, 23);
             this.selectAllButton.TabIndex = 10;
@@ -199,6 +212,7 @@ namespace uk.org.riseley.puttySessionManager
             this.folderCheckBox.TabIndex = 8;
             this.folderCheckBox.Text = "Session Folder";
             this.folderCheckBox.UseVisualStyleBackColor = true;
+            this.folderCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // portForwardCheckBox
             // 
@@ -210,6 +224,7 @@ namespace uk.org.riseley.puttySessionManager
             this.portForwardCheckBox.TabIndex = 7;
             this.portForwardCheckBox.Text = "SSH Port Forwards";
             this.portForwardCheckBox.UseVisualStyleBackColor = true;
+            this.portForwardCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // keepalivesCheckBox
             // 
@@ -221,6 +236,7 @@ namespace uk.org.riseley.puttySessionManager
             this.keepalivesCheckBox.TabIndex = 6;
             this.keepalivesCheckBox.Text = "Keepalives";
             this.keepalivesCheckBox.UseVisualStyleBackColor = true;
+            this.keepalivesCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // selectionCheckBox
             // 
@@ -232,6 +248,7 @@ namespace uk.org.riseley.puttySessionManager
             this.selectionCheckBox.TabIndex = 5;
             this.selectionCheckBox.Text = "Selection Characters";
             this.selectionCheckBox.UseVisualStyleBackColor = true;
+            this.selectionCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // fontCheckBox
             // 
@@ -243,6 +260,7 @@ namespace uk.org.riseley.puttySessionManager
             this.fontCheckBox.TabIndex = 4;
             this.fontCheckBox.Text = "Font";
             this.fontCheckBox.UseVisualStyleBackColor = true;
+            this.fontCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // protocoCheckBox
             // 
@@ -254,6 +272,7 @@ namespace uk.org.riseley.puttySessionManager
             this.protocoCheckBox.TabIndex = 3;
             this.protocoCheckBox.Text = "Protocol / Port";
             this.protocoCheckBox.UseVisualStyleBackColor = true;
+            this.protocoCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // userNameCheckBox
             // 
@@ -265,6 +284,7 @@ namespace uk.org.riseley.puttySessionManager
             this.userNameCheckBox.TabIndex = 2;
             this.userNameCheckBox.Text = "Default Username";
             this.userNameCheckBox.UseVisualStyleBackColor = true;
+            this.userNameCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // scrollBackCheckBox
             // 
@@ -276,6 +296,7 @@ namespace uk.org.riseley.puttySessionManager
             this.scrollBackCheckBox.TabIndex = 1;
             this.scrollBackCheckBox.Text = "Scrollback";
             this.scrollBackCheckBox.UseVisualStyleBackColor = true;
+            this.scrollBackCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // coloursCheckBox
             // 
@@ -299,6 +320,7 @@ namespace uk.org.riseley.puttySessionManager
             this.excludeRadioButton.TabIndex = 21;
             this.excludeRadioButton.Text = "Exclude hostname and selected attributes";
             this.excludeRadioButton.UseVisualStyleBackColor = true;
+            this.excludeRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // CopySessionForm
             // 
@@ -351,5 +373,6 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.CheckBox folderCheckBox;
         private System.Windows.Forms.Button selectNoneButton;
         private System.Windows.Forms.Button selectAllButton;
+        private System.Windows.Forms.Button invertButton;
     }
 }

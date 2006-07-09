@@ -32,7 +32,7 @@ namespace uk.org.riseley.puttySessionManager
         private Form parentWindow;
         private SessionController sc;
         private CopySessionRequest csr;
-        private Dictionary<CopySessionRequest.AttribGroups,CheckBox> checkboxDictionary;
+        private Dictionary<CopySessionRequest.AttribGroups, CheckBox> checkboxDictionary;
 
         public CopySessionForm(Form parent)
         {
@@ -43,7 +43,9 @@ namespace uk.org.riseley.puttySessionManager
             sc.SessionsRefreshed += scHandler;
             csr = new CopySessionRequest();
             tagCheckboxes();
+            tagRadioButtons();
             createDictonary();
+            copyAllRadioButton.Checked = true;
         }
 
         private void tagCheckboxes()
@@ -57,6 +59,13 @@ namespace uk.org.riseley.puttySessionManager
             keepalivesCheckBox.Tag = CopySessionRequest.AttribGroups.KEEP_ALIVES;
             selectionCheckBox.Tag = CopySessionRequest.AttribGroups.SELECTION_CHARS;
             folderCheckBox.Tag = CopySessionRequest.AttribGroups.SESSION_FOLDER;
+        }
+
+        private void tagRadioButtons()
+        {
+            copyAllRadioButton.Tag = CopySessionRequest.CopySessionOptions.COPY_ALL;
+            includeRadioButton.Tag = CopySessionRequest.CopySessionOptions.COPY_INCLUDE;
+            excludeRadioButton.Tag = CopySessionRequest.CopySessionOptions.COPY_EXCLUDE;
         }
 
         private void createDictonary()
@@ -96,9 +105,9 @@ namespace uk.org.riseley.puttySessionManager
             loadList();
         }
 
-        public void getCopySessionRequest()
+        public CopySessionRequest getCopySessionRequest()
         {
-            
+            return csr;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -126,20 +135,27 @@ namespace uk.org.riseley.puttySessionManager
 
         }
 
-        private void copyAllRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
         {
-            attributesGroupBox.Enabled = !(copyAllRadioButton.Checked);
+            RadioButton rb = (RadioButton) sender;
+            if ( rb == copyAllRadioButton )
+            {
+                attributesGroupBox.Enabled = !(copyAllRadioButton.Checked);
+            }
+
+            if ( rb.Checked == true )
+                csr.CopyOptions = (CopySessionRequest.CopySessionOptions)rb.Tag;
         }
 
         private void sessionComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             // Suspend redraw
             SuspendLayout();
-            
+
             // Save the list of selected items
             string[] selectedItems = new string[attributeListBox.SelectedItems.Count];
             attributeListBox.SelectedItems.CopyTo(selectedItems, 0);
-         
+
             // Clear the existing list
             attributeListBox.Items.Clear();
 
@@ -147,7 +163,7 @@ namespace uk.org.riseley.puttySessionManager
             attributeListBox.Items.AddRange(sc.getSessionAttributes((Session)sessionComboBox.SelectedItem).ToArray());
 
             // Attempt to reselect the item
-            foreach ( string s in selectedItems )
+            foreach (string s in selectedItems)
             {
                 attributeListBox.SelectedItems.Add(s);
             }
@@ -159,24 +175,44 @@ namespace uk.org.riseley.puttySessionManager
 
         private void selectAllButton_Click(object sender, EventArgs e)
         {
-            for( int i=0 ; i < attributeListBox.Items.Count ; i++ )
+            for (int i = 0; i < attributeListBox.Items.Count; i++)
                 attributeListBox.SelectedIndices.Add(i);
+            csr.SelectedAttributes = getSelectedAttributes();
         }
 
         private void selectNoneButton_Click(object sender, EventArgs e)
         {
             attributeListBox.SelectedIndices.Clear();
+            csr.SelectedAttributes = getSelectedAttributes();
+        }
+
+        private void invertButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < attributeListBox.Items.Count; i++)
+            {
+                if (attributeListBox.SelectedIndices.Contains(i))
+                    attributeListBox.SelectedIndices.Remove(i);
+                else
+                    attributeListBox.SelectedIndices.Add(i);
+            }
+            csr.SelectedAttributes = getSelectedAttributes();
+        }
+
+
+        private List<string> getSelectedAttributes()
+        {
+            string[] selectedAttribs = new string[attributeListBox.SelectedItems.Count];
+            attributeListBox.SelectedItems.CopyTo(selectedAttribs, 0);
+            List<string> sl = new List<string>();
+            sl.AddRange(selectedAttribs);
+            return sl;
         }
 
         private void attributeListBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            string [] selectedAttribs = new string[attributeListBox.SelectedItems.Count];
-            attributeListBox.SelectedItems.CopyTo(selectedAttribs,0);
-            List<string> sl = new List<string>();
-            sl.AddRange(selectedAttribs);
-            csr.SelectedAttributes = sl;
+            csr.SelectedAttributes = getSelectedAttributes();
 
-            foreach ( CheckBox cb in checkboxDictionary.Values )
+            foreach (CheckBox cb in checkboxDictionary.Values)
             {
                 cb.CheckState = csr.getGroupStatus((CopySessionRequest.AttribGroups)cb.Tag);
             }
@@ -184,8 +220,31 @@ namespace uk.org.riseley.puttySessionManager
 
         private void checkBox_Click(object sender, EventArgs e)
         {
+            CheckBox cb = (CheckBox)sender;
+            bool buttonChecked = cb.Checked;
+            CopySessionRequest.AttribGroups ag = (CopySessionRequest.AttribGroups)cb.Tag;
+            List<string> attribs = csr.getAttribs(ag);
+            int index = -1;
 
+            foreach (string s in attribs)
+            {
+                index = attributeListBox.Items.IndexOf(s);
+                if (index >= 0)
+                {
+                    if (buttonChecked == true)
+                    {
+                        attributeListBox.SelectedIndices.Add(index);
+                    }
+                    else if (buttonChecked == false)
+                    {
+                        attributeListBox.SelectedIndices.Remove(index);
+                    }
+                }
+            }
+
+            csr.SelectedAttributes = getSelectedAttributes();
         }
 
+ 
     }
 }

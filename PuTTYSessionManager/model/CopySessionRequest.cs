@@ -78,6 +78,14 @@ namespace uk.org.riseley.puttySessionManager.model
             get { return selectedAttributes; }        
         }
 
+        private CopySessionOptions copyOptions;
+
+        public CopySessionOptions CopyOptions
+        {
+            set { copyOptions = value; }
+            get { return copyOptions; }
+        }
+
         private void initialiseLists()
         {
             initialiseColours();
@@ -96,7 +104,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
         private void initialiseColours()
         {
-            for (int i = 0; i <= 20; i++)
+            for (int i = 0; i <= 21; i++)
             {
                 attribColours.Add("Colour" + i);
             }
@@ -226,6 +234,13 @@ namespace uk.org.riseley.puttySessionManager.model
                 cs = CheckState.Checked;
 
             return cs;
-        }        
+        }
+
+        public List<string> getAttribs(AttribGroups ag)
+        {
+            List<string> attribList;
+            dictAllAttribGroups.TryGetValue(ag, out attribList);
+            return attribList;        
+        }
     }
 }
