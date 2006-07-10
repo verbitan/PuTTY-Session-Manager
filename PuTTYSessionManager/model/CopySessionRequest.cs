@@ -41,6 +41,7 @@ namespace uk.org.riseley.puttySessionManager.model
             COLOURS
           , DEFAULT_USERNAME
           , FONT
+          , HOSTNAME
           , KEEP_ALIVES
           , PROTOCOL_PORT
           , SCROLLBACK
@@ -52,6 +53,7 @@ namespace uk.org.riseley.puttySessionManager.model
         private List<string> attribColours = new List<string>();
         private List<string> attribDefaultUsername = new List<string>();
         private List<string> attribFont = new List<string>();
+        private List<string> attribHostName = new List<string>();
         private List<string> attribKeepAlives = new List<string>();
         private List<string> attribProtocolPort = new List<string>();
         private List<string> attribScrollback = new List<string>();
@@ -86,11 +88,21 @@ namespace uk.org.riseley.puttySessionManager.model
             get { return copyOptions; }
         }
 
+        private List<Session> targetSessions;
+
+        public List<Session> TargetSessions
+        {
+            set { targetSessions = value; }
+            get { return targetSessions; }
+
+        }
+
         private void initialiseLists()
         {
             initialiseColours();
             initialiseDefaultUsername();
             initialiseFont();
+            initialiseHostName();
             initialiseKeepAlives();           
             initialiseProtocolPort();
             initialiseScrollback();
@@ -112,7 +124,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
         private void initialiseDefaultUsername()
         {
-            attribDefaultUsername.Add("UserName");
+            attribDefaultUsername.Add(SessionController.PUTTY_USERNAME_ATTRIB);
         }
 
         private void initialiseFont()
@@ -132,9 +144,15 @@ namespace uk.org.riseley.puttySessionManager.model
             attribFont.Add("BoldFontIsBold");        
         }
 
+        private void initialiseHostName()
+        {
+            attribHostName.Add(SessionController.PUTTY_HOSTNAME_ATTRIB);
+        }
+
         private void initialiseKeepAlives()
         {
-            attribKeepAlives.Add("TCPKeepalives");
+            attribKeepAlives.Add("PingInterval");
+            attribKeepAlives.Add("PingIntervalSecs");
         }
 
         private void initialiseProtocolPort()
@@ -181,6 +199,7 @@ namespace uk.org.riseley.puttySessionManager.model
             dictAllAttribGroups.Add(AttribGroups.COLOURS, attribColours);
             dictAllAttribGroups.Add(AttribGroups.DEFAULT_USERNAME, attribDefaultUsername);
             dictAllAttribGroups.Add(AttribGroups.FONT, attribFont);
+            dictAllAttribGroups.Add(AttribGroups.HOSTNAME, attribHostName);
             dictAllAttribGroups.Add(AttribGroups.KEEP_ALIVES, attribKeepAlives);
             dictAllAttribGroups.Add(AttribGroups.PROTOCOL_PORT, attribProtocolPort);
             dictAllAttribGroups.Add(AttribGroups.SCROLLBACK, attribScrollback);
@@ -241,6 +260,22 @@ namespace uk.org.riseley.puttySessionManager.model
             List<string> attribList;
             dictAllAttribGroups.TryGetValue(ag, out attribList);
             return attribList;        
+        }
+
+        public bool selectionContainsHostname()
+        {
+            if (selectedAttributes == null)
+                return false;
+            else
+                return selectedAttributes.Contains(SessionController.PUTTY_HOSTNAME_ATTRIB);
+        }
+
+        public bool selectionContainsFolder()
+        {
+            if (selectedAttributes == null)
+                return false;
+            else
+                return selectedAttributes.Contains(SessionController.PUTTY_PSM_FOLDER_ATTRIB);
         }
     }
 }

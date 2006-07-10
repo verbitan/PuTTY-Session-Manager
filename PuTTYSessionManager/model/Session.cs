@@ -25,6 +25,7 @@ namespace uk.org.riseley.puttySessionManager.model
     public class Session : IEquatable<Session> ,IComparable<Session>
     {
         public const string SESSIONS_FOLDER_NAME = "Sessions";
+        public const string PATH_SEPARATOR = "\\";
 
         private const string KEY_SESSION = "SESSION|";
         private const string KEY_FOLDER = "FOLDER|";
@@ -63,12 +64,19 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             SessionName = regKey;
             SessionDisplayText = convertSessionKeyToDisplay(regKey);
-            if (folderName == null || folderName.Equals(""))
+            string folderCellValue;
+            if (folderName == null || folderName.Equals("") || folderName.Equals(SESSIONS_FOLDER_NAME) )
+            {
                 FolderName = SESSIONS_FOLDER_NAME;
+                folderCellValue = "";
+            }
             else
+            {
                 FolderName = folderName;
+                folderCellValue = FolderName.Remove(0, (SESSIONS_FOLDER_NAME.Length + PATH_SEPARATOR.Length));
+            }
             IsFolder = isFolder;
-            cellValues = new String[] { SessionDisplayText, FolderName };
+            cellValues = new String[] { SessionDisplayText, folderCellValue};
         }
 
         public override string ToString()

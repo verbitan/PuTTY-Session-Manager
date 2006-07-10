@@ -130,18 +130,29 @@ namespace uk.org.riseley.puttySessionManager
             {
                 bool result = sc.deleteSessions(sessionEditorControl1.getSelectedSessionsList());
                 if (result == false)
-                    MessageBox.Show("Failed to delete sessions"
+                    MessageBox.Show("Failed to delete sessions - you may need to refresh the session list"
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void sessionEditorControl1_CopySessionAttributes(object sender, EventArgs e)
         {
-            if ( sessionEditorControl1.getSelectedSessions().Length > 0 )
-                csf.ShowDialog();
-            else
+            List<Session> sl = sessionEditorControl1.getSelectedSessionsList();
+            if (sl.Count == 0)
+            {
                 MessageBox.Show("You must select some target sessions!"
                     , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Pass in the target sessions
+            csf.setTargetSessions(sl);
+
+            if (csf.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Attributes copied successfully"
+                        , "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);                
+            }            
         }
 
         private void SessionEditorForm_FormClosing(object sender, FormClosingEventArgs e)

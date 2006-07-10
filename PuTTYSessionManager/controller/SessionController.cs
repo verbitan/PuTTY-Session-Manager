@@ -16,9 +16,9 @@ namespace uk.org.riseley.puttySessionManager.model
     public class SessionController
     {
         public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
-        public const string PUTTY_PSM_FOLDER_VALUE = "PsmPath";
-        private const string PUTTY_HOSTNAME_VALUE = "HostName";
-        private const string PUTTY_USERNAME_VALUE = "UserName";
+        public const string PUTTY_PSM_FOLDER_ATTRIB = "PsmPath";
+        public const string PUTTY_HOSTNAME_ATTRIB = "HostName";
+        public const string PUTTY_USERNAME_ATTRIB = "UserName";
         private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
 
         private static List<Session> sessionList = new List<Session>();
@@ -126,7 +126,7 @@ namespace uk.org.riseley.puttySessionManager.model
             foreach (string keyName in rk.GetSubKeyNames())
             {
                 RegistryKey sessKey = rk.OpenSubKey(keyName);
-                String psmpath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_VALUE);
+                String psmpath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_ATTRIB);
                 sessKey.Close();
 
                 Session s = new Session(keyName, psmpath, false);
@@ -143,6 +143,7 @@ namespace uk.org.riseley.puttySessionManager.model
         private List<string> getFolderListFromSessions(List<Session> sl)
         {
             List<string> fl = new List<string>();
+            List<string> sfl = new List<string>();
 
             // Add the default folder
             fl.Add(Session.SESSIONS_FOLDER_NAME);
@@ -152,6 +153,25 @@ namespace uk.org.riseley.puttySessionManager.model
                 if (fl.Contains(s.FolderName) == false)
                     fl.Add(s.FolderName);
             }
+
+            // Add in the path elements
+            foreach (string folder in fl)
+            {
+                string path = "";
+                foreach (string subfolder in folder.Split(Session.PATH_SEPARATOR.ToCharArray()))
+                {
+                    if (path.Equals(""))
+                        path = subfolder;
+                    else
+                        path = path + Session.PATH_SEPARATOR + subfolder;
+
+                    if (fl.Contains(path) == false && 
+                        sfl.Contains(path) == false)
+                        sfl.Add(path);
+                }
+            }
+
+            fl.AddRange(sfl.ToArray());
 
             fl.Sort();
 
@@ -163,7 +183,7 @@ namespace uk.org.riseley.puttySessionManager.model
         public void saveFolderToRegistry(Session s)
         {
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
-            rk.SetValue(PUTTY_PSM_FOLDER_VALUE, s.FolderName, RegistryValueKind.String);
+            rk.SetValue(PUTTY_PSM_FOLDER_ATTRIB, s.FolderName, RegistryValueKind.String);
             rk.Close();
         }
 
@@ -247,18 +267,18 @@ namespace uk.org.riseley.puttySessionManager.model
             foreach (string valueName in template.GetValueNames())
             {
                 
-                if ( valueName.Equals ( PUTTY_HOSTNAME_VALUE ) ) 
+                if ( valueName.Equals ( PUTTY_HOSTNAME_ATTRIB ) ) 
                 {
                     hostnameSet = true;
                     value = nsr.Hostname;
                 } 
-                else if ( valueName.Equals ( PUTTY_PSM_FOLDER_VALUE ) )
+                else if ( valueName.Equals ( PUTTY_PSM_FOLDER_ATTRIB ) )
                 {
                     foldernameSet = true;
                     value = nsr.SessionFolder;
                 }
                 else if ( nsr.CopyDefaultUsername == false &&
-                            valueName.Equals (PUTTY_USERNAME_VALUE) )
+                            valueName.Equals (PUTTY_USERNAME_ATTRIB) )
                 {
                     value = "";
                 } 
@@ -272,11 +292,11 @@ namespace uk.org.riseley.puttySessionManager.model
 
             // Set the hostname if it hasn't already been set
             if ( hostnameSet == false )
-                newSession.SetValue(PUTTY_HOSTNAME_VALUE, nsr.Hostname, RegistryValueKind.String);
+                newSession.SetValue(PUTTY_HOSTNAME_ATTRIB, nsr.Hostname, RegistryValueKind.String);
 
             // Set the foldername if it hasn't already been set
             if ( foldernameSet == false )
-                newSession.SetValue(PUTTY_PSM_FOLDER_VALUE, nsr.SessionFolder, RegistryValueKind.String);
+                newSession.SetValue(PUTTY_PSM_FOLDER_ATTRIB, nsr.SessionFolder, RegistryValueKind.String);
 
             template.Close();
             newSession.Close();
@@ -288,13 +308,17 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public bool deleteSessions(List<Session> sl)
         {
-            // Can't delete the default session
-            if (findSession(sl, PUTTY_DEFAULT_SESSION) != null)
+            // Check all the sessions still exist
+            RegistryKey rk;
+            foreach (Session s in sl)
             {
-                return false;
+                rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+                if (rk == null)
+                    return false;
+                rk.Close();
             }
 
-            // 
+            // Delete the sessions
             foreach (Session s in sl)
             {
                 Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
@@ -379,6 +403,67 @@ namespace uk.org.riseley.puttySessionManager.model
             else 
                 return false;
 
+        }
+
+        public bool copySessionAttributes(CopySessionRequest csr)
+        {
+            // Check the template session is still there
+            RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + csr.SessionTemplate.SessionName, false);
+            if (template == null)
+                return false;
+
+            // Check all the target sessions still exist
+            foreach (Session s in csr.TargetSessions)
+            {
+                RegistryKey targetSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
+                if (targetSession == null)
+                {
+                    template.Close();
+                    return false;
+                }
+                else
+                {
+                    targetSession.Close();
+                }
+            }
+
+            // Copy all the attributes
+            foreach (Session s in csr.TargetSessions)
+            {
+                RegistryKey targetSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
+                object value;
+                bool copy;
+                foreach (string valueName in template.GetValueNames())
+                {
+                    copy = false;
+
+                    if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_ALL ) &&
+                         !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB))&&
+                         !(valueName.Equals(SessionController.PUTTY_PSM_FOLDER_ATTRIB))
+                        )
+                        copy = true;
+                    else if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_EXCLUDE) &&
+                         !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB)) &&                        
+                         !(valueName.Equals(SessionController.PUTTY_PSM_FOLDER_ATTRIB)) &&
+                         !(csr.SelectedAttributes.Contains(valueName)))
+                        copy = true;
+                    else if (csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_INCLUDE)
+                        copy = csr.SelectedAttributes.Contains(valueName);
+
+                    if (copy == true)
+                    {
+                        value = template.GetValue(valueName);
+                        targetSession.SetValue(valueName, value, template.GetValueKind(valueName));
+                    }
+                }
+                targetSession.Close();
+             
+            }
+            
+            // Close the template session;
+            template.Close();
+
+            return true;
         }
     }
 

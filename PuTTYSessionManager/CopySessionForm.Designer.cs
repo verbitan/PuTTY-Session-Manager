@@ -66,6 +66,8 @@ namespace uk.org.riseley.puttySessionManager
             this.scrollBackCheckBox = new System.Windows.Forms.CheckBox();
             this.coloursCheckBox = new System.Windows.Forms.CheckBox();
             this.excludeRadioButton = new System.Windows.Forms.RadioButton();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.hostnameCheckBox = new System.Windows.Forms.CheckBox();
             this.attributesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +96,7 @@ namespace uk.org.riseley.puttySessionManager
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(147, 385);
+            this.okButton.Location = new System.Drawing.Point(147, 440);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 16;
@@ -105,7 +107,7 @@ namespace uk.org.riseley.puttySessionManager
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(228, 385);
+            this.cancelButton.Location = new System.Drawing.Point(228, 440);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 17;
@@ -119,17 +121,17 @@ namespace uk.org.riseley.puttySessionManager
             this.copyAllRadioButton.Location = new System.Drawing.Point(45, 61);
             this.copyAllRadioButton.Name = "copyAllRadioButton";
             this.copyAllRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.copyAllRadioButton.Size = new System.Drawing.Size(192, 17);
+            this.copyAllRadioButton.Size = new System.Drawing.Size(242, 17);
             this.copyAllRadioButton.TabIndex = 18;
             this.copyAllRadioButton.TabStop = true;
-            this.copyAllRadioButton.Text = "Copy all attributes except hostname";
+            this.copyAllRadioButton.Text = "Copy all attributes except hostname and folder";
             this.copyAllRadioButton.UseVisualStyleBackColor = true;
             this.copyAllRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // includeRadioButton
             // 
             this.includeRadioButton.AutoSize = true;
-            this.includeRadioButton.Location = new System.Drawing.Point(77, 107);
+            this.includeRadioButton.Location = new System.Drawing.Point(127, 107);
             this.includeRadioButton.Name = "includeRadioButton";
             this.includeRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.includeRadioButton.Size = new System.Drawing.Size(160, 17);
@@ -140,6 +142,7 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // attributesGroupBox
             // 
+            this.attributesGroupBox.Controls.Add(this.hostnameCheckBox);
             this.attributesGroupBox.Controls.Add(this.invertButton);
             this.attributesGroupBox.Controls.Add(this.selectNoneButton);
             this.attributesGroupBox.Controls.Add(this.selectAllButton);
@@ -156,14 +159,14 @@ namespace uk.org.riseley.puttySessionManager
             this.attributesGroupBox.Enabled = false;
             this.attributesGroupBox.Location = new System.Drawing.Point(15, 130);
             this.attributesGroupBox.Name = "attributesGroupBox";
-            this.attributesGroupBox.Size = new System.Drawing.Size(428, 237);
+            this.attributesGroupBox.Size = new System.Drawing.Size(428, 278);
             this.attributesGroupBox.TabIndex = 20;
             this.attributesGroupBox.TabStop = false;
             this.attributesGroupBox.Text = "Attributes";
             // 
             // invertButton
             // 
-            this.invertButton.Location = new System.Drawing.Point(233, 197);
+            this.invertButton.Location = new System.Drawing.Point(233, 242);
             this.invertButton.Name = "invertButton";
             this.invertButton.Size = new System.Drawing.Size(89, 23);
             this.invertButton.TabIndex = 12;
@@ -173,7 +176,7 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // selectNoneButton
             // 
-            this.selectNoneButton.Location = new System.Drawing.Point(331, 197);
+            this.selectNoneButton.Location = new System.Drawing.Point(331, 242);
             this.selectNoneButton.Name = "selectNoneButton";
             this.selectNoneButton.Size = new System.Drawing.Size(75, 23);
             this.selectNoneButton.TabIndex = 11;
@@ -183,7 +186,7 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // selectAllButton
             // 
-            this.selectAllButton.Location = new System.Drawing.Point(150, 197);
+            this.selectAllButton.Location = new System.Drawing.Point(150, 242);
             this.selectAllButton.Name = "selectAllButton";
             this.selectAllButton.Size = new System.Drawing.Size(75, 23);
             this.selectAllButton.TabIndex = 10;
@@ -197,7 +200,7 @@ namespace uk.org.riseley.puttySessionManager
             this.attributeListBox.Location = new System.Drawing.Point(144, 19);
             this.attributeListBox.Name = "attributeListBox";
             this.attributeListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.attributeListBox.Size = new System.Drawing.Size(268, 173);
+            this.attributeListBox.Size = new System.Drawing.Size(268, 212);
             this.attributeListBox.Sorted = true;
             this.attributeListBox.TabIndex = 9;
             this.attributeListBox.SelectedValueChanged += new System.EventHandler(this.attributeListBox_SelectedValueChanged);
@@ -205,7 +208,7 @@ namespace uk.org.riseley.puttySessionManager
             // folderCheckBox
             // 
             this.folderCheckBox.AutoSize = true;
-            this.folderCheckBox.Location = new System.Drawing.Point(34, 180);
+            this.folderCheckBox.Location = new System.Drawing.Point(34, 203);
             this.folderCheckBox.Name = "folderCheckBox";
             this.folderCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.folderCheckBox.Size = new System.Drawing.Size(95, 17);
@@ -217,7 +220,7 @@ namespace uk.org.riseley.puttySessionManager
             // portForwardCheckBox
             // 
             this.portForwardCheckBox.AutoSize = true;
-            this.portForwardCheckBox.Location = new System.Drawing.Point(13, 203);
+            this.portForwardCheckBox.Location = new System.Drawing.Point(13, 226);
             this.portForwardCheckBox.Name = "portForwardCheckBox";
             this.portForwardCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.portForwardCheckBox.Size = new System.Drawing.Size(116, 17);
@@ -229,7 +232,7 @@ namespace uk.org.riseley.puttySessionManager
             // keepalivesCheckBox
             // 
             this.keepalivesCheckBox.AutoSize = true;
-            this.keepalivesCheckBox.Location = new System.Drawing.Point(51, 88);
+            this.keepalivesCheckBox.Location = new System.Drawing.Point(51, 111);
             this.keepalivesCheckBox.Name = "keepalivesCheckBox";
             this.keepalivesCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.keepalivesCheckBox.Size = new System.Drawing.Size(78, 17);
@@ -241,7 +244,7 @@ namespace uk.org.riseley.puttySessionManager
             // selectionCheckBox
             // 
             this.selectionCheckBox.AutoSize = true;
-            this.selectionCheckBox.Location = new System.Drawing.Point(5, 157);
+            this.selectionCheckBox.Location = new System.Drawing.Point(5, 180);
             this.selectionCheckBox.Name = "selectionCheckBox";
             this.selectionCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.selectionCheckBox.Size = new System.Drawing.Size(124, 17);
@@ -265,7 +268,7 @@ namespace uk.org.riseley.puttySessionManager
             // protocoCheckBox
             // 
             this.protocoCheckBox.AutoSize = true;
-            this.protocoCheckBox.Location = new System.Drawing.Point(34, 111);
+            this.protocoCheckBox.Location = new System.Drawing.Point(34, 134);
             this.protocoCheckBox.Name = "protocoCheckBox";
             this.protocoCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.protocoCheckBox.Size = new System.Drawing.Size(95, 17);
@@ -289,7 +292,7 @@ namespace uk.org.riseley.puttySessionManager
             // scrollBackCheckBox
             // 
             this.scrollBackCheckBox.AutoSize = true;
-            this.scrollBackCheckBox.Location = new System.Drawing.Point(53, 134);
+            this.scrollBackCheckBox.Location = new System.Drawing.Point(53, 157);
             this.scrollBackCheckBox.Name = "scrollBackCheckBox";
             this.scrollBackCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.scrollBackCheckBox.Size = new System.Drawing.Size(76, 17);
@@ -313,14 +316,32 @@ namespace uk.org.riseley.puttySessionManager
             // excludeRadioButton
             // 
             this.excludeRadioButton.AutoSize = true;
-            this.excludeRadioButton.Location = new System.Drawing.Point(15, 84);
+            this.excludeRadioButton.Location = new System.Drawing.Point(33, 84);
             this.excludeRadioButton.Name = "excludeRadioButton";
             this.excludeRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.excludeRadioButton.Size = new System.Drawing.Size(222, 17);
+            this.excludeRadioButton.Size = new System.Drawing.Size(254, 17);
             this.excludeRadioButton.TabIndex = 21;
-            this.excludeRadioButton.Text = "Exclude hostname and selected attributes";
+            this.excludeRadioButton.Text = "Exclude hostname, folder and selected attributes";
             this.excludeRadioButton.UseVisualStyleBackColor = true;
             this.excludeRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "reg";
+            this.saveFileDialog1.Filter = "Reg files|*.reg|All files|*.*";
+            this.saveFileDialog1.Title = "Export PuTTY Sessions";
+            // 
+            // hostnameCheckBox
+            // 
+            this.hostnameCheckBox.AutoSize = true;
+            this.hostnameCheckBox.Location = new System.Drawing.Point(55, 88);
+            this.hostnameCheckBox.Name = "hostnameCheckBox";
+            this.hostnameCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.hostnameCheckBox.Size = new System.Drawing.Size(74, 17);
+            this.hostnameCheckBox.TabIndex = 13;
+            this.hostnameCheckBox.Text = "Hostname";
+            this.hostnameCheckBox.UseVisualStyleBackColor = true;
+            this.hostnameCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // CopySessionForm
             // 
@@ -328,7 +349,7 @@ namespace uk.org.riseley.puttySessionManager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(459, 423);
+            this.ClientSize = new System.Drawing.Size(459, 488);
             this.ControlBox = false;
             this.Controls.Add(this.excludeRadioButton);
             this.Controls.Add(this.attributesGroupBox);
@@ -374,5 +395,7 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.Button selectNoneButton;
         private System.Windows.Forms.Button selectAllButton;
         private System.Windows.Forms.Button invertButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.CheckBox hostnameCheckBox;
     }
 }
