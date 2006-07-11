@@ -74,8 +74,22 @@ namespace uk.org.riseley.puttySessionManager
             // Retrieve the client coordinates of the mouse position.
             Point targetPoint = treeView.PointToClient(new Point(e.X, e.Y));
 
-            // Select the node at the mouse position.
-            treeView.SelectedNode = treeView.GetNodeAt(targetPoint);
+            // Get the node at the mouse position.
+            TreeNode node = treeView.GetNodeAt(targetPoint);
+
+            // Only if there is node under the mouse
+            if (node != null)
+            {
+                // Select the node at the mouse position
+                treeView.SelectedNode = node;
+
+                // Ensure the panel scrolls if we get near the top
+                if (targetPoint.Y < (node.Bounds.Height / 2) &&
+                    node.PrevVisibleNode != null)
+                {
+                    node.PrevVisibleNode.EnsureVisible();
+                }
+            }
         }
 
         private void treeView1_DragDrop(object sender, DragEventArgs e)
