@@ -372,7 +372,7 @@ namespace uk.org.riseley.puttySessionManager.model
             }
 
             // Create the new session
-            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionName);
+            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionName.Replace(" ", "%20"));
             if (newSession == null)
                 return false;
 
