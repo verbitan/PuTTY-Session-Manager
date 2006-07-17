@@ -29,14 +29,14 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionTreeControl : SessionControl, uk.org.riseley.puttySessionManager.ISessionControl
+    public partial class SessionTreeControl : SessionControl, ISessionControl
     {
 
         private const int IMAGE_INDEX_FOLDER = 0;
         private const int IMAGE_INDEX_SELECTED_FOLDER = 1;
         private const int IMAGE_INDEX_SESSION = 2;
 
-        private NewSessionForm newSessionForm; 
+        private NewSessionForm newSessionForm;
 
         public SessionTreeControl()
             : base()
@@ -291,14 +291,16 @@ namespace uk.org.riseley.puttySessionManager
 
         private void launchSessionMenuItem_Click(object sender, EventArgs e)
         {
-            Session s = (Session)treeView.SelectedNode.Tag;
-            string sessionName = s.SessionDisplayText;
+            Session s = getSelectedSession();
+            string sessionName = "";
+            if ( s != null )
+                sessionName = s.SessionDisplayText;
             OnLaunchSession(new LaunchSessionEventArgs(sessionName));
         }
 
         private void launchSessionSystrayMenuItem_Click(object sender, EventArgs e)
         {
-            string sessionName = ((ToolStripMenuItem)sender).Text; 
+            string sessionName = ((ToolStripMenuItem)sender).Text;
             OnLaunchSession(new LaunchSessionEventArgs(sessionName));
         }
 
@@ -316,16 +318,23 @@ namespace uk.org.riseley.puttySessionManager
             if (lockSessionsToolStripMenuItem.Checked)
             {
                 treeView.AllowDrop = false;
+                sessionManagementToolStripMenuItem.Enabled = false;
+                setSessionAsHotkeyToolStripMenuItem.Enabled = false;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
                 saveNewSessionToolStripMenuItem.Enabled = false;
+                exportSessionsToolStripMenuItem.Enabled = false;
+                deleteSessionToolStripMenuItem.Enabled = false;
             }
             else
             {
                 treeView.AllowDrop = true;
+                sessionManagementToolStripMenuItem.Enabled = true;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
                 saveNewSessionToolStripMenuItem.Enabled = true;
+                exportSessionsToolStripMenuItem.Enabled = true;
+                deleteSessionToolStripMenuItem.Enabled = true;
             }
 
 
@@ -335,12 +344,17 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (e.Button == MouseButtons.Right)
             {
+                // Select the node that has been clicked
                 treeView.SelectedNode = e.Node;
-                Session s = (Session)e.Node.Tag;
+
+                // Get the session
+                Session s = getSelectedSession(true);
+
                 if (s.IsFolder == false)
                 {
                     newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameSessionToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
+                    setSessionAsHotkeyToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameFolderMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
@@ -497,7 +511,7 @@ namespace uk.org.riseley.puttySessionManager
         public override void getSessionMenuItems(ToolStripMenuItem parent)
         {
             parent.DropDownItems.Clear();
-            addSessionMenuItemsFolder(parent, treeView.Nodes[0].Nodes); 
+            addSessionMenuItemsFolder(parent, treeView.Nodes[0].Nodes);
         }
 
         private void addSessionMenuItemsFolder(ToolStripMenuItem parent, TreeNodeCollection nodes)
@@ -528,28 +542,20 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (sender is ToolStripMenuItem)
             {
-                if (confirmNumberOfSessions(treeView.SelectedNode, false))
-                    launchFolderSessions(treeView.SelectedNode, false);
+                List<Session> sl = getSelectedSessionsList(false);
+                if (confirmNumberOfSessions(sl))
+                    launchFolderSessions(sl);
             }
         }
 
-
-        private void launchFolderSessions(TreeNode folder, bool launchSubfolders)
+        private void launchFolderSessions(List<Session> sl)
         {
-            IEnumerator ie = folder.Nodes.GetEnumerator();
+            if (sl == null)
+                return;
 
-            while (ie.MoveNext())
+            foreach (Session s in sl)
             {
-                TreeNode node = (TreeNode)ie.Current;
-                Session s = (Session)node.Tag;
-                if (s.IsFolder && launchSubfolders)
-                {
-                    launchFolderSessions(node, launchSubfolders);
-                }
-                else if (s.IsFolder == false)
-                {
-                    OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
-                }
+                OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
             }
         }
 
@@ -557,18 +563,22 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (sender is ToolStripMenuItem)
             {
-                if (confirmNumberOfSessions(treeView.SelectedNode, true))
-                    launchFolderSessions(treeView.SelectedNode, true);
+                List<Session> sl = getSelectedSessionsList(true);
+                if (confirmNumberOfSessions(sl))
+                    launchFolderSessions(sl);
             }
         }
 
-        private bool confirmNumberOfSessions(TreeNode folder, bool countSubfolders)
+        private bool confirmNumberOfSessions(List<Session> sl)
         {
             int warningLevel = (int)Properties.Settings.Default.SubfolderSessionWarning;
             int sessionCount = 0;
             bool result = true;
 
-            sessionCount = getSessionCount(sessionCount, folder, countSubfolders);
+            if (sl != null)
+                sessionCount = sl.Count;
+            else
+                sessionCount = 0;
 
             if (sessionCount > warningLevel)
                 result = (MessageBox.Show(this
@@ -581,28 +591,10 @@ namespace uk.org.riseley.puttySessionManager
 
         }
 
-        private int getSessionCount(int currentCount, TreeNode folder, bool countSubfolders)
-        {
-            IEnumerator ie = folder.Nodes.GetEnumerator();
-            TreeNode currentNode = null;
-            while (ie.MoveNext())
-            {
-                currentNode = (TreeNode)ie.Current;
-                if (currentNode.Nodes.Count == 0)
-                    currentCount++;
-                else if (countSubfolders == true)
-                    currentCount = getSessionCount(currentCount, currentNode, countSubfolders);
-            }
-            return currentCount;
-        }
-
         private void saveNewSessionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Find the selected node
-            TreeNode selectedNode = treeView.SelectedNode;
-
             // Get the session
-            Session s = (Session)selectedNode.Tag;
+            Session s = getSelectedSession(true);
 
             // Setup the session request
             NewSessionRequest nsr;
@@ -613,7 +605,7 @@ namespace uk.org.riseley.puttySessionManager
             }
             else
             {
-                nsr = new NewSessionRequest(null,s.FolderName, "", "",true, true);
+                nsr = new NewSessionRequest(null, s.FolderName, "", "", true, true);
             }
 
             // Set the options in the form
@@ -671,11 +663,8 @@ namespace uk.org.riseley.puttySessionManager
 
         private void renameSessionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Find the selected node
-            TreeNode selectedNode = treeView.SelectedNode;
-
             // Get the session
-            Session s = (Session)selectedNode.Tag;
+            Session s = getSelectedSession(true);
 
             // Check we are not renaming the default session
             Session defaultSession = getSessionController().findDefaultSession();
@@ -683,11 +672,11 @@ namespace uk.org.riseley.puttySessionManager
             {
                 MessageBox.Show("Cannot rename the default session"
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                return;
             }
 
             // Display the session name requester
-            SessionNameForm snf = new SessionNameForm(selectedNode.Text);
+            SessionNameForm snf = new SessionNameForm(s.SessionDisplayText);
 
             if (snf.ShowDialog() == DialogResult.OK && validateSessionName(snf.getSessionName()))
             {
@@ -704,14 +693,14 @@ namespace uk.org.riseley.puttySessionManager
 
                 // Create the new session object
                 Session newSession = new Session(snf.getSessionName(), s.FolderName, false);
-                                
+
                 // Suppress repainting the TreeView until all the objects have been created.
                 treeView.BeginUpdate();
 
                 // Update the selected node
-                selectedNode.Tag = newSession;
-                selectedNode.Text = newSession.SessionDisplayText;
-                selectedNode.Name = newSession.getKey();
+                treeView.SelectedNode.Tag = newSession;
+                treeView.SelectedNode.Text = newSession.SessionDisplayText;
+                treeView.SelectedNode.Name = newSession.getKey();
 
                 // Fire a refresh event
                 sc.invalidateSessionList(this, false);
@@ -719,6 +708,96 @@ namespace uk.org.riseley.puttySessionManager
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
             }
+        }
+
+        private void deleteSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OnExportSessions(e);
+        }        
+
+        public override List<Session> getSelectedSessionsList()
+        {
+            return getSelectedSessionsList(true);
+        }
+
+        private List<Session> getSelectedSessionsList(bool includeSubfolders)
+        {
+            List<Session> sl = new List<Session>();
+
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
+
+            // Add all the child nodes
+            sl.AddRange(getChildSessions(selectedNode, includeSubfolders));
+
+            return sl;
+        }
+
+        private List<Session> getChildSessions(TreeNode parent, bool includeSubfolders)
+        {
+            List<Session> sl = new List<Session>();
+
+            // Get the session
+            Session s = (Session)parent.Tag;
+
+            if (s.IsFolder == true)
+            {
+                IEnumerator ie = parent.Nodes.GetEnumerator();
+                TreeNode curr = null;
+                while (ie.MoveNext())
+                {
+                    curr = (TreeNode)ie.Current;
+                    s = (Session)curr.Tag;
+                    if (s.IsFolder == true)
+                    {
+                        if (includeSubfolders == true)
+                        {
+                            sl.AddRange(getChildSessions(curr, includeSubfolders));
+                        }
+                    }
+                    else
+                    {
+                        sl.Add(s);
+                    }
+                }
+
+            }
+            else
+            {
+                sl.Add(s);
+            }
+
+            return sl;
+        }
+
+        // Returns selected session
+        // will return null if selected session is a folder
+        // and getFolder is false
+        private Session getSelectedSession(bool getFolder)
+        {
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
+            Session s = null;
+
+            if (selectedNode != null)
+                s = (Session)selectedNode.Tag;
+
+            if (getFolder == false && s.IsFolder == true)
+                s = null;
+
+            return s;
+        }
+
+        // Returns selected session
+        // will return null if selected session is a folder
+        private Session getSelectedSession()
+        {
+            return getSelectedSession(false);
+        }
+
+        private void exportSessionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OnExportSessions(e);
         }
     }
 }

@@ -27,7 +27,7 @@ using uk.org.riseley.puttySessionManager.controller;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionManagerForm : Form
+    public partial class SessionManagerForm : SessionManagementForm
     {
         private Options optionsDialog;
         private AboutBox aboutDialog;
@@ -40,9 +40,9 @@ namespace uk.org.riseley.puttySessionManager
         private SessionController sc = SessionController.getInstance();
 
         public SessionManagerForm()
+            : base()
         {
             InitializeComponent();
-
 
             LoadLayout();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
@@ -224,6 +224,11 @@ namespace uk.org.riseley.puttySessionManager
         private void sessionHotkeysToolStripMenuItem_Click(object sender, EventArgs e)
         {
             hotKeyChooser.Show();
+        }
+
+        private void sessionTreeControl1_ExportSessions(object sender, EventArgs e)
+        {
+            exportSessions(currentSessionControl, sender, e);
         }
     }
 }

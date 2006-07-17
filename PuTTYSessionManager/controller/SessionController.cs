@@ -193,14 +193,14 @@ namespace uk.org.riseley.puttySessionManager.model
                 SessionsRefreshed(sender, e);
         }
 
-        public bool saveSessionsToFile(Session[] sessionArray, String fileName)
+        public bool saveSessionsToFile(List<Session> sessionList, String fileName)
         {
-            if (sessionArray.Length == 0)
+            if (sessionList.Count == 0)
                 return false;
             using (StreamWriter sw = File.CreateText(fileName))
             {
                 writeSessionExportHeader(sw);
-                foreach (Session s in sessionArray)
+                foreach (Session s in sessionList)
                 {
                     saveSession(s, sw);
                 }

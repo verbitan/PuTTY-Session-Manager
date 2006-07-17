@@ -346,7 +346,7 @@ namespace uk.org.riseley.puttySessionManager
                 try
                 {
                     result = sc.saveSessionsToFile(
-                                         csr.TargetSessions.ToArray(),
+                                         csr.TargetSessions,
                                          saveFileDialog1.FileName);
                 }
                 catch (Exception ex)

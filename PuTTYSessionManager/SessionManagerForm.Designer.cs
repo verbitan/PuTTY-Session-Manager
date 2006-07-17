@@ -156,10 +156,10 @@ namespace uk.org.riseley.puttySessionManager
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
             this.sessionTreeControl1.Name = "sessionTreeControl1";
             this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionTreeControl1.ExportSessions += new System.EventHandler(this.sessionTreeControl1_ExportSessions);
             // 
             // sessionListControl1
             // 
-            this.sessionListControl1.AllowMultiSelect = false;
             this.sessionListControl1.ContextMenuVisible = true;
             resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
             this.sessionListControl1.Name = "sessionListControl1";

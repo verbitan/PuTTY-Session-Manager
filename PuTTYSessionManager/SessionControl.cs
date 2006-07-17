@@ -29,6 +29,10 @@ namespace uk.org.riseley.puttySessionManager
     public partial class SessionControl : UserControl, uk.org.riseley.puttySessionManager.ISessionControl
     {
         public event LaunchSessionEventHandler LaunchSession;
+        public event System.EventHandler ExportSessions;
+        public event System.EventHandler NewSession;
+        public event System.EventHandler DeleteSessions;
+ 
         public delegate void LaunchSessionEventHandler(object sender, LaunchSessionEventArgs se);
 
         protected SessionController sc;
@@ -49,12 +53,51 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
+        protected virtual void OnExportSessions(EventArgs e)
+        {
+            if (ExportSessions != null)
+            {
+                ExportSessions(this, e);
+            }
+        }
+
+        protected virtual void OnNewSession(EventArgs e)
+        {
+            if (NewSession != null)
+            {
+                NewSession(this, e);
+            }
+        }
+
+        protected virtual void OnDeleteSessions(EventArgs e)
+        {
+            if (DeleteSessions != null)
+            {
+                DeleteSessions(this, e);
+            }
+        }
+
         public virtual void getSessionMenuItems(ToolStripMenuItem parent)
         {
         }
 
         protected virtual void LoadSessions()
         {
+        }
+
+        public Session[] getSelectedSessions()
+        {
+             List<Session> list = new List<Session>();
+             list = getSelectedSessionsList();
+             Session[] sarr = new Session[list.Count];
+             list.CopyTo(sarr);
+             return sarr;
+        }
+
+        public virtual List<Session> getSelectedSessionsList()
+        {
+            List<Session> sl = new List<Session>();
+            return sl;
         }
 
         protected SessionController getSessionController()

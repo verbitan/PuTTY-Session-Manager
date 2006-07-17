@@ -27,16 +27,13 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionEditorControl : uk.org.riseley.puttySessionManager.SessionControl
+    public partial class SessionEditorControl : SessionControl
     {
-
-        public event System.EventHandler ExportSessions;
-        public event System.EventHandler NewSession;
-        public event System.EventHandler DeleteSessions;
         public event System.EventHandler CopySessionAttributes;
         public event System.EventHandler CloseSessionEditor;
 
         public SessionEditorControl()
+            : base()
         {
             InitializeComponent();
         }
@@ -62,29 +59,7 @@ namespace uk.org.riseley.puttySessionManager
             dataGridView1.ResumeLayout();
         }
 
-        protected virtual void OnExportSessions(EventArgs e)
-        {
-            if (ExportSessions != null)
-            {
-                ExportSessions(this, e);
-            }
-        }
 
-        protected virtual void OnNewSession(EventArgs e)
-        {
-            if (NewSession != null)
-            {
-                NewSession(this, e);
-            }
-        }
-
-        protected virtual void OnDeleteSessions(EventArgs e)
-        {
-            if (DeleteSessions != null)
-            {
-                DeleteSessions(this, e);
-            }
-        }
 
         protected virtual void OnCopySessionAttributes(EventArgs e)
         {
@@ -107,28 +82,19 @@ namespace uk.org.riseley.puttySessionManager
             OnExportSessions(e);
         }
 
-        public Session[] getSelectedSessions()
+        public override List<Session> getSelectedSessionsList()
         {
+            List<Session> sl = new List<Session>();
             Session[] sarr = new Session[dataGridView1.SelectedRows.Count];
-            int i=0;
 
             IEnumerator ie = dataGridView1.SelectedRows.GetEnumerator();
             while ( ie.MoveNext() )
             {
                 DataGridViewRow dgvr = (DataGridViewRow)ie.Current;
-                sarr[i] = (Session)dgvr.Tag;
-                i++;
+                sl.Add((Session)dgvr.Tag);                
             }
-            return sarr;
-        }
-
-        public List<Session> getSelectedSessionsList()
-        {
-            List<Session> sl = new List<Session> ();
-            sl.AddRange(getSelectedSessions());
             return sl;
         }
-
 
         private void newSessionButton_Click(object sender, EventArgs e)
         {

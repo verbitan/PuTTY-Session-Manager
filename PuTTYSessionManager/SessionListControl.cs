@@ -94,21 +94,5 @@ namespace uk.org.riseley.puttySessionManager
             if ( tsmiArray != null )
                 parent.DropDownItems.AddRange(tsmiArray);            
         }
-
-        public bool AllowMultiSelect
-        {
-            get
-            {
-                return (listBox1.SelectionMode == SelectionMode.One ? false : true);
-            }
-            set
-            {
-                if (value == true)
-                    listBox1.SelectionMode = SelectionMode.MultiExtended;
-                else
-                    listBox1.SelectionMode = SelectionMode.One;
-            }
-
-        }
     }
 }
