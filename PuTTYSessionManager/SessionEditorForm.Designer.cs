@@ -67,7 +67,7 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionEditorControl1.CopySessionAttributes += new System.EventHandler(this.sessionEditorControl1_CopySessionAttributes);
             this.sessionEditorControl1.NewSession += new System.EventHandler(this.sessionEditorControl1_NewSession);
             this.sessionEditorControl1.CloseSessionEditor += new System.EventHandler(this.sessionEditorControl1_CloseSessionEditor);
-            this.sessionEditorControl1.DeleteSessions += new System.EventHandler(this.sessionEditorControl1_DeleteSessions);
+            this.sessionEditorControl1.DeleteSessions += new SessionControl.DeleteSessionsEventHandler(this.sessionEditorControl1_DeleteSessions);
             // 
             // SessionEditorForm
             // 

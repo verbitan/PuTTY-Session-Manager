@@ -52,6 +52,7 @@ namespace uk.org.riseley.puttySessionManager
             this.copyAllRadioButton = new System.Windows.Forms.RadioButton();
             this.includeRadioButton = new System.Windows.Forms.RadioButton();
             this.attributesGroupBox = new System.Windows.Forms.GroupBox();
+            this.hostnameCheckBox = new System.Windows.Forms.CheckBox();
             this.invertButton = new System.Windows.Forms.Button();
             this.selectNoneButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
@@ -66,8 +67,6 @@ namespace uk.org.riseley.puttySessionManager
             this.scrollBackCheckBox = new System.Windows.Forms.CheckBox();
             this.coloursCheckBox = new System.Windows.Forms.CheckBox();
             this.excludeRadioButton = new System.Windows.Forms.RadioButton();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.hostnameCheckBox = new System.Windows.Forms.CheckBox();
             this.attributesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -163,6 +162,18 @@ namespace uk.org.riseley.puttySessionManager
             this.attributesGroupBox.TabIndex = 20;
             this.attributesGroupBox.TabStop = false;
             this.attributesGroupBox.Text = "Attributes";
+            // 
+            // hostnameCheckBox
+            // 
+            this.hostnameCheckBox.AutoSize = true;
+            this.hostnameCheckBox.Location = new System.Drawing.Point(55, 88);
+            this.hostnameCheckBox.Name = "hostnameCheckBox";
+            this.hostnameCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.hostnameCheckBox.Size = new System.Drawing.Size(74, 17);
+            this.hostnameCheckBox.TabIndex = 13;
+            this.hostnameCheckBox.Text = "Hostname";
+            this.hostnameCheckBox.UseVisualStyleBackColor = true;
+            this.hostnameCheckBox.Click += new System.EventHandler(this.checkBox_Click);
             // 
             // invertButton
             // 
@@ -325,24 +336,6 @@ namespace uk.org.riseley.puttySessionManager
             this.excludeRadioButton.UseVisualStyleBackColor = true;
             this.excludeRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "reg";
-            this.saveFileDialog1.Filter = "Reg files|*.reg|All files|*.*";
-            this.saveFileDialog1.Title = "Export PuTTY Sessions";
-            // 
-            // hostnameCheckBox
-            // 
-            this.hostnameCheckBox.AutoSize = true;
-            this.hostnameCheckBox.Location = new System.Drawing.Point(55, 88);
-            this.hostnameCheckBox.Name = "hostnameCheckBox";
-            this.hostnameCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.hostnameCheckBox.Size = new System.Drawing.Size(74, 17);
-            this.hostnameCheckBox.TabIndex = 13;
-            this.hostnameCheckBox.Text = "Hostname";
-            this.hostnameCheckBox.UseVisualStyleBackColor = true;
-            this.hostnameCheckBox.Click += new System.EventHandler(this.checkBox_Click);
-            // 
             // CopySessionForm
             // 
             this.AcceptButton = this.okButton;
@@ -395,7 +388,6 @@ namespace uk.org.riseley.puttySessionManager
         private System.Windows.Forms.Button selectNoneButton;
         private System.Windows.Forms.Button selectAllButton;
         private System.Windows.Forms.Button invertButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.CheckBox hostnameCheckBox;
     }
 }

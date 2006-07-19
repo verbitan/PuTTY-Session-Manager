@@ -28,8 +28,10 @@ namespace uk.org.riseley.puttySessionManager
 {
     public partial class SessionManagementForm : Form
     {
-        private SessionController sc;
+        protected SessionController sc;
         private NewSessionForm nsf;
+
+        private const string SAVE_FILE_DIALOG_TITLE = "Export PuTTY Sessions To File";
 
 
         public SessionManagementForm()
@@ -39,13 +41,31 @@ namespace uk.org.riseley.puttySessionManager
             nsf = new NewSessionForm(this);
         }
 
-        protected void exportSessions(SessionControl sessionControl, object sender, EventArgs e)
+
+        protected DialogResult backupSessions(List<Session> selectedSessions )
         {
-            if (sessionControl.getSelectedSessionsList().Count == 0)
+            DialogResult dr = MessageBox.Show("Do you want to backup " + selectedSessions.Count + " sessions to a file?"
+                    , "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                exportSessions(selectedSessions);
+            }
+            
+            return dr;            
+        }
+
+        protected void exportSessions(List<Session> selectedSessions)
+        {
+            if (selectedSessions.Count == 0)
             {
                 MessageBox.Show("You must select some sessions to export!"
                     , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+            else
+            {
+                saveFileDialog1.Title = SAVE_FILE_DIALOG_TITLE + ": " +
+                                        selectedSessions.Count + " sessions selected";
             }
             if (DialogResult.OK == saveFileDialog1.ShowDialog(this))
             {
@@ -55,7 +75,7 @@ namespace uk.org.riseley.puttySessionManager
                 try
                 {
                     result = sc.saveSessionsToFile(
-                                         sessionControl.getSelectedSessionsList(),
+                                         selectedSessions,
                                          saveFileDialog1.FileName);
                 }
                 catch (Exception ex)
@@ -72,12 +92,12 @@ namespace uk.org.riseley.puttySessionManager
 
         }
 
-        protected void newSession(SessionControl sessionControl, object sender, EventArgs e)
+        protected void newSession(List<Session> selectedSessions)
         {
-            if (sessionControl.getSelectedSessions().Length > 0)
+            if (selectedSessions.Count > 0)
             {
                 // Pick the first selected session to be the template 
-                Session template = sessionControl.getSelectedSessions()[0];
+                Session template = selectedSessions[0];
                 NewSessionRequest nsr = new NewSessionRequest(template, template.FolderName, "", "", true, false);
                 nsf.setNewSessionRequest(nsr);
             }
@@ -106,40 +126,37 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
-        protected void deleteSessions(SessionControl sessionControl, object sender, EventArgs e)
+        protected bool deleteSessions(List<Session> selectedSessions, object sender)
         {
-            List<Session> sl = sessionControl.getSelectedSessionsList();
-            if (sl.Count == 0)
+            if (selectedSessions.Count == 0)
             {
                 MessageBox.Show("You must select some sessions to delete!"
                     , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
-            if (sc.findDefaultSession(sl, true) != null)
+            if (sc.findDefaultSession(selectedSessions, true) != null)
             {
                 if ( MessageBox.Show("Are you sure you want to delete the default session?"
                         , "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No )
-                    return;
+                    return false;
             }
-            DialogResult dr = MessageBox.Show("Do you want to backup " + sl.Count + " sessions to a file?"
-                    , "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if ( dr == DialogResult.Yes)
+            DialogResult dr = backupSessions(selectedSessions);
+            if ( dr == DialogResult.Cancel ) 
             {
-                exportSessions(sessionControl, sender, e);
-            } 
-            else if ( dr == DialogResult.Cancel ) 
-            {
-                return;
+                return false;
             }
 
-            if (MessageBox.Show("Are you sure you want to delete " + sl.Count + " sessions?"
+            if (MessageBox.Show("Are you sure you want to delete " + selectedSessions.Count + " sessions?"
                     , "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                bool result = sc.deleteSessions(sessionControl.getSelectedSessionsList());
+                bool result = sc.deleteSessions(selectedSessions, sender);
                 if (result == false)
                     MessageBox.Show("Failed to delete sessions - you may need to refresh the session list"
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return result;
             }
+
+            return false;
         }
 
         protected void formClosing(object sender, FormClosingEventArgs e)

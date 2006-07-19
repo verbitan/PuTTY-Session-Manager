@@ -27,17 +27,16 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class CopySessionForm : Form
+    public partial class CopySessionForm : SessionManagementForm
     {
         private Form parentWindow;
-        private SessionController sc;
         private CopySessionRequest csr;
         private Dictionary<CopySessionRequest.AttribGroups, CheckBox> checkboxDictionary;
 
         public CopySessionForm(Form parent)
+            : base()
         {
             parentWindow = parent;
-            sc = SessionController.getInstance();
             InitializeComponent();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
@@ -156,18 +155,14 @@ namespace uk.org.riseley.puttySessionManager
                     return;
                 }
             }
-            DialogResult dr = MessageBox.Show("Do you want to backup " + csr.TargetSessions.Count + " sessions to a file?"
-                    , "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
-            {
-                exportSessions();
-            }
-            else if (dr == DialogResult.Cancel)
+
+            DialogResult dr = backupSessions(csr.TargetSessions);
+            if (dr == DialogResult.Cancel)
             {
                 DialogResult = DialogResult.None;
                 return;
             }
-
+            
             if (MessageBox.Show("Are you sure you want to copy attributes from " + csr.SessionTemplate.SessionDisplayText +
                                 " to " + csr.TargetSessions.Count + " sessions?"
                     , "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
@@ -328,40 +323,6 @@ namespace uk.org.riseley.puttySessionManager
         public void setTargetSessions(List<Session> targetSessions)
         {
             csr.TargetSessions = targetSessions;
-        }
-
-        private void exportSessions()
-        {
-            if (csr.TargetSessions.Count == 0)
-            {
-                MessageBox.Show("You must select some sessions to export!"
-                    , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (DialogResult.OK == saveFileDialog1.ShowDialog(this))
-            {
-
-                bool result = false;
-                String errorMessage = "Unknown Error";
-                try
-                {
-                    result = sc.saveSessionsToFile(
-                                         csr.TargetSessions,
-                                         saveFileDialog1.FileName);
-                }
-                catch (Exception ex)
-                {
-                    errorMessage = ex.Message;
-                    result = false;
-
-                }
-                if (result == false)
-                    MessageBox.Show("Failed to export sessions:\n" +
-                                errorMessage
-                    , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
- 
+        }       
     }
 }

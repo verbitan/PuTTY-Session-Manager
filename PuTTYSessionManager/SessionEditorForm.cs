@@ -39,22 +39,22 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
         {
-            exportSessions(sessionEditorControl1, sender, e);
+            exportSessions(sessionEditorControl1.getSelectedSessions());
         }
 
         private void sessionEditorControl1_NewSession(object sender, EventArgs e)
         {
-            newSession(sessionEditorControl1, sender, e);
+            newSession(sessionEditorControl1.getSelectedSessions());
         }
 
         private void sessionEditorControl1_DeleteSessions(object sender, EventArgs e)
         {
-            deleteSessions(sessionEditorControl1, sender, e);
+            deleteSessions(sessionEditorControl1.getSelectedSessions(), sender);
         }
 
         private void sessionEditorControl1_CopySessionAttributes(object sender, EventArgs e)
         {
-            List<Session> sl = sessionEditorControl1.getSelectedSessionsList();
+            List<Session> sl = sessionEditorControl1.getSelectedSessions();
             if (sl.Count == 0)
             {
                 MessageBox.Show("You must select some target sessions!"

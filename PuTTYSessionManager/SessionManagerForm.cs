@@ -37,8 +37,6 @@ namespace uk.org.riseley.puttySessionManager
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
 
-        private SessionController sc = SessionController.getInstance();
-
         public SessionManagerForm()
             : base()
         {
@@ -228,7 +226,19 @@ namespace uk.org.riseley.puttySessionManager
 
         private void sessionTreeControl1_ExportSessions(object sender, EventArgs e)
         {
-            exportSessions(currentSessionControl, sender, e);
+            exportSessions(currentSessionControl.getSelectedSessions());
+        }
+
+        private void sessionTreeControl1_BackupSessions(object sender, EventArgs e)
+        {
+            backupSessions(currentSessionControl.getSelectedSessions());
+        }
+
+        private void sessionTreeControl1_DeleteSessions(object sender, CancelEventArgs ce)
+        {
+            bool result = deleteSessions(currentSessionControl.getSelectedSessions(), sender);
+            // if the delete failed or aborted cancel the event
+            ce.Cancel = !(result);
         }
     }
 }

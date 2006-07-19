@@ -22,13 +22,11 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using uk.org.riseley.puttySessionManager.model;
-using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionListControl : SessionControl, ISessionControl
+    public partial class SessionListControl : SessionControl
     {
 
         ToolStripMenuItem[] tsmiArray;
@@ -93,6 +91,15 @@ namespace uk.org.riseley.puttySessionManager
             parent.DropDownItems.Clear();
             if ( tsmiArray != null )
                 parent.DropDownItems.AddRange(tsmiArray);            
+        }
+
+        public override List<Session> getSelectedSessions()
+        {
+            List<Session> sl = new List<Session>();
+            Session s = (Session)listBox1.SelectedItem;
+            if ( s != null )
+                sl.Add(s);
+            return sl;
         }
     }
 }

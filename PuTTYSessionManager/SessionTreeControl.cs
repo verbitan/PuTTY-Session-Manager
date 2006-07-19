@@ -29,7 +29,7 @@ using System.Collections;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionTreeControl : SessionControl, ISessionControl
+    public partial class SessionTreeControl : SessionControl
     {
 
         private const int IMAGE_INDEX_FOLDER = 0;
@@ -175,6 +175,9 @@ namespace uk.org.riseley.puttySessionManager
         // Remove any hanging folders
         private void cleanFolders(TreeNode node)
         {
+            if (node == null)
+                return;
+
             Session s = ((Session)node.Tag);
             TreeNode parentNode = node.Parent;
             if (s.IsFolder == true && node.FirstNode == null)
@@ -318,22 +321,18 @@ namespace uk.org.riseley.puttySessionManager
             if (lockSessionsToolStripMenuItem.Checked)
             {
                 treeView.AllowDrop = false;
-                sessionManagementToolStripMenuItem.Enabled = false;
                 setSessionAsHotkeyToolStripMenuItem.Enabled = false;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
                 saveNewSessionToolStripMenuItem.Enabled = false;
-                exportSessionsToolStripMenuItem.Enabled = false;
                 deleteSessionToolStripMenuItem.Enabled = false;
             }
             else
             {
                 treeView.AllowDrop = true;
-                sessionManagementToolStripMenuItem.Enabled = true;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
                 saveNewSessionToolStripMenuItem.Enabled = true;
-                exportSessionsToolStripMenuItem.Enabled = true;
                 deleteSessionToolStripMenuItem.Enabled = true;
             }
 
@@ -542,7 +541,7 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (sender is ToolStripMenuItem)
             {
-                List<Session> sl = getSelectedSessionsList(false);
+                List<Session> sl = getSelectedSessions(false);
                 if (confirmNumberOfSessions(sl))
                     launchFolderSessions(sl);
             }
@@ -563,7 +562,7 @@ namespace uk.org.riseley.puttySessionManager
         {
             if (sender is ToolStripMenuItem)
             {
-                List<Session> sl = getSelectedSessionsList(true);
+                List<Session> sl = getSelectedSessions(true);
                 if (confirmNumberOfSessions(sl))
                     launchFolderSessions(sl);
             }
@@ -712,15 +711,52 @@ namespace uk.org.riseley.puttySessionManager
 
         private void deleteSessionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OnExportSessions(e);
-        }        
+            CancelEventArgs ce = new CancelEventArgs();
+            OnDeleteSessions(ce);
 
-        public override List<Session> getSelectedSessionsList()
-        {
-            return getSelectedSessionsList(true);
+            // If the delete was cancelled then return
+            if (ce.Cancel)
+                return;
+
+            // Otherwise update the tree to delete the selected nodes
+            deleteSelectedSessions();
         }
 
-        private List<Session> getSelectedSessionsList(bool includeSubfolders)
+        private void deleteSelectedSessions()
+        {
+            // Suppress repainting the TreeView until all the objects have been removed.
+            treeView.BeginUpdate();
+
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
+
+            // Find it's parent node
+            TreeNode parentNode = selectedNode.Parent;
+
+            // Delete any child nodes
+            if (selectedNode.Nodes.Count > 0)
+                selectedNode.Nodes.Clear();
+
+            // Now remove the node itself
+            if (parentNode != null)
+                selectedNode.Remove();
+             
+            // Clean folders
+            cleanFolders(parentNode);
+
+            // Notfiy others of the change
+            getSessionController().invalidateSessionList(this, false);
+
+            // Resume repainting the TreeView
+            treeView.EndUpdate();
+        }
+
+        public override List<Session> getSelectedSessions()
+        {
+            return getSelectedSessions(true);
+        }
+
+        private List<Session> getSelectedSessions(bool includeSubfolders)
         {
             List<Session> sl = new List<Session>();
 

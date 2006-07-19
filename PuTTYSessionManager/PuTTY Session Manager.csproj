@@ -101,7 +101,6 @@
     <Compile Include="model\CopySessionRequest.cs" />
     <Compile Include="model\NewSessionRequest.cs" />
     <Compile Include="model\RefreshSessionsEventArgs.cs" />
-    <Compile Include="model\ISessionControl.cs" />
     <Compile Include="model\LaunchSessionEventArgs.cs" />
     <Compile Include="model\Session.cs" />
     <Compile Include="controller\SessionController.cs" />

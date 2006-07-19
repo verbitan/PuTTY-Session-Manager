@@ -82,7 +82,7 @@ namespace uk.org.riseley.puttySessionManager
             OnExportSessions(e);
         }
 
-        public override List<Session> getSelectedSessionsList()
+        public override List<Session> getSelectedSessions()
         {
             List<Session> sl = new List<Session>();
             Session[] sarr = new Session[dataGridView1.SelectedRows.Count];
@@ -103,7 +103,7 @@ namespace uk.org.riseley.puttySessionManager
 
         private void deleteSesssionsButton_Click(object sender, EventArgs e)
         {
-            OnDeleteSessions(e);
+            OnDeleteSessions(new CancelEventArgs());
         }
 
         private void copySessionAttribButton_Click(object sender, EventArgs e)

@@ -26,14 +26,15 @@ using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager
 {
-    public partial class SessionControl : UserControl, uk.org.riseley.puttySessionManager.ISessionControl
+    public partial class SessionControl : UserControl
     {
         public event LaunchSessionEventHandler LaunchSession;
         public event System.EventHandler ExportSessions;
         public event System.EventHandler NewSession;
-        public event System.EventHandler DeleteSessions;
+        public event DeleteSessionsEventHandler DeleteSessions;
  
         public delegate void LaunchSessionEventHandler(object sender, LaunchSessionEventArgs se);
+        public delegate void DeleteSessionsEventHandler(object sender, CancelEventArgs ce);
 
         protected SessionController sc;
 
@@ -69,11 +70,11 @@ namespace uk.org.riseley.puttySessionManager
             }
         }
 
-        protected virtual void OnDeleteSessions(EventArgs e)
+        protected virtual void OnDeleteSessions(CancelEventArgs ce)
         {
             if (DeleteSessions != null)
             {
-                DeleteSessions(this, e);
+                DeleteSessions(this, ce);
             }
         }
 
@@ -85,16 +86,7 @@ namespace uk.org.riseley.puttySessionManager
         {
         }
 
-        public Session[] getSelectedSessions()
-        {
-             List<Session> list = new List<Session>();
-             list = getSelectedSessionsList();
-             Session[] sarr = new Session[list.Count];
-             list.CopyTo(sarr);
-             return sarr;
-        }
-
-        public virtual List<Session> getSelectedSessionsList()
+        public virtual List<Session> getSelectedSessions()
         {
             List<Session> sl = new List<Session>();
             return sl;

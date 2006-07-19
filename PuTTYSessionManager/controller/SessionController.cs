@@ -306,7 +306,7 @@ namespace uk.org.riseley.puttySessionManager.model
             return true;
         }
 
-        public bool deleteSessions(List<Session> sl)
+        public bool deleteSessions(List<Session> sl, object sender)
         {
             // Check all the sessions still exist
             RegistryKey rk;
@@ -324,7 +324,7 @@ namespace uk.org.riseley.puttySessionManager.model
                 Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
             }
 
-            invalidateSessionList(this, true);
+            invalidateSessionList(sender, false);
 
             return true;
         }

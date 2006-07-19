@@ -63,7 +63,6 @@ namespace uk.org.riseley.puttySessionManager
             this.renameFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveNewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setSessionAsHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,6 +73,7 @@ namespace uk.org.riseley.puttySessionManager
             this.hotkey5MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
+            this.exportSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -153,7 +153,6 @@ namespace uk.org.riseley.puttySessionManager
             this.renameSessionToolStripMenuItem,
             this.saveNewSessionToolStripMenuItem,
             this.setSessionAsHotkeyToolStripMenuItem});
-            this.sessionManagementToolStripMenuItem.Enabled = false;
             this.sessionManagementToolStripMenuItem.Name = "sessionManagementToolStripMenuItem";
             this.sessionManagementToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.sessionManagementToolStripMenuItem.Text = "Session Management";
@@ -186,14 +185,6 @@ namespace uk.org.riseley.puttySessionManager
             this.deleteSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.deleteSessionToolStripMenuItem.Text = "Delete Sessions";
             this.deleteSessionToolStripMenuItem.Click += new System.EventHandler(this.deleteSessionToolStripMenuItem_Click);
-            // 
-            // exportSessionsToolStripMenuItem
-            // 
-            this.exportSessionsToolStripMenuItem.Enabled = false;
-            this.exportSessionsToolStripMenuItem.Name = "exportSessionsToolStripMenuItem";
-            this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
-            this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click);
             // 
             // renameSessionToolStripMenuItem
             // 
@@ -296,6 +287,13 @@ namespace uk.org.riseley.puttySessionManager
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
+            // 
+            // exportSessionsToolStripMenuItem
+            // 
+            this.exportSessionsToolStripMenuItem.Name = "exportSessionsToolStripMenuItem";
+            this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
+            this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click);
             // 
             // SessionTreeControl
             // 
