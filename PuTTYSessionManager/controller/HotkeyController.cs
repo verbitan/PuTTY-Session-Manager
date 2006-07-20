@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Text;
+using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
@@ -229,37 +230,138 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
         }
 
-        public static bool RegisterHotkey(Form form, HotKey hk, HotKeyId id)
+        private static HotkeyController instance = null;
+        private SessionController sc;
+
+        public event EventHandler HotkeysRefreshed;
+
+        private HotkeyController()
+        {
+            sc = SessionController.getInstance();
+        }
+
+        public static HotkeyController getInstance()
+        {
+            if (instance == null)
+                instance = new HotkeyController();
+            return instance;
+        }
+
+        public bool RegisterHotkey(Form form, HotKeyId id)
+        {
+            return RegisterHotkey(form, getHotKey(id), id);
+        }
+
+        public bool RegisterHotkey(Form form, HotKey hk, HotKeyId id)
         {
             return RegisterHotkey ( form ,(char)hk, id );
         }
 
 
-        public static bool RegisterHotkey(Form form, char winkey, HotKeyId id)
+        public bool RegisterHotkey(Form form, char winkey, HotKeyId id)
         {
             bool result = User32.RegisterHotKey(form.Handle, (int) id, (int) User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
             return result;
         }
 
-        public static bool RegisterHotkey(Form form)
+        public bool RegisterHotkey(Form form)
         {
             return RegisterHotkey(form, DEFAULT_HOTKEY, HotKeyId.HKID_NEW );
         }
 
-        public static bool UnregisterHotKey(Form form, HotKeyId id)
+        public bool UnregisterHotKey(Form form, HotKeyId id)
         {
             bool result = User32.UnregisterHotKey(form.Handle, (int)id);
             return result;
         }
 
-        public static bool UnregisterHotKey(Form form)
+        public bool UnregisterHotKey(Form form)
         {
             return UnregisterHotKey(form, HotKeyId.HKID_NEW );
         }
 
-        public static int WM_HOTKEY = (int) User32.Msgs.WM_HOTKEY;
+        public Session getSessionFromHotkey(HotKeyId hkid)
+        {
+            return sc.findSession(getSessionNameFromHotkey(hkid));
+        }
+
+        private String getSessionNameFromHotkey(HotKeyId hkid)
+        {
+            switch ( hkid )
+            {
+                case HotKeyId.HKID_NEW:
+                    return Properties.Settings.Default.HotkeyNewSession;
+                case HotKeyId.HKID_SESSION_1:
+                    return Properties.Settings.Default.FavouriteSession1;
+                case HotKeyId.HKID_SESSION_2:
+                    return Properties.Settings.Default.FavouriteSession2;
+                case HotKeyId.HKID_SESSION_3:
+                    return Properties.Settings.Default.FavouriteSession3;
+                case HotKeyId.HKID_SESSION_4:
+                    return Properties.Settings.Default.FavouriteSession4;
+                case HotKeyId.HKID_SESSION_5:
+                    return Properties.Settings.Default.FavouriteSession5;
+                default:
+                    return null;
+            }
+        }
+
+        private HotKey getHotKey(HotKeyId hkid)
+        {
+            switch (hkid)
+            {
+                case HotKeyId.HKID_SESSION_1:
+                    return HotKey.HK_SESSION_1;
+                case HotKeyId.HKID_SESSION_2:
+                    return HotKey.HK_SESSION_2;
+                case HotKeyId.HKID_SESSION_3:
+                    return HotKey.HK_SESSION_3;
+                case HotKeyId.HKID_SESSION_4:
+                    return HotKey.HK_SESSION_4;
+                case HotKeyId.HKID_SESSION_5:
+                    return HotKey.HK_SESSION_5;
+                default:
+                    return HotKey.HK_SESSION_1;
+            }
+        }
+
+        public bool saveSessionnameToHotkey(Form window, HotKeyId hkid, Session s)
+        {
+            UnregisterHotKey(window, hkid);
+            if (RegisterHotkey(window,getHotKey(hkid), hkid))
+            {
+                switch (hkid)
+                {
+                    case HotKeyId.HKID_SESSION_1:
+                        Properties.Settings.Default.FavouriteSession1 = s.SessionName;
+                        return true;
+                    case HotKeyId.HKID_SESSION_2:
+                        Properties.Settings.Default.FavouriteSession2 = s.SessionName;
+                        return true;
+                    case HotKeyId.HKID_SESSION_3:
+                        Properties.Settings.Default.FavouriteSession3 = s.SessionName;
+                        return true;
+                    case HotKeyId.HKID_SESSION_4:
+                        Properties.Settings.Default.FavouriteSession4 = s.SessionName;
+                        return true;
+                    case HotKeyId.HKID_SESSION_5:
+                        Properties.Settings.Default.FavouriteSession5 = s.SessionName;
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+            return false;
+        }
+
+        public String getNewSessionHotkey()
+        {
+            return getSessionNameFromHotkey(HotKeyId.HKID_NEW);
+        }
+
+        public int WM_HOTKEY = (int) User32.Msgs.WM_HOTKEY;
         
-        private static char DEFAULT_HOTKEY = 'N';
+        private char DEFAULT_HOTKEY = 'N';
 
         public enum HotKeyId
         {

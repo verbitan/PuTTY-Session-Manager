@@ -37,11 +37,13 @@ namespace uk.org.riseley.puttySessionManager
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
 
+        private HotkeyController hkc;
+
         public SessionManagerForm()
             : base()
         {
             InitializeComponent();
-
+            hkc = HotkeyController.getInstance();
             LoadLayout();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
@@ -58,7 +60,7 @@ namespace uk.org.riseley.puttySessionManager
             this.Location   = Properties.Settings.Default.Location;
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
             if (Properties.Settings.Default.HotkeyNewEnabled)
-                HotkeyController.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);
+                hkc.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);
             sc.invalidateSessionList(this, true); 
             setDisplay();
         }
@@ -107,7 +109,7 @@ namespace uk.org.riseley.puttySessionManager
             }
             else
             {
-                HotkeyController.UnregisterHotKey(this);
+                hkc.UnregisterHotKey(this);
                 SaveSize();
                 Properties.Settings.Default.Save();
             }
@@ -162,7 +164,7 @@ namespace uk.org.riseley.puttySessionManager
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == HotkeyController.WM_HOTKEY)
+            if (m.Msg == hkc.WM_HOTKEY)
                 processHotKey((int) m.WParam);               
             base.WndProc(ref m);
         }
