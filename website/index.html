@@ -15,9 +15,9 @@
     Manager (PSM) is a tool that allows system adminstrators to organise their
     PuTTY sessions into folders and assign hotkeys to their favourite sessions.
   This is designed for MS Windows and requires the .NET 2.0 Runtime.</p>
-    <div align="justify"> 
+  <div align="justify"> 
       <h3 align="left">Features</h3>
-    </div>
+</div>
     <ul>
       <li>
         <div align="justify">Organise your sessions into folders</div>
@@ -28,13 +28,30 @@
       <li>Display sessions in a list</li>
       <li>Semi-transparency of sessions window</li>
       <li>Does not require any alterations to the existing PuTTY executable</li>
+      <li>Session Management
+- available from the tree view or a separate session management window
+        <ul>
+          <li> Export Sessions to registry file</li>
+          <li>            Save New Session using existing session as template</li>
+          <li> Delete Sessions</li>
+          <li> Copy Session Attributes - copy all or part of your sesssion settings
+            from one session to many others</li>
+          <li>Rename Session</li>
+        </ul>
+      </li>
     </ul>
     <h3>News</h3>
     <table width="75%" border="1">
       <tr>
-        <td width="14%">22-06-2006</td>
-        <td width="86%">The initial release of PSM v0.1.0.1 is now available
-          on the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge downloads page</a></td>
+        <td width="14%">22-07-2006</td>
+        <td width="86%">The second release of PSM v0.2.0.1 is now available on
+          the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge
+          downloads page.</a> This version has many new session management features</td>
+      </tr>
+      <tr>
+        <td>22-06-2006</td>
+        <td>The initial release of PSM v0.1.0.1 is now available on the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge
+        downloads page</a></td>
       </tr>
     </table>
     <h3>Screenshots</h3>
@@ -64,6 +81,34 @@
       download page</a>.</p>
     <p>Source code: The subversion repository can be viewed <a href="http://svn.sourceforge.net/puttysm" target="_blank">here</a>.</p>
     <p>Release Notes: The latest release notes can be found <a href="http://sourceforge.net/project/shownotes.php?group_id=169031&release_id=426945" target="_blank">here</a>.</p>
+    <h3>Build instructions</h3>
+    <p>If you want to get the latest source code and build the bleeding edge
+      version, instructions are as follows:</p>
+    <p>1. Get the project from subversion - you can get subversion here: <br>
+      <a href="http://subversion.tigris.org/%20" target="_blank">http://subversion.tigris.org/ </a><br>
+      and tortoise svn ( a windows client for subversion ) here: <br>
+      <a href="http://tortoisesvn.tigris.org/" target="_blank">http://tortoisesvn.tigris.org/</a> <br>
+      <br>
+      Set the svn root to be 
+      <strong>https://svn.sourceforge.net/svnroot/puttysm/trunk</strong>      and do a checkout. <br>
+      <br>
+      2. If you have Visual Studio 2005, just open the visual studio project
+      and build the project. You can download Visual Studio C# Express edition
+      (free) from here<br>
+      <a href="http://msdn.microsoft.com/vstudio/express/visualcsharp/" target="_blank">http://msdn.microsoft.com/vstudio/express/visualcsharp/</a><br>
+      <br>
+      3. If not you can download the Microsoft .NET 2.0 SDK from here: <br>
+      <a href="http://msdn.microsoft.com/netframework/downloads/updates/default.aspx%20" target="_blank">http://msdn.microsoft.com/netframework/downloads/updates/default.aspx </a><br>
+      <br>
+      In the root of the svn sandbox, run the &quot;SDK Command Prompt&quot; shortcut
+      ( if it doesn't work , check the properties to ensure that it points to
+      the location that you installed the SDK to ) <br>
+      <br>
+      From the command prompt, run &quot;buildrelease.bat&quot; - this calls
+      the &quot;msbuild&quot; utility , which calls the C# compiler. <br>
+      <br>
+      3. In the svn sandbox - go to PuTTYSessionManager\bin\Release and the compiled
+    exe should be there - you can just run it from that directory. </p>
     <h3>Licence</h3>
     <p>PuTTY Session Manager is released under the <a href="http://www.gnu.org/licenses/gpl.txt" target="_blank">GPL</a>.</p>
     <h3>Credits</h3>

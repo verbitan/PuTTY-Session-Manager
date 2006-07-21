@@ -247,6 +247,12 @@ namespace uk.org.riseley.puttySessionManager.controller
             return instance;
         }
 
+        protected virtual void OnHotkeysRefreshed(Object sender, EventArgs e)
+        {
+            if (HotkeysRefreshed != null)
+                HotkeysRefreshed(sender, e);
+        }
+
         public bool RegisterHotkey(Form form, HotKeyId id)
         {
             return RegisterHotkey(form, getHotKey(id), id);
@@ -325,8 +331,10 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
         }
 
+
         public bool saveSessionnameToHotkey(Form window, HotKeyId hkid, Session s)
         {
+            bool result = false;
             UnregisterHotKey(window, hkid);
             if (RegisterHotkey(window,getHotKey(hkid), hkid))
             {
@@ -334,24 +342,46 @@ namespace uk.org.riseley.puttySessionManager.controller
                 {
                     case HotKeyId.HKID_SESSION_1:
                         Properties.Settings.Default.FavouriteSession1 = s.SessionName;
-                        return true;
+                        result = true;
+                        break;
                     case HotKeyId.HKID_SESSION_2:
                         Properties.Settings.Default.FavouriteSession2 = s.SessionName;
-                        return true;
+                        result = true;
+                        break;
                     case HotKeyId.HKID_SESSION_3:
                         Properties.Settings.Default.FavouriteSession3 = s.SessionName;
-                        return true;
+                        result = true;
+                        break;
                     case HotKeyId.HKID_SESSION_4:
                         Properties.Settings.Default.FavouriteSession4 = s.SessionName;
-                        return true;
+                        result = true;
+                        break;
                     case HotKeyId.HKID_SESSION_5:
                         Properties.Settings.Default.FavouriteSession5 = s.SessionName;
-                        return true;
+                        result = true;
+                        break;
                     default:
-                        return false;
+                        result = false;
+                        break;
                 }
             }
-            return false;
+
+            // Fire the refresh event
+            if (result)
+                OnHotkeysRefreshed(this, EventArgs.Empty);
+
+            return result;
+        }
+
+        public bool isFavouriteSessionHotkeysEnabled()
+        {
+            return Properties.Settings.Default.HotkeyFavouriteEnabled;
+        }
+
+        public void setFavouriteSessionHotkeysEnabled(bool value)
+        {
+            Properties.Settings.Default.HotkeyFavouriteEnabled = value;
+            OnHotkeysRefreshed(this, EventArgs.Empty);
         }
 
         public String getNewSessionHotkey()

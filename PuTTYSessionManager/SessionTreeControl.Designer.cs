@@ -63,6 +63,7 @@ namespace uk.org.riseley.puttySessionManager
             this.renameFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveNewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setSessionAsHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,6 @@ namespace uk.org.riseley.puttySessionManager
             this.hotkey5MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
-            this.exportSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -186,6 +186,13 @@ namespace uk.org.riseley.puttySessionManager
             this.deleteSessionToolStripMenuItem.Text = "Delete Sessions";
             this.deleteSessionToolStripMenuItem.Click += new System.EventHandler(this.deleteSessionToolStripMenuItem_Click);
             // 
+            // exportSessionsToolStripMenuItem
+            // 
+            this.exportSessionsToolStripMenuItem.Name = "exportSessionsToolStripMenuItem";
+            this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
+            this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click);
+            // 
             // renameSessionToolStripMenuItem
             // 
             this.renameSessionToolStripMenuItem.Enabled = false;
@@ -218,43 +225,38 @@ namespace uk.org.riseley.puttySessionManager
             // hotkey1MenuItem
             // 
             this.hotkey1MenuItem.AutoToolTip = true;
-            this.hotkey1MenuItem.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.hotkey1MenuItem.Name = "hotkey1MenuItem";
-            this.hotkey1MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey1MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey1MenuItem.Text = "Win+1";
-            this.hotkey1MenuItem.ToolTipText = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FavouriteSession1;
+            this.hotkey1MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey2MenuItem
             // 
-            this.hotkey2MenuItem.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.hotkey2MenuItem.Name = "hotkey2MenuItem";
-            this.hotkey2MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey2MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey2MenuItem.Text = "Win+2";
-            this.hotkey2MenuItem.ToolTipText = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FavouriteSession2;
+            this.hotkey2MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey3MenuItem
             // 
-            this.hotkey3MenuItem.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.hotkey3MenuItem.Name = "hotkey3MenuItem";
-            this.hotkey3MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey3MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey3MenuItem.Text = "Win+3";
-            this.hotkey3MenuItem.ToolTipText = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FavouriteSession3;
+            this.hotkey3MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey4MenuItem
             // 
-            this.hotkey4MenuItem.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.hotkey4MenuItem.Name = "hotkey4MenuItem";
-            this.hotkey4MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey4MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey4MenuItem.Text = "Win+4";
-            this.hotkey4MenuItem.ToolTipText = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FavouriteSession4;
+            this.hotkey4MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey5MenuItem
             // 
-            this.hotkey5MenuItem.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.hotkey5MenuItem.Name = "hotkey5MenuItem";
-            this.hotkey5MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey5MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey5MenuItem.Text = "Win+5";
-            this.hotkey5MenuItem.ToolTipText = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FavouriteSession5;
+            this.hotkey5MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // treeImageList
             // 
@@ -287,13 +289,6 @@ namespace uk.org.riseley.puttySessionManager
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
-            // 
-            // exportSessionsToolStripMenuItem
-            // 
-            this.exportSessionsToolStripMenuItem.Name = "exportSessionsToolStripMenuItem";
-            this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
-            this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click);
             // 
             // SessionTreeControl
             // 

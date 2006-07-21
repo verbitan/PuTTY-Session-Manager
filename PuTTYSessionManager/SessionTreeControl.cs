@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using uk.org.riseley.puttySessionManager.model;
 using System.Collections;
+using uk.org.riseley.puttySessionManager.controller;
 
 
 namespace uk.org.riseley.puttySessionManager
@@ -37,12 +38,37 @@ namespace uk.org.riseley.puttySessionManager
         private const int IMAGE_INDEX_SESSION = 2;
 
         private NewSessionForm newSessionForm;
+        private HotkeyController hkc;
+
+        private Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem> hotkeyDictionary;
 
         public SessionTreeControl()
             : base()
         {
             InitializeComponent();
             newSessionForm = new NewSessionForm(null);
+            
+            hkc = HotkeyController.getInstance();
+            setupHotkeyDictionary();
+            setHotkeyMenuItemsToolTips(this,EventArgs.Empty);
+            EventHandler hkHandler = new EventHandler(setHotkeyMenuItemsToolTips);
+            hkc.HotkeysRefreshed += hkHandler;
+        }
+
+        private void setupHotkeyDictionary()
+        {
+            hotkeyDictionary = new Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem>();
+            hotkey1MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
+            hotkey2MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_2;
+            hotkey3MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
+            hotkey4MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
+            hotkey5MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
+
+            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_1, hotkey1MenuItem);
+            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_2, hotkey2MenuItem);
+            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_3, hotkey3MenuItem);
+            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_4, hotkey4MenuItem);
+            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_5, hotkey5MenuItem);        
         }
 
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
@@ -834,6 +860,31 @@ namespace uk.org.riseley.puttySessionManager
         private void exportSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OnExportSessions(e);
+        }
+
+        private void setHotkeyMenuItemsToolTips(object sender, EventArgs e)
+        {
+            bool hotkeysEnabled = hkc.isFavouriteSessionHotkeysEnabled();
+            ToolStripMenuItem tsmi;
+            Session s;
+            foreach (HotkeyController.HotKeyId hkid in hotkeyDictionary.Keys)
+            {
+                hotkeyDictionary.TryGetValue(hkid, out tsmi);
+                s = hkc.getSessionFromHotkey((HotkeyController.HotKeyId)tsmi.Tag);
+                tsmi.Enabled = hotkeysEnabled;
+                if (s != null)
+                    tsmi.ToolTipText = s.SessionDisplayText;
+                else
+                    tsmi.ToolTipText = "";
+            }
+        }
+
+        private void hotkeyMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = (ToolStripMenuItem) sender;
+            HotkeyController.HotKeyId hkid = (HotkeyController.HotKeyId)tsmi.Tag;
+            Session s = getSelectedSession();
+            hkc.saveSessionnameToHotkey(ParentForm, hkid, s);
         }
     }
 }

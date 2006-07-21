@@ -48,6 +48,8 @@ namespace uk.org.riseley.puttySessionManager
             hotKeyTextBox.Text = hkc.getNewSessionHotkey();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
+            EventHandler hkHandler = new EventHandler(setHotkeys);
+            hkc.HotkeysRefreshed += hkHandler;
         }
 
         private void createComboDictionary()
@@ -76,6 +78,17 @@ namespace uk.org.riseley.puttySessionManager
                 c.SelectedItem = hkc.getSessionFromHotkey(hkid);
             }
         }
+
+        private void setHotkeys(object source , EventArgs e)
+        {
+            ComboBox c;
+            foreach (HotkeyController.HotKeyId hkid in comboDictionary.Keys)
+            {
+                comboDictionary.TryGetValue(hkid, out c);
+                c.SelectedItem = hkc.getSessionFromHotkey(hkid);
+            }        
+        }
+
 
         private void clearLists()
         {
@@ -182,6 +195,7 @@ namespace uk.org.riseley.puttySessionManager
                     hkc.UnregisterHotKey(parentWindow, hkid);
                 }                
             }
+            hkc.setFavouriteSessionHotkeysEnabled(favSessCheckBox.Checked);
         }
 
         private void HotkeyChooser_FormClosing(object sender, FormClosingEventArgs e)

@@ -1,3 +1,27 @@
+PuTTY Session Manager v0.2.0.1 ( 22-07-2006 )
+=============================================
+Second release of PuTTY Session Manager
+ - New Session Management features
+    - Session Editor
+		- Export Sessions to registry file
+		- Save New Session
+		- Delete Sessions
+		- Copy Session Attributes
+	- Session management from the tree view
+		- Export Sessions ( thanks to Roland Lammel for the idea )
+		- Save New Session
+		- Delete Sessions
+		- Rename Session
+		- Set session as hotkey
+			
+ - F5 Shortcut to refresh sessions
+ 
+ - Bug fixes
+	- Implement upwards scrolling on session drag 
+	  in tree view
+	- Allow for no sessions or no default session
+	- Performance enhancement for large number of sessions
+
 PuTTY Session Manager v0.1.0.1 ( 22-06-2006 )
 =============================================
 Initial release of PuTTY Session Manager
