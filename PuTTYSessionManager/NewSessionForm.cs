@@ -87,7 +87,10 @@ namespace uk.org.riseley.puttySessionManager
                 // use the session controller to find the session as the objects held
                 // held in the session control may not be the same
                 sessionComboBox.SelectedItem = sc.findSession(nsr.SessionTemplate.SessionName);
-                sessionFolderComboBox.SelectedItem = nsr.SessionTemplate.FolderName;
+                if (nsr.SessionFolder == null)
+                    sessionFolderComboBox.SelectedItem = nsr.SessionTemplate.FolderName;
+                else
+                    sessionFolderComboBox.SelectedItem = nsr.SessionFolder;
             }
             else
             {

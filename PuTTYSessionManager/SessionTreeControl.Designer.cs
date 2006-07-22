@@ -224,7 +224,6 @@ namespace uk.org.riseley.puttySessionManager
             // 
             // hotkey1MenuItem
             // 
-            this.hotkey1MenuItem.AutoToolTip = true;
             this.hotkey1MenuItem.Name = "hotkey1MenuItem";
             this.hotkey1MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey1MenuItem.Text = "Win+1";

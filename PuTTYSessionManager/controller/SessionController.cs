@@ -257,7 +257,7 @@ namespace uk.org.riseley.puttySessionManager.model
             }
 
             // Create the new session 
-            newSession = Registry.CurrentUser.CreateSubKey (PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionName.Replace(" ", "%20"));
+            newSession = Registry.CurrentUser.CreateSubKey (PUTTY_SESSIONS_REG_KEY + "\\" + Session.convertDisplayToSessionKey(nsr.SessionName));
 
             // Copy the values
             bool hostnameSet = false;
@@ -372,7 +372,7 @@ namespace uk.org.riseley.puttySessionManager.model
             }
 
             // Create the new session
-            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionName.Replace(" ", "%20"));
+            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + Session.convertDisplayToSessionKey(newSessionName));
             if (newSession == null)
                 return false;
 
@@ -398,7 +398,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public bool isDefaultSessionName ( String sessionName )
         {
-            if ( sessionName.Replace ( " ", "%20").Equals( PUTTY_DEFAULT_SESSION ))
+            if ( Session.convertDisplayToSessionKey(sessionName).Equals( PUTTY_DEFAULT_SESSION ))
                 return true;
             else 
                 return false;
@@ -436,8 +436,11 @@ namespace uk.org.riseley.puttySessionManager.model
                 foreach (string valueName in template.GetValueNames())
                 {
                     copy = false;
-
-                    if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_ALL ) &&
+                    // Never copy the hostname onto the default session
+                    if (s.SessionName.Equals(SessionController.PUTTY_DEFAULT_SESSION) &&
+                        valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB))
+                        copy = false;                        
+                    else if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_ALL ) &&
                          !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB))&&
                          !(valueName.Equals(SessionController.PUTTY_PSM_FOLDER_ATTRIB))
                         )

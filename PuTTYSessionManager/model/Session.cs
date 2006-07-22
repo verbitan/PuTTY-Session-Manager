@@ -99,6 +99,12 @@ namespace uk.org.riseley.puttySessionManager.model
             return key.Replace("%20", " ");
         }
 
+        public static String convertDisplayToSessionKey(string display)
+        {
+            return display.Replace(" ", "%20");
+        }
+
+
         private string[] cellValues;
         public string[] getCellValues()
         {

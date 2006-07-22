@@ -375,11 +375,14 @@ namespace uk.org.riseley.puttySessionManager
                 // Get the session
                 Session s = getSelectedSession(true);
 
+                // Check if hotkeys are enabled
+                bool hotkeysEnabled = hkc.isFavouriteSessionHotkeysEnabled();
+
                 if (s.IsFolder == false)
                 {
                     newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameSessionToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
-                    setSessionAsHotkeyToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
+                    setSessionAsHotkeyToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
                     renameFolderMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
@@ -388,6 +391,7 @@ namespace uk.org.riseley.puttySessionManager
                 else
                 {
                     renameSessionToolStripMenuItem.Enabled = false;
+                    setSessionAsHotkeyToolStripMenuItem.Enabled = false;
                     launchSessionMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
@@ -621,16 +625,26 @@ namespace uk.org.riseley.puttySessionManager
             // Get the session
             Session s = getSelectedSession(true);
 
+            // Get the foldername
+            String folderName = s.FolderName;
+
             // Setup the session request
             NewSessionRequest nsr;
 
             if (s.IsFolder == false)
             {
-                nsr = new NewSessionRequest(s, s.FolderName, "", "", true, true);
+                nsr = new NewSessionRequest(s, folderName, "", "", true, true);
             }
             else
             {
-                nsr = new NewSessionRequest(null, s.FolderName, "", "", true, true);
+                // Try to get the default session
+                s = sc.findDefaultSession(true);
+
+                // If that doesn't work get the first child session
+                if (s == null)                   
+                    s = getSelectedSessions()[0];
+
+                nsr = new NewSessionRequest(s, folderName, "", "", true, true);
             }
 
             // Set the options in the form
@@ -717,7 +731,7 @@ namespace uk.org.riseley.puttySessionManager
                 }
 
                 // Create the new session object
-                Session newSession = new Session(snf.getSessionName(), s.FolderName, false);
+                Session newSession = new Session(Session.convertDisplayToSessionKey(snf.getSessionName()), s.FolderName, false);
 
                 // Suppress repainting the TreeView until all the objects have been created.
                 treeView.BeginUpdate();
