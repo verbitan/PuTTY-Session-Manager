@@ -89,7 +89,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem,
             this.sessionManagementToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 186);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 164);
             // 
             // newSessionMenuItem
             // 
@@ -225,35 +225,35 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey1MenuItem
             // 
             this.hotkey1MenuItem.Name = "hotkey1MenuItem";
-            this.hotkey1MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey1MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey1MenuItem.Text = "Win+1";
             this.hotkey1MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey2MenuItem
             // 
             this.hotkey2MenuItem.Name = "hotkey2MenuItem";
-            this.hotkey2MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey2MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey2MenuItem.Text = "Win+2";
             this.hotkey2MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey3MenuItem
             // 
             this.hotkey3MenuItem.Name = "hotkey3MenuItem";
-            this.hotkey3MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey3MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey3MenuItem.Text = "Win+3";
             this.hotkey3MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey4MenuItem
             // 
             this.hotkey4MenuItem.Name = "hotkey4MenuItem";
-            this.hotkey4MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey4MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey4MenuItem.Text = "Win+4";
             this.hotkey4MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey5MenuItem
             // 
             this.hotkey5MenuItem.Name = "hotkey5MenuItem";
-            this.hotkey5MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey5MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey5MenuItem.Text = "Win+5";
             this.hotkey5MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
@@ -283,11 +283,13 @@ namespace uk.org.riseley.puttySessionManager.control
             this.treeView.Size = new System.Drawing.Size(205, 414);
             this.treeView.TabIndex = 0;
             this.treeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseDoubleClick);
-            this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
-            this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
+            this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView_DragDrop);
+            this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
+            this.treeView.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeView_NodeMouseHover);
+            this.treeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseMove);
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
-            this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
-            this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
+            this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
+            this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView_ItemDrag);
             // 
             // SessionTreeControl
             // 

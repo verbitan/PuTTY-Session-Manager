@@ -26,18 +26,57 @@ using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager.control
 {
+    /// <summary>
+    /// This is the control from which all other session controls extend
+    /// It registers with the <code>SessionController</code>
+    /// and listens for <code>SessionsRefreshedEvent</code>s
+    /// </summary>
     public partial class SessionControl : UserControl
     {
+        /// <summary>
+        /// Fired when a launch session request is made
+        /// </summary>
         public event LaunchSessionEventHandler LaunchSession;
+
+        /// <summary>
+        /// Fired when an export session(s) request is made
+        /// </summary>
         public event System.EventHandler ExportSessions;
+
+        /// <summary>
+        /// Fired when a new session request is made
+        /// </summary>
         public event System.EventHandler NewSession;
+
+        /// <summary>
+        /// Fired when a delete session(s) request is made
+        /// </summary>
         public event DeleteSessionsEventHandler DeleteSessions;
  
+        /// <summary>
+        /// Event handler for the <code>LaunchSessionEvent</code>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="se">EventArgs containing the session name to launch</param>
         public delegate void LaunchSessionEventHandler(object sender, LaunchSessionEventArgs se);
+
+        /// <summary>
+        /// Event handler for the <code>DeleteSessionsEvent</code>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ce">The delete sessions event can be cancelled if validation fails</param>
         public delegate void DeleteSessionsEventHandler(object sender, CancelEventArgs ce);
 
+        /// <summary>
+        /// Reference to the session controller
+        /// </summary>
         protected SessionController sc;
 
+        /// <summary>
+        /// Default constructor for this control
+        /// This will get a reference to the singleton SessionController
+        /// and register the SessionsRefreshedEventHandler
+        /// </summary>
         public SessionControl()
         {
             sc = SessionController.getInstance();

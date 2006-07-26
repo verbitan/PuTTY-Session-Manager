@@ -31,18 +31,25 @@ using uk.org.riseley.puttySessionManager.form;
 
 namespace uk.org.riseley.puttySessionManager.control
 {
+    /// <summary>
+    /// This is the main control that provides the tree functionality 
+    /// for PuTTY Session Manager
+    /// </summary>
+
     public partial class SessionTreeControl : SessionControl
     {
-
+        // Constants for image selection 
         private const int IMAGE_INDEX_FOLDER = 0;
         private const int IMAGE_INDEX_SELECTED_FOLDER = 1;
         private const int IMAGE_INDEX_SESSION = 2;
+
 
         private NewSessionForm newSessionForm;
         private HotkeyController hkc;
 
         private Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem> hotkeyDictionary;
 
+        private ToolTip toolTip;
         public SessionTreeControl()
             : base()
         {
@@ -54,49 +61,74 @@ namespace uk.org.riseley.puttySessionManager.control
             setHotkeyMenuItemsToolTips(this,EventArgs.Empty);
             EventHandler hkHandler = new EventHandler(setHotkeyMenuItemsToolTips);
             hkc.HotkeysRefreshed += hkHandler;
+
+            toolTip = new ToolTip();
+            toolTip.InitialDelay = 5000; // 5 seconds delay
+            toolTip.ReshowDelay  = 5000;
+            toolTip.AutoPopDelay = 5000;
+            toolTip.UseAnimation = true;
+            toolTip.UseFading = true;
         }
 
+        /// <summary>
+        /// Adds the hotkey menu items to dictionary to facilitate iteration of 
+        /// all hotkey menu items at other places in the code
+        /// Also sets the HotKeyId as the Tag for each menu item
+        /// </summary>
         private void setupHotkeyDictionary()
         {
-            hotkeyDictionary = new Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem>();
+            // Specify the hot key id's
             hotkey1MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
             hotkey2MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_2;
             hotkey3MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
             hotkey4MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
             hotkey5MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
 
-            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_1, hotkey1MenuItem);
-            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_2, hotkey2MenuItem);
-            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_3, hotkey3MenuItem);
-            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_4, hotkey4MenuItem);
-            hotkeyDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_5, hotkey5MenuItem);        
+            hotkeyDictionary = new Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem>();
+
+            // Add the menu items to the dictionary
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey1MenuItem.Tag, hotkey1MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey2MenuItem.Tag, hotkey2MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey3MenuItem.Tag, hotkey3MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey4MenuItem.Tag, hotkey4MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey5MenuItem.Tag, hotkey5MenuItem);        
         }
 
-        private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
+        /// <summary>
+        /// Event handler for ItemDragEvent from the tree view.
+        /// If the left mouse button is used call DoDragDrop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_ItemDrag(object sender, ItemDragEventArgs e)
         {
             // Move the dragged node when the left mouse button is used.
             if (e.Button == MouseButtons.Left)
             {
                 DoDragDrop(e.Item, DragDropEffects.Move);
             }
-
-            // Copy the dragged node when the right mouse button is used.
-            //else if (e.Button == MouseButtons.Right)
-            //{
-            //    DoDragDrop(e.Item, DragDropEffects.Copy);
-            //}
         }
 
-        // Set the target drop effect to the effect 
-        // specified in the ItemDrag event handler.
-        private void treeView1_DragEnter(object sender, DragEventArgs e)
+        /// <summary>
+        /// Event handler for DragEnterEvent from the tree view.
+        /// Set the target drop effect to the effect 
+        /// specified in the ItemDrag event handler.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = e.AllowedEffect;
         }
-
-        // Select the node under the mouse pointer to indicate the 
-        // expected drop location.
-        private void treeView1_DragOver(object sender, DragEventArgs e)
+       
+        /// <summary>
+        /// Event handler for DragOverEvent from the tree view.
+        /// Select the node under the mouse pointer to indicate the 
+        /// expected drop location.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_DragOver(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the mouse position.
             Point targetPoint = treeView.PointToClient(new Point(e.X, e.Y));
@@ -119,7 +151,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        private void treeView1_DragDrop(object sender, DragEventArgs e)
+        private void treeView_DragDrop(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = treeView.PointToClient(new Point(e.X, e.Y));
@@ -159,17 +191,6 @@ namespace uk.org.riseley.puttySessionManager.control
                     // Fire a refresh event
                     sc.invalidateSessionList(this, false);
                 }
-
-                // If it is a copy operation, clone the dragged node 
-                // and add it to the node at the drop location.
-                else if (e.Effect == DragDropEffects.Copy)
-                {
-                    targetNode.Nodes.Add((TreeNode)draggedNode.Clone());
-                }
-
-                // Expand the node at the location 
-                // to show the dropped node.
-                //targetNode.Expand();
             }
         }
 
@@ -234,7 +255,6 @@ namespace uk.org.riseley.puttySessionManager.control
 
         protected override void LoadSessions()
         {
-
             // Suppress repainting the TreeView until all the objects have been created.
             treeView.BeginUpdate();
 
@@ -300,7 +320,7 @@ namespace uk.org.riseley.puttySessionManager.control
                             currnode.Tag = sess;
                             currnode.ContextMenuStrip = nodeContextMenuStrip;
                             currnode.ImageIndex = IMAGE_INDEX_FOLDER;
-                            currnode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
+                            currnode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;                            
                         }
 
                     }
@@ -901,5 +921,47 @@ namespace uk.org.riseley.puttySessionManager.control
             Session s = getSelectedSession();
             hkc.saveSessionnameToHotkey(ParentForm, hkid, s);
         }
+
+        /// <summary>
+        /// Event handler for NodeMouseHover from the tree view.
+        /// Retrieve the tool tip text from the session if the node
+        /// that is pointed to is not a folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">contains the node are we hovering over</param>
+        private void treeView_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+        {
+            // If the tool tip is active on another node
+            // disable it
+            if (toolTip.Active == true)
+                toolTip.Active = false;
+
+            // Find the session
+            Session s = (Session)e.Node.Tag;
+
+            // If there is a session and it's not a folder
+            // set the tool tip text and display it
+            if (s != null && s.IsFolder == false)
+            {
+                toolTip.SetToolTip(e.Node.TreeView, s.SessionDisplayText);
+                toolTip.Active = true;
+            }
+        }
+
+        /// <summary>
+        /// Event handler for MouseMove from the tree view.
+        /// If a tool tip is active and we have moved off the tree
+        /// then disable the tool tip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Get the node at the mouse position.
+            TreeNode node = treeView.GetNodeAt(e.X,e.Y);
+            if (node == null && toolTip.Active == true)
+                toolTip.Active = false;
+        }
+
     }
 }
