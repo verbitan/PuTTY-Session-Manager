@@ -15,7 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-namespace uk.org.riseley.puttySessionManager
+using uk.org.riseley.puttySessionManager.control;
+namespace uk.org.riseley.puttySessionManager.form
 {
     partial class SessionEditorForm
     {
@@ -46,7 +47,7 @@ namespace uk.org.riseley.puttySessionManager
         private void InitializeComponent()
         {
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.sessionEditorControl1 = new uk.org.riseley.puttySessionManager.SessionEditorControl();
+            this.sessionEditorControl1 = new SessionEditorControl();
             this.SuspendLayout();
             // 
             // saveFileDialog1

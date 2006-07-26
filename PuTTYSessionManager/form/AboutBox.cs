@@ -23,7 +23,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.form
 {
     partial class AboutBox : Form
     {

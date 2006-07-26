@@ -1,6 +1,6 @@
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.form
 {
-    partial class FolderForm
+    partial class SessionNameForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,8 @@ namespace uk.org.riseley.puttySessionManager
         {
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.sessionNameLabel = new System.Windows.Forms.Label();
+            this.sessionNameTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // okButton
@@ -54,24 +54,24 @@ namespace uk.org.riseley.puttySessionManager
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // sessionNameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Folder Name";
+            this.sessionNameLabel.AutoSize = true;
+            this.sessionNameLabel.Location = new System.Drawing.Point(5, 20);
+            this.sessionNameLabel.Name = "sessionNameLabel";
+            this.sessionNameLabel.Size = new System.Drawing.Size(75, 13);
+            this.sessionNameLabel.TabIndex = 2;
+            this.sessionNameLabel.Text = "Session Name";
             // 
-            // textBox1
+            // sessionNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 17);
-            this.textBox1.MaxLength = 100;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 20);
-            this.textBox1.TabIndex = 0;
+            this.sessionNameTextBox.Location = new System.Drawing.Point(94, 17);
+            this.sessionNameTextBox.MaxLength = 60;
+            this.sessionNameTextBox.Name = "sessionNameTextBox";
+            this.sessionNameTextBox.Size = new System.Drawing.Size(188, 20);
+            this.sessionNameTextBox.TabIndex = 0;
             // 
-            // FolderForm
+            // SessionNameForm
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -79,8 +79,8 @@ namespace uk.org.riseley.puttySessionManager
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(294, 107);
             this.ControlBox = false;
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.sessionNameTextBox);
+            this.Controls.Add(this.sessionNameLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -89,10 +89,10 @@ namespace uk.org.riseley.puttySessionManager
             this.MaximumSize = new System.Drawing.Size(300, 139);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 139);
-            this.Name = "FolderForm";
+            this.Name = "SessionNameForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Enter Folder Name";
+            this.Text = "Enter Session Name";
             this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,7 +103,7 @@ namespace uk.org.riseley.puttySessionManager
 
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label sessionNameLabel;
+        private System.Windows.Forms.TextBox sessionNameTextBox;
     }
 }

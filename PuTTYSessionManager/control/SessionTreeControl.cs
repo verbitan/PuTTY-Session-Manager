@@ -22,13 +22,14 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 using Microsoft.Win32;
 using uk.org.riseley.puttySessionManager.model;
-using System.Collections;
 using uk.org.riseley.puttySessionManager.controller;
+using uk.org.riseley.puttySessionManager.form;
 
 
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.control
 {
     public partial class SessionTreeControl : SessionControl
     {

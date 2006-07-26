@@ -15,7 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-namespace uk.org.riseley.puttySessionManager
+using uk.org.riseley.puttySessionManager.control;
+namespace uk.org.riseley.puttySessionManager.form
 {
     partial class SessionManagerForm
     {
@@ -59,8 +60,8 @@ namespace uk.org.riseley.puttySessionManager
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.SessionTreeControl();
-            this.sessionListControl1 = new uk.org.riseley.puttySessionManager.SessionListControl();
+            this.sessionTreeControl1 = new SessionTreeControl();
+            this.sessionListControl1 = new SessionListControl();
             this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,8 +156,8 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionTreeControl1.ContextMenuVisible = true;
             resources.ApplyResources(this.sessionTreeControl1, "sessionTreeControl1");
             this.sessionTreeControl1.Name = "sessionTreeControl1";
-            this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
-            this.sessionTreeControl1.DeleteSessions += new uk.org.riseley.puttySessionManager.SessionControl.DeleteSessionsEventHandler(this.sessionTreeControl1_DeleteSessions);
+            this.sessionTreeControl1.LaunchSession += new SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionTreeControl1.DeleteSessions += new SessionControl.DeleteSessionsEventHandler(this.sessionTreeControl1_DeleteSessions);
             this.sessionTreeControl1.ExportSessions += new System.EventHandler(this.sessionTreeControl1_ExportSessions);
             // 
             // sessionListControl1
@@ -164,7 +165,7 @@ namespace uk.org.riseley.puttySessionManager
             this.sessionListControl1.ContextMenuVisible = true;
             resources.ApplyResources(this.sessionListControl1, "sessionListControl1");
             this.sessionListControl1.Name = "sessionListControl1";
-            this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
+            this.sessionListControl1.LaunchSession += new SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
             // 
             // SessionManagerForm
             // 
@@ -190,7 +191,7 @@ namespace uk.org.riseley.puttySessionManager
         #endregion
 
         private System.Windows.Forms.NotifyIcon systrayIcon;
-        private uk.org.riseley.puttySessionManager.SessionTreeControl sessionTreeControl1;
+        private SessionTreeControl sessionTreeControl1;
         private System.Windows.Forms.ContextMenuStrip sysTrayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem displayTreeToolStripMenuItem;

@@ -17,7 +17,7 @@
  */
 using uk.org.riseley.puttySessionManager.model;
 
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.control
 {
     partial class SessionTreeControl
     {

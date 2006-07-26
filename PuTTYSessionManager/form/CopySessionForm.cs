@@ -25,7 +25,7 @@ using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
 using System.Collections;
 
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.form
 {
     public partial class CopySessionForm : SessionManagementForm
     {

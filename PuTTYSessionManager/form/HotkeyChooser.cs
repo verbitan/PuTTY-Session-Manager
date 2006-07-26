@@ -27,7 +27,7 @@ using uk.org.riseley.puttySessionManager.controller;
 using System.Text.RegularExpressions;
 
 
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.form
 {
     public partial class HotkeyChooser : Form
     {

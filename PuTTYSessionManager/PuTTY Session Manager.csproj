@@ -61,41 +61,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox.cs">
+    <Compile Include="form\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox.Designer.cs">
+    <Compile Include="form\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="controller\HotkeyController.cs" />
-    <Compile Include="SessionManagementForm.cs">
+    <Compile Include="form\NewSessionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SessionManagementForm.Designer.cs">
+    <Compile Include="form\NewSessionForm.Designer.cs">
+      <DependentUpon>NewSessionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SessionManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SessionManagementForm.Designer.cs">
       <DependentUpon>SessionManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SessionNameForm.cs">
+    <Compile Include="form\SessionNameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SessionNameForm.Designer.cs">
+    <Compile Include="form\SessionNameForm.Designer.cs">
       <DependentUpon>SessionNameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CopySessionForm.cs">
+    <Compile Include="form\CopySessionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CopySessionForm.Designer.cs">
+    <Compile Include="form\CopySessionForm.Designer.cs">
       <DependentUpon>CopySessionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HotkeyChooser.cs">
+    <Compile Include="form\HotkeyChooser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HotkeyChooser.Designer.cs">
+    <Compile Include="form\HotkeyChooser.Designer.cs">
       <DependentUpon>HotkeyChooser.cs</DependentUpon>
     </Compile>
-    <Compile Include="FolderForm.cs">
+    <Compile Include="form\FolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FolderForm.Designer.cs">
+    <Compile Include="form\FolderForm.Designer.cs">
       <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="model\CopySessionRequest.cs" />
@@ -104,16 +110,10 @@
     <Compile Include="model\LaunchSessionEventArgs.cs" />
     <Compile Include="model\Session.cs" />
     <Compile Include="controller\SessionController.cs" />
-    <Compile Include="NewSessionForm.cs">
+    <Compile Include="form\Options.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewSessionForm.Designer.cs">
-      <DependentUpon>NewSessionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Options.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Options.Designer.cs">
+    <Compile Include="form\Options.Designer.cs">
       <DependentUpon>Options.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -121,87 +121,87 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SessionControl.cs">
+    <Compile Include="control\SessionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SessionControl.Designer.cs">
+    <Compile Include="control\SessionControl.Designer.cs">
       <DependentUpon>SessionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="SessionEditorForm.cs">
+    <Compile Include="form\SessionEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SessionEditorForm.Designer.cs">
+    <Compile Include="form\SessionEditorForm.Designer.cs">
       <DependentUpon>SessionEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SessionEditorControl.cs">
+    <Compile Include="control\SessionEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SessionEditorControl.Designer.cs">
+    <Compile Include="control\SessionEditorControl.Designer.cs">
       <DependentUpon>SessionEditorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="SessionListControl.cs">
+    <Compile Include="control\SessionListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SessionListControl.Designer.cs">
+    <Compile Include="control\SessionListControl.Designer.cs">
       <DependentUpon>SessionListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="SessionManagerForm.cs">
+    <Compile Include="form\SessionManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SessionManagerForm.Designer.cs">
+    <Compile Include="form\SessionManagerForm.Designer.cs">
       <DependentUpon>SessionManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutBox.resx">
+    <EmbeddedResource Include="form\AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionManagementForm.resx">
+    <EmbeddedResource Include="form\NewSessionForm.resx">
+      <DependentUpon>NewSessionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SessionManagementForm.resx">
       <DependentUpon>SessionManagementForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionNameForm.resx">
+    <EmbeddedResource Include="form\SessionNameForm.resx">
       <DependentUpon>SessionNameForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopySessionForm.resx">
+    <EmbeddedResource Include="form\CopySessionForm.resx">
       <DependentUpon>CopySessionForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="HotkeyChooser.resx">
+    <EmbeddedResource Include="form\HotkeyChooser.resx">
       <DependentUpon>HotkeyChooser.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FolderForm.resx">
+    <EmbeddedResource Include="form\FolderForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FolderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewSessionForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NewSessionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Options.resx">
+    <EmbeddedResource Include="form\Options.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionControl.resx">
+    <EmbeddedResource Include="control\SessionControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionEditorForm.resx">
+    <EmbeddedResource Include="form\SessionEditorForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionEditorControl.resx">
+    <EmbeddedResource Include="control\SessionEditorControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionEditorControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionListControl.resx">
+    <EmbeddedResource Include="control\SessionListControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionListControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionManagerForm.resx">
+    <EmbeddedResource Include="form\SessionManagerForm.resx">
       <DependentUpon>SessionManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -210,7 +210,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionTreeControl.resx">
+    <EmbeddedResource Include="control\SessionTreeControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SessionTreeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -226,10 +226,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="PuTTY Session Manager_TemporaryKey.pfx" />
-    <Compile Include="SessionTreeControl.cs">
+    <Compile Include="control\SessionTreeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SessionTreeControl.Designer.cs">
+    <Compile Include="control\SessionTreeControl.Designer.cs">
       <DependentUpon>SessionTreeControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />

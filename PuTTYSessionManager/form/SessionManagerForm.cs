@@ -24,8 +24,9 @@ using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.controller;
+using uk.org.riseley.puttySessionManager.control;
 
-namespace uk.org.riseley.puttySessionManager
+namespace uk.org.riseley.puttySessionManager.form
 {
     public partial class SessionManagerForm : SessionManagementForm
     {
