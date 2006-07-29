@@ -31,7 +31,6 @@ namespace uk.org.riseley.puttySessionManager.model
         private const string KEY_FOLDER = "FOLDER|";
 
         private string sessionName = "";
-
         public string SessionName
         {
             get { return sessionName; }
@@ -39,21 +38,20 @@ namespace uk.org.riseley.puttySessionManager.model
         }
         
         private string sessionDisplayText = "";
-
         public string SessionDisplayText
         {
             get { return sessionDisplayText; }
             private set { sessionDisplayText = value; }
         }
-        private string folderName = "";
 
+        private string folderName = "";
         public string FolderName
         {
             get { return folderName; }
             set { folderName = value; }
         }
+        
         private bool isFolder = false;
-
         public bool IsFolder
         {
             get { return isFolder; }
@@ -104,7 +102,6 @@ namespace uk.org.riseley.puttySessionManager.model
             return display.Replace(" ", "%20");
         }
 
-
         private string[] cellValues;
         public string[] getCellValues()
         {
@@ -122,6 +119,13 @@ namespace uk.org.riseley.puttySessionManager.model
         public static string getFolderKey(string folder)
         {
             return KEY_FOLDER + folder;
+        }
+
+        private string toolTipText = "";
+        public string ToolTipText
+        {
+            get { return toolTipText; }
+            set { toolTipText = value; }
         }
 
 

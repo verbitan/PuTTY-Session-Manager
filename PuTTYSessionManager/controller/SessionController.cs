@@ -8,27 +8,68 @@ using System.Diagnostics;
 
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
-ViewAndModify = uk.org.riseley.puttySessionManager.model.SessionController.PUTTY_SESSIONS_REG_KEY)]
+ ViewAndModify = uk.org.riseley.puttySessionManager.model.SessionController.PUTTY_SESSIONS_REG_KEY)]
 
 namespace uk.org.riseley.puttySessionManager.model
 {
 
+    /// <summary>
+    /// This singleton class provides the interface between the application
+    /// and the registry
+    /// </summary>
     public class SessionController
     {
-        public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
+        /// <summary>
+        /// The registry value which stores the Session folder
+        /// </summary>
         public const string PUTTY_PSM_FOLDER_ATTRIB = "PsmPath";
+
+        /// <summary>
+        /// The hostname registry value
+        /// </summary>
         public const string PUTTY_HOSTNAME_ATTRIB = "HostName";
+
+        /// <summary>
+        /// The default username registry value
+        /// </summary>
         public const string PUTTY_USERNAME_ATTRIB = "UserName";
+
+        /// <summary>
+        /// The registry key ( relative to HKCU ) that stores PuTTY sessions
+        /// </summary>
+        public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
+
+        /// <summary>
+        /// The registry key of the "Default Session"
+        /// </summary>
         private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
 
+        /// <summary>
+        /// The current list of all the sessions stored in the registry
+        /// </summary>
         private static List<Session> sessionList = new List<Session>();
+
+        /// <summary>
+        /// The current list of all the folders which can be used to 
+        /// organise sessions. Must be kept in sync with <code>sessionList</code>
+        /// </summary>
         private static List<string> folderList = new List<string>();
 
+        /// <summary>
+        /// The singleton instance of this class
+        /// </summary>
         private static SessionController instance = null;
 
+        /// <summary>
+        /// This event is fired when the list of sessions has been altered
+        /// </summary>
         public event SessionsRefreshedEventHandler SessionsRefreshed;
         public delegate void SessionsRefreshedEventHandler(object sender, RefreshSessionsEventArgs re);
 
+        /// <summary>
+        /// Gets the singleton instance of this class
+        /// </summary>
+        /// <returns></returns>
         public static SessionController getInstance()
         {
             if (instance == null)
@@ -36,11 +77,19 @@ namespace uk.org.riseley.puttySessionManager.model
             return instance;
         }
 
+        /// <summary>
+        /// Private constructor called when the singleton instance is 
+        /// created.
+        /// </summary>
         private SessionController()
         {
             invalidateSessionList(this, true);
         }
 
+        /// <summary>
+        /// Get the list of sessions
+        /// </summary>
+        /// <returns></returns>
         public List<Session> getSessionList()
         {
             return sessionList;
@@ -55,8 +104,12 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
             List<string> attributes = new List<string>();
-            attributes.AddRange(rk.GetValueNames());
-            attributes.Sort();
+            if (rk != null)
+            {
+                attributes.AddRange(rk.GetValueNames());
+                attributes.Sort();
+                rk.Close();
+            }
             return attributes;
         }
 
@@ -126,11 +179,13 @@ namespace uk.org.riseley.puttySessionManager.model
             foreach (string keyName in rk.GetSubKeyNames())
             {
                 RegistryKey sessKey = rk.OpenSubKey(keyName);
-                String psmpath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_ATTRIB);
-                sessKey.Close();
+                String psmpath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_ATTRIB);          
 
                 Session s = new Session(keyName, psmpath, false);
 
+                s.ToolTipText = getSessionToolTipText(sessKey);
+
+                sessKey.Close();
                 sl.Add(s);
 
             }
@@ -179,12 +234,14 @@ namespace uk.org.riseley.puttySessionManager.model
         
         }
 
-
         public void saveFolderToRegistry(Session s)
         {
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
-            rk.SetValue(PUTTY_PSM_FOLDER_ATTRIB, s.FolderName, RegistryValueKind.String);
-            rk.Close();
+            if (rk != null)
+            {
+                rk.SetValue(PUTTY_PSM_FOLDER_ATTRIB, s.FolderName, RegistryValueKind.String);
+                rk.Close();
+            }
         }
 
         protected virtual void OnSessionsRefreshed(Object sender, RefreshSessionsEventArgs e)
@@ -329,7 +386,7 @@ namespace uk.org.riseley.puttySessionManager.model
             return true;
         }
 
-        public String launchSession(String sessionName)
+        public string launchSession(string sessionName)
         {
             String puttyExec = Properties.Settings.Default.PuttyLocation;
             Process p = new Process();
@@ -396,7 +453,7 @@ namespace uk.org.riseley.puttySessionManager.model
             return true;
         }
 
-        public bool isDefaultSessionName ( String sessionName )
+        public bool isDefaultSessionName ( string sessionName )
         {
             if ( Session.convertDisplayToSessionKey(sessionName).Equals( PUTTY_DEFAULT_SESSION ))
                 return true;
@@ -467,6 +524,34 @@ namespace uk.org.riseley.puttySessionManager.model
             template.Close();
 
             return true;
+        }
+
+        /// <summary>
+        /// Build the tool tip text for a session
+        /// </summary>
+        /// <param name="s">The session to use</param>
+        /// <returns></returns>
+        private string getSessionToolTipText(RegistryKey rk)
+        {
+            string tooltip = "";
+            if (rk != null)
+            {
+                string hostname = (string)rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
+                string username = (string)rk.GetValue(PUTTY_USERNAME_ATTRIB);
+                string portforwards = (string)rk.GetValue ("PortForwardings");
+                rk.Close();
+
+                if (hostname != null && !hostname.Equals(""))
+                    tooltip += "Hostname: " + hostname + "\n";
+                if (username != null && !username.Equals(""))
+                    tooltip += "Username: " + username + "\n";
+                if (portforwards != null && !portforwards.Equals(""))
+                    tooltip += "Port Forwards: " + portforwards + "\n";
+                
+                if (tooltip.EndsWith("\n"))
+                    tooltip = tooltip.Remove(tooltip.LastIndexOf("\n"));
+            }
+            return tooltip;
         }
     }
 

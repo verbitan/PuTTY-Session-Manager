@@ -26,10 +26,25 @@ using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
+    /// <summary>
+    /// This form allows various session management functions to be
+    /// performed on more than one session:
+    ///     Export Sessions
+    ///     Copy Sesssion Attributes
+    ///     Delete sessions
+    ///     Save new session
+    /// </summary>
     public partial class SessionEditorForm : SessionManagementForm
     {
+        /// <summary>
+        /// Copy session form used to select which attributes to copy
+        /// to the selected sessions
+        /// </summary>
         private CopySessionForm csf;
  
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public SessionEditorForm()
             : base()
         {
@@ -37,24 +52,49 @@ namespace uk.org.riseley.puttySessionManager.form
             csf = new CopySessionForm(this);
         }
 
+        /// <summary>
+        /// Event handler for the sessionEditorControl ExportSessionsEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
         {
             exportSessions(sessionEditorControl1.getSelectedSessions());
         }
 
+        /// <summary>
+        /// Event handler for the sessionEditorControl NewSessionEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sessionEditorControl1_NewSession(object sender, EventArgs e)
         {
             newSession(sessionEditorControl1.getSelectedSessions());
         }
 
+        /// <summary>
+        /// Event handler for the sessionEditorControl DeleteSessionsEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sessionEditorControl1_DeleteSessions(object sender, EventArgs e)
         {
-            deleteSessions(sessionEditorControl1.getSelectedSessions(), sender);
+            // Don't pass the orginal sender , to ensure that the SessionEditor
+            // control gets the refresh event.
+            deleteSessions(sessionEditorControl1.getSelectedSessions(), this);
         }
 
+        /// <summary>
+        /// Event handler for the sessionEditorControl CopySessionAttributesEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sessionEditorControl1_CopySessionAttributes(object sender, EventArgs e)
         {
+            // Get the list of selected sessions
             List<Session> sl = sessionEditorControl1.getSelectedSessions();
+
+            // If there are none - display the error and return
             if (sl.Count == 0)
             {
                 MessageBox.Show("You must select some target sessions!"
@@ -65,6 +105,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // Pass in the target sessions
             csf.setTargetSessions(sl);
 
+            // Display the copy session form.
+            // The form is responsible for actually copying the session 
+            // attributes - just display a confirmation if it worked
             if (csf.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Attributes copied successfully"
@@ -72,11 +115,21 @@ namespace uk.org.riseley.puttySessionManager.form
             }            
         }
 
+        /// <summary>
+        /// Event handler for the FormClosingEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SessionEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             formClosing(sender, e);
         }
 
+        /// <summary>
+        /// Event handler for the sessionEditorControl CloseSessionEditorEvent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sessionEditorControl1_CloseSessionEditor(object sender, EventArgs e)
         {
             closeSessionManagementForm(sender, e);

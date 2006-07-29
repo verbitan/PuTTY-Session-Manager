@@ -63,8 +63,8 @@ namespace uk.org.riseley.puttySessionManager.control
             hkc.HotkeysRefreshed += hkHandler;
 
             toolTip = new ToolTip();
-            toolTip.InitialDelay = 5000; // 5 seconds delay
-            toolTip.ReshowDelay  = 5000;
+            toolTip.InitialDelay = 5000; // 3 seconds delay
+            toolTip.ReshowDelay  = 2000;
             toolTip.AutoPopDelay = 5000;
             toolTip.UseAnimation = true;
             toolTip.UseFading = true;
@@ -176,6 +176,14 @@ namespace uk.org.riseley.puttySessionManager.control
                     // Capture the old parent node
                     TreeNode oldParent = draggedNode.Parent;
 
+                    // Check that no folder exists at the same level
+                    // with the same name
+                    string newpath = targetNode.FullPath + treeView.PathSeparator + draggedNode.Text;
+                    if (validateFolderName(draggedNode.Text, newpath) == false)
+                    {
+                        return;
+                    }
+
                     // Remove the old node and add it back in
                     // in the new location
                     draggedNode.Remove();
@@ -220,21 +228,38 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        // Remove any hanging folders
+        /// <summary>
+        /// Remove any hanging folders.
+        /// </summary>
+        /// <param name="node"></param>
         private void cleanFolders(TreeNode node)
         {
+            // Check the passed in node is valid
             if (node == null)
                 return;
 
+            // Get the session associated with the node
             Session s = ((Session)node.Tag);
-            TreeNode parentNode = node.Parent;
+
             if (s.IsFolder == true && node.FirstNode == null)
             {
+                // Get the parent node
+                TreeNode parentNode = node.Parent;
+            
+                // Remove this node
                 node.Remove();
-                s = ((Session)parentNode.Tag);
-                if (s.IsFolder && !(s.SessionDisplayText.Equals(Session.SESSIONS_FOLDER_NAME)))
+
+                // If there is a parent node
+                if (parentNode != null)
                 {
-                    cleanFolders(parentNode);
+                    // Get the session 
+                    s = ((Session)parentNode.Tag);
+
+                    // If it's a folder and not the root node
+                    if (s.IsFolder && !(s.SessionDisplayText.Equals(Session.SESSIONS_FOLDER_NAME)))
+                    {
+                        cleanFolders(parentNode);
+                    }
                 }
             }
         }
@@ -439,11 +464,8 @@ namespace uk.org.riseley.puttySessionManager.control
         {
 
             FolderForm ff = new FolderForm();
-            if (ff.ShowDialog() == DialogResult.OK && validateFolderName(ff.getFolderName()))
+            if (ff.ShowDialog() == DialogResult.OK )
             {
-                // Suppress repainting the TreeView until all the objects have been created.
-                treeView.BeginUpdate();
-
                 // Find the selected node
                 TreeNode selectedNode = treeView.SelectedNode;
 
@@ -453,6 +475,15 @@ namespace uk.org.riseley.puttySessionManager.control
                 // Get the new folder name and the new full path
                 string folder = ff.getFolderName();
                 string newpath = parent.FullPath + treeView.PathSeparator + folder;
+
+                // Check the new folder name is valid
+                if (validateFolderName(folder, newpath) == false)
+                {
+                    return;
+                }
+
+                // Suppress repainting the TreeView until all the objects have been created.
+                treeView.BeginUpdate();         
 
                 // Remove the selected node from it's current location
                 parent.Nodes.Remove(selectedNode);
@@ -480,16 +511,31 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        private bool validateFolderName(string foldername)
+        /// <summary>
+        /// Check and see if the new folder name is valid
+        /// </summary>
+        /// <param name="foldername">The new folder name</param>
+        /// <param name="newpath">The full path of the new folder , including
+        ///  the new folder name</param>
+        /// <returns></returns>
+        private bool validateFolderName(string foldername, string newpath)
         {
-            if (foldername.Contains("\\"))
-            {
-                MessageBox.Show("\"\\\" may not be used in folder name", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (foldername.Equals(""))
+            // The folder name must not be blank
+            if (foldername.Equals(""))
             {
                 MessageBox.Show("Folder name must be supplied", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            // The new folder name must not contain the path separator
+            else if (foldername.Contains(treeView.PathSeparator))
+            {
+                MessageBox.Show("\""+ treeView.PathSeparator + "\" may not be used in folder name", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            // No folder with the same name should exist at the same level
+            else if (sc.getFolderList().Contains(newpath))
+            {
+                MessageBox.Show("A folder with this name already exists", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -524,17 +570,22 @@ namespace uk.org.riseley.puttySessionManager.control
             // Display the folder requester
             FolderForm ff = new FolderForm(selectedNode.Text);
 
-            if (ff.ShowDialog() == DialogResult.OK && validateFolderName(ff.getFolderName()))
+            if (ff.ShowDialog() == DialogResult.OK )
             {
-                // Suppress repainting the TreeView until all the objects have been created.
-                treeView.BeginUpdate();
-
                 // Find it's parent
                 TreeNode parent = selectedNode.Parent;
 
                 // Get the new folder name and the new full path
                 string folder = ff.getFolderName();
                 string newpath = parent.FullPath + treeView.PathSeparator + folder;
+
+                if (validateFolderName(folder, newpath) == false)
+                {
+                    return;
+                }
+
+                // Suppress repainting the TreeView until all the objects have been created.
+                treeView.BeginUpdate();
 
                 // Remove the selected node from it's current location
                 parent.Nodes.Remove(selectedNode);
@@ -943,7 +994,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // set the tool tip text and display it
             if (s != null && s.IsFolder == false)
             {
-                toolTip.SetToolTip(e.Node.TreeView, s.SessionDisplayText);
+                toolTip.SetToolTip(e.Node.TreeView, s.ToolTipText);
                 toolTip.Active = true;
             }
         }
