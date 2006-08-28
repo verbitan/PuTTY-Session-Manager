@@ -57,8 +57,22 @@ namespace uk.org.riseley.puttySessionManager.form
             sessionEditor = new SessionEditorForm();
             hotKeyChooser = new HotkeyChooser(this);
 
+            // Restore the size of the application
             this.ClientSize = Properties.Settings.Default.WindowSize;
-            this.Location   = Properties.Settings.Default.Location;
+
+            // Restore the location of the application
+            Point savedLocation = Properties.Settings.Default.Location;
+
+            // Get the screen that will display the point
+            Screen display = Screen.FromPoint(savedLocation);
+
+            // Check that the selected display contains the point
+            // if not - restore the application in the top left hand corner
+            if (display != null && display.Bounds.Contains(savedLocation))
+                this.DesktopLocation = Properties.Settings.Default.Location;
+            else
+                this.DesktopLocation = new Point(0, 0);
+
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
             if (Properties.Settings.Default.HotkeyNewEnabled)
                 hkc.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);
@@ -69,7 +83,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private void SaveSize()
         {
             Properties.Settings.Default.WindowSize = this.ClientSize;
-            Properties.Settings.Default.Location = this.Location;
+            Properties.Settings.Default.Location = this.DesktopLocation;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

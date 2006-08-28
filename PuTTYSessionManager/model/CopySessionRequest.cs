@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using uk.org.riseley.puttySessionManager.controller;
 
 namespace uk.org.riseley.puttySessionManager.model
 {

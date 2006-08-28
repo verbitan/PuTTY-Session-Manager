@@ -5,12 +5,12 @@ using System.Security.Permissions;
 using System.IO;
 using Microsoft.Win32;
 using System.Diagnostics;
-
+using uk.org.riseley.puttySessionManager.model;
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
- ViewAndModify = uk.org.riseley.puttySessionManager.model.SessionController.PUTTY_SESSIONS_REG_KEY)]
+  ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.PUTTY_SESSIONS_REG_KEY)]
 
-namespace uk.org.riseley.puttySessionManager.model
+namespace uk.org.riseley.puttySessionManager.controller
 {
 
     /// <summary>
@@ -554,7 +554,4 @@ namespace uk.org.riseley.puttySessionManager.model
             return tooltip;
         }
     }
-
-
-
 }
