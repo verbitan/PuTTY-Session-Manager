@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
+using uk.org.riseley.puttySessionManager.controller;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
@@ -31,11 +32,15 @@ namespace uk.org.riseley.puttySessionManager.form
         private Form parentWindow;
         private HotkeyChooser hkChooser;
 
+        private SessionController sc;
+
         public Options(Form parentWindow)
         {
             this.parentWindow = parentWindow;
             InitializeComponent();
             hkChooser = new HotkeyChooser(parentWindow);
+            sc = SessionController.getInstance();
+            autostartCheckBox.Checked = sc.isAutoStartEnabled();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -57,6 +62,11 @@ namespace uk.org.riseley.puttySessionManager.form
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void autostartCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            sc.setAutoStart(autostartCheckBox.Checked);
         } 
     }
 }

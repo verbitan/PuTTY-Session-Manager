@@ -257,5 +257,19 @@ namespace uk.org.riseley.puttySessionManager.form
             // if the delete failed or aborted cancel the event
             ce.Cancel = !(result);
         }
+
+        /// <summary>
+        /// This event is fired when the form is first shown.
+        /// If the user has set the MinimizeOnStart option, hide the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SessionManagerForm_Shown(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.MinimizeOnStart == true)
+            {
+                this.Visible = false;
+            }
+        }
     }
 }

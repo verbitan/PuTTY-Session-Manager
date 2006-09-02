@@ -47,22 +47,24 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.sessionWarningLabel = new System.Windows.Forms.Label();
+            this.chooseFontButton = new System.Windows.Forms.Button();
+            this.locatePuttyButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.okButton = new System.Windows.Forms.Button();
+            this.autostartCheckBox = new System.Windows.Forms.CheckBox();
+            this.minimizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.onTopCheckBox = new System.Windows.Forms.CheckBox();
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.sampletextTextbox = new System.Windows.Forms.TextBox();
-            this.chooseFontButton = new System.Windows.Forms.Button();
-            this.locatePuttyButton = new System.Windows.Forms.Button();
             this.puttyLocation = new System.Windows.Forms.TextBox();
             this.transparencyCheckBox = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.okButton = new System.Windows.Forms.Button();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
-            this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -73,6 +75,8 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.autostartCheckBox);
+            this.groupBox1.Controls.Add(this.minimizeCheckBox);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.sessionWarningLabel);
             this.groupBox1.Controls.Add(this.onTopCheckBox);
@@ -90,6 +94,88 @@ namespace uk.org.riseley.puttySessionManager.form
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
+            // sessionWarningLabel
+            // 
+            this.sessionWarningLabel.AutoSize = true;
+            this.sessionWarningLabel.Location = new System.Drawing.Point(12, 94);
+            this.sessionWarningLabel.Name = "sessionWarningLabel";
+            this.sessionWarningLabel.Size = new System.Drawing.Size(273, 13);
+            this.sessionWarningLabel.TabIndex = 8;
+            this.sessionWarningLabel.Text = "Number of sessions in subfolders to open before warning";
+            // 
+            // chooseFontButton
+            // 
+            this.chooseFontButton.Location = new System.Drawing.Point(15, 143);
+            this.chooseFontButton.Name = "chooseFontButton";
+            this.chooseFontButton.Size = new System.Drawing.Size(98, 22);
+            this.chooseFontButton.TabIndex = 3;
+            this.chooseFontButton.Text = "Choose Font";
+            this.chooseFontButton.UseVisualStyleBackColor = true;
+            this.chooseFontButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // locatePuttyButton
+            // 
+            this.locatePuttyButton.Location = new System.Drawing.Point(15, 115);
+            this.locatePuttyButton.Name = "locatePuttyButton";
+            this.locatePuttyButton.Size = new System.Drawing.Size(98, 22);
+            this.locatePuttyButton.TabIndex = 2;
+            this.locatePuttyButton.Text = "Locate putty.exe";
+            this.locatePuttyButton.UseVisualStyleBackColor = true;
+            this.locatePuttyButton.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.okButton, 0, 1);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.88288F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.11712F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(369, 222);
+            this.tableLayoutPanel.TabIndex = 1;
+            // 
+            // okButton
+            // 
+            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Location = new System.Drawing.Point(151, 191);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(67, 22);
+            this.okButton.TabIndex = 1;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // autostartCheckBox
+            // 
+            this.autostartCheckBox.AutoSize = true;
+            this.autostartCheckBox.Location = new System.Drawing.Point(255, 19);
+            this.autostartCheckBox.Name = "autostartCheckBox";
+            this.autostartCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.autostartCheckBox.Size = new System.Drawing.Size(92, 17);
+            this.autostartCheckBox.TabIndex = 11;
+            this.autostartCheckBox.Text = "Start on logon";
+            this.autostartCheckBox.UseVisualStyleBackColor = true;
+            this.autostartCheckBox.CheckedChanged += new System.EventHandler(this.autostartCheckBox_CheckedChanged);
+            // 
+            // minimizeCheckBox
+            // 
+            this.minimizeCheckBox.AutoSize = true;
+            this.minimizeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.MinimizeOnStart;
+            this.minimizeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "MinimizeOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.minimizeCheckBox.Location = new System.Drawing.Point(124, 19);
+            this.minimizeCheckBox.Name = "minimizeCheckBox";
+            this.minimizeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.minimizeCheckBox.Size = new System.Drawing.Size(116, 17);
+            this.minimizeCheckBox.TabIndex = 10;
+            this.minimizeCheckBox.Text = "Minimize on startup";
+            this.minimizeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // numericUpDown1
             // 
             this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "SubfolderSessionWarning", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -104,22 +190,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.numericUpDown1.TabIndex = 9;
             this.numericUpDown1.Value = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.SubfolderSessionWarning;
             // 
-            // sessionWarningLabel
-            // 
-            this.sessionWarningLabel.AutoSize = true;
-            this.sessionWarningLabel.Location = new System.Drawing.Point(12, 94);
-            this.sessionWarningLabel.Name = "sessionWarningLabel";
-            this.sessionWarningLabel.Size = new System.Drawing.Size(273, 13);
-            this.sessionWarningLabel.TabIndex = 8;
-            this.sessionWarningLabel.Text = "Number of sessions in subfolders to open before warning";
-            // 
             // onTopCheckBox
             // 
             this.onTopCheckBox.AutoSize = true;
             this.onTopCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;
             this.onTopCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.onTopCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "AlwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.onTopCheckBox.Location = new System.Drawing.Point(123, 19);
+            this.onTopCheckBox.Location = new System.Drawing.Point(15, 19);
             this.onTopCheckBox.Name = "onTopCheckBox";
             this.onTopCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.onTopCheckBox.Size = new System.Drawing.Size(92, 17);
@@ -152,26 +229,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sampletextTextbox.Text = "Sample Text for Tree";
             this.sampletextTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // chooseFontButton
-            // 
-            this.chooseFontButton.Location = new System.Drawing.Point(15, 143);
-            this.chooseFontButton.Name = "chooseFontButton";
-            this.chooseFontButton.Size = new System.Drawing.Size(98, 22);
-            this.chooseFontButton.TabIndex = 3;
-            this.chooseFontButton.Text = "Choose Font";
-            this.chooseFontButton.UseVisualStyleBackColor = true;
-            this.chooseFontButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // locatePuttyButton
-            // 
-            this.locatePuttyButton.Location = new System.Drawing.Point(15, 115);
-            this.locatePuttyButton.Name = "locatePuttyButton";
-            this.locatePuttyButton.Size = new System.Drawing.Size(98, 22);
-            this.locatePuttyButton.TabIndex = 2;
-            this.locatePuttyButton.Text = "Locate putty.exe";
-            this.locatePuttyButton.UseVisualStyleBackColor = true;
-            this.locatePuttyButton.Click += new System.EventHandler(this.button3_Click);
-            // 
             // puttyLocation
             // 
             this.puttyLocation.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "PuttyLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -188,40 +245,12 @@ namespace uk.org.riseley.puttySessionManager.form
             this.transparencyCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.transparencyCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
             this.transparencyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.transparencyCheckBox.Location = new System.Drawing.Point(88, 42);
+            this.transparencyCheckBox.Location = new System.Drawing.Point(113, 42);
             this.transparencyCheckBox.Name = "transparencyCheckBox";
             this.transparencyCheckBox.Size = new System.Drawing.Size(127, 17);
             this.transparencyCheckBox.TabIndex = 0;
             this.transparencyCheckBox.Text = "Enable Transparency";
             this.transparencyCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel
-            // 
-            this.tableLayoutPanel.ColumnCount = 1;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Controls.Add(this.groupBox1, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.okButton, 0, 1);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 2;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.88288F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.11712F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(369, 222);
-            this.tableLayoutPanel.TabIndex = 1;
-            // 
-            // okButton
-            // 
-            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(151, 191);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(67, 22);
-            this.okButton.TabIndex = 1;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // fontDialog
             // 
@@ -248,9 +277,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
-            this.tableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -271,5 +300,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.CheckBox onTopCheckBox;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label sessionWarningLabel;
+        private System.Windows.Forms.CheckBox autostartCheckBox;
+        private System.Windows.Forms.CheckBox minimizeCheckBox;
     }
 }

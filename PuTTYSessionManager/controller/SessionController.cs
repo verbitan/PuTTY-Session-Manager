@@ -6,9 +6,12 @@ using System.IO;
 using Microsoft.Win32;
 using System.Diagnostics;
 using uk.org.riseley.puttySessionManager.model;
+using System.Windows.Forms;
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
   ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.PUTTY_SESSIONS_REG_KEY)]
+[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
+ ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.AUTOSTART_REG_KEY)]  
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
@@ -38,6 +41,16 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// The registry key ( relative to HKCU ) that stores PuTTY sessions
         /// </summary>
         public const string PUTTY_SESSIONS_REG_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
+
+        /// <summary>
+        /// The registry key ( relative to HKCU ) that stores the Autostart entries
+        /// </summary>
+        public const string AUTOSTART_REG_KEY = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+
+        /// <summary>
+        /// The registry key attribute that stores the PSM Autostart entry
+        /// </summary>
+        public const string PSM_AUTOSTART_REG_ATTRIB = "PuTTYSessionManager";
 
         /// <summary>
         /// The registry key of the "Default Session"
@@ -553,5 +566,49 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
             return tooltip;
         }
+
+        /// <summary>
+        /// Check whether auto start on logon is enabled in the registry
+        /// </summary>
+        /// <returns></returns>
+        public bool isAutoStartEnabled()
+        {
+            bool retval = false;
+            
+            // Open the autostart registry key
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY);
+
+            // Check if the PSM attribute exists
+            if (rk.GetValue(PSM_AUTOSTART_REG_ATTRIB) != null)
+                retval = true;
+
+            // Clost the registry key
+            rk.Close();
+
+            return retval;                
+        }
+
+        /// <summary>
+        /// Adds or removes a key from the registry to automatically
+        /// start Putty Session Manager on logon
+        /// </summary>
+        /// <param name="enabled">Enable or disable auto start</param>
+        public void setAutoStart(bool enabled)
+        {
+            // Open the autostart registry key
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY,true);
+
+            // If we are enabling autstart set the value to the current exec path
+            if (enabled)
+                rk.SetValue(PSM_AUTOSTART_REG_ATTRIB, "\"" + Application.ExecutablePath + "\"", RegistryValueKind.String);
+            // otherwise delete it
+            else
+                rk.DeleteValue(PSM_AUTOSTART_REG_ATTRIB, false);
+
+            // Close the value
+            rk.Close();
+        }
+
+
     }
 }

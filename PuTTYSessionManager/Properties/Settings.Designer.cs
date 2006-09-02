@@ -238,5 +238,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["SubfolderSessionWarning"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MinimizeOnStart {
+            get {
+                return ((bool)(this["MinimizeOnStart"]));
+            }
+            set {
+                this["MinimizeOnStart"] = value;
+            }
+        }
     }
 }

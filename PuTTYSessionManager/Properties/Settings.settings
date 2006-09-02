@@ -56,5 +56,8 @@
     <Setting Name="SubfolderSessionWarning" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="MinimizeOnStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

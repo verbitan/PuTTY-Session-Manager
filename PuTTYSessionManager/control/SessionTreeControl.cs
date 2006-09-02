@@ -63,7 +63,7 @@ namespace uk.org.riseley.puttySessionManager.control
             hkc.HotkeysRefreshed += hkHandler;
 
             toolTip = new ToolTip();
-            toolTip.InitialDelay = 5000; // 3 seconds delay
+            toolTip.InitialDelay = 3000; // 3 seconds delay
             toolTip.ReshowDelay  = 2000;
             toolTip.AutoPopDelay = 5000;
             toolTip.UseAnimation = true;
