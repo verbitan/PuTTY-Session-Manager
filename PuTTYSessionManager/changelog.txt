@@ -1,3 +1,25 @@
+PuTTY Session Manager v0.2.1.1 ( 02-09-2006 )
+=============================================
+Third release of PuTTY Session Manager
+
+This is a minor release of PSM with the following changes:
+
+Feature requests:
+1550783: Add Session Manager option: minimize to tray on startup
+1550780: Session Manager should have option start with windows logon
+1529192: Improve code commenting
+		 This has only been partially done.
+1529179: Enable Create new folder on session folders
+1528624: Tooltips for sessions
+
+Bugs:
+1548086: Saved location may not restore when using dual monitors
+1530587: Drag n drop duplicate folder names does not refresh properly
+1530585: Delete sessions does not refresh the session list
+	
+I have also restructured the code although there is more to do!
+
+ 
 PuTTY Session Manager v0.2.0.1 ( 22-07-2006 )
 =============================================
 Second release of PuTTY Session Manager

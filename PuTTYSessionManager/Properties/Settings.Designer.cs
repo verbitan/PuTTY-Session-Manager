@@ -250,5 +250,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["MinimizeOnStart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ToolTipsEnabled {
+            get {
+                return ((bool)(this["ToolTipsEnabled"]));
+            }
+            set {
+                this["ToolTipsEnabled"] = value;
+            }
+        }
     }
 }

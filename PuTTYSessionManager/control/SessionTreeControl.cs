@@ -448,12 +448,16 @@ namespace uk.org.riseley.puttySessionManager.control
                     }
                     else
                     {
-                        newFolderMenuItem.Enabled = false;
-
                         if (treeView.SelectedNode.Parent == null)
+                        {
+                            newFolderMenuItem.Enabled = false;
                             renameFolderMenuItem.Enabled = false;
+                        }
                         else
+                        {
+                            newFolderMenuItem.Enabled = true;
                             renameFolderMenuItem.Enabled = true;
+                        }
                     }
                 }
             }
@@ -1009,7 +1013,10 @@ namespace uk.org.riseley.puttySessionManager.control
             else
             {
                 if (toolTip != null && toolTip.Active)
+                {
+                    oldNodeIndex = -1;
                     toolTip.Active = false; //turn it off
+                }
             }
         }
 
