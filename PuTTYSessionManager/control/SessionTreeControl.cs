@@ -50,6 +50,8 @@ namespace uk.org.riseley.puttySessionManager.control
         private Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem> hotkeyDictionary;
 
         private ToolTip toolTip;
+        private int oldNodeIndex = -1; 
+
         public SessionTreeControl()
             : base()
         {
@@ -63,11 +65,8 @@ namespace uk.org.riseley.puttySessionManager.control
             hkc.HotkeysRefreshed += hkHandler;
 
             toolTip = new ToolTip();
-            toolTip.InitialDelay = 3000; // 3 seconds delay
-            toolTip.ReshowDelay  = 2000;
-            toolTip.AutoPopDelay = 5000;
-            toolTip.UseAnimation = true;
-            toolTip.UseFading = true;
+            toolTip.InitialDelay = 800;
+            toolTip.ReshowDelay = 0;
         }
 
         /// <summary>
@@ -974,33 +973,8 @@ namespace uk.org.riseley.puttySessionManager.control
         }
 
         /// <summary>
-        /// Event handler for NodeMouseHover from the tree view.
-        /// Retrieve the tool tip text from the session if the node
-        /// that is pointed to is not a folder
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e">contains the node are we hovering over</param>
-        private void treeView_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
-        {
-            // If the tool tip is active on another node
-            // disable it
-            if (toolTip.Active == true)
-                toolTip.Active = false;
-
-            // Find the session
-            Session s = (Session)e.Node.Tag;
-
-            // If there is a session and it's not a folder
-            // set the tool tip text and display it
-            if (s != null && s.IsFolder == false)
-            {
-                toolTip.SetToolTip(e.Node.TreeView, s.ToolTipText);
-                toolTip.Active = true;
-            }
-        }
-
-        /// <summary>
         /// Event handler for MouseMove from the tree view.
+        /// Enable the tooltip if the node is a session not a folder
         /// If a tool tip is active and we have moved off the tree
         /// then disable the tool tip
         /// </summary>
@@ -1008,10 +982,35 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <param name="e"></param>
         private void treeView_MouseMove(object sender, MouseEventArgs e)
         {
-            // Get the node at the mouse position.
-            TreeNode node = treeView.GetNodeAt(e.X,e.Y);
-            if (node == null && toolTip.Active == true)
-                toolTip.Active = false;
+            // If we have disable tooltips return
+            if (Properties.Settings.Default.ToolTipsEnabled == false)
+                return;
+
+            TreeNode tn = treeView.GetNodeAt(e.X, e.Y);
+            if (tn != null)
+            {
+                int currentNodeIndex = tn.Index;
+                if (currentNodeIndex != oldNodeIndex)
+                {
+                    oldNodeIndex = currentNodeIndex;
+                    if (toolTip != null && toolTip.Active)
+                        toolTip.Active = false; //turn it off
+
+                    // Find the session
+                    Session s = (Session)tn.Tag;
+
+                    if (s.IsFolder == false)
+                    {
+                        toolTip.SetToolTip(treeView, s.ToolTipText);
+                        toolTip.Active = true; //make it active so it can show
+                    }
+                }
+            }
+            else
+            {
+                if (toolTip != null && toolTip.Active)
+                    toolTip.Active = false; //turn it off
+            }
         }
 
     }

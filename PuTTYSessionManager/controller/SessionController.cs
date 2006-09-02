@@ -196,7 +196,7 @@ namespace uk.org.riseley.puttySessionManager.controller
 
                 Session s = new Session(keyName, psmpath, false);
 
-                s.ToolTipText = getSessionToolTipText(sessKey);
+                s.ToolTipText = getSessionToolTipText(sessKey, s.SessionDisplayText);
 
                 sessKey.Close();
                 sl.Add(s);
@@ -544,23 +544,54 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// </summary>
         /// <param name="s">The session to use</param>
         /// <returns></returns>
-        private string getSessionToolTipText(RegistryKey rk)
+        private string getSessionToolTipText(RegistryKey rk, string sessionname)
         {
             string tooltip = "";
             if (rk != null)
             {
+                // Get all the values from the registry that we are interested in
                 string hostname = (string)rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
                 string username = (string)rk.GetValue(PUTTY_USERNAME_ATTRIB);
                 string portforwards = (string)rk.GetValue ("PortForwardings");
+                string protocol = (string)rk.GetValue("Protocol");
+                string remotecommand = (string)rk.GetValue("RemoteCommand");
+                int portnumber = (int)rk.GetValue("PortNumber");
+
+                // Close the registry key
                 rk.Close();
 
-                if (hostname != null && !hostname.Equals(""))
-                    tooltip += "Hostname: " + hostname + "\n";
-                if (username != null && !username.Equals(""))
-                    tooltip += "Username: " + username + "\n";
+                // Check if the hostname is set
+                if (hostname == null || hostname.Equals(""))
+                    hostname = "[NONE SET]";
+
+                // Ignore the default username if the hostname contains an @
+                if ( hostname.Contains("@") )
+                    username = null;
+                else if ( username != null && !(username.Equals("")))
+                    username = username + "@";
+
+                // Set the port number to null if default for the protocol
+                string port = ":" + portnumber;
+                if ( ( protocol.Equals("ssh") && portnumber == 22 )    ||
+                     ( protocol.Equals("telnet") && portnumber == 23 ) ||
+                     ( protocol.Equals("rlogin") && portnumber == 513 ) )
+                {
+                    port = "";
+                }
+
+                // Build the connection string
+                String connection = protocol + "://" + username + hostname + port;
+
+                // Now build the full tooltip text
+                if (sessionname != null && !sessionname.Equals(""))
+                    tooltip += "Session: " + sessionname + "\n";
+                tooltip += connection + "\n";
+                if (remotecommand != null && !remotecommand.Equals(""))
+                    tooltip += "Remote Command: " + remotecommand + "\n";
                 if (portforwards != null && !portforwards.Equals(""))
                     tooltip += "Port Forwards: " + portforwards + "\n";
                 
+                // Strip off any trailing newline
                 if (tooltip.EndsWith("\n"))
                     tooltip = tooltip.Remove(tooltip.LastIndexOf("\n"));
             }
