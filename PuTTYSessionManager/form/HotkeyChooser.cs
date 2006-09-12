@@ -45,7 +45,8 @@ namespace uk.org.riseley.puttySessionManager.form
             hkc = HotkeyController.getInstance();
             InitializeComponent();
             createComboDictionary();
-            hotKeyTextBox.Text = hkc.getNewSessionHotkey();
+            newSessionHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_NEW);
+            minimizeWindowHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_MINIMIZE);
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
             EventHandler hkHandler = new EventHandler(setHotkeys);
@@ -101,16 +102,40 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (hotkeyCheckBox.Checked == false)
-                hotKeyTextBox.Text = hkc.getNewSessionHotkey();
+            if (newSessionHKCheckbox.Checked == false)
+                newSessionHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_NEW);
+            if (minimizeWindowHKCheckbox.Checked == false)
+                minimizeWindowHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_MINIMIZE);            
             this.Close();
         }
 
-        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void hotkeyCheckbox_Click(object sender, EventArgs e)
         {
-            if (hotkeyCheckBox.Checked == false)
+            // Get the checkbox that was clicked
+            CheckBox cb = (CheckBox)sender;
+
+            // Get the hotkey to adjust and the text box to query
+            HotkeyController.HotKeyId hkid;
+            TextBox tb = null;
+            if (cb == newSessionHKCheckbox)
             {
-                bool result = hkc.UnregisterHotKey(parentWindow);
+                hkid = HotkeyController.HotKeyId.HKID_NEW;
+                tb = newSessionHKTextbox;
+            }
+            else if (cb == minimizeWindowHKCheckbox)
+            {
+                hkid = HotkeyController.HotKeyId.HKID_MINIMIZE;
+                tb = minimizeWindowHKTextbox;
+            }
+            else
+            {
+                return;
+            }
+
+            // Unregister the hotkey if the box is unticked
+            if (cb.Checked == false)
+            {
+                bool result = hkc.UnregisterHotKey(parentWindow, hkid);
                 if (result == false)
                 {
                     MessageBox.Show(this, "Failed to unregister hotkey"
@@ -118,43 +143,54 @@ namespace uk.org.riseley.puttySessionManager.form
                                    , MessageBoxButtons.OK
                                    , MessageBoxIcon.Warning);
                 }
-                hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
+                tb.Text = hkc.getHotKeyFromId(hkid);
             }
             else
             {
-                if ( hotKeyTextBox.Text.Length != 1 ) {
+                if ( tb.Text.Length != 1 ) {
                     MessageBox.Show(this, "Hotkey must be specified"
                                    , "Warning"
                                    , MessageBoxButtons.OK
-                                   , MessageBoxIcon.Warning);                    
-                    hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
-                    hotkeyCheckBox.Checked = false;
-                } else if ( Regex.IsMatch ( hotKeyTextBox.Text, @"(?!([deflmruDERLMRU]))[a-zA-Z]" ) == false ) 
+                                   , MessageBoxIcon.Warning);
+                    tb.Text = hkc.getHotKeyFromId(hkid);
+                    cb.Checked = false;
+                } 
+                else if ( Regex.IsMatch ( tb.Text, @"(?!([deflmruDERLMRU]))[a-zA-Z]" ) == false ) 
                 {
                     MessageBox.Show(this, "Hotkey can only be A-Z but not D,E,F,L,M,R or U"
                                    , "Warning"
                                    , MessageBoxButtons.OK
-                                   , MessageBoxIcon.Warning);                    
-                    hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
-                    hotkeyCheckBox.Checked = false;
-                
+                                   , MessageBoxIcon.Warning);
+                    tb.Text = hkc.getHotKeyFromId(hkid);
+                    cb.Checked = false;                
+                }
+                else if (newSessionHKTextbox.Text.Equals(minimizeWindowHKTextbox.Text,StringComparison.CurrentCultureIgnoreCase))
+                {
+                    MessageBox.Show(this, "Hotkeys must be different"
+                                , "Warning"
+                                , MessageBoxButtons.OK
+                                , MessageBoxIcon.Warning);
+                    tb.Text = hkc.getHotKeyFromId(hkid);
+                    cb.Checked = false;                
                 }
                 else
                 {
-                    char newHotkey = hotKeyTextBox.Text.ToUpper().ToCharArray(0,1)[0];
-                    bool result = hkc.RegisterHotkey(parentWindow, newHotkey, HotkeyController.HotKeyId.HKID_NEW);
+                    char newHotkey = tb.Text.ToUpper().ToCharArray(0, 1)[0];
+                    bool result = hkc.RegisterHotkey(parentWindow, newHotkey, hkid);
                     if (result == false)
                     {
                         MessageBox.Show(this, "Failed to register hotkey"
                                        , "Warning"
                                        , MessageBoxButtons.OK
                                        , MessageBoxIcon.Warning);
-                        hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
-                        hotkeyCheckBox.Checked = false;
-                    } else 
+                        tb.Text = hkc.getHotKeyFromId(hkid);
+                        cb.Checked = false;
+                    }
+                    else
                     {
-                        Properties.Settings.Default.HotkeyNewSession = hotKeyTextBox.Text.ToUpper();
-                        hotKeyTextBox.Text = Properties.Settings.Default.HotkeyNewSession;
+                        Properties.Settings.Default.HotkeyNewSession = newSessionHKTextbox.Text.ToUpper();
+                        Properties.Settings.Default.HotkeyMinimize = minimizeWindowHKTextbox.Text.ToUpper();
+                        tb.Text = hkc.getHotKeyFromId(hkid);
                     }
                 }
                 
@@ -179,7 +215,7 @@ namespace uk.org.riseley.puttySessionManager.form
             hkc.saveSessionnameToHotkey(parentWindow, hkid, s);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void favSessCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (favSessCheckBox.Checked == true)
             {

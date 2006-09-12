@@ -262,5 +262,29 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["ToolTipsEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HotkeyMinimizeEnabled {
+            get {
+                return ((bool)(this["HotkeyMinimizeEnabled"]));
+            }
+            set {
+                this["HotkeyMinimizeEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Q")]
+        public string HotkeyMinimize {
+            get {
+                return ((string)(this["HotkeyMinimize"]));
+            }
+            set {
+                this["HotkeyMinimize"] = value;
+            }
+        }
     }
 }

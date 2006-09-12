@@ -73,10 +73,21 @@ namespace uk.org.riseley.puttySessionManager.form
             else
                 this.DesktopLocation = new Point(0, 0);
 
+            // Reset the display to either the tree or the list
             displayTreeToolStripMenuItem.Checked = Properties.Settings.Default.DisplayTree;
+
+            // Register the new session hotkey if enabled
             if (Properties.Settings.Default.HotkeyNewEnabled)
-                hkc.RegisterHotkey(this, Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0], HotkeyController.HotKeyId.HKID_NEW);
+                hkc.RegisterHotkey(this, HotkeyController.HotKeyId.HKID_NEW);
+
+            // Register the minimize hotkey if enabled
+            if (Properties.Settings.Default.HotkeyMinimizeEnabled)
+                hkc.RegisterHotkey(this, HotkeyController.HotKeyId.HKID_MINIMIZE);
+
+            // Invalidate the session list to force a refresh of all forms
             sc.invalidateSessionList(this, true); 
+
+            // Setup the display
             setDisplay();
         }
 
@@ -184,8 +195,20 @@ namespace uk.org.riseley.puttySessionManager.form
             base.WndProc(ref m);
         }
 
+        /// <summary>
+        /// Process the hotkey event
+        /// </summary>
+        /// <param name="id">The hotkey that was pressed</param>
         private void processHotKey(int id)
         {
+            // If it's the minimize hotkey switch the display state
+            if (id == (int)HotkeyController.HotKeyId.HKID_MINIMIZE)
+            {
+                this.Visible = !(this.Visible);
+                return;
+            }
+
+            // Otherwise figure out which session to launch
             String sessionName = "";
             switch (id)
             {

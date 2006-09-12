@@ -62,5 +62,11 @@
     <Setting Name="ToolTipsEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="HotkeyMinimizeEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HotkeyMinimize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Q</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

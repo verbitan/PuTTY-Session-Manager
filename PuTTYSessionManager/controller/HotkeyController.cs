@@ -255,24 +255,13 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         public bool RegisterHotkey(Form form, HotKeyId id)
         {
-            return RegisterHotkey(form, getHotKey(id), id);
+            return RegisterHotkey(form, getHotKeyCharFromId(id), id);
         }
-
-        public bool RegisterHotkey(Form form, HotKey hk, HotKeyId id)
-        {
-            return RegisterHotkey ( form ,(char)hk, id );
-        }
-
 
         public bool RegisterHotkey(Form form, char winkey, HotKeyId id)
         {
             bool result = User32.RegisterHotKey(form.Handle, (int) id, (int) User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
             return result;
-        }
-
-        public bool RegisterHotkey(Form form)
-        {
-            return RegisterHotkey(form, DEFAULT_HOTKEY, HotKeyId.HKID_NEW );
         }
 
         public bool UnregisterHotKey(Form form, HotKeyId id)
@@ -294,9 +283,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         private String getSessionNameFromHotkey(HotKeyId hkid)
         {
             switch ( hkid )
-            {
-                case HotKeyId.HKID_NEW:
-                    return Properties.Settings.Default.HotkeyNewSession;
+            {                
                 case HotKeyId.HKID_SESSION_1:
                     return Properties.Settings.Default.FavouriteSession1;
                 case HotKeyId.HKID_SESSION_2:
@@ -309,6 +296,25 @@ namespace uk.org.riseley.puttySessionManager.controller
                     return Properties.Settings.Default.FavouriteSession5;
                 default:
                     return null;
+            }
+        }
+
+        public string getHotKeyFromId(HotKeyId hkid)
+        {
+            return getHotKeyCharFromId(hkid).ToString();
+        }
+
+
+        private char getHotKeyCharFromId(HotKeyId hkid)
+        {
+            switch (hkid)
+            {
+                case HotKeyId.HKID_NEW:
+                    return Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0];
+                case HotKeyId.HKID_MINIMIZE:
+                    return Properties.Settings.Default.HotkeyMinimize.ToCharArray(0,1)[0];
+                default:
+                    return (char)getHotKey(hkid);
             }
         }
 
@@ -336,7 +342,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         {
             bool result = false;
             UnregisterHotKey(window, hkid);
-            if (RegisterHotkey(window,getHotKey(hkid), hkid))
+            if (RegisterHotkey(window,hkid))
             {
                 switch (hkid)
                 {
@@ -384,15 +390,8 @@ namespace uk.org.riseley.puttySessionManager.controller
             OnHotkeysRefreshed(this, EventArgs.Empty);
         }
 
-        public String getNewSessionHotkey()
-        {
-            return getSessionNameFromHotkey(HotKeyId.HKID_NEW);
-        }
-
         public int WM_HOTKEY = (int) User32.Msgs.WM_HOTKEY;
         
-        private char DEFAULT_HOTKEY = 'N';
-
         public enum HotKeyId
         {
             HKID_NEW = 0,
@@ -400,7 +399,8 @@ namespace uk.org.riseley.puttySessionManager.controller
             HKID_SESSION_2 = 2,
             HKID_SESSION_3 = 3,
             HKID_SESSION_4 = 4,
-            HKID_SESSION_5 = 5
+            HKID_SESSION_5 = 5,
+            HKID_MINIMIZE  = 6
         }
 
         public enum HotKey
