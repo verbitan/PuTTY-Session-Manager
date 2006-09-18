@@ -106,6 +106,12 @@
     <Compile Include="form\FolderForm.Designer.cs">
       <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\UpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UpdateForm.Designer.cs">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="model\CopySessionRequest.cs" />
     <Compile Include="model\NewSessionRequest.cs" />
     <Compile Include="model\RefreshSessionsEventArgs.cs" />
@@ -206,6 +212,10 @@
     <EmbeddedResource Include="form\SessionManagerForm.resx">
       <DependentUpon>SessionManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UpdateForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,3 +1,13 @@
+PuTTY Session Manager v0.2.2.1 ( 02-09-2006 )
+=============================================
+Fourth release of PuTTY Session Manager
+
+This is a minor release of PSM with the following changes:
+
+Feature requests:
+1557278: Add minimize window hotkey
+
+
 PuTTY Session Manager v0.2.1.1 ( 02-09-2006 )
 =============================================
 Third release of PuTTY Session Manager

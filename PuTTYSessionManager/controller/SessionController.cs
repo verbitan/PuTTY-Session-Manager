@@ -584,16 +584,16 @@ namespace uk.org.riseley.puttySessionManager.controller
 
                 // Now build the full tooltip text
                 if (sessionname != null && !sessionname.Equals(""))
-                    tooltip += "Session: " + sessionname + "\n";
-                tooltip += connection + "\n";
+                    tooltip += "Session: " + sessionname + Environment.NewLine;
+                tooltip += connection + Environment.NewLine;
                 if (remotecommand != null && !remotecommand.Equals(""))
-                    tooltip += "Remote Command: " + remotecommand + "\n";
+                    tooltip += "Remote Command: " + remotecommand + Environment.NewLine;
                 if (portforwards != null && !portforwards.Equals(""))
-                    tooltip += "Port Forwards: " + portforwards + "\n";
+                    tooltip += "Port Forwards: " + portforwards + Environment.NewLine;
                 
                 // Strip off any trailing newline
-                if (tooltip.EndsWith("\n"))
-                    tooltip = tooltip.Remove(tooltip.LastIndexOf("\n"));
+                if (tooltip.EndsWith(Environment.NewLine))
+                    tooltip = tooltip.Remove(tooltip.LastIndexOf(Environment.NewLine));
             }
             return tooltip;
         }

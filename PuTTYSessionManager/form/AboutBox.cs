@@ -27,6 +27,8 @@ namespace uk.org.riseley.puttySessionManager.form
 {
     partial class AboutBox : Form
     {
+        private UpdateForm uf = null; 
+
         public AboutBox()
         {
             InitializeComponent();
@@ -41,6 +43,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
+
+            // Create the update form
+            uf = new UpdateForm();
         }
 
         #region Assembly Attribute Accessors
@@ -133,6 +138,11 @@ namespace uk.org.riseley.puttySessionManager.form
         private void sfLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(sfLinkLabel.Text);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            uf.ShowDialog();
         }
     }
 }
