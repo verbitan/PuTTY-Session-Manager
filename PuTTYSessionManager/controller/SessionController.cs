@@ -192,15 +192,17 @@ namespace uk.org.riseley.puttySessionManager.controller
             foreach (string keyName in rk.GetSubKeyNames())
             {
                 RegistryKey sessKey = rk.OpenSubKey(keyName);
-                String psmpath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_ATTRIB);          
 
-                Session s = new Session(keyName, psmpath, false);
+                // Exclude keys that have no values in them
+                if (sessKey.ValueCount > 0)
+                {
+                    String psmpath = (String)sessKey.GetValue(PUTTY_PSM_FOLDER_ATTRIB);
+                    Session s = new Session(keyName, psmpath, false);
 
-                s.ToolTipText = getSessionToolTipText(sessKey, s.SessionDisplayText);
-
+                    s.ToolTipText = getSessionToolTipText(sessKey, s.SessionDisplayText);
+                    sl.Add(s);
+                }
                 sessKey.Close();
-                sl.Add(s);
-
             }
             rk.Close();
             sl.Sort();
@@ -547,7 +549,9 @@ namespace uk.org.riseley.puttySessionManager.controller
         private string getSessionToolTipText(RegistryKey rk, string sessionname)
         {
             string tooltip = "";
-            if (rk != null)
+            int portnumber = -1;
+
+            if (rk != null )
             {
                 // Get all the values from the registry that we are interested in
                 string hostname = (string)rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
@@ -555,7 +559,12 @@ namespace uk.org.riseley.puttySessionManager.controller
                 string portforwards = (string)rk.GetValue ("PortForwardings");
                 string protocol = (string)rk.GetValue("Protocol");
                 string remotecommand = (string)rk.GetValue("RemoteCommand");
-                int portnumber = (int)rk.GetValue("PortNumber");
+
+                // Get the port number
+                object portnumberObject = rk.GetValue("PortNumber");
+                // Only attempt to cast to an int if the object is not null
+                if ( portnumberObject != null )
+                    portnumber = (int)portnumberObject;
 
                 // Close the registry key
                 rk.Close();
@@ -565,16 +574,18 @@ namespace uk.org.riseley.puttySessionManager.controller
                     hostname = "[NONE SET]";
 
                 // Ignore the default username if the hostname contains an @
-                if ( hostname.Contains("@") )
+                if (hostname != null && hostname.Contains("@"))
                     username = null;
                 else if ( username != null && !(username.Equals("")))
                     username = username + "@";
 
                 // Set the port number to null if default for the protocol
                 string port = ":" + portnumber;
-                if ( ( protocol.Equals("ssh") && portnumber == 22 )    ||
-                     ( protocol.Equals("telnet") && portnumber == 23 ) ||
-                     ( protocol.Equals("rlogin") && portnumber == 513 ) )
+                if (  protocol != null &&
+                    ((protocol.Equals("ssh") && portnumber == 22) ||
+                     (protocol.Equals("telnet") && portnumber == 23) ||
+                     (protocol.Equals("rlogin") && portnumber == 513) ||
+                      portnumber == -1 ))
                 {
                     port = "";
                 }
