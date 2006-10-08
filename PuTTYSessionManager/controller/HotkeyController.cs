@@ -391,6 +391,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         public int WM_HOTKEY = (int) User32.Msgs.WM_HOTKEY;
+        public int WM_KEYDOWN = (int)User32.Msgs.WM_KEYDOWN;
         
         public enum HotKeyId
         {

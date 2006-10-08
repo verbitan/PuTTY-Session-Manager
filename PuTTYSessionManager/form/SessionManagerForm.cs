@@ -28,7 +28,7 @@ using uk.org.riseley.puttySessionManager.control;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
-    public partial class SessionManagerForm : SessionManagementForm
+    public partial class SessionManagerForm : SessionManagementForm, IMessageFilter 
     {
         private Options optionsDialog;
         private AboutBox aboutDialog;
@@ -48,6 +48,7 @@ namespace uk.org.riseley.puttySessionManager.form
             LoadLayout();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
+            Application.AddMessageFilter(this); 
         }
 
         private void LoadLayout()
@@ -188,12 +189,36 @@ namespace uk.org.riseley.puttySessionManager.form
 
         }
 
-        protected override void WndProc(ref Message m)
+        /// <summary>
+        /// A message filter to listen for escape key and hotkey events
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public bool PreFilterMessage(ref Message m)
         {
-            if (m.Msg == hkc.WM_HOTKEY)
-                processHotKey((int) m.WParam);               
-            base.WndProc(ref m);
-        }
+            // Quick filter to ignore events we're not interested in
+            if (m.Msg != hkc.WM_KEYDOWN &&
+                m.Msg != hkc.WM_HOTKEY)
+                return false;
+
+            Keys keyCode = (Keys)(int)m.WParam & Keys.KeyCode;
+            if (m.Msg == hkc.WM_KEYDOWN &&
+                keyCode == Keys.Escape &&
+                this.Visible == true &&
+                this.ContainsFocus == true )
+            {
+                this.Visible = false;
+            }
+            else if (m.Msg == hkc.WM_HOTKEY)
+            {
+                processHotKey((int)m.WParam);
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        } 
 
         /// <summary>
         /// Process the hotkey event
