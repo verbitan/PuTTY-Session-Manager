@@ -1,11 +1,27 @@
-PuTTY Session Manager v0.2.2.1 ( 02-09-2006 )
+PuTTY Session Manager v0.2.2.1 ( 29-10-2006 )
 =============================================
 Fourth release of PuTTY Session Manager
 
 This is a minor release of PSM with the following changes:
 
 Feature requests:
-1557278: Add minimize window hotkey
+1557278: Add minimize window hotkey. The hotkey is configurable through
+         the options dialog. Pressing ESC when the focus is on the main
+         tree will also minimize the window.
+1551069: Check for update. You can now check for the latest version of
+         PSM from either the options window or the about box.  This 
+         feature supports HTTP proxy servers.  
+1561769: Allow installer to specify "all users" or "current user"
+         Fixed to create All Users icons if possible, otherwise 
+         reverts to current user icons      
+
+Bugs:         
+1563160: PSM crashes with NRE when empty key is stored in registry. This
+         had the effect of making PSM incompatible with TuTTY. Empty keys
+         (TuTTY folders) are now silently ignored
+1531431: Installer does not handle previous version of PSM running.
+         Fixed to kill any version of PSM that is running before installer
+         or uninstaller starts.       
 
 
 PuTTY Session Manager v0.2.1.1 ( 02-09-2006 )

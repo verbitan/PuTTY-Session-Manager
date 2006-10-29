@@ -64,7 +64,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tableLayoutPanel.ColumnCount = 3;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.37288F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.62712F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.labelVersion, 1, 1);
@@ -186,9 +186,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.okButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.okButton.Location = new System.Drawing.Point(410, 328);
+            this.okButton.Location = new System.Drawing.Point(409, 328);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(56, 22);
+            this.okButton.Size = new System.Drawing.Size(57, 22);
             this.okButton.TabIndex = 24;
             this.okButton.Text = "&OK";
             // 

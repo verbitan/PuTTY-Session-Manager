@@ -38,6 +38,13 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
 
+; Set the version info for the installer
+VIAddVersionKey "ProductName" "${PRODUCT_NAME} Installer"
+VIAddVersionKey "LegalCopyright" "© ${PRODUCT_PUBLISHER}"
+VIAddVersionKey "FileDescription" "${PRODUCT_NAME} Installer"
+VIAddVersionKey "FileVersion" "${PRODUCT_VERSION}"
+VIProductVersion "${PRODUCT_VERSION}"
+
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
 
@@ -89,17 +96,29 @@ ShowUnInstDetails show
 
 Section "MainSection" SEC01
   !insertmacro CheckDotNET
+  
+  ; Kill PSM if it's running
+  KillProcDLL::KillProc "${PRODUCT_NAME}.exe"
+  
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "${PSM_EXE}"
   File "${PSM_EXE}.config"
   File "${PSM_BUILD_DIR}\gpl.txt"
+  File "${PSM_BUILD_DIR}\changelog.txt"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-  CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
+  SetShellVarContext all
+  CreateDirectory $SMPROGRAMS\$ICONS_GROUP
+  IfFileExists $SMPROGRAMS\$ICONS_GROUP createIcons
+    SetShellVarContext current
+    CreateDirectory $SMPROGRAMS\$ICONS_GROUP
+
+  createIcons:
+    CreateDirectory "$SMPROGRAMS\"
+    CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
+    CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
@@ -122,6 +141,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
 
+AutoCloseWindow false
 
 Function un.onUninstSuccess
   HideWindow
@@ -135,21 +155,36 @@ FunctionEnd
 
 Section Uninstall
   !insertmacro MUI_STARTMENU_GETFOLDER "Application" $ICONS_GROUP
+  ; Kill PSM if it's running
+  KillProcDLL::KillProc "${PRODUCT_NAME}.exe"
+  
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\gpl.txt"
-  Delete "$INSTDIR\${PRODUCT_NAME}.config"
+  Delete "$INSTDIR\changelog.txt"
+  Delete "$INSTDIR\${PRODUCT_NAME}.exe.config"
   Delete "$INSTDIR\${PRODUCT_NAME}.exe"
-
+  
+  ; Remove the all users icons
+  SetShellVarContext all
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Website.lnk"
-  Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk"
-
+  Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
+
+  ; Remove the current users icons
+  SetShellVarContext current
+  Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\Website.lnk"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk"
+  Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
+  RMDir "$SMPROGRAMS\$ICONS_GROUP"
+
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
+  DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Run" "PuTTYSessionManager"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
-  SetAutoClose true
+  SetAutoClose false
 SectionEnd
