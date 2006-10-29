@@ -68,5 +68,20 @@
     <Setting Name="HotkeyMinimize" Type="System.String" Scope="User">
       <Value Profile="(Default)">Q</Value>
     </Setting>
+    <Setting Name="UpdateUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://puttysm.sourceforge.net/update.txt</Value>
+    </Setting>
+    <Setting Name="ProxyMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ProxyServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProxyPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultUpdateUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://puttysm.sourceforge.net/update.txt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

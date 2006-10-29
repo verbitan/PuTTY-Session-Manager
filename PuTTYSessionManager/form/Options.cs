@@ -34,6 +34,10 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private SessionController sc;
 
+        private UpdateForm uf;
+
+        public enum ProxyMode { PROXY_IE, PROXY_NONE, PROXY_USER };
+
         public Options(Form parentWindow)
         {
             this.parentWindow = parentWindow;
@@ -41,9 +45,33 @@ namespace uk.org.riseley.puttySessionManager.form
             hkChooser = new HotkeyChooser(parentWindow);
             sc = SessionController.getInstance();
             autostartCheckBox.Checked = sc.isAutoStartEnabled();
+
+            // Create the update form
+            uf = new UpdateForm();
+
+            // Reset the proxy mode button to the save pref
+            ProxyMode pm = (ProxyMode)Properties.Settings.Default.ProxyMode;
+            if (pm == ProxyMode.PROXY_IE)
+            {
+                ieProxyRadioButton.Checked = true;
+            }
+            else if (pm == ProxyMode.PROXY_NONE)
+            {
+                directRadioButton.Checked = true;
+            }
+            else if (pm == ProxyMode.PROXY_USER)
+            {
+                userProxyRadioButton.Checked = true;
+            }
+            proxyServerTextBox.ReadOnly = !userProxyRadioButton.Checked;
+            proxyPortTextBox.ReadOnly = !userProxyRadioButton.Checked;
+
+            // Check if the update url is changed
+            if (!urlTextBox.Text.Equals(Properties.Settings.Default.DefaultUpdateUrl))
+                urlCheckBox.Checked = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void locatePuttyButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -51,7 +79,7 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void chooseFontButton_Click(object sender, EventArgs e)
         {
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
@@ -67,6 +95,36 @@ namespace uk.org.riseley.puttySessionManager.form
         private void autostartCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             sc.setAutoStart(autostartCheckBox.Checked);
+        }
+
+        private void urlCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            urlTextBox.ReadOnly = urlCheckBox.Checked;
+            if (urlCheckBox.Checked == true)
+                urlTextBox.Text = Properties.Settings.Default.DefaultUpdateUrl;
+        }
+
+        private void proxyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ieProxyRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.ProxyMode = (int)ProxyMode.PROXY_IE;
+            }
+            else if (directRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.ProxyMode = (int)ProxyMode.PROXY_NONE;
+            }
+            else if (userProxyRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.ProxyMode = (int)ProxyMode.PROXY_USER;                
+            }
+            proxyServerTextBox.ReadOnly = !userProxyRadioButton.Checked;
+            proxyPortTextBox.ReadOnly = !userProxyRadioButton.Checked;
+        }
+
+        private void checkForUpdateButton_Click(object sender, EventArgs e)
+        {
+            uf.ShowDialog();
         } 
     }
 }

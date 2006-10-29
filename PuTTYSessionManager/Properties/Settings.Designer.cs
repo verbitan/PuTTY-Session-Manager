@@ -286,5 +286,65 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["HotkeyMinimize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://puttysm.sourceforge.net/update.txt")]
+        public string UpdateUrl {
+            get {
+                return ((string)(this["UpdateUrl"]));
+            }
+            set {
+                this["UpdateUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ProxyMode {
+            get {
+                return ((int)(this["ProxyMode"]));
+            }
+            set {
+                this["ProxyMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyServer {
+            get {
+                return ((string)(this["ProxyServer"]));
+            }
+            set {
+                this["ProxyServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyPort {
+            get {
+                return ((string)(this["ProxyPort"]));
+            }
+            set {
+                this["ProxyPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://puttysm.sourceforge.net/update.txt")]
+        public string DefaultUpdateUrl {
+            get {
+                return ((string)(this["DefaultUpdateUrl"]));
+            }
+            set {
+                this["DefaultUpdateUrl"] = value;
+            }
+        }
     }
 }

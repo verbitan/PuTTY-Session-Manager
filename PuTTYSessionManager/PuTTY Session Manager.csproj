@@ -76,6 +76,12 @@
     <Compile Include="form\NewSessionForm.Designer.cs">
       <DependentUpon>NewSessionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\ProxyAuthenticationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\ProxyAuthenticationForm.Designer.cs">
+      <DependentUpon>ProxyAuthenticationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\SessionManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,10 @@
     <EmbeddedResource Include="form\NewSessionForm.resx">
       <DependentUpon>NewSessionForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\ProxyAuthenticationForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProxyAuthenticationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SessionManagementForm.resx">
       <DependentUpon>SessionManagementForm.cs</DependentUpon>

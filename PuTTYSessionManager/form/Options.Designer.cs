@@ -46,7 +46,11 @@ namespace uk.org.riseley.puttySessionManager.form
         private void InitializeComponent()
         {
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.okButton = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.generalOptionsTab = new System.Windows.Forms.TabPage();
+            this.toolTipsCheckBox = new System.Windows.Forms.CheckBox();
             this.autostartCheckBox = new System.Windows.Forms.CheckBox();
             this.minimizeCheckBox = new System.Windows.Forms.CheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -58,14 +62,27 @@ namespace uk.org.riseley.puttySessionManager.form
             this.locatePuttyButton = new System.Windows.Forms.Button();
             this.puttyLocation = new System.Windows.Forms.TextBox();
             this.transparencyCheckBox = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.okButton = new System.Windows.Forms.Button();
+            this.updateOptionsTab = new System.Windows.Forms.TabPage();
+            this.checkForUpdateButton = new System.Windows.Forms.Button();
+            this.urlCheckBox = new System.Windows.Forms.CheckBox();
+            this.urlTextBox = new System.Windows.Forms.TextBox();
+            this.urlLabel = new System.Windows.Forms.Label();
+            this.proxyGroupBox = new System.Windows.Forms.GroupBox();
+            this.proxyPortLabel = new System.Windows.Forms.Label();
+            this.proxyServerLabel = new System.Windows.Forms.Label();
+            this.proxyPortTextBox = new System.Windows.Forms.TextBox();
+            this.userProxyRadioButton = new System.Windows.Forms.RadioButton();
+            this.directRadioButton = new System.Windows.Forms.RadioButton();
+            this.ieProxyRadioButton = new System.Windows.Forms.RadioButton();
+            this.proxyServerTextBox = new System.Windows.Forms.TextBox();
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.toolTipsCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.generalOptionsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
-            this.tableLayoutPanel.SuspendLayout();
+            this.updateOptionsTab.SuspendLayout();
+            this.proxyGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -74,36 +91,89 @@ namespace uk.org.riseley.puttySessionManager.form
             this.openFileDialog.Filter = "putty.exe|putty.exe|All Files|*.*";
             this.openFileDialog.InitialDirectory = "C:\\Program Files\\PuTTY\\";
             // 
-            // groupBox1
+            // tableLayoutPanel
             // 
-            this.groupBox1.Controls.Add(this.toolTipsCheckBox);
-            this.groupBox1.Controls.Add(this.autostartCheckBox);
-            this.groupBox1.Controls.Add(this.minimizeCheckBox);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.sessionWarningLabel);
-            this.groupBox1.Controls.Add(this.onTopCheckBox);
-            this.groupBox1.Controls.Add(this.trackBar);
-            this.groupBox1.Controls.Add(this.sampletextTextbox);
-            this.groupBox1.Controls.Add(this.chooseFontButton);
-            this.groupBox1.Controls.Add(this.locatePuttyButton);
-            this.groupBox1.Controls.Add(this.puttyLocation);
-            this.groupBox1.Controls.Add(this.transparencyCheckBox);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(363, 177);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Options";
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel.Controls.Add(this.okButton, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.tabControl1, 0, 0);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.88288F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.11712F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(381, 268);
+            this.tableLayoutPanel.TabIndex = 1;
+            // 
+            // okButton
+            // 
+            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Location = new System.Drawing.Point(157, 234);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(67, 22);
+            this.okButton.TabIndex = 1;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.generalOptionsTab);
+            this.tabControl1.Controls.Add(this.updateOptionsTab);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(375, 216);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // generalOptionsTab
+            // 
+            this.generalOptionsTab.Controls.Add(this.toolTipsCheckBox);
+            this.generalOptionsTab.Controls.Add(this.autostartCheckBox);
+            this.generalOptionsTab.Controls.Add(this.minimizeCheckBox);
+            this.generalOptionsTab.Controls.Add(this.numericUpDown1);
+            this.generalOptionsTab.Controls.Add(this.sessionWarningLabel);
+            this.generalOptionsTab.Controls.Add(this.onTopCheckBox);
+            this.generalOptionsTab.Controls.Add(this.trackBar);
+            this.generalOptionsTab.Controls.Add(this.sampletextTextbox);
+            this.generalOptionsTab.Controls.Add(this.chooseFontButton);
+            this.generalOptionsTab.Controls.Add(this.locatePuttyButton);
+            this.generalOptionsTab.Controls.Add(this.puttyLocation);
+            this.generalOptionsTab.Controls.Add(this.transparencyCheckBox);
+            this.generalOptionsTab.Location = new System.Drawing.Point(4, 22);
+            this.generalOptionsTab.Name = "generalOptionsTab";
+            this.generalOptionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.generalOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.generalOptionsTab.TabIndex = 0;
+            this.generalOptionsTab.Text = "General";
+            this.generalOptionsTab.UseVisualStyleBackColor = true;
+            // 
+            // toolTipsCheckBox
+            // 
+            this.toolTipsCheckBox.AutoSize = true;
+            this.toolTipsCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ToolTipsEnabled;
+            this.toolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolTipsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ToolTipsEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.toolTipsCheckBox.Location = new System.Drawing.Point(14, 45);
+            this.toolTipsCheckBox.Name = "toolTipsCheckBox";
+            this.toolTipsCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolTipsCheckBox.Size = new System.Drawing.Size(99, 17);
+            this.toolTipsCheckBox.TabIndex = 24;
+            this.toolTipsCheckBox.Text = "Enable Tooltips";
+            this.toolTipsCheckBox.UseVisualStyleBackColor = true;
             // 
             // autostartCheckBox
             // 
             this.autostartCheckBox.AutoSize = true;
-            this.autostartCheckBox.Location = new System.Drawing.Point(255, 19);
+            this.autostartCheckBox.Location = new System.Drawing.Point(261, 22);
             this.autostartCheckBox.Name = "autostartCheckBox";
             this.autostartCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.autostartCheckBox.Size = new System.Drawing.Size(92, 17);
-            this.autostartCheckBox.TabIndex = 11;
+            this.autostartCheckBox.TabIndex = 23;
             this.autostartCheckBox.Text = "Start on logon";
             this.autostartCheckBox.UseVisualStyleBackColor = true;
             this.autostartCheckBox.CheckedChanged += new System.EventHandler(this.autostartCheckBox_CheckedChanged);
@@ -113,18 +183,18 @@ namespace uk.org.riseley.puttySessionManager.form
             this.minimizeCheckBox.AutoSize = true;
             this.minimizeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.MinimizeOnStart;
             this.minimizeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "MinimizeOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.minimizeCheckBox.Location = new System.Drawing.Point(124, 19);
+            this.minimizeCheckBox.Location = new System.Drawing.Point(130, 22);
             this.minimizeCheckBox.Name = "minimizeCheckBox";
             this.minimizeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.minimizeCheckBox.Size = new System.Drawing.Size(116, 17);
-            this.minimizeCheckBox.TabIndex = 10;
+            this.minimizeCheckBox.TabIndex = 22;
             this.minimizeCheckBox.Text = "Minimize on startup";
             this.minimizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "SubfolderSessionWarning", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Location = new System.Drawing.Point(304, 92);
+            this.numericUpDown1.Location = new System.Drawing.Point(310, 95);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             99,
             0,
@@ -132,16 +202,16 @@ namespace uk.org.riseley.puttySessionManager.form
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(43, 20);
-            this.numericUpDown1.TabIndex = 9;
+            this.numericUpDown1.TabIndex = 21;
             this.numericUpDown1.Value = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.SubfolderSessionWarning;
             // 
             // sessionWarningLabel
             // 
             this.sessionWarningLabel.AutoSize = true;
-            this.sessionWarningLabel.Location = new System.Drawing.Point(12, 94);
+            this.sessionWarningLabel.Location = new System.Drawing.Point(18, 97);
             this.sessionWarningLabel.Name = "sessionWarningLabel";
             this.sessionWarningLabel.Size = new System.Drawing.Size(273, 13);
-            this.sessionWarningLabel.TabIndex = 8;
+            this.sessionWarningLabel.TabIndex = 20;
             this.sessionWarningLabel.Text = "Number of sessions in subfolders to open before warning";
             // 
             // onTopCheckBox
@@ -150,11 +220,11 @@ namespace uk.org.riseley.puttySessionManager.form
             this.onTopCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;
             this.onTopCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.onTopCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "AlwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.onTopCheckBox.Location = new System.Drawing.Point(15, 19);
+            this.onTopCheckBox.Location = new System.Drawing.Point(21, 22);
             this.onTopCheckBox.Name = "onTopCheckBox";
             this.onTopCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.onTopCheckBox.Size = new System.Drawing.Size(92, 17);
-            this.onTopCheckBox.TabIndex = 6;
+            this.onTopCheckBox.TabIndex = 19;
             this.onTopCheckBox.Text = "Always on top";
             this.onTopCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -163,54 +233,54 @@ namespace uk.org.riseley.puttySessionManager.form
             this.trackBar.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.trackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyValueInt", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.trackBar.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
-            this.trackBar.Location = new System.Drawing.Point(15, 56);
+            this.trackBar.Location = new System.Drawing.Point(21, 59);
             this.trackBar.Maximum = 99;
             this.trackBar.Minimum = 20;
             this.trackBar.Name = "trackBar";
             this.trackBar.Size = new System.Drawing.Size(332, 45);
-            this.trackBar.TabIndex = 5;
+            this.trackBar.TabIndex = 18;
             this.trackBar.Value = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyValueInt;
             // 
             // sampletextTextbox
             // 
             this.sampletextTextbox.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TreeFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.sampletextTextbox.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TreeFont;
-            this.sampletextTextbox.Location = new System.Drawing.Point(115, 145);
+            this.sampletextTextbox.Location = new System.Drawing.Point(121, 148);
             this.sampletextTextbox.Name = "sampletextTextbox";
             this.sampletextTextbox.ReadOnly = true;
             this.sampletextTextbox.Size = new System.Drawing.Size(232, 20);
-            this.sampletextTextbox.TabIndex = 4;
+            this.sampletextTextbox.TabIndex = 17;
             this.sampletextTextbox.Text = "Sample Text for Tree";
             this.sampletextTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // chooseFontButton
             // 
-            this.chooseFontButton.Location = new System.Drawing.Point(15, 143);
+            this.chooseFontButton.Location = new System.Drawing.Point(21, 146);
             this.chooseFontButton.Name = "chooseFontButton";
             this.chooseFontButton.Size = new System.Drawing.Size(98, 22);
-            this.chooseFontButton.TabIndex = 3;
+            this.chooseFontButton.TabIndex = 16;
             this.chooseFontButton.Text = "Choose Font";
             this.chooseFontButton.UseVisualStyleBackColor = true;
-            this.chooseFontButton.Click += new System.EventHandler(this.button1_Click);
+            this.chooseFontButton.Click += new System.EventHandler(this.chooseFontButton_Click);
             // 
             // locatePuttyButton
             // 
-            this.locatePuttyButton.Location = new System.Drawing.Point(15, 115);
+            this.locatePuttyButton.Location = new System.Drawing.Point(21, 118);
             this.locatePuttyButton.Name = "locatePuttyButton";
             this.locatePuttyButton.Size = new System.Drawing.Size(98, 22);
-            this.locatePuttyButton.TabIndex = 2;
+            this.locatePuttyButton.TabIndex = 15;
             this.locatePuttyButton.Text = "Locate putty.exe";
             this.locatePuttyButton.UseVisualStyleBackColor = true;
-            this.locatePuttyButton.Click += new System.EventHandler(this.button3_Click);
+            this.locatePuttyButton.Click += new System.EventHandler(this.locatePuttyButton_Click);
             // 
             // puttyLocation
             // 
             this.puttyLocation.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "PuttyLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.puttyLocation.Location = new System.Drawing.Point(115, 115);
+            this.puttyLocation.Location = new System.Drawing.Point(121, 118);
             this.puttyLocation.Name = "puttyLocation";
             this.puttyLocation.ReadOnly = true;
             this.puttyLocation.Size = new System.Drawing.Size(232, 20);
-            this.puttyLocation.TabIndex = 1;
+            this.puttyLocation.TabIndex = 14;
             this.puttyLocation.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.PuttyLocation;
             // 
             // transparencyCheckBox
@@ -219,40 +289,161 @@ namespace uk.org.riseley.puttySessionManager.form
             this.transparencyCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.transparencyCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
             this.transparencyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.transparencyCheckBox.Location = new System.Drawing.Point(113, 42);
+            this.transparencyCheckBox.Location = new System.Drawing.Point(119, 45);
             this.transparencyCheckBox.Name = "transparencyCheckBox";
             this.transparencyCheckBox.Size = new System.Drawing.Size(127, 17);
-            this.transparencyCheckBox.TabIndex = 0;
+            this.transparencyCheckBox.TabIndex = 13;
             this.transparencyCheckBox.Text = "Enable Transparency";
             this.transparencyCheckBox.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel
+            // updateOptionsTab
             // 
-            this.tableLayoutPanel.ColumnCount = 1;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Controls.Add(this.groupBox1, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.okButton, 0, 1);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 2;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.88288F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.11712F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(369, 222);
-            this.tableLayoutPanel.TabIndex = 1;
+            this.updateOptionsTab.Controls.Add(this.checkForUpdateButton);
+            this.updateOptionsTab.Controls.Add(this.urlCheckBox);
+            this.updateOptionsTab.Controls.Add(this.urlTextBox);
+            this.updateOptionsTab.Controls.Add(this.urlLabel);
+            this.updateOptionsTab.Controls.Add(this.proxyGroupBox);
+            this.updateOptionsTab.Location = new System.Drawing.Point(4, 22);
+            this.updateOptionsTab.Name = "updateOptionsTab";
+            this.updateOptionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.updateOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.updateOptionsTab.TabIndex = 1;
+            this.updateOptionsTab.Text = "Update";
+            this.updateOptionsTab.UseVisualStyleBackColor = true;
             // 
-            // okButton
+            // checkForUpdateButton
             // 
-            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(151, 191);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(67, 22);
-            this.okButton.TabIndex = 1;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            this.checkForUpdateButton.Location = new System.Drawing.Point(128, 163);
+            this.checkForUpdateButton.Name = "checkForUpdateButton";
+            this.checkForUpdateButton.Size = new System.Drawing.Size(111, 22);
+            this.checkForUpdateButton.TabIndex = 27;
+            this.checkForUpdateButton.Text = "Check for update...";
+            this.checkForUpdateButton.UseVisualStyleBackColor = true;
+            this.checkForUpdateButton.Click += new System.EventHandler(this.checkForUpdateButton_Click);
+            // 
+            // urlCheckBox
+            // 
+            this.urlCheckBox.AutoSize = true;
+            this.urlCheckBox.Checked = true;
+            this.urlCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.urlCheckBox.Location = new System.Drawing.Point(30, 7);
+            this.urlCheckBox.Name = "urlCheckBox";
+            this.urlCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.urlCheckBox.Size = new System.Drawing.Size(94, 17);
+            this.urlCheckBox.TabIndex = 1;
+            this.urlCheckBox.Text = "Use default url";
+            this.urlCheckBox.UseVisualStyleBackColor = true;
+            this.urlCheckBox.CheckedChanged += new System.EventHandler(this.urlCheckBox_CheckedChanged);
+            // 
+            // urlTextBox
+            // 
+            this.urlTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "UpdateUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.urlTextBox.Location = new System.Drawing.Point(93, 27);
+            this.urlTextBox.Name = "urlTextBox";
+            this.urlTextBox.ReadOnly = true;
+            this.urlTextBox.Size = new System.Drawing.Size(229, 20);
+            this.urlTextBox.TabIndex = 2;
+            this.urlTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.UpdateUrl;
+            // 
+            // urlLabel
+            // 
+            this.urlLabel.AutoSize = true;
+            this.urlLabel.Location = new System.Drawing.Point(31, 30);
+            this.urlLabel.Name = "urlLabel";
+            this.urlLabel.Size = new System.Drawing.Size(56, 13);
+            this.urlLabel.TabIndex = 15;
+            this.urlLabel.Text = "Update url";
+            // 
+            // proxyGroupBox
+            // 
+            this.proxyGroupBox.Controls.Add(this.proxyPortLabel);
+            this.proxyGroupBox.Controls.Add(this.proxyServerLabel);
+            this.proxyGroupBox.Controls.Add(this.proxyPortTextBox);
+            this.proxyGroupBox.Controls.Add(this.userProxyRadioButton);
+            this.proxyGroupBox.Controls.Add(this.directRadioButton);
+            this.proxyGroupBox.Controls.Add(this.ieProxyRadioButton);
+            this.proxyGroupBox.Controls.Add(this.proxyServerTextBox);
+            this.proxyGroupBox.Location = new System.Drawing.Point(6, 53);
+            this.proxyGroupBox.Name = "proxyGroupBox";
+            this.proxyGroupBox.Size = new System.Drawing.Size(355, 108);
+            this.proxyGroupBox.TabIndex = 21;
+            this.proxyGroupBox.TabStop = false;
+            this.proxyGroupBox.Text = "Proxy Settings";
+            // 
+            // proxyPortLabel
+            // 
+            this.proxyPortLabel.AutoSize = true;
+            this.proxyPortLabel.Location = new System.Drawing.Point(271, 87);
+            this.proxyPortLabel.Name = "proxyPortLabel";
+            this.proxyPortLabel.Size = new System.Drawing.Size(26, 13);
+            this.proxyPortLabel.TabIndex = 25;
+            this.proxyPortLabel.Text = "Port";
+            // 
+            // proxyServerLabel
+            // 
+            this.proxyServerLabel.AutoSize = true;
+            this.proxyServerLabel.Location = new System.Drawing.Point(119, 87);
+            this.proxyServerLabel.Name = "proxyServerLabel";
+            this.proxyServerLabel.Size = new System.Drawing.Size(67, 13);
+            this.proxyServerLabel.TabIndex = 24;
+            this.proxyServerLabel.Text = "Proxy Server";
+            // 
+            // proxyPortTextBox
+            // 
+            this.proxyPortTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ProxyPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.proxyPortTextBox.Location = new System.Drawing.Point(274, 64);
+            this.proxyPortTextBox.MaxLength = 5;
+            this.proxyPortTextBox.Name = "proxyPortTextBox";
+            this.proxyPortTextBox.Size = new System.Drawing.Size(75, 20);
+            this.proxyPortTextBox.TabIndex = 7;
+            this.proxyPortTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ProxyPort;
+            // 
+            // userProxyRadioButton
+            // 
+            this.userProxyRadioButton.AutoSize = true;
+            this.userProxyRadioButton.Location = new System.Drawing.Point(11, 65);
+            this.userProxyRadioButton.Name = "userProxyRadioButton";
+            this.userProxyRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.userProxyRadioButton.Size = new System.Drawing.Size(105, 17);
+            this.userProxyRadioButton.TabIndex = 5;
+            this.userProxyRadioButton.Text = "Use HTTP Proxy";
+            this.userProxyRadioButton.UseVisualStyleBackColor = true;
+            this.userProxyRadioButton.CheckedChanged += new System.EventHandler(this.proxyRadioButton_CheckedChanged);
+            // 
+            // directRadioButton
+            // 
+            this.directRadioButton.AutoSize = true;
+            this.directRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.directRadioButton.Name = "directRadioButton";
+            this.directRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.directRadioButton.Size = new System.Drawing.Size(110, 17);
+            this.directRadioButton.TabIndex = 4;
+            this.directRadioButton.Text = "Direct Connection";
+            this.directRadioButton.UseVisualStyleBackColor = true;
+            this.directRadioButton.CheckedChanged += new System.EventHandler(this.proxyRadioButton_CheckedChanged);
+            // 
+            // ieProxyRadioButton
+            // 
+            this.ieProxyRadioButton.AutoSize = true;
+            this.ieProxyRadioButton.Checked = true;
+            this.ieProxyRadioButton.Location = new System.Drawing.Point(18, 19);
+            this.ieProxyRadioButton.Name = "ieProxyRadioButton";
+            this.ieProxyRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ieProxyRadioButton.Size = new System.Drawing.Size(98, 17);
+            this.ieProxyRadioButton.TabIndex = 3;
+            this.ieProxyRadioButton.TabStop = true;
+            this.ieProxyRadioButton.Text = "Use IE Settings";
+            this.ieProxyRadioButton.UseVisualStyleBackColor = true;
+            this.ieProxyRadioButton.CheckedChanged += new System.EventHandler(this.proxyRadioButton_CheckedChanged);
+            // 
+            // proxyServerTextBox
+            // 
+            this.proxyServerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ProxyServer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.proxyServerTextBox.Location = new System.Drawing.Point(122, 64);
+            this.proxyServerTextBox.Name = "proxyServerTextBox";
+            this.proxyServerTextBox.Size = new System.Drawing.Size(145, 20);
+            this.proxyServerTextBox.TabIndex = 6;
+            this.proxyServerTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ProxyServer;
             // 
             // fontDialog
             // 
@@ -260,42 +451,32 @@ namespace uk.org.riseley.puttySessionManager.form
             this.fontDialog.ShowColor = true;
             this.fontDialog.ShowEffects = false;
             // 
-            // toolTipsCheckBox
-            // 
-            this.toolTipsCheckBox.AutoSize = true;
-            this.toolTipsCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ToolTipsEnabled;
-            this.toolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolTipsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ToolTipsEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.toolTipsCheckBox.Location = new System.Drawing.Point(8, 42);
-            this.toolTipsCheckBox.Name = "toolTipsCheckBox";
-            this.toolTipsCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolTipsCheckBox.Size = new System.Drawing.Size(99, 17);
-            this.toolTipsCheckBox.TabIndex = 12;
-            this.toolTipsCheckBox.Text = "Enable Tooltips";
-            this.toolTipsCheckBox.UseVisualStyleBackColor = true;
-            // 
             // Options
             // 
-            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 222);
+            this.ClientSize = new System.Drawing.Size(381, 268);
             this.Controls.Add(this.tableLayoutPanel);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(377, 256);
+            this.MaximumSize = new System.Drawing.Size(389, 302);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(377, 256);
+            this.MinimumSize = new System.Drawing.Size(389, 302);
             this.Name = "Options";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Options";
             this.TopMost = true;
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.generalOptionsTab.ResumeLayout(false);
+            this.generalOptionsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
-            this.tableLayoutPanel.ResumeLayout(false);
+            this.updateOptionsTab.ResumeLayout(false);
+            this.updateOptionsTab.PerformLayout();
+            this.proxyGroupBox.ResumeLayout(false);
+            this.proxyGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -303,21 +484,35 @@ namespace uk.org.riseley.puttySessionManager.form
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.FontDialog fontDialog;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage generalOptionsTab;
+        private System.Windows.Forms.TabPage updateOptionsTab;
+        private System.Windows.Forms.CheckBox toolTipsCheckBox;
+        private System.Windows.Forms.CheckBox autostartCheckBox;
+        private System.Windows.Forms.CheckBox minimizeCheckBox;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label sessionWarningLabel;
+        private System.Windows.Forms.CheckBox onTopCheckBox;
+        private System.Windows.Forms.TrackBar trackBar;
+        private System.Windows.Forms.TextBox sampletextTextbox;
+        private System.Windows.Forms.Button chooseFontButton;
         private System.Windows.Forms.Button locatePuttyButton;
         private System.Windows.Forms.TextBox puttyLocation;
         private System.Windows.Forms.CheckBox transparencyCheckBox;
-        private System.Windows.Forms.Button chooseFontButton;
-        private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.TextBox sampletextTextbox;
-        private System.Windows.Forms.TrackBar trackBar;
-        private System.Windows.Forms.CheckBox onTopCheckBox;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label sessionWarningLabel;
-        private System.Windows.Forms.CheckBox autostartCheckBox;
-        private System.Windows.Forms.CheckBox minimizeCheckBox;
-        private System.Windows.Forms.CheckBox toolTipsCheckBox;
+        private System.Windows.Forms.GroupBox proxyGroupBox;
+        private System.Windows.Forms.RadioButton ieProxyRadioButton;
+        private System.Windows.Forms.TextBox proxyServerTextBox;
+        private System.Windows.Forms.CheckBox urlCheckBox;
+        private System.Windows.Forms.TextBox urlTextBox;
+        private System.Windows.Forms.Label urlLabel;
+        private System.Windows.Forms.RadioButton userProxyRadioButton;
+        private System.Windows.Forms.RadioButton directRadioButton;
+        private System.Windows.Forms.Label proxyPortLabel;
+        private System.Windows.Forms.Label proxyServerLabel;
+        private System.Windows.Forms.TextBox proxyPortTextBox;
+        private System.Windows.Forms.Button checkForUpdateButton;
     }
 }

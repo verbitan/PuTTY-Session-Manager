@@ -22,26 +22,40 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
-    public partial class SessionNameForm
-        : Form
+    /// <summary>
+    /// Form to collect the proxy username and password 
+    /// for update functionality
+    /// </summary>
+    public partial class ProxyAuthenticationForm : Form
     {
-        public SessionNameForm()
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public ProxyAuthenticationForm()
         {
             InitializeComponent();
         }
 
-        public SessionNameForm(string sessionName)
-            : this()
+        /// <summary>
+        /// Set the proxy realm to be displayed on the form
+        /// </summary>
+        /// <param name="realm"></param>
+        public void setRealm(string realm)
         {
-            sessionNameTextBox.Text = sessionName;
+            realmLabel.Text = realm;
         }
 
-        public string getSessionName()
+        /// <summary>
+        /// Get the network credential that has been specified
+        /// </summary>
+        /// <returns></returns>
+        public NetworkCredential getCredentials()
         {
-            return sessionNameTextBox.Text;
-        }     
+            return new NetworkCredential(usernameTextBox.Text, passwordTextBox.Text);
+        }
     }
 }
