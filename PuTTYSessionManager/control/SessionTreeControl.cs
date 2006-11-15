@@ -715,9 +715,18 @@ namespace uk.org.riseley.puttySessionManager.control
                 // Try to get the default session
                 s = sc.findDefaultSession(true);
 
-                // If that doesn't work get the first child session
-                if (s == null)                   
+                // If that doesn't work get the first child session, if 
+                // one exists
+                if (s == null && getSelectedSessions().Count > 0)
+                {
                     s = getSelectedSessions()[0];
+                }
+                else
+                {
+                    MessageBox.Show("You must create at least one session in PuTTY first!"
+                        , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 nsr = new NewSessionRequest(s, folderName, "", "", true, true);
             }
