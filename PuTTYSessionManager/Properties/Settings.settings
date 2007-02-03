@@ -83,5 +83,8 @@
     <Setting Name="DefaultUpdateUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://puttysm.sourceforge.net/update.txt</Value>
     </Setting>
+    <Setting Name="SortOrder" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

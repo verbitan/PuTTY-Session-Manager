@@ -55,7 +55,12 @@ namespace uk.org.riseley.puttySessionManager.control
             this.launchSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchFolderAndSubfoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortByToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.foldersFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.foldersLastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.lockSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,12 +89,14 @@ namespace uk.org.riseley.puttySessionManager.control
             this.launchSessionMenuItem,
             this.launchFolderToolStripMenuItem,
             this.launchFolderAndSubfoldersToolStripMenuItem,
+            this.toolStripSeparator3,
             this.refreshSessionsToolStripMenuItem,
+            this.sortByToolStripMenuItem,
             this.toolStripSeparator2,
             this.lockSessionsToolStripMenuItem,
             this.sessionManagementToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 164);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 214);
             // 
             // newSessionMenuItem
             // 
@@ -119,6 +126,11 @@ namespace uk.org.riseley.puttySessionManager.control
             this.launchFolderAndSubfoldersToolStripMenuItem.Text = "Launch Folder and Subfolders";
             this.launchFolderAndSubfoldersToolStripMenuItem.Click += new System.EventHandler(this.launchFolderAndSubfoldersToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(224, 6);
+            // 
             // refreshSessionsToolStripMenuItem
             // 
             this.refreshSessionsToolStripMenuItem.Name = "refreshSessionsToolStripMenuItem";
@@ -126,6 +138,40 @@ namespace uk.org.riseley.puttySessionManager.control
             this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.refreshSessionsToolStripMenuItem.Text = "Refresh Sessions";
             this.refreshSessionsToolStripMenuItem.Click += new System.EventHandler(this.refreshSessionsToolStripMenuItem_Click);
+            // 
+            // sortByToolStripMenuItem
+            // 
+            this.sortByToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.foldersFirstToolStripMenuItem,
+            this.ignoreFoldersToolStripMenuItem,
+            this.foldersLastToolStripMenuItem});
+            this.sortByToolStripMenuItem.Name = "sortByToolStripMenuItem";
+            this.sortByToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.sortByToolStripMenuItem.Text = "Sort By";
+            // 
+            // foldersFirstToolStripMenuItem
+            // 
+            this.foldersFirstToolStripMenuItem.CheckOnClick = true;
+            this.foldersFirstToolStripMenuItem.Name = "foldersFirstToolStripMenuItem";
+            this.foldersFirstToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.foldersFirstToolStripMenuItem.Text = "Folders First";
+            this.foldersFirstToolStripMenuItem.Click += new System.EventHandler(this.sortOrderToolStripMenuItem_Click);
+            // 
+            // ignoreFoldersToolStripMenuItem
+            // 
+            this.ignoreFoldersToolStripMenuItem.CheckOnClick = true;
+            this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
+            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.ignoreFoldersToolStripMenuItem.Text = "Ignore Folders";
+            this.ignoreFoldersToolStripMenuItem.Click += new System.EventHandler(this.sortOrderToolStripMenuItem_Click);
+            // 
+            // foldersLastToolStripMenuItem
+            // 
+            this.foldersLastToolStripMenuItem.CheckOnClick = true;
+            this.foldersLastToolStripMenuItem.Name = "foldersLastToolStripMenuItem";
+            this.foldersLastToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.foldersLastToolStripMenuItem.Text = "Folders Last";
+            this.foldersLastToolStripMenuItem.Click += new System.EventHandler(this.sortOrderToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -329,5 +375,10 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.ToolStripMenuItem hotkey4MenuItem;
         private System.Windows.Forms.ToolStripMenuItem hotkey5MenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportSessionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortByToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem foldersFirstToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ignoreFoldersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem foldersLastToolStripMenuItem;
     }
 }

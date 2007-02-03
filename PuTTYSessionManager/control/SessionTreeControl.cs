@@ -67,6 +67,16 @@ namespace uk.org.riseley.puttySessionManager.control
             toolTip = new ToolTip();
             toolTip.InitialDelay = 800;
             toolTip.ReshowDelay = 0;
+
+            SessionSorter.SortOrder order = (SessionSorter.SortOrder)Properties.Settings.Default.SortOrder;          
+            treeView.TreeViewNodeSorter = new SessionSorter( (SessionSorter.SortOrder) Properties.Settings.Default.SortOrder );
+            if (order == SessionSorter.SortOrder.FOLDER_FIRST)
+                foldersFirstToolStripMenuItem.Checked = true;
+            else if (order == SessionSorter.SortOrder.FOLDER_IGNORE)
+                ignoreFoldersToolStripMenuItem.Checked = true;
+            else if (order == SessionSorter.SortOrder.FOLDER_LAST)
+                foldersLastToolStripMenuItem.Checked = true;
+
         }
 
         /// <summary>
@@ -339,12 +349,17 @@ namespace uk.org.riseley.puttySessionManager.control
                         else
                         {
                             Session sess = new Session(folder, path, true);
-                            currnode.Nodes.Add(sess.getKey(), sess.SessionDisplayText);
-                            currnode = currnode.Nodes[sess.getKey()];
-                            currnode.Tag = sess;
-                            currnode.ContextMenuStrip = nodeContextMenuStrip;
-                            currnode.ImageIndex = IMAGE_INDEX_FOLDER;
-                            currnode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;                            
+                            
+                            TreeNode folderNode = new TreeNode ( sess.SessionDisplayText );
+
+                            folderNode.Name = sess.getKey();                                                     
+                            folderNode.Tag = sess;
+                            folderNode.ContextMenuStrip = nodeContextMenuStrip;
+                            folderNode.ImageIndex = IMAGE_INDEX_FOLDER;
+                            folderNode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
+                            
+                            currnode.Nodes.Add(folderNode);
+                            currnode = folderNode;
                         }
 
                     }
@@ -353,7 +368,6 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
             }
 
-            this.treeView.Sort();
             // Begin repainting the TreeView.
             treeView.EndUpdate();
         }
@@ -493,22 +507,30 @@ namespace uk.org.riseley.puttySessionManager.control
 
                 // Set up the new folder node and add it to the parent node
                 Session sess = new Session(folder, newpath, true);
-                parent.Nodes.Add(folder, sess.SessionDisplayText);
-                TreeNode foldernode = parent.Nodes[folder];
+
+                // Create the folder node
+                TreeNode foldernode = new TreeNode(sess.SessionDisplayText);
+
+                // Set the key so that we can find it again
+                foldernode.Name = folder;
+
                 foldernode.Tag = sess;
                 foldernode.ContextMenuStrip = nodeContextMenuStrip;
                 foldernode.ImageIndex = IMAGE_INDEX_FOLDER;
                 foldernode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
-
-                // Now add the selected node back to the folder
+                
+                // Add the selected node back to the folder
                 foldernode.Nodes.Add(selectedNode);
+
+                // Now add the node to the parent
+                parent.Nodes.Add(foldernode);
 
                 // Refresh the paths of all the child nodes
                 updateFolders(selectedNode, foldernode);
 
                 // Fire a refresh event
                 sc.invalidateSessionList(this, false);
-
+            
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
             }
@@ -1033,5 +1055,31 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
+        private void sortOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SessionSorter.SortOrder order = SessionSorter.SortOrder.FOLDER_IGNORE;
+            if ( sender == foldersFirstToolStripMenuItem ) 
+            {
+                order =  SessionSorter.SortOrder.FOLDER_FIRST;
+                ignoreFoldersToolStripMenuItem.Checked = false;
+                foldersLastToolStripMenuItem.Checked = false;
+            }
+            else if ( sender == ignoreFoldersToolStripMenuItem ) 
+            {
+                order = SessionSorter.SortOrder.FOLDER_IGNORE;
+                foldersFirstToolStripMenuItem.Checked = false;
+                foldersLastToolStripMenuItem.Checked = false;
+            }
+            else if (sender == foldersLastToolStripMenuItem)
+            {
+                order = SessionSorter.SortOrder.FOLDER_LAST;
+                foldersFirstToolStripMenuItem.Checked = false;
+                ignoreFoldersToolStripMenuItem.Checked = false;
+            }
+
+            SessionSorter sorter = new SessionSorter(order);
+            treeView.TreeViewNodeSorter = sorter;
+            Properties.Settings.Default.SortOrder = (int)order;
+        }
     }
 }
