@@ -346,5 +346,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["DefaultUpdateUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int SortOrder {
+            get {
+                return ((int)(this["SortOrder"]));
+            }
+            set {
+                this["SortOrder"] = value;
+            }
+        }
     }
 }
