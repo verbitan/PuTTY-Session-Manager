@@ -23,8 +23,14 @@ using System.Windows.Forms;
 
 namespace uk.org.riseley.puttySessionManager.model
 {
+    /// <summary>
+    /// A class that allows tree nodes to be sorted by folder and name
+    /// </summary>
     public class SessionSorter : IComparer
     {
+        /// <summary>
+        /// Enumeration of different possible sort orders
+        /// </summary>
         public enum SortOrder
         {
             FOLDER_FIRST  = 1,
@@ -32,8 +38,15 @@ namespace uk.org.riseley.puttySessionManager.model
             FOLDER_LAST   = -1
         }
 
+        /// <summary>
+        /// The current sort order
+        /// </summary>
         private int sortOrder;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="order">The sort order for this instance</param>
         public SessionSorter(SortOrder order)
         {
             sortOrder = (int)order;
@@ -41,6 +54,15 @@ namespace uk.org.riseley.puttySessionManager.model
 
         #region IComparer Members
 
+        /// <summary>
+        /// Method to compare the values of two tree
+        /// nodes
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns> x less than    y = less than 0
+        ///           x equal to     y = 0
+        ///           x greater than y = greater than 0 </returns>
         int IComparer.Compare(object x, object y)
         {
             TreeNode tx = x as TreeNode;

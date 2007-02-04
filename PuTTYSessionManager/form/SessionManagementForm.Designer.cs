@@ -50,9 +50,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.DefaultExt = "reg";
-            this.saveFileDialog1.Filter = "Reg files|*.reg|All files|*.*";
-            this.saveFileDialog1.Title = "Export PuTTY Sessions";
+
             // 
             // SessionManagementForm
             // 

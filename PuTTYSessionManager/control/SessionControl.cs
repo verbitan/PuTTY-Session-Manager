@@ -42,7 +42,7 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <summary>
         /// Fired when an export session(s) request is made
         /// </summary>
-        public event System.EventHandler ExportSessions;
+        public event ExportSessionEventHandler ExportSessions;
 
         /// <summary>
         /// Fired when a new session request is made
@@ -60,6 +60,13 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <param name="sender"></param>
         /// <param name="se">EventArgs containing the session name to launch</param>
         public delegate void LaunchSessionEventHandler(object sender, LaunchSessionEventArgs se);
+
+        /// <summary>
+        /// Event handler for the <code>ExportSessionEvent</code>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="se">EventArgs containing the export type</param>
+        public delegate void ExportSessionEventHandler(object sender, ExportSessionEventArgs se);
 
         /// <summary>
         /// Event handler for the <code>DeleteSessionsEvent</code>
@@ -94,7 +101,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        protected virtual void OnExportSessions(EventArgs e)
+        protected virtual void OnExportSessions(ExportSessionEventArgs e)
         {
             if (ExportSessions != null)
             {

@@ -32,8 +32,7 @@ namespace uk.org.riseley.puttySessionManager.form
         protected SessionController sc;
         private NewSessionForm nsf;
 
-        private const string SAVE_FILE_DIALOG_TITLE = "Export PuTTY Sessions To File";
-
+        private const string SAVE_FILE_DIALOG_TITLE = "Export PuTTY Sessions To ";
 
         public SessionManagementForm()
         {
@@ -49,14 +48,16 @@ namespace uk.org.riseley.puttySessionManager.form
                     , "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                exportSessions(selectedSessions);
+                exportSessions(selectedSessions, new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.REG_TYPE));
             }
             
             return dr;            
         }
 
-        protected void exportSessions(List<Session> selectedSessions)
+        protected void exportSessions(List<Session> selectedSessions, ExportSessionEventArgs se)
         {
+            String filetype;
+
             if (selectedSessions.Count == 0)
             {
                 MessageBox.Show("You must select some sessions to export!"
@@ -64,20 +65,40 @@ namespace uk.org.riseley.puttySessionManager.form
                 return;
             }
             else
-            {
-                saveFileDialog1.Title = SAVE_FILE_DIALOG_TITLE + ": " +
+            {                
+                if (se.type == ExportSessionEventArgs.ExportType.REG_TYPE)
+                {
+                    filetype = SessionController.FILE_TYPE_REG;
+                    saveFileDialog1.Filter = "reg files|*.reg|All files|*.*";
+                }
+                else
+                {
+                    filetype = SessionController.FILE_TYPE_CSV;
+                    saveFileDialog1.Filter = "csv files|*.csv|All files|*.*";
+                }
+
+                saveFileDialog1.Title = SAVE_FILE_DIALOG_TITLE + filetype + " file: " +
                                         selectedSessions.Count + " sessions selected";
+                saveFileDialog1.DefaultExt = filetype;
             }
+
             if (DialogResult.OK == saveFileDialog1.ShowDialog(this))
             {
 
-                bool result = false;
+                bool result = true;
                 String errorMessage = "Unknown Error";
                 try
                 {
-                    result = sc.saveSessionsToFile(
+                    int savedCount = sc.saveSessionsToFile(
                                          selectedSessions,
-                                         saveFileDialog1.FileName);
+                                         saveFileDialog1.FileName,
+                                         filetype);
+                    if (savedCount != selectedSessions.Count)
+                    {
+                        result = false;
+                        errorMessage = "Only exported " + savedCount
+                                       + " out of " + selectedSessions.Count + " sessions.";
+                    }
                 }
                 catch (Exception ex)
                 {

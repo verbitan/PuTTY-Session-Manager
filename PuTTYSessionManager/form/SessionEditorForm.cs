@@ -59,7 +59,7 @@ namespace uk.org.riseley.puttySessionManager.form
         /// <param name="e"></param>
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
         {
-            exportSessions(sessionEditorControl1.getSelectedSessions());
+            exportSessions(sessionEditorControl1.getSelectedSessions(), new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.REG_TYPE));
         }
 
         /// <summary>

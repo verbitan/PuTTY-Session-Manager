@@ -174,7 +174,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionTreeControl1.Visible = false;
             this.sessionTreeControl1.LaunchSession += new uk.org.riseley.puttySessionManager.control.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
             this.sessionTreeControl1.DeleteSessions += new uk.org.riseley.puttySessionManager.control.SessionControl.DeleteSessionsEventHandler(this.sessionTreeControl1_DeleteSessions);
-            this.sessionTreeControl1.ExportSessions += new System.EventHandler(this.sessionTreeControl1_ExportSessions);
+            this.sessionTreeControl1.ExportSessions += new uk.org.riseley.puttySessionManager.control.SessionControl.ExportSessionEventHandler(this.sessionTreeControl1_ExportSessions);
             // 
             // sessionListControl1
             // 

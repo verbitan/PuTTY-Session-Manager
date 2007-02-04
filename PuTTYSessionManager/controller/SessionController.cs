@@ -58,6 +58,16 @@ namespace uk.org.riseley.puttySessionManager.controller
         private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
 
         /// <summary>
+        /// The registry export file type
+        /// </summary>
+        public const string FILE_TYPE_REG = "reg";
+
+        /// <summary>
+        /// The csv export file type
+        /// </summary>
+        public const string FILE_TYPE_CSV = "csv";
+
+        /// <summary>
         /// The current list of all the sessions stored in the registry
         /// </summary>
         private static List<Session> sessionList = new List<Session>();
@@ -265,26 +275,77 @@ namespace uk.org.riseley.puttySessionManager.controller
                 SessionsRefreshed(sender, e);
         }
 
-        public bool saveSessionsToFile(List<Session> sessionList, String fileName)
+        public int saveSessionsToFile(List<Session> sessionList, String fileName, String filetype)
         {
+            int savedCount = 0;
             if (sessionList.Count == 0)
-                return false;
+                return 0;
             using (StreamWriter sw = File.CreateText(fileName))
             {
-                writeSessionExportHeader(sw);
+                writeSessionExportHeader(sw, filetype);
                 foreach (Session s in sessionList)
                 {
-                    saveSession(s, sw);
+                    if (saveSession(s, sw, filetype))
+                        savedCount ++;
                 }
                 sw.Close();
             }
+            return savedCount;
+        }
+
+        private bool saveSession(Session s, StreamWriter sw, String filetype)
+        {
+            bool result = false;
+            if (filetype.Equals(FILE_TYPE_REG))
+                result = saveSessionToRegExport(s, sw);
+            else if ( filetype.Equals(FILE_TYPE_CSV))
+                result = saveSessionToCsvExport(s,sw);
+            return result;
+        }
+
+        private bool saveSessionToCsvExport(Session s, StreamWriter sw) 
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            if (rk == null)
+                return false;
+            String hostname = "";
+            String sessionName = "";
+            String username = "";
+            String foldername = "";
+            
+            Object value = rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
+            if ( value != null )
+                hostname = value.ToString();
+            sessionName = s.SessionDisplayText;
+
+            value = rk.GetValue(PUTTY_USERNAME_ATTRIB);
+            if (value != null)
+                username = value.ToString();
+
+            if ( hostname != null && hostname.Contains("@") ) 
+            {
+                username = hostname.Substring(0,hostname.IndexOf("@"));
+                hostname = hostname.Substring(hostname.IndexOf("@") + 1);
+            }
+            value = rk.GetValue(PUTTY_PSM_FOLDER_ATTRIB);
+            if (value != null)
+                foldername = value.ToString();
+
+            sw.WriteLine("\"" + sessionName + "\"," +
+                         "\"" + foldername  + "\"," +   
+                         "\"" + username    + "\"," +   
+                         "\"" + hostname    + "\"" );   
+            rk.Close();
             return true;
         }
 
-        private void saveSession(Session s, StreamWriter sw)
+        private bool saveSessionToRegExport(Session s, StreamWriter sw)
         {
-            sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName + "]");
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            if (rk != null)
+                sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName + "]");
+            else
+                return false;
             foreach (string valueName in rk.GetValueNames())
             {
                 RegistryValueKind valueKind = rk.GetValueKind(valueName);
@@ -302,15 +363,22 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
             sw.WriteLine();
             rk.Close();
-
+            return true;
         }
 
-        private void writeSessionExportHeader(StreamWriter sw)
+        private void writeSessionExportHeader(StreamWriter sw, String filetype)
         {
-            sw.WriteLine("Windows Registry Editor Version 5.00");
-            sw.WriteLine();
-            sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "]");
-            sw.WriteLine();
+            if (filetype.Equals(FILE_TYPE_REG))
+            {
+                sw.WriteLine("Windows Registry Editor Version 5.00");
+                sw.WriteLine();
+                sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "]");
+                sw.WriteLine();
+            }
+            else if (filetype.Equals(FILE_TYPE_CSV))
+            {
+                sw.WriteLine("Session Name,Folder Name,Username,Hostname");
+            }
         }
 
         public bool createNewSession(NewSessionRequest nsr, object sender)

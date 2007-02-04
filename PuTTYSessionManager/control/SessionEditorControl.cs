@@ -79,7 +79,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private void exportButton_Click(object sender, EventArgs e)
         {
-            OnExportSessions(e);
+            OnExportSessions(new ExportSessionEventArgs());
         }
 
         public override List<Session> getSelectedSessions()

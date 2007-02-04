@@ -407,6 +407,11 @@ namespace uk.org.riseley.puttySessionManager.control
             {
                 treeView.AllowDrop = false;
                 setSessionAsHotkeyToolStripMenuItem.Enabled = false;
+                hotkey1MenuItem.Visible = false;
+                hotkey2MenuItem.Visible = false;
+                hotkey3MenuItem.Visible = false;
+                hotkey4MenuItem.Visible = false;
+                hotkey5MenuItem.Visible = false;
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
                 saveNewSessionToolStripMenuItem.Enabled = false;
@@ -442,6 +447,12 @@ namespace uk.org.riseley.puttySessionManager.control
                     newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameSessionToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     setSessionAsHotkeyToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+                    hotkey1MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+                    hotkey2MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+                    hotkey3MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+                    hotkey4MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+                    hotkey5MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+
                     renameFolderMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
@@ -451,6 +462,12 @@ namespace uk.org.riseley.puttySessionManager.control
                 {
                     renameSessionToolStripMenuItem.Enabled = false;
                     setSessionAsHotkeyToolStripMenuItem.Enabled = false;
+                    hotkey1MenuItem.Visible = false;
+                    hotkey2MenuItem.Visible = false;
+                    hotkey3MenuItem.Visible = false;
+                    hotkey4MenuItem.Visible = false;
+                    hotkey5MenuItem.Visible = false;
+
                     launchSessionMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
@@ -983,7 +1000,10 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private void exportSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OnExportSessions(e);
+            if (sender == toCSVFileToolStripMenuItem)
+                OnExportSessions(new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.CSV_TYPE));
+            else if (sender == toRegistryFileToolStripMenuItem)
+                OnExportSessions(new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.REG_TYPE));
         }
 
         private void setHotkeyMenuItemsToolTips(object sender, EventArgs e)

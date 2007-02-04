@@ -119,6 +119,7 @@
       <DependentUpon>UpdateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="model\CopySessionRequest.cs" />
+    <Compile Include="model\ExportSessionEventArgs.cs" />
     <Compile Include="model\NewSessionRequest.cs" />
     <Compile Include="model\RefreshSessionsEventArgs.cs" />
     <Compile Include="model\LaunchSessionEventArgs.cs" />

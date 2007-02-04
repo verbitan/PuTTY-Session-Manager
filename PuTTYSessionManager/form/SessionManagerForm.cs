@@ -289,9 +289,9 @@ namespace uk.org.riseley.puttySessionManager.form
             hotKeyChooser.Show();
         }
 
-        private void sessionTreeControl1_ExportSessions(object sender, EventArgs e)
+        private void sessionTreeControl1_ExportSessions(object sender, ExportSessionEventArgs se)
         {
-            exportSessions(currentSessionControl.getSelectedSessions());
+            exportSessions(currentSessionControl.getSelectedSessions(),se);
         }
 
         private void sessionTreeControl1_BackupSessions(object sender, EventArgs e)
