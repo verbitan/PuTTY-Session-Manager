@@ -760,7 +760,9 @@ namespace uk.org.riseley.puttySessionManager.control
                 {
                     s = getSelectedSessions()[0];
                 }
-                else
+
+                // If we still don't have a session error and return
+                if (s == null)
                 {
                     MessageBox.Show("You must create at least one session in PuTTY first!"
                         , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
