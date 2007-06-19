@@ -9,7 +9,7 @@
 
 <body>
 <div align="center">
-   
+
 </div>
   <table width="100%" border="0" align="center" cellspacing="20"><!--DWLayoutTable-->
   <tr>
@@ -22,7 +22,7 @@
     <tr>
       <td width="143" height="1688" valign="top">
 	    <p class="nav"><a href="#overview">Overview</a></p>
-	    <p class="nav"><a href="#features">Features</a></p>	    
+	    <p class="nav"><a href="#features">Features</a></p>
 	    <p class="nav"><a href="#news">News </a></p>
 	    <p class="nav"><a href="#screenshots">Screenshots </a></p>	    <p class="nav"><a href="#documentation">Documentation</a></p>
         <p class="nav"><a href="#support">Support</a></p>
@@ -59,11 +59,17 @@
                 </ul>
           </li>
 		  <li>Check for updates feature</li>
-        </ul> 		
+        </ul>
 		<td width="52%"><img src="images/psm-folders.jpg" width="254" height="293" align="right">		  </td>
-		</table>       
+		</table>
           <span class="subtitle">News</span> <a name="news"></a>        <table width="100%" border="1"><!--DWLayoutTable-->
             <tr>
+              <td>19-06-2007</td>
+              <td>The fifth release of PSM v0.2.3.1 is now available on the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge
+                  downloads page.</a> This version implements Export Sessions to CSV and reordering of 
+				  folders, and some bug fixes </td>
+            </tr>
+			<tr>
               <td>29-10-2006</td>
               <td>The fourth release of PSM v0.2.2.1 is now available on the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge
                   downloads page.</a> This version implements a check for update
@@ -88,15 +94,15 @@
             <td>The initial release of PSM v0.1.0.1 is now available on the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge
                 downloads page</a></td>
           </tr>
-                </table>        
+                </table>
           <p><span class="subtitle">Screenshots</span> <a name="screenshots"></a></p>
-        <p>Screenshots can be found <a href="http://sourceforge.net/project/screenshots.php?group_id=169031" target="_blank">here</a>.</p>        
+        <p>Screenshots can be found <a href="http://sourceforge.net/project/screenshots.php?group_id=169031" target="_blank">here</a>.</p>
           <span class="subtitle">Documentation</span> <a name="documentation"></a>        <p>There is no documentation for this at the moment , although I plan
-          to rectify this as soon as possible!</p>        
+          to rectify this as soon as possible!</p>
           <span class="subtitle">Support</span> <a name="support"></a>        <p>Submit support requests to the tracker <a href="http://sourceforge.net/tracker/?group_id=169031&atid=848794">here</a>,
-          or post a note on one of the discussion forums <a href="http://sourceforge.net/forum/?group_id=169031">here</a>.</p>        
+          or post a note on one of the discussion forums <a href="http://sourceforge.net/forum/?group_id=169031">here</a>.</p>
           <span class="subtitle">Installation Requirements</span><a name="installation"></a>          <ol>
-          <li>PuTTY. This has been tested with PuTTY v0.58.</li>
+          <li>PuTTY. This has been tested with PuTTY v0.58,v0.59 and v0.60.</li>
           <li>.NET Framework 2.0. The windows installer will check your system
             for the correct version of the framework. It will then prompt you
             to download and install it, if you don't already have it. Alternatively,
@@ -104,17 +110,17 @@
             and use the zip file for the binaries.</li>
           <li>This has only been tested on Windows XP Professional. I would welcome
             any feedback from users of other Windows variants.</li>
-        </ol>        
+        </ol>
           <span class="subtitle">Download<a name="download"></a></span>        <p>Binaries: PSM is available in a windows installer or a zip file. All
           downloads can be found on the <a href="http://sourceforge.net/project/showfiles.php?group_id=169031" target="_blank">Sourceforge
-          download page</a>.</p>        <p>Source code: The subversion repository can be viewed <a href="http://svn.sourceforge.net/puttysm" target="_blank">here</a>.</p>        <p>Release Notes: The latest release notes can be found <a href="http://sourceforge.net/project/shownotes.php?release_id=459397&group_id=169031" target="_blank">here</a>.</p>        
+          download page</a>.</p>        <p>Source code: The subversion repository can be viewed <a href="http://puttysm.svn.sourceforge.net/viewvc/puttysm/" target="_blank">here</a>.</p>        <p>Release Notes: The latest release notes can be found <a href="http://sourceforge.net/project/shownotes.php?release_id=459397&group_id=169031" target="_blank">here</a>.</p>
           <span class="subtitle">Build instructions</span> <a name="build"></a>        <p>If you want to get the latest source code and build the bleeding edge
           version, instructions are as follows:</p>        <p>1. Get the project from subversion - you can get subversion here: <br>
-            <a href="http://subversion.tigris.org/%20" target="_blank">http://subversion.tigris.org/ </a><br>
+            <a href="http://subversion.tigris.org/" target="_blank">http://subversion.tigris.org/ </a><br>
   and tortoise svn ( a windows client for subversion ) here: <br>
   <a href="http://tortoisesvn.tigris.org/" target="_blank">http://tortoisesvn.tigris.org/</a> <br>
   <br>
-  Set the svn root to be <strong>https://svn.sourceforge.net/svnroot/puttysm/trunk</strong> and
+  Set the svn root to be <strong>https://puttysm.svn.sourceforge.net/svnroot/puttysm/trunk</strong> and
   do a checkout. <br>
   <br>
   2. If you have Visual Studio 2005, just open the visual studio project and
@@ -133,8 +139,8 @@
   , which calls the C# compiler. <br>
         <br>
   3. In the svn sandbox - go to PuTTYSessionManager\bin\Release and the compiled
-  exe should be there - you can just run it from that directory. </p>        
-          <span class="subtitle">Licence</span>        <a name="licence"></a>        <p>PuTTY Session Manager is released under the <a href="http://www.gnu.org/licenses/gpl.txt" target="_blank">GPL</a>.</p>        
+  exe should be there - you can just run it from that directory. </p>
+          <span class="subtitle">Licence</span>        <a name="licence"></a>        <p>PuTTY Session Manager is released under the <a href="http://www.gnu.org/licenses/gpl.txt" target="_blank">GPL</a>.</p>
           <span class="subtitle">Credits</span>        <a name="credits"></a>        <p>Designed for use with <a href="http://www.chiark.greenend.org.uk/%7Esgtatham/putty/" target="_blank">PuTTY</a> by
           Simon Tatham.</p>        <p>Inspired by <a href="http://www.deckmyn.org/olivier/software" target="_blank">QuickPuTTY</a> by
           Olivier Deckmyn and <a href="http://putty.dwalin.ru/?plaunch" target="_blank">PLaunch</a>.</p>        <p>Installer uses the <a href="http://nsis.sourceforge.net/Main_Page" target="_blank">Nullsoft

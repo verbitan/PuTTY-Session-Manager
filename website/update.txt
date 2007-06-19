@@ -1,3 +1,3 @@
-LatestVersion|0.2.2.1
-ReleaseDate|29/10/2006
-UpdateUrl|http://sourceforge.net/project/showfiles.php?group_id=169031&package_id=192873&release_id=459397
+LatestVersion|0.2.3.1
+ReleaseDate|19/07/2007
+UpdateUrl|http://sourceforge.net/project/showfiles.php?group_id=169031&package_id=192873&release_id=517363
