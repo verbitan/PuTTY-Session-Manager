@@ -1,3 +1,26 @@
+PuTTY Session Manager v0.2.3.1 ( 19-06-2007 )
+=============================================
+Fifth release of PuTTY Session Manager
+
+This is a minor release of PSM with the following changes:
+Feature requests:
+
+1651011: Allow sort order of sessions and folders to be configured by 
+         the user
+1651897: Create csv session export.  You can now export 
+         Session Name,Folder Name,Username,Hostname
+         to csv file ( useful for scripting if you want to create a list
+         of boxes you have logons to ).  
+
+Bugs:
+Not Tracked:  New sessions ( with a space in their name )
+              weren't showing up in the system tray with a 
+              session refresh
+Not Tracked:  ArrayIndexOutOfBoundsException when trying to create 
+              a new session when no previoussessions exist
+Not Tracked:  Fix NRE on startup if you don't have access to 
+			  HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+
 PuTTY Session Manager v0.2.2.1 ( 29-10-2006 )
 =============================================
 Fourth release of PuTTY Session Manager

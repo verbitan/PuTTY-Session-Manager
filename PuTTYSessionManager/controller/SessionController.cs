@@ -688,13 +688,16 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Open the autostart registry key
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY);
 
-            // Check if the PSM attribute exists
-            if (rk.GetValue(PSM_AUTOSTART_REG_ATTRIB) != null)
-                retval = true;
+            // This key should exist - but just in case...
+            if (rk != null)
+            {
+                // Check if the PSM attribute exists
+                if (rk.GetValue(PSM_AUTOSTART_REG_ATTRIB) != null)
+                    retval = true;
 
-            // Clost the registry key
-            rk.Close();
-
+                // Clost the registry key
+                rk.Close();
+            }
             return retval;                
         }
 
@@ -703,22 +706,39 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// start Putty Session Manager on logon
         /// </summary>
         /// <param name="enabled">Enable or disable auto start</param>
-        public void setAutoStart(bool enabled)
+        public bool setAutoStart(bool enabled)
         {
+            // Assume we fail
+            bool result = false;
+
             // Open the autostart registry key
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY,true);
 
-            // If we are enabling autstart set the value to the current exec path
-            if (enabled)
-                rk.SetValue(PSM_AUTOSTART_REG_ATTRIB, "\"" + Application.ExecutablePath + "\"", RegistryValueKind.String);
-            // otherwise delete it
-            else
-                rk.DeleteValue(PSM_AUTOSTART_REG_ATTRIB, false);
+            // Check if we can open the key
+            if (rk != null)
+            {
+                // If we are enabling autstart set the value to the current exec path
+                if (enabled)
+                    rk.SetValue(PSM_AUTOSTART_REG_ATTRIB, "\"" + Application.ExecutablePath + "\"", RegistryValueKind.String);
+                // otherwise delete it, but only if it exists
+                else if (rk.GetValue(PSM_AUTOSTART_REG_ATTRIB) != null)
+                    rk.DeleteValue(PSM_AUTOSTART_REG_ATTRIB, false);
 
-            // Close the value
-            rk.Close();
+                // Close the value
+                rk.Close();
+
+                // It worked
+                result = true;
+            }
+            // if we can't get to the registry value - but the preference is disabled
+            // don't worry
+            else if (enabled == false)
+            {
+                result = true;
+            }
+
+            return result;
         }
-
 
     }
 }

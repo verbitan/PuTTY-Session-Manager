@@ -94,7 +94,14 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void autostartCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            sc.setAutoStart(autostartCheckBox.Checked);
+            bool result = sc.setAutoStart(autostartCheckBox.Checked);
+            if (result == false)
+            {
+                MessageBox.Show(this, "Failed to set \"Start on logon\" preference"
+                               , "Warning"
+                               , MessageBoxButtons.OK
+                               , MessageBoxIcon.Warning);
+            }
         }
 
         private void urlCheckBox_CheckedChanged(object sender, EventArgs e)
