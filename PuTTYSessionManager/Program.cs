@@ -32,6 +32,15 @@ namespace uk.org.riseley.puttySessionManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            // Upgrade settings from a previous release
+            if (Properties.Settings.Default.UpgradeRequired == true)
+            {                
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
+
             Application.Run(new SessionManagerForm());           
         }
     }
