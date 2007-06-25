@@ -66,6 +66,16 @@ namespace uk.org.riseley.puttySessionManager.form
             comboBox4.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
             comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_5, comboBox5);
             comboBox5.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
+            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_6, comboBox6);
+            comboBox6.Tag = HotkeyController.HotKeyId.HKID_SESSION_6;
+            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_7, comboBox7);
+            comboBox7.Tag = HotkeyController.HotKeyId.HKID_SESSION_7;
+            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_8, comboBox8);
+            comboBox8.Tag = HotkeyController.HotKeyId.HKID_SESSION_8;
+            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_9, comboBox9);
+            comboBox9.Tag = HotkeyController.HotKeyId.HKID_SESSION_9;
+            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_10, comboBox10);
+            comboBox10.Tag = HotkeyController.HotKeyId.HKID_SESSION_10;
         }
 
         private void loadLists()

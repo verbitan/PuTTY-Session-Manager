@@ -714,6 +714,13 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Open the autostart registry key
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY,true);
 
+            // If we are trying to enable autostart and the key doesn't exist
+            // try to create it
+            if (rk == null && enabled)
+            {
+                rk = Registry.CurrentUser.CreateSubKey(AUTOSTART_REG_KEY);
+            }
+
             // Check if we can open the key
             if (rk != null)
             {

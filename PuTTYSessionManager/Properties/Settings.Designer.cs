@@ -370,5 +370,305 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession6 {
+            get {
+                return ((string)(this["FavouriteSession6"]));
+            }
+            set {
+                this["FavouriteSession6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession7 {
+            get {
+                return ((string)(this["FavouriteSession7"]));
+            }
+            set {
+                this["FavouriteSession7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession8 {
+            get {
+                return ((string)(this["FavouriteSession8"]));
+            }
+            set {
+                this["FavouriteSession8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession9 {
+            get {
+                return ((string)(this["FavouriteSession9"]));
+            }
+            set {
+                this["FavouriteSession9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FavouriteSession10 {
+            get {
+                return ((string)(this["FavouriteSession10"]));
+            }
+            set {
+                this["FavouriteSession10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string HotkeySession1 {
+            get {
+                return ((string)(this["HotkeySession1"]));
+            }
+            set {
+                this["HotkeySession1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public string HotkeySession2 {
+            get {
+                return ((string)(this["HotkeySession2"]));
+            }
+            set {
+                this["HotkeySession2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public string HotkeySession3 {
+            get {
+                return ((string)(this["HotkeySession3"]));
+            }
+            set {
+                this["HotkeySession3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public string HotkeySession4 {
+            get {
+                return ((string)(this["HotkeySession4"]));
+            }
+            set {
+                this["HotkeySession4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public string HotkeySession5 {
+            get {
+                return ((string)(this["HotkeySession5"]));
+            }
+            set {
+                this["HotkeySession5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public string HotkeySession6 {
+            get {
+                return ((string)(this["HotkeySession6"]));
+            }
+            set {
+                this["HotkeySession6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public string HotkeySession7 {
+            get {
+                return ((string)(this["HotkeySession7"]));
+            }
+            set {
+                this["HotkeySession7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public string HotkeySession8 {
+            get {
+                return ((string)(this["HotkeySession8"]));
+            }
+            set {
+                this["HotkeySession8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public string HotkeySession9 {
+            get {
+                return ((string)(this["HotkeySession9"]));
+            }
+            set {
+                this["HotkeySession9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string HotkeySession10 {
+            get {
+                return ((string)(this["HotkeySession10"]));
+            }
+            set {
+                this["HotkeySession10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey1Enabled {
+            get {
+                return ((bool)(this["Hotkey1Enabled"]));
+            }
+            set {
+                this["Hotkey1Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey2Enabled {
+            get {
+                return ((bool)(this["Hotkey2Enabled"]));
+            }
+            set {
+                this["Hotkey2Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey3Enabled {
+            get {
+                return ((bool)(this["Hotkey3Enabled"]));
+            }
+            set {
+                this["Hotkey3Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey4Enabled {
+            get {
+                return ((bool)(this["Hotkey4Enabled"]));
+            }
+            set {
+                this["Hotkey4Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey5Enabled {
+            get {
+                return ((bool)(this["Hotkey5Enabled"]));
+            }
+            set {
+                this["Hotkey5Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey6Enabled {
+            get {
+                return ((bool)(this["Hotkey6Enabled"]));
+            }
+            set {
+                this["Hotkey6Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey7Enabled {
+            get {
+                return ((bool)(this["Hotkey7Enabled"]));
+            }
+            set {
+                this["Hotkey7Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey8Enabled {
+            get {
+                return ((bool)(this["Hotkey8Enabled"]));
+            }
+            set {
+                this["Hotkey8Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey9Enabled {
+            get {
+                return ((bool)(this["Hotkey9Enabled"]));
+            }
+            set {
+                this["Hotkey9Enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Hotkey10Enabled {
+            get {
+                return ((bool)(this["Hotkey10Enabled"]));
+            }
+            set {
+                this["Hotkey10Enabled"] = value;
+            }
+        }
     }
 }

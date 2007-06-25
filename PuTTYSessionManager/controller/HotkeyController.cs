@@ -294,8 +294,18 @@ namespace uk.org.riseley.puttySessionManager.controller
                     return Properties.Settings.Default.FavouriteSession4;
                 case HotKeyId.HKID_SESSION_5:
                     return Properties.Settings.Default.FavouriteSession5;
+                case HotKeyId.HKID_SESSION_6:
+                    return Properties.Settings.Default.FavouriteSession6;
+                case HotKeyId.HKID_SESSION_7:
+                    return Properties.Settings.Default.FavouriteSession7;
+                case HotKeyId.HKID_SESSION_8:
+                    return Properties.Settings.Default.FavouriteSession8;
+                case HotKeyId.HKID_SESSION_9:
+                    return Properties.Settings.Default.FavouriteSession9;
+                case HotKeyId.HKID_SESSION_10:
+                    return Properties.Settings.Default.FavouriteSession10;
                 default:
-                    return null;
+                    return "";
             }
         }
 
@@ -314,26 +324,36 @@ namespace uk.org.riseley.puttySessionManager.controller
                 case HotKeyId.HKID_MINIMIZE:
                     return Properties.Settings.Default.HotkeyMinimize.ToCharArray(0,1)[0];
                 default:
-                    return (char)getHotKey(hkid);
+                    return getHotKey(hkid);
             }
         }
 
-        private HotKey getHotKey(HotKeyId hkid)
+        private char getHotKey(HotKeyId hkid)
         {
             switch (hkid)
             {
                 case HotKeyId.HKID_SESSION_1:
-                    return HotKey.HK_SESSION_1;
+                    return Properties.Settings.Default.HotkeySession1.ToCharArray(0, 1)[0];
                 case HotKeyId.HKID_SESSION_2:
-                    return HotKey.HK_SESSION_2;
+                    return Properties.Settings.Default.HotkeySession2.ToCharArray(0, 1)[0];
                 case HotKeyId.HKID_SESSION_3:
-                    return HotKey.HK_SESSION_3;
+                    return Properties.Settings.Default.HotkeySession3.ToCharArray(0, 1)[0];
                 case HotKeyId.HKID_SESSION_4:
-                    return HotKey.HK_SESSION_4;
+                    return Properties.Settings.Default.HotkeySession4.ToCharArray(0, 1)[0];
                 case HotKeyId.HKID_SESSION_5:
-                    return HotKey.HK_SESSION_5;
+                    return Properties.Settings.Default.HotkeySession5.ToCharArray(0, 1)[0];
+                case HotKeyId.HKID_SESSION_6:
+                    return Properties.Settings.Default.HotkeySession6.ToCharArray(0, 1)[0];
+                case HotKeyId.HKID_SESSION_7:
+                    return Properties.Settings.Default.HotkeySession7.ToCharArray(0, 1)[0];
+                case HotKeyId.HKID_SESSION_8:
+                    return Properties.Settings.Default.HotkeySession8.ToCharArray(0, 1)[0];
+                case HotKeyId.HKID_SESSION_9:
+                    return Properties.Settings.Default.HotkeySession9.ToCharArray(0, 1)[0];
+                case HotKeyId.HKID_SESSION_10:
+                    return Properties.Settings.Default.HotkeySession10.ToCharArray(0, 1)[0];
                 default:
-                    return HotKey.HK_SESSION_1;
+                    return Properties.Settings.Default.HotkeySession1.ToCharArray(0, 1)[0];
             }
         }
 
@@ -366,6 +386,26 @@ namespace uk.org.riseley.puttySessionManager.controller
                         Properties.Settings.Default.FavouriteSession5 = s.SessionName;
                         result = true;
                         break;
+                    case HotKeyId.HKID_SESSION_6:
+                        Properties.Settings.Default.FavouriteSession6 = s.SessionName;
+                        result = true;
+                        break;
+                    case HotKeyId.HKID_SESSION_7:
+                        Properties.Settings.Default.FavouriteSession7 = s.SessionName;
+                        result = true;
+                        break;
+                    case HotKeyId.HKID_SESSION_8:
+                        Properties.Settings.Default.FavouriteSession8 = s.SessionName;
+                        result = true;
+                        break;
+                    case HotKeyId.HKID_SESSION_9:
+                        Properties.Settings.Default.FavouriteSession9 = s.SessionName;
+                        result = true;
+                        break;
+                    case HotKeyId.HKID_SESSION_10:
+                        Properties.Settings.Default.FavouriteSession10 = s.SessionName;
+                        result = true;
+                        break;
                     default:
                         result = false;
                         break;
@@ -390,7 +430,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             OnHotkeysRefreshed(this, EventArgs.Empty);
         }
 
-        public int WM_HOTKEY = (int) User32.Msgs.WM_HOTKEY;
+        public int WM_HOTKEY =  (int)User32.Msgs.WM_HOTKEY;
         public int WM_KEYDOWN = (int)User32.Msgs.WM_KEYDOWN;
         
         public enum HotKeyId
@@ -401,16 +441,12 @@ namespace uk.org.riseley.puttySessionManager.controller
             HKID_SESSION_3 = 3,
             HKID_SESSION_4 = 4,
             HKID_SESSION_5 = 5,
-            HKID_MINIMIZE  = 6
-        }
-
-        public enum HotKey
-        {
-            HK_SESSION_1 = '1',
-            HK_SESSION_2 = '2',
-            HK_SESSION_3 = '3',
-            HK_SESSION_4 = '4',
-            HK_SESSION_5 = '5'
+            HKID_SESSION_6 = 6,
+            HKID_SESSION_7 = 7,
+            HKID_SESSION_8 = 8,
+            HKID_SESSION_9 = 9,
+            HKID_SESSION_10 = 10,
+            HKID_MINIMIZE   = 11
         }
     }
 }

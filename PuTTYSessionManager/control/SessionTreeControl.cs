@@ -92,6 +92,11 @@ namespace uk.org.riseley.puttySessionManager.control
             hotkey3MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
             hotkey4MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
             hotkey5MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
+            hotkey6MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_6;
+            hotkey7MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_7;
+            hotkey8MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_8;
+            hotkey9MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_9;
+            hotkey10MenuItem.Tag = HotkeyController.HotKeyId.HKID_SESSION_10;
 
             hotkeyDictionary = new Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem>();
 
@@ -100,7 +105,12 @@ namespace uk.org.riseley.puttySessionManager.control
             hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey2MenuItem.Tag, hotkey2MenuItem);
             hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey3MenuItem.Tag, hotkey3MenuItem);
             hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey4MenuItem.Tag, hotkey4MenuItem);
-            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey5MenuItem.Tag, hotkey5MenuItem);        
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey5MenuItem.Tag, hotkey5MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey6MenuItem.Tag, hotkey6MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey7MenuItem.Tag, hotkey7MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey8MenuItem.Tag, hotkey8MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey9MenuItem.Tag, hotkey9MenuItem);
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey10MenuItem.Tag, hotkey10MenuItem); 
         }
 
         /// <summary>
@@ -407,11 +417,10 @@ namespace uk.org.riseley.puttySessionManager.control
             {
                 treeView.AllowDrop = false;
                 setSessionAsHotkeyToolStripMenuItem.Enabled = false;
-                hotkey1MenuItem.Visible = false;
-                hotkey2MenuItem.Visible = false;
-                hotkey3MenuItem.Visible = false;
-                hotkey4MenuItem.Visible = false;
-                hotkey5MenuItem.Visible = false;
+                foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
+                {
+                    menuItem.Visible = false;
+                }
                 newFolderMenuItem.Enabled = false;
                 renameFolderMenuItem.Enabled = false;
                 saveNewSessionToolStripMenuItem.Enabled = false;
@@ -447,12 +456,10 @@ namespace uk.org.riseley.puttySessionManager.control
                     newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     renameSessionToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
                     setSessionAsHotkeyToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
-                    hotkey1MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
-                    hotkey2MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
-                    hotkey3MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
-                    hotkey4MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
-                    hotkey5MenuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
-
+                    foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
+                    {
+                        menuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled; ;
+                    }
                     renameFolderMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
@@ -462,11 +469,10 @@ namespace uk.org.riseley.puttySessionManager.control
                 {
                     renameSessionToolStripMenuItem.Enabled = false;
                     setSessionAsHotkeyToolStripMenuItem.Enabled = false;
-                    hotkey1MenuItem.Visible = false;
-                    hotkey2MenuItem.Visible = false;
-                    hotkey3MenuItem.Visible = false;
-                    hotkey4MenuItem.Visible = false;
-                    hotkey5MenuItem.Visible = false;
+                    foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
+                    {
+                        menuItem.Visible = false;
+                    }
 
                     launchSessionMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;

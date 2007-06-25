@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PuTTY Session Manager")]
-[assembly: AssemblyCopyright("Copyright © David Riseley 2006")]
+[assembly: AssemblyCopyright("Copyright © David Riseley 2006,2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,5 +53,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.2.3.1")]
-[assembly: AssemblyFileVersion("0.2.3.1")]
+[assembly: AssemblyVersion("0.2.4.1")]
+[assembly: AssemblyFileVersion("0.2.4.1")]
