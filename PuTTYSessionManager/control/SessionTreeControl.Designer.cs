@@ -79,13 +79,13 @@ namespace uk.org.riseley.puttySessionManager.control
             this.hotkey3MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey4MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey5MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeImageList = new System.Windows.Forms.ImageList(this.components);
-            this.treeView = new System.Windows.Forms.TreeView();
             this.hotkey6MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey7MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey8MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey9MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey10MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeImageList = new System.Windows.Forms.ImageList(this.components);
+            this.treeView = new System.Windows.Forms.TreeView();
             this.nodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +103,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem,
             this.sessionManagementToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 214);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 192);
             // 
             // newSessionMenuItem
             // 
@@ -299,7 +299,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey1MenuItem
             // 
             this.hotkey1MenuItem.Name = "hotkey1MenuItem";
-            this.hotkey1MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey1MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey1MenuItem.Text = "Win+1";
             this.hotkey1MenuItem.Visible = false;
             this.hotkey1MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -307,7 +307,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey2MenuItem
             // 
             this.hotkey2MenuItem.Name = "hotkey2MenuItem";
-            this.hotkey2MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey2MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey2MenuItem.Text = "Win+2";
             this.hotkey2MenuItem.Visible = false;
             this.hotkey2MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -315,7 +315,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey3MenuItem
             // 
             this.hotkey3MenuItem.Name = "hotkey3MenuItem";
-            this.hotkey3MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey3MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey3MenuItem.Text = "Win+3";
             this.hotkey3MenuItem.Visible = false;
             this.hotkey3MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -323,7 +323,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey4MenuItem
             // 
             this.hotkey4MenuItem.Name = "hotkey4MenuItem";
-            this.hotkey4MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey4MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey4MenuItem.Text = "Win+4";
             this.hotkey4MenuItem.Visible = false;
             this.hotkey4MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -331,10 +331,40 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey5MenuItem
             // 
             this.hotkey5MenuItem.Name = "hotkey5MenuItem";
-            this.hotkey5MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hotkey5MenuItem.Size = new System.Drawing.Size(117, 22);
             this.hotkey5MenuItem.Text = "Win+5";
             this.hotkey5MenuItem.Visible = false;
             this.hotkey5MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
+            // 
+            // hotkey6MenuItem
+            // 
+            this.hotkey6MenuItem.Name = "hotkey6MenuItem";
+            this.hotkey6MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey6MenuItem.Text = "Win+6";
+            // 
+            // hotkey7MenuItem
+            // 
+            this.hotkey7MenuItem.Name = "hotkey7MenuItem";
+            this.hotkey7MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey7MenuItem.Text = "Win+7";
+            // 
+            // hotkey8MenuItem
+            // 
+            this.hotkey8MenuItem.Name = "hotkey8MenuItem";
+            this.hotkey8MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey8MenuItem.Text = "Win+8";
+            // 
+            // hotkey9MenuItem
+            // 
+            this.hotkey9MenuItem.Name = "hotkey9MenuItem";
+            this.hotkey9MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey9MenuItem.Text = "Win+9";
+            // 
+            // hotkey10MenuItem
+            // 
+            this.hotkey10MenuItem.Name = "hotkey10MenuItem";
+            this.hotkey10MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey10MenuItem.Text = "Win+0";
             // 
             // treeImageList
             // 
@@ -367,37 +397,8 @@ namespace uk.org.riseley.puttySessionManager.control
             this.treeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseMove);
             this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
+            this.treeView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyUp);
             this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView_ItemDrag);
-            // 
-            // hotkey6MenuItem
-            // 
-            this.hotkey6MenuItem.Name = "hotkey6MenuItem";
-            this.hotkey6MenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hotkey6MenuItem.Text = "Win+6";
-            // 
-            // hotkey7MenuItem
-            // 
-            this.hotkey7MenuItem.Name = "hotkey7MenuItem";
-            this.hotkey7MenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hotkey7MenuItem.Text = "Win+7";
-            // 
-            // hotkey8MenuItem
-            // 
-            this.hotkey8MenuItem.Name = "hotkey8MenuItem";
-            this.hotkey8MenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hotkey8MenuItem.Text = "Win+8";
-            // 
-            // hotkey9MenuItem
-            // 
-            this.hotkey9MenuItem.Name = "hotkey9MenuItem";
-            this.hotkey9MenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hotkey9MenuItem.Text = "Win+9";
-            // 
-            // hotkey10MenuItem
-            // 
-            this.hotkey10MenuItem.Name = "hotkey10MenuItem";
-            this.hotkey10MenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hotkey10MenuItem.Text = "Win+0";
             // 
             // SessionTreeControl
             // 

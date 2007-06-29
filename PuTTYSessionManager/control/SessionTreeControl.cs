@@ -1109,5 +1109,46 @@ namespace uk.org.riseley.puttySessionManager.control
             treeView.TreeViewNodeSorter = sorter;
             Properties.Settings.Default.SortOrder = (int)order;
         }
+
+        /// <summary>
+        /// Event handler for key press from the tree view
+        /// If ENTER is pressed and the selected session isn't 
+        /// a folder , launch that session
+        /// Also add a handler for CTRL Left and Right arrows
+        /// to expand and collapse child nodes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Session s = getSelectedSession();
+                if (s != null)
+                {
+                    OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
+                    e.Handled = true;
+                }
+            }
+            else if ((e.KeyCode == Keys.Right || e.KeyCode == Keys.Left )&& 
+                     e.Modifiers == Keys.Control ) 
+            {
+                // Find the selected node
+                TreeNode selectedNode = treeView.SelectedNode;
+
+                if (selectedNode != null)
+                {
+                    if (e.KeyCode == Keys.Right )
+                    {
+                        selectedNode.ExpandAll();
+                        e.Handled = true;
+                    }
+                    else if (e.KeyCode == Keys.Left)
+                    {
+                        selectedNode.Collapse(false);
+                    }
+                }
+            }
+        }
     }
 }
