@@ -101,5 +101,24 @@ namespace uk.org.riseley.puttySessionManager.control
                 sl.Add(s);
             return sl;
         }
+
+        /// <summary>
+        /// Event handler for key press from the list view
+        /// If ENTER is pressed launch that session
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Session s = (Session)listBox1.SelectedItem;
+                if (s != null)
+                {
+                    OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
+                    e.Handled = true;
+                }
+            }
+        }
     }
 }

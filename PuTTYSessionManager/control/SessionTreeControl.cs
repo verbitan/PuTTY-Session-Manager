@@ -60,8 +60,8 @@ namespace uk.org.riseley.puttySessionManager.control
             
             hkc = HotkeyController.getInstance();
             setupHotkeyDictionary();
-            setHotkeyMenuItemsToolTips(this,EventArgs.Empty);
-            EventHandler hkHandler = new EventHandler(setHotkeyMenuItemsToolTips);
+            setupHotkeyMenuItems(this,EventArgs.Empty);
+            EventHandler hkHandler = new EventHandler(setupHotkeyMenuItems);
             hkc.HotkeysRefreshed += hkHandler;
 
             toolTip = new ToolTip();
@@ -464,6 +464,8 @@ namespace uk.org.riseley.puttySessionManager.control
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
                     launchSessionMenuItem.Enabled = true;
+                    expandTreeToolStripMenuItem.Enabled = false;
+                    collapseTreeToolStripMenuItem.Enabled = false;
                 }
                 else
                 {
@@ -496,6 +498,8 @@ namespace uk.org.riseley.puttySessionManager.control
                             renameFolderMenuItem.Enabled = true;
                         }
                     }
+                    expandTreeToolStripMenuItem.Enabled = true;
+                    collapseTreeToolStripMenuItem.Enabled = true;
                 }
             }
         }
@@ -1014,7 +1018,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 OnExportSessions(new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.REG_TYPE));
         }
 
-        private void setHotkeyMenuItemsToolTips(object sender, EventArgs e)
+        private void setupHotkeyMenuItems(object sender, EventArgs e)
         {
             bool hotkeysEnabled = hkc.isFavouriteSessionHotkeysEnabled();
             ToolStripMenuItem tsmi;
@@ -1023,11 +1027,18 @@ namespace uk.org.riseley.puttySessionManager.control
             {
                 hotkeyDictionary.TryGetValue(hkid, out tsmi);
                 s = hkc.getSessionFromHotkey((HotkeyController.HotKeyId)tsmi.Tag);
-                tsmi.Enabled = hotkeysEnabled;
+                
+                if (hotkeysEnabled && hkc.isSessionHotkeyEnabled(hkid))
+                    tsmi.Enabled = true;
+                else
+                    tsmi.Enabled = false;
+
                 if (s != null)
                     tsmi.ToolTipText = s.SessionDisplayText;
                 else
                     tsmi.ToolTipText = "";
+
+                tsmi.Text = "Win+" + hkc.getHotKeyFromId(hkid);
             }
         }
 
@@ -1083,6 +1094,13 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
+        /// <summary>
+        /// Event handler for the sortOrderToolStripMenuItems click event
+        /// Determines which toolstripmenuitem sent the event, defines a
+        /// sorter based on that, and sorts the tree
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sortOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SessionSorter.SortOrder order = SessionSorter.SortOrder.FOLDER_IGNORE;
@@ -1148,6 +1166,38 @@ namespace uk.org.riseley.puttySessionManager.control
                         selectedNode.Collapse(false);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Event handler for expandTreeToolStripMenuItem click event
+        /// Will expand all child nodes of the selected node
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void expandTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
+            if (selectedNode != null)
+            {
+                selectedNode.ExpandAll();                
+            }
+        }
+
+        /// <summary>
+        /// Event handler for collapseTreeToolStripMenuItem click event
+        /// Will collapse all child nodes of the selected node
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void collapseTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Find the selected node
+            TreeNode selectedNode = treeView.SelectedNode;
+            if (selectedNode != null)
+            {
+                selectedNode.Collapse(false);
             }
         }
     }

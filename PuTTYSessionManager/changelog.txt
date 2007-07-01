@@ -1,3 +1,10 @@
+PuTTY Session Manager v0.2.4.1 ( XX-XX-2007 )
+=============================================
+Sixth release of PuTTY Session Manager
+
+This is a minor release of PSM with the following changes:
+Feature requests:
+
 PuTTY Session Manager v0.2.3.1 ( 19-06-2007 )
 =============================================
 Fifth release of PuTTY Session Manager

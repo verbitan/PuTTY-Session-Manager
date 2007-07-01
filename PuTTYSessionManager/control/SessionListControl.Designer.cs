@@ -61,6 +61,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.listBox1.Sorted = true;
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
             // 
             // SessionListControl
             // 

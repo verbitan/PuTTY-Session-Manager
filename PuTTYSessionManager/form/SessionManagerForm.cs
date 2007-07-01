@@ -136,7 +136,7 @@ namespace uk.org.riseley.puttySessionManager.form
             }
             else
             {
-                hkc.UnregisterHotKey(this);
+                hkc.UnregisterAllHotKeys(this);
                 SaveSize();
                 Properties.Settings.Default.Save();
             }
@@ -254,6 +254,21 @@ namespace uk.org.riseley.puttySessionManager.form
                     break;
                 case (int)HotkeyController.HotKeyId.HKID_SESSION_5:
                     sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession5); 
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_6:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession6);
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_7:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession7);
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_8:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession8);
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_9:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession9);
+                    break;
+                case (int)HotkeyController.HotKeyId.HKID_SESSION_10:
+                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession10);
                     break;
             }
             sessionControl_LaunchSession(this, new LaunchSessionEventArgs(sessionName));

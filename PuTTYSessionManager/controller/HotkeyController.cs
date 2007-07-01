@@ -235,9 +235,12 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         public event EventHandler HotkeysRefreshed;
 
+        private Dictionary<char, HotKeyId> hotkeyDictionary;
+
         private HotkeyController()
         {
             sc = SessionController.getInstance();
+            initialiseHotkeyDictionary();
         }
 
         public static HotkeyController getInstance()
@@ -260,19 +263,28 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         public bool RegisterHotkey(Form form, char winkey, HotKeyId id)
         {
-            bool result = User32.RegisterHotKey(form.Handle, (int) id, (int) User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
+            bool result = User32.RegisterHotKey(form.Handle, (int)id, (int)User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
+            if (result)
+                saveHotkey(winkey, id);
             return result;
         }
 
         public bool UnregisterHotKey(Form form, HotKeyId id)
         {
             bool result = User32.UnregisterHotKey(form.Handle, (int)id);
+            hotkeyDictionary.Remove(getHotKeyCharFromId(id));
             return result;
         }
 
-        public bool UnregisterHotKey(Form form)
+        public bool UnregisterAllHotKeys(Form form)
         {
-            return UnregisterHotKey(form, HotKeyId.HKID_NEW );
+            foreach (HotKeyId hk in Enum.GetValues(typeof(HotKeyId)))
+            {
+                // Skip over the SYSTEM hotkey
+                if (hk != HotKeyId.HKID_SYSTEM)
+                    UnregisterHotKey(form, hk);
+            }
+            return true;
         }
 
         public Session getSessionFromHotkey(HotKeyId hkid)
@@ -282,8 +294,8 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         private String getSessionNameFromHotkey(HotKeyId hkid)
         {
-            switch ( hkid )
-            {                
+            switch (hkid)
+            {
                 case HotKeyId.HKID_SESSION_1:
                     return Properties.Settings.Default.FavouriteSession1;
                 case HotKeyId.HKID_SESSION_2:
@@ -314,107 +326,85 @@ namespace uk.org.riseley.puttySessionManager.controller
             return getHotKeyCharFromId(hkid).ToString();
         }
 
-
         private char getHotKeyCharFromId(HotKeyId hkid)
         {
             switch (hkid)
             {
                 case HotKeyId.HKID_NEW:
-                    return Properties.Settings.Default.HotkeyNewSession.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeyNewSession;
                 case HotKeyId.HKID_MINIMIZE:
-                    return Properties.Settings.Default.HotkeyMinimize.ToCharArray(0,1)[0];
-                default:
-                    return getHotKey(hkid);
-            }
-        }
-
-        private char getHotKey(HotKeyId hkid)
-        {
-            switch (hkid)
-            {
+                    return Properties.Settings.Default.HotkeyMinimize;
                 case HotKeyId.HKID_SESSION_1:
-                    return Properties.Settings.Default.HotkeySession1.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession1;
                 case HotKeyId.HKID_SESSION_2:
-                    return Properties.Settings.Default.HotkeySession2.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession2;
                 case HotKeyId.HKID_SESSION_3:
-                    return Properties.Settings.Default.HotkeySession3.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession3;
                 case HotKeyId.HKID_SESSION_4:
-                    return Properties.Settings.Default.HotkeySession4.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession4;
                 case HotKeyId.HKID_SESSION_5:
-                    return Properties.Settings.Default.HotkeySession5.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession5;
                 case HotKeyId.HKID_SESSION_6:
-                    return Properties.Settings.Default.HotkeySession6.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession6;
                 case HotKeyId.HKID_SESSION_7:
-                    return Properties.Settings.Default.HotkeySession7.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession7;
                 case HotKeyId.HKID_SESSION_8:
-                    return Properties.Settings.Default.HotkeySession8.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession8;
                 case HotKeyId.HKID_SESSION_9:
-                    return Properties.Settings.Default.HotkeySession9.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession9;
                 case HotKeyId.HKID_SESSION_10:
-                    return Properties.Settings.Default.HotkeySession10.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession10;
                 default:
-                    return Properties.Settings.Default.HotkeySession1.ToCharArray(0, 1)[0];
+                    return Properties.Settings.Default.HotkeySession1;
             }
         }
-
 
         public bool saveSessionnameToHotkey(Form window, HotKeyId hkid, Session s)
         {
             bool result = false;
             UnregisterHotKey(window, hkid);
-            if (RegisterHotkey(window,hkid))
+            if (RegisterHotkey(window, hkid))
             {
                 switch (hkid)
                 {
                     case HotKeyId.HKID_SESSION_1:
                         Properties.Settings.Default.FavouriteSession1 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_2:
                         Properties.Settings.Default.FavouriteSession2 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_3:
                         Properties.Settings.Default.FavouriteSession3 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_4:
                         Properties.Settings.Default.FavouriteSession4 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_5:
                         Properties.Settings.Default.FavouriteSession5 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_6:
                         Properties.Settings.Default.FavouriteSession6 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_7:
                         Properties.Settings.Default.FavouriteSession7 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_8:
                         Properties.Settings.Default.FavouriteSession8 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_9:
                         Properties.Settings.Default.FavouriteSession9 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     case HotKeyId.HKID_SESSION_10:
                         Properties.Settings.Default.FavouriteSession10 = s.SessionName;
-                        result = true;
-                        break;
+                        result = true; break;
                     default:
-                        result = false;
-                        break;
+                        result = false; break;
                 }
             }
 
             // Fire the refresh event
             if (result)
-                OnHotkeysRefreshed(this, EventArgs.Empty);
+                refreshHotkeys();
 
             return result;
         }
@@ -424,17 +414,54 @@ namespace uk.org.riseley.puttySessionManager.controller
             return Properties.Settings.Default.HotkeyFavouriteEnabled;
         }
 
+        public bool isSessionHotkeyEnabled(HotKeyId hkid)
+        {
+            bool result = false;
+            switch (hkid)
+            {
+                case HotKeyId.HKID_SESSION_1:
+                    result = Properties.Settings.Default.Hotkey1Enabled; break;
+                case HotKeyId.HKID_SESSION_2:
+                    result = Properties.Settings.Default.Hotkey2Enabled; break;
+                case HotKeyId.HKID_SESSION_3:
+                    result = Properties.Settings.Default.Hotkey3Enabled; break;
+                case HotKeyId.HKID_SESSION_4:
+                    result = Properties.Settings.Default.Hotkey4Enabled; break;
+                case HotKeyId.HKID_SESSION_5:
+                    result = Properties.Settings.Default.Hotkey5Enabled; break;
+                case HotKeyId.HKID_SESSION_6:
+                    result = Properties.Settings.Default.Hotkey6Enabled; break;
+                case HotKeyId.HKID_SESSION_7:
+                    result = Properties.Settings.Default.Hotkey7Enabled; break;
+                case HotKeyId.HKID_SESSION_8:
+                    result = Properties.Settings.Default.Hotkey8Enabled; break;
+                case HotKeyId.HKID_SESSION_9:
+                    result = Properties.Settings.Default.Hotkey9Enabled; break;
+                case HotKeyId.HKID_SESSION_10:
+                    result = Properties.Settings.Default.Hotkey10Enabled; break;
+                default:
+                    result = false; break;
+            }
+            return result;
+        }
+
         public void setFavouriteSessionHotkeysEnabled(bool value)
         {
             Properties.Settings.Default.HotkeyFavouriteEnabled = value;
+            refreshHotkeys();
+        }
+
+        public void refreshHotkeys()
+        {
             OnHotkeysRefreshed(this, EventArgs.Empty);
         }
 
-        public int WM_HOTKEY =  (int)User32.Msgs.WM_HOTKEY;
+        public int WM_HOTKEY = (int)User32.Msgs.WM_HOTKEY;
         public int WM_KEYDOWN = (int)User32.Msgs.WM_KEYDOWN;
-        
+
         public enum HotKeyId
         {
+            HKID_SYSTEM = -1,
             HKID_NEW = 0,
             HKID_SESSION_1 = 1,
             HKID_SESSION_2 = 2,
@@ -446,7 +473,138 @@ namespace uk.org.riseley.puttySessionManager.controller
             HKID_SESSION_8 = 8,
             HKID_SESSION_9 = 9,
             HKID_SESSION_10 = 10,
-            HKID_MINIMIZE   = 11
+            HKID_MINIMIZE = 11
+        }
+
+        private void initialiseHotkeyDictionary()
+        {
+            hotkeyDictionary = new Dictionary<char, HotKeyId>();
+
+            // Add the default system hotkeys so they can't be duplicated
+            hotkeyDictionary.Add('D', HotKeyId.HKID_SYSTEM);
+            hotkeyDictionary.Add('E', HotKeyId.HKID_SYSTEM);
+            hotkeyDictionary.Add('F', HotKeyId.HKID_SYSTEM);
+            hotkeyDictionary.Add('L', HotKeyId.HKID_SYSTEM);
+            hotkeyDictionary.Add('M', HotKeyId.HKID_SYSTEM);
+            hotkeyDictionary.Add('R', HotKeyId.HKID_SYSTEM);
+            hotkeyDictionary.Add('U', HotKeyId.HKID_SYSTEM);
+
+            // Add all the enabled hotkeys
+            if (Properties.Settings.Default.HotkeyNewEnabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeyNewSession), HotKeyId.HKID_NEW);
+            if (Properties.Settings.Default.HotkeyMinimizeEnabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeyMinimize), HotKeyId.HKID_MINIMIZE);
+            if (Properties.Settings.Default.Hotkey1Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession1), HotKeyId.HKID_SESSION_1);
+            if (Properties.Settings.Default.Hotkey2Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession2), HotKeyId.HKID_SESSION_2);
+            if (Properties.Settings.Default.Hotkey3Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession3), HotKeyId.HKID_SESSION_3);
+            if (Properties.Settings.Default.Hotkey4Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession4), HotKeyId.HKID_SESSION_4);
+            if (Properties.Settings.Default.Hotkey5Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession5), HotKeyId.HKID_SESSION_5);
+            if (Properties.Settings.Default.Hotkey6Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession6), HotKeyId.HKID_SESSION_6);
+            if (Properties.Settings.Default.Hotkey7Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession7), HotKeyId.HKID_SESSION_7);
+            if (Properties.Settings.Default.Hotkey8Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession8), HotKeyId.HKID_SESSION_8);
+            if (Properties.Settings.Default.Hotkey9Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession9), HotKeyId.HKID_SESSION_9);
+            if (Properties.Settings.Default.Hotkey10Enabled)
+                hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession10), HotKeyId.HKID_SESSION_10);
+        }
+
+        public void registerAllEnabledHotkeys( Form form )
+        {
+            // Register all the enabled hotkeys
+            if (Properties.Settings.Default.HotkeyNewEnabled)
+                RegisterHotkey(form, HotKeyId.HKID_NEW);
+            if (Properties.Settings.Default.HotkeyMinimizeEnabled)
+                RegisterHotkey(form, HotKeyId.HKID_MINIMIZE);
+            if (Properties.Settings.Default.Hotkey1Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_1);
+            if (Properties.Settings.Default.Hotkey2Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_2);
+            if (Properties.Settings.Default.Hotkey3Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_3);
+            if (Properties.Settings.Default.Hotkey4Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_4);
+            if (Properties.Settings.Default.Hotkey5Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_5);
+            if (Properties.Settings.Default.Hotkey6Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_6);
+            if (Properties.Settings.Default.Hotkey7Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_7);
+            if (Properties.Settings.Default.Hotkey8Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_8);
+            if (Properties.Settings.Default.Hotkey9Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_9);
+            if (Properties.Settings.Default.Hotkey10Enabled)
+                RegisterHotkey(form, HotKeyId.HKID_SESSION_10);
+        }
+
+        public bool isHotkeyAvailable(char hotkey)
+        {
+            return !(hotkeyDictionary.ContainsKey(Char.ToUpper(hotkey)));
+        }
+
+        private bool saveHotkey(char hotkey, HotKeyId hkid)
+        {
+            hotkey = Char.ToUpper(hotkey);
+            bool result = false;
+
+            // Check the hotkey is available
+            if (isHotkeyAvailable(hotkey))
+            {
+                result = true;
+
+                // Save the new value in the dictionary
+                hotkeyDictionary[hotkey] = hkid;
+
+                // And update the setting
+                switch (hkid)
+                {
+                    case HotKeyId.HKID_NEW:
+                        Properties.Settings.Default.HotkeyNewSession = hotkey;
+                        break;
+                    case HotKeyId.HKID_MINIMIZE:
+                        Properties.Settings.Default.HotkeyMinimize = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_1:
+                        Properties.Settings.Default.HotkeySession1 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_2:
+                        Properties.Settings.Default.HotkeySession2 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_3:
+                        Properties.Settings.Default.HotkeySession3 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_4:
+                        Properties.Settings.Default.HotkeySession4 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_5:
+                        Properties.Settings.Default.HotkeySession5 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_6:
+                        Properties.Settings.Default.HotkeySession6 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_7:
+                        Properties.Settings.Default.HotkeySession7 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_8:
+                        Properties.Settings.Default.HotkeySession8 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_9:
+                        Properties.Settings.Default.HotkeySession9 = hotkey;
+                        break;
+                    case HotKeyId.HKID_SESSION_10:
+                        Properties.Settings.Default.HotkeySession10 = hotkey;
+                        break;
+                }               
+            }
+            return result;
         }
     }
 }

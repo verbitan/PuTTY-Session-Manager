@@ -35,8 +35,10 @@ namespace uk.org.riseley.puttySessionManager.form
         private SessionController sc;
         private HotkeyController hkc;
 
+        // Setup dictionaries
         private Dictionary<HotkeyController.HotKeyId,ComboBox> comboDictionary;
-
+        private Dictionary<HotkeyController.HotKeyId,TextBox>  textboxDictionary;
+        private Dictionary<HotkeyController.HotKeyId,CheckBox> checkboxDictionary;
 
         public HotkeyChooser(Form parent)
         {
@@ -44,38 +46,114 @@ namespace uk.org.riseley.puttySessionManager.form
             sc = SessionController.getInstance();
             hkc = HotkeyController.getInstance();
             InitializeComponent();
+            createTags();
             createComboDictionary();
-            newSessionHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_NEW);
-            minimizeWindowHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_MINIMIZE);
+            createTextboxDictionary();
+            createCheckboxDictionary();
+            intialiseTextboxes();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
             EventHandler hkHandler = new EventHandler(setHotkeys);
             hkc.HotkeysRefreshed += hkHandler;
+            hkc.registerAllEnabledHotkeys(parentWindow);
+        }
+
+        private void createTags()
+        {
+            comboBox1.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
+            comboBox2.Tag = HotkeyController.HotKeyId.HKID_SESSION_2;
+            comboBox3.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
+            comboBox4.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
+            comboBox5.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
+            comboBox6.Tag = HotkeyController.HotKeyId.HKID_SESSION_6;
+            comboBox7.Tag = HotkeyController.HotKeyId.HKID_SESSION_7;
+            comboBox8.Tag = HotkeyController.HotKeyId.HKID_SESSION_8;
+            comboBox9.Tag = HotkeyController.HotKeyId.HKID_SESSION_9;
+            comboBox10.Tag = HotkeyController.HotKeyId.HKID_SESSION_10;
+
+            checkBox1.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
+            checkBox2.Tag = HotkeyController.HotKeyId.HKID_SESSION_2;
+            checkBox3.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
+            checkBox4.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
+            checkBox5.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
+            checkBox6.Tag = HotkeyController.HotKeyId.HKID_SESSION_6;
+            checkBox7.Tag = HotkeyController.HotKeyId.HKID_SESSION_7;
+            checkBox8.Tag = HotkeyController.HotKeyId.HKID_SESSION_8;
+            checkBox9.Tag = HotkeyController.HotKeyId.HKID_SESSION_9;
+            checkBox10.Tag = HotkeyController.HotKeyId.HKID_SESSION_10;
+            newSessionHKCheckbox.Tag = HotkeyController.HotKeyId.HKID_NEW;
+            minimizeWindowHKCheckbox.Tag = HotkeyController.HotKeyId.HKID_MINIMIZE;
+
+            hk1TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
+            hk2TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_2;
+            hk3TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
+            hk4TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
+            hk5TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
+            hk6TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_6;
+            hk7TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_7;
+            hk8TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_8;
+            hk9TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_9;
+            hk10TextBox.Tag = HotkeyController.HotKeyId.HKID_SESSION_10;
+            newSessionHKTextbox.Tag = HotkeyController.HotKeyId.HKID_NEW;
+            minimizeWindowHKTextbox.Tag = HotkeyController.HotKeyId.HKID_MINIMIZE;
         }
 
         private void createComboDictionary()
         {
             comboDictionary = new Dictionary<HotkeyController.HotKeyId, ComboBox>();
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_1, comboBox1);
-            comboBox1.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_2, comboBox2);
-            comboBox2.Tag = HotkeyController.HotKeyId.HKID_SESSION_2;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_3, comboBox3);
-            comboBox3.Tag = HotkeyController.HotKeyId.HKID_SESSION_3;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_4, comboBox4);
-            comboBox4.Tag = HotkeyController.HotKeyId.HKID_SESSION_4;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_5, comboBox5);
-            comboBox5.Tag = HotkeyController.HotKeyId.HKID_SESSION_5;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_6, comboBox6);
-            comboBox6.Tag = HotkeyController.HotKeyId.HKID_SESSION_6;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_7, comboBox7);
-            comboBox7.Tag = HotkeyController.HotKeyId.HKID_SESSION_7;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_8, comboBox8);
-            comboBox8.Tag = HotkeyController.HotKeyId.HKID_SESSION_8;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_9, comboBox9);
-            comboBox9.Tag = HotkeyController.HotKeyId.HKID_SESSION_9;
-            comboDictionary.Add(HotkeyController.HotKeyId.HKID_SESSION_10, comboBox10);
-            comboBox10.Tag = HotkeyController.HotKeyId.HKID_SESSION_10;
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox1.Tag, comboBox1);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox2.Tag, comboBox2);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox3.Tag, comboBox3);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox4.Tag, comboBox4);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox5.Tag, comboBox5);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox6.Tag, comboBox6);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox7.Tag, comboBox7);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox8.Tag, comboBox8);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox9.Tag, comboBox9);
+            comboDictionary.Add((HotkeyController.HotKeyId)comboBox10.Tag, comboBox10);
+        }
+
+        private void createTextboxDictionary()
+        {
+            textboxDictionary = new Dictionary<HotkeyController.HotKeyId, TextBox>();
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk1TextBox.Tag, hk1TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk2TextBox.Tag, hk2TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk3TextBox.Tag, hk3TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk4TextBox.Tag, hk4TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk5TextBox.Tag, hk5TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk6TextBox.Tag, hk6TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk7TextBox.Tag, hk7TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk8TextBox.Tag, hk8TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk9TextBox.Tag, hk9TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)hk10TextBox.Tag, hk10TextBox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)minimizeWindowHKTextbox.Tag, minimizeWindowHKTextbox);
+            textboxDictionary.Add((HotkeyController.HotKeyId)newSessionHKTextbox.Tag, newSessionHKTextbox);
+        }
+
+        private void createCheckboxDictionary()
+        {
+            checkboxDictionary = new Dictionary<HotkeyController.HotKeyId, CheckBox>();
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox1.Tag, checkBox1);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox2.Tag, checkBox2);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox3.Tag, checkBox3);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox4.Tag, checkBox4);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox5.Tag, checkBox5);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox6.Tag, checkBox6);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox7.Tag, checkBox7);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox8.Tag, checkBox8);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox9.Tag, checkBox9);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)checkBox10.Tag, checkBox10);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)minimizeWindowHKCheckbox.Tag, minimizeWindowHKCheckbox);
+            checkboxDictionary.Add((HotkeyController.HotKeyId)newSessionHKCheckbox.Tag, newSessionHKCheckbox);
+        }
+
+
+        private void intialiseTextboxes()
+        {
+            foreach (TextBox t in textboxDictionary.Values)
+            {
+                t.Text = hkc.getHotKeyFromId((HotkeyController.HotKeyId)t.Tag);
+            }
         }
 
         private void loadLists()
@@ -96,7 +174,7 @@ namespace uk.org.riseley.puttySessionManager.form
             foreach (HotkeyController.HotKeyId hkid in comboDictionary.Keys)
             {
                 comboDictionary.TryGetValue(hkid, out c);
-                c.SelectedItem = hkc.getSessionFromHotkey(hkid);
+                c.SelectedItem = hkc.getSessionFromHotkey(hkid);               
             }        
         }
 
@@ -112,10 +190,17 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (newSessionHKCheckbox.Checked == false)
-                newSessionHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_NEW);
-            if (minimizeWindowHKCheckbox.Checked == false)
-                minimizeWindowHKTextbox.Text = hkc.getHotKeyFromId(HotkeyController.HotKeyId.HKID_MINIMIZE);            
+            foreach (CheckBox c in checkboxDictionary.Values)
+            {
+                if (c.Checked == false)
+                {
+                    TextBox t = null;
+                    HotkeyController.HotKeyId hkid = (HotkeyController.HotKeyId)c.Tag;
+                    textboxDictionary.TryGetValue(hkid, out t);
+                    if (t != null)
+                        t.Text = hkc.getHotKeyFromId(hkid);
+                }
+            }
             this.Close();
         }
 
@@ -127,18 +212,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // Get the hotkey to adjust and the text box to query
             HotkeyController.HotKeyId hkid;
             TextBox tb = null;
-            if (cb == newSessionHKCheckbox)
+            
+            hkid = (HotkeyController.HotKeyId)cb.Tag;
+            if (textboxDictionary.TryGetValue(hkid, out tb) == false)
             {
-                hkid = HotkeyController.HotKeyId.HKID_NEW;
-                tb = newSessionHKTextbox;
-            }
-            else if (cb == minimizeWindowHKCheckbox)
-            {
-                hkid = HotkeyController.HotKeyId.HKID_MINIMIZE;
-                tb = minimizeWindowHKTextbox;
-            }
-            else
-            {
+                // If we can't get the text box give up
                 return;
             }
 
@@ -154,6 +232,13 @@ namespace uk.org.riseley.puttySessionManager.form
                                    , MessageBoxIcon.Warning);
                 }
                 tb.Text = hkc.getHotKeyFromId(hkid);
+                hkc.refreshHotkeys();
+
+                // Try to disable any associated combox box
+                ComboBox cmb = null;
+                comboDictionary.TryGetValue(hkid, out cmb);
+                if (cb != null)
+                    cb.Enabled = false;
             }
             else
             {
@@ -165,31 +250,12 @@ namespace uk.org.riseley.puttySessionManager.form
                     tb.Text = hkc.getHotKeyFromId(hkid);
                     cb.Checked = false;
                 } 
-                else if ( Regex.IsMatch ( tb.Text, @"(?!([deflmruDERLMRU]))[a-zA-Z]" ) == false ) 
+                else 
                 {
-                    MessageBox.Show(this, "Hotkey can only be A-Z but not D,E,F,L,M,R or U"
-                                   , "Warning"
-                                   , MessageBoxButtons.OK
-                                   , MessageBoxIcon.Warning);
-                    tb.Text = hkc.getHotKeyFromId(hkid);
-                    cb.Checked = false;                
-                }
-                else if (newSessionHKTextbox.Text.Equals(minimizeWindowHKTextbox.Text,StringComparison.CurrentCultureIgnoreCase))
-                {
-                    MessageBox.Show(this, "Hotkeys must be different"
-                                , "Warning"
-                                , MessageBoxButtons.OK
-                                , MessageBoxIcon.Warning);
-                    tb.Text = hkc.getHotKeyFromId(hkid);
-                    cb.Checked = false;                
-                }
-                else
-                {
-                    char newHotkey = tb.Text.ToUpper().ToCharArray(0, 1)[0];
-                    bool result = hkc.RegisterHotkey(parentWindow, newHotkey, hkid);
-                    if (result == false)
+                    char newHotkey = tb.Text.ToCharArray(0,1)[0];
+                    if (hkc.isHotkeyAvailable(newHotkey) == false)
                     {
-                        MessageBox.Show(this, "Failed to register hotkey"
+                        MessageBox.Show(this, "Hotkey may not be duplicated or D,E,F,L,M,R or U"
                                        , "Warning"
                                        , MessageBoxButtons.OK
                                        , MessageBoxIcon.Warning);
@@ -198,12 +264,30 @@ namespace uk.org.riseley.puttySessionManager.form
                     }
                     else
                     {
-                        Properties.Settings.Default.HotkeyNewSession = newSessionHKTextbox.Text.ToUpper();
-                        Properties.Settings.Default.HotkeyMinimize = minimizeWindowHKTextbox.Text.ToUpper();
-                        tb.Text = hkc.getHotKeyFromId(hkid);
+                        bool result = hkc.RegisterHotkey(parentWindow, newHotkey, hkid);
+                        if (result == false)
+                        {
+                            MessageBox.Show(this, "Failed to register hotkey"
+                                           , "Warning"
+                                           , MessageBoxButtons.OK
+                                           , MessageBoxIcon.Warning);
+                            tb.Text = hkc.getHotKeyFromId(hkid);
+                            cb.Checked = false;
+                        }
+                        else
+                        {
+                            tb.Text = hkc.getHotKeyFromId(hkid);
+
+                            // Try to enable any associated combox box
+                            ComboBox cmb = null;
+                            comboDictionary.TryGetValue(hkid, out cmb);
+                            if (cb != null)
+                                cb.Enabled = true;
+
+                            hkc.refreshHotkeys();
+                        }
                     }
-                }
-                
+                }                
             }
         }
 
@@ -219,7 +303,9 @@ namespace uk.org.riseley.puttySessionManager.form
             Session s = (Session)c.SelectedItem;
             HotkeyController.HotKeyId hkid = (HotkeyController.HotKeyId)c.Tag;
 
-            if (s == null || Properties.Settings.Default.HotkeyFavouriteEnabled == false)
+            if (s == null || 
+                Properties.Settings.Default.HotkeyFavouriteEnabled == false ||
+                hkc.isSessionHotkeyEnabled(hkid) == false )
                 return;
 
             hkc.saveSessionnameToHotkey(parentWindow, hkid, s);
@@ -231,7 +317,8 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 foreach (HotkeyController.HotKeyId hkid in comboDictionary.Keys)
                 {
-                    hkc.RegisterHotkey(parentWindow, hkid);
+                    if ( hkc.isSessionHotkeyEnabled(hkid) )
+                        hkc.RegisterHotkey(parentWindow, hkid);
                 }                
             }
             else
