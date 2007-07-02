@@ -492,6 +492,33 @@ namespace uk.org.riseley.puttySessionManager.controller
             return errMsg;
         }
 
+        public string launchPageant()
+        {
+            String pageantExec = Properties.Settings.Default.PageantLocation;
+            Process p = new Process();
+            p.StartInfo.FileName = pageantExec;
+
+            foreach (String key in Properties.Settings.Default.PageantKeyList)
+            {
+                p.StartInfo.Arguments += "\"" + key + "\" ";
+            }
+
+            bool result = false;
+            String errMsg = "";
+            try
+            {
+                result = p.Start();
+            }
+            catch (Exception ex)
+            {
+                result = false;
+                errMsg = ex.Message;
+            }
+            p.Close();
+
+            return errMsg;
+        }
+
         public bool renameSession(Session s, string newSessionName)
         {
             // Check the old session isn't the default session

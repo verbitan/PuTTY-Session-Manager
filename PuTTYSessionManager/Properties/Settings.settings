@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PuttyLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\PuTTY\putty.exe</Value>
+      <Value Profile="(Default)">C:\Program Files\PuTTY\pagent.exe</Value>
     </Setting>
     <Setting Name="TransparencyEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -163,6 +163,16 @@
     </Setting>
     <Setting Name="HotkeySession10" Type="System.Char" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PageantLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\PuTTY\pageant.exe</Value>
+    </Setting>
+    <Setting Name="PageantKeyList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
+    </Setting>
+    <Setting Name="LaunchPageantOnStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

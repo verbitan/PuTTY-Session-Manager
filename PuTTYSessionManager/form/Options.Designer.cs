@@ -62,6 +62,15 @@ namespace uk.org.riseley.puttySessionManager.form
             this.locatePuttyButton = new System.Windows.Forms.Button();
             this.puttyLocation = new System.Windows.Forms.TextBox();
             this.transparencyCheckBox = new System.Windows.Forms.CheckBox();
+            this.pageantOptionsTab = new System.Windows.Forms.TabPage();
+            this.launchPageantButton = new System.Windows.Forms.Button();
+            this.removeKeyButton = new System.Windows.Forms.Button();
+            this.addKeyButton = new System.Windows.Forms.Button();
+            this.keysListBox = new System.Windows.Forms.ListBox();
+            this.launchPageantCheckBox = new System.Windows.Forms.CheckBox();
+            this.locatePageantButton = new System.Windows.Forms.Button();
+            this.pageantTextBox = new System.Windows.Forms.TextBox();
+            this.thirdPartyOptionsTab = new System.Windows.Forms.TabPage();
             this.updateOptionsTab = new System.Windows.Forms.TabPage();
             this.checkForUpdateButton = new System.Windows.Forms.Button();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
@@ -81,6 +90,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.generalOptionsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
+            this.pageantOptionsTab.SuspendLayout();
             this.updateOptionsTab.SuspendLayout();
             this.proxyGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -89,7 +99,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.openFileDialog.FileName = "putty.exe";
             this.openFileDialog.Filter = "putty.exe|putty.exe|All Files|*.*";
-            this.openFileDialog.InitialDirectory = "C:\\Program Files\\PuTTY\\";
+            this.openFileDialog.RestoreDirectory = true;
             // 
             // tableLayoutPanel
             // 
@@ -122,6 +132,8 @@ namespace uk.org.riseley.puttySessionManager.form
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.generalOptionsTab);
+            this.tabControl1.Controls.Add(this.pageantOptionsTab);
+            this.tabControl1.Controls.Add(this.thirdPartyOptionsTab);
             this.tabControl1.Controls.Add(this.updateOptionsTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
@@ -296,6 +308,103 @@ namespace uk.org.riseley.puttySessionManager.form
             this.transparencyCheckBox.Text = "Enable Transparency";
             this.transparencyCheckBox.UseVisualStyleBackColor = true;
             // 
+            // pageantOptionsTab
+            // 
+            this.pageantOptionsTab.Controls.Add(this.launchPageantButton);
+            this.pageantOptionsTab.Controls.Add(this.removeKeyButton);
+            this.pageantOptionsTab.Controls.Add(this.addKeyButton);
+            this.pageantOptionsTab.Controls.Add(this.keysListBox);
+            this.pageantOptionsTab.Controls.Add(this.launchPageantCheckBox);
+            this.pageantOptionsTab.Controls.Add(this.locatePageantButton);
+            this.pageantOptionsTab.Controls.Add(this.pageantTextBox);
+            this.pageantOptionsTab.Location = new System.Drawing.Point(4, 22);
+            this.pageantOptionsTab.Name = "pageantOptionsTab";
+            this.pageantOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.pageantOptionsTab.TabIndex = 2;
+            this.pageantOptionsTab.Text = "Pageant";
+            this.pageantOptionsTab.UseVisualStyleBackColor = true;
+            // 
+            // launchPageantButton
+            // 
+            this.launchPageantButton.Location = new System.Drawing.Point(17, 161);
+            this.launchPageantButton.Name = "launchPageantButton";
+            this.launchPageantButton.Size = new System.Drawing.Size(109, 23);
+            this.launchPageantButton.TabIndex = 22;
+            this.launchPageantButton.Text = "Launch Now";
+            this.launchPageantButton.UseVisualStyleBackColor = true;
+            this.launchPageantButton.Click += new System.EventHandler(this.launchPageantButton_Click);
+            // 
+            // removeKeyButton
+            // 
+            this.removeKeyButton.Location = new System.Drawing.Point(17, 99);
+            this.removeKeyButton.Name = "removeKeyButton";
+            this.removeKeyButton.Size = new System.Drawing.Size(109, 23);
+            this.removeKeyButton.TabIndex = 21;
+            this.removeKeyButton.Text = "Remove Key";
+            this.removeKeyButton.UseVisualStyleBackColor = true;
+            this.removeKeyButton.Click += new System.EventHandler(this.removeKeyButton_Click);
+            // 
+            // addKeyButton
+            // 
+            this.addKeyButton.Location = new System.Drawing.Point(17, 70);
+            this.addKeyButton.Name = "addKeyButton";
+            this.addKeyButton.Size = new System.Drawing.Size(109, 23);
+            this.addKeyButton.TabIndex = 20;
+            this.addKeyButton.Text = "Add Key";
+            this.addKeyButton.UseVisualStyleBackColor = true;
+            this.addKeyButton.Click += new System.EventHandler(this.addKeyButton_Click);
+            // 
+            // keysListBox
+            // 
+            this.keysListBox.FormattingEnabled = true;
+            this.keysListBox.HorizontalScrollbar = true;
+            this.keysListBox.Location = new System.Drawing.Point(132, 40);
+            this.keysListBox.Name = "keysListBox";
+            this.keysListBox.Size = new System.Drawing.Size(217, 121);
+            this.keysListBox.TabIndex = 19;
+            // 
+            // launchPageantCheckBox
+            // 
+            this.launchPageantCheckBox.AutoSize = true;
+            this.launchPageantCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.LaunchPageantOnStart;
+            this.launchPageantCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "LaunchPageantOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.launchPageantCheckBox.Location = new System.Drawing.Point(197, 167);
+            this.launchPageantCheckBox.Name = "launchPageantCheckBox";
+            this.launchPageantCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.launchPageantCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.launchPageantCheckBox.TabIndex = 18;
+            this.launchPageantCheckBox.Text = "Launch Pageant at startup";
+            this.launchPageantCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // locatePageantButton
+            // 
+            this.locatePageantButton.Location = new System.Drawing.Point(17, 11);
+            this.locatePageantButton.Name = "locatePageantButton";
+            this.locatePageantButton.Size = new System.Drawing.Size(109, 24);
+            this.locatePageantButton.TabIndex = 17;
+            this.locatePageantButton.Text = "Locate pageant.exe";
+            this.locatePageantButton.UseVisualStyleBackColor = true;
+            this.locatePageantButton.Click += new System.EventHandler(this.locatePagentButton_Click);
+            // 
+            // pageantTextBox
+            // 
+            this.pageantTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "PageantLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.pageantTextBox.Location = new System.Drawing.Point(132, 14);
+            this.pageantTextBox.Name = "pageantTextBox";
+            this.pageantTextBox.ReadOnly = true;
+            this.pageantTextBox.Size = new System.Drawing.Size(217, 20);
+            this.pageantTextBox.TabIndex = 16;
+            this.pageantTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.PageantLocation;
+            // 
+            // thirdPartyOptionsTab
+            // 
+            this.thirdPartyOptionsTab.Location = new System.Drawing.Point(4, 22);
+            this.thirdPartyOptionsTab.Name = "thirdPartyOptionsTab";
+            this.thirdPartyOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.thirdPartyOptionsTab.TabIndex = 3;
+            this.thirdPartyOptionsTab.Text = "Third Party Apps";
+            this.thirdPartyOptionsTab.UseVisualStyleBackColor = true;
+            // 
             // updateOptionsTab
             // 
             this.updateOptionsTab.Controls.Add(this.checkForUpdateButton);
@@ -459,7 +568,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.tableLayoutPanel);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(389, 302);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(389, 302);
             this.Name = "Options";
@@ -473,6 +581,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.generalOptionsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
+            this.pageantOptionsTab.ResumeLayout(false);
+            this.pageantOptionsTab.PerformLayout();
             this.updateOptionsTab.ResumeLayout(false);
             this.updateOptionsTab.PerformLayout();
             this.proxyGroupBox.ResumeLayout(false);
@@ -514,5 +624,14 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.Label proxyServerLabel;
         private System.Windows.Forms.TextBox proxyPortTextBox;
         private System.Windows.Forms.Button checkForUpdateButton;
+        private System.Windows.Forms.TabPage pageantOptionsTab;
+        private System.Windows.Forms.Button locatePageantButton;
+        private System.Windows.Forms.TextBox pageantTextBox;
+        private System.Windows.Forms.TabPage thirdPartyOptionsTab;
+        private System.Windows.Forms.ListBox keysListBox;
+        private System.Windows.Forms.CheckBox launchPageantCheckBox;
+        private System.Windows.Forms.Button removeKeyButton;
+        private System.Windows.Forms.Button addKeyButton;
+        private System.Windows.Forms.Button launchPageantButton;
     }
 }

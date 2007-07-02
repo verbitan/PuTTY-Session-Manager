@@ -25,7 +25,7 @@ namespace uk.org.riseley.puttySessionManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PuTTY\\putty.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PuTTY\\pagent.exe")]
         public string PuttyLocation {
             get {
                 return ((string)(this["PuttyLocation"]));
@@ -668,6 +668,43 @@ namespace uk.org.riseley.puttySessionManager.Properties {
             }
             set {
                 this["HotkeySession10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PuTTY\\pageant.exe")]
+        public string PageantLocation {
+            get {
+                return ((string)(this["PageantLocation"]));
+            }
+            set {
+                this["PageantLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />")]
+        public global::System.Collections.Specialized.StringCollection PageantKeyList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["PageantKeyList"]));
+            }
+            set {
+                this["PageantKeyList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LaunchPageantOnStart {
+            get {
+                return ((bool)(this["LaunchPageantOnStart"]));
+            }
+            set {
+                this["LaunchPageantOnStart"] = value;
             }
         }
     }

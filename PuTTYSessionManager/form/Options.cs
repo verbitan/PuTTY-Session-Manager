@@ -38,6 +38,8 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public enum ProxyMode { PROXY_IE, PROXY_NONE, PROXY_USER };
 
+        private enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA };
+
         public Options(Form parentWindow)
         {
             this.parentWindow = parentWindow;
@@ -69,13 +71,23 @@ namespace uk.org.riseley.puttySessionManager.form
             // Check if the update url is changed
             if (!urlTextBox.Text.Equals(Properties.Settings.Default.DefaultUpdateUrl))
                 urlCheckBox.Checked = false;
+
+            // Initialise the key list from the properties
+            foreach (String key in Properties.Settings.Default.PageantKeyList)
+            {
+                keysListBox.Items.Add(key);
+            }
+
+            if (Properties.Settings.Default.LaunchPageantOnStart)
+                sc.launchPageant();
         }
 
         private void locatePuttyButton_Click(object sender, EventArgs e)
         {
+            setupOpenFileDialogue(FileDialogType.PUTTY);
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.puttyLocation.Text = openFileDialog.FileName;
+                puttyLocation.Text = openFileDialog.FileName;
             }
         }
 
@@ -83,7 +95,7 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
-                this.sampletextTextbox.Font = fontDialog.Font;
+                sampletextTextbox.Font = fontDialog.Font;
             }
         }
 
@@ -132,6 +144,64 @@ namespace uk.org.riseley.puttySessionManager.form
         private void checkForUpdateButton_Click(object sender, EventArgs e)
         {
             uf.ShowDialog();
-        } 
+        }
+
+        private void locatePagentButton_Click(object sender, EventArgs e)
+        {
+            setupOpenFileDialogue(FileDialogType.PAGEANT);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pageantTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void setupOpenFileDialogue(FileDialogType fdt) 
+        {
+            String filename = "";
+            String fileFilter = "";
+            const String allFilesFilter = "|All Files|*.*";
+            switch ( fdt) 
+            {
+                case FileDialogType.PUTTY:
+                    filename = "putty.exe";
+                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    break;
+                case FileDialogType.PAGEANT:
+                    filename = "pageant.exe";
+                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    break;
+               case FileDialogType.PAGEANT_KEYS:
+                    filename = "";
+                    fileFilter = "*.ppk|*.ppk" + allFilesFilter;
+                    break;
+                case FileDialogType.FILEZILLA:
+                    filename = "FileZilla.exe";
+                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    break;                
+            }
+            openFileDialog.FileName = filename;
+            openFileDialog.Filter = fileFilter;
+        }
+
+        private void addKeyButton_Click(object sender, EventArgs e)
+        {
+            setupOpenFileDialogue(FileDialogType.PAGEANT_KEYS);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.PageantKeyList.Add(openFileDialog.FileName);
+                keysListBox.Items.Add(openFileDialog.FileName);                
+            }
+        }
+
+        private void removeKeyButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.PageantKeyList.Remove(keysListBox.SelectedItem.ToString());
+            keysListBox.Items.Remove(keysListBox.SelectedItem);            
+        }
+
+        private void launchPageantButton_Click(object sender, EventArgs e)
+        {
+            sc.launchPageant();
+        }
     }
 }
