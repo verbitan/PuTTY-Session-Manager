@@ -5,6 +5,19 @@ Sixth release of PuTTY Session Manager
 This is a minor release of PSM with the following changes:
 Feature requests:
 
+1744520: Expand all folders.  All child folders may now be expanded with
+         CTRL Right Arrow , and collapsed with CTRL Left arrow.
+         Also added context menu items to perform the same function
+1744518: Hit Enter to launch a session.  Implemented on tree and list view
+1746714: More Session Hotkeys.  You can now have up to 10 configurable 
+         session hotkeys.  Hotkeys may be indvidually enabled and disabled.
+         
+Bugs:
+Not Tracked:  Create HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+              if it doesn't exist and auto startup requested
+Not Tracked:  Upgrade settings from one version of PSM to another ( so
+              you don't have to keep resetting everything after an upgrade).              
+
 PuTTY Session Manager v0.2.3.1 ( 19-06-2007 )
 =============================================
 Fifth release of PuTTY Session Manager

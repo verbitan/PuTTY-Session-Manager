@@ -361,30 +361,35 @@ namespace uk.org.riseley.puttySessionManager.control
             this.hotkey6MenuItem.Name = "hotkey6MenuItem";
             this.hotkey6MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey6MenuItem.Text = "Win+6";
+            this.hotkey6MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey7MenuItem
             // 
             this.hotkey7MenuItem.Name = "hotkey7MenuItem";
             this.hotkey7MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey7MenuItem.Text = "Win+7";
+            this.hotkey7MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey8MenuItem
             // 
             this.hotkey8MenuItem.Name = "hotkey8MenuItem";
             this.hotkey8MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey8MenuItem.Text = "Win+8";
+            this.hotkey8MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey9MenuItem
             // 
             this.hotkey9MenuItem.Name = "hotkey9MenuItem";
             this.hotkey9MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey9MenuItem.Text = "Win+9";
+            this.hotkey9MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey10MenuItem
             // 
             this.hotkey10MenuItem.Name = "hotkey10MenuItem";
             this.hotkey10MenuItem.Size = new System.Drawing.Size(152, 22);
             this.hotkey10MenuItem.Text = "Win+0";
+            this.hotkey10MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // treeImageList
             // 
