@@ -41,7 +41,38 @@ namespace uk.org.riseley.puttySessionManager
                 Properties.Settings.Default.Save();
             }
 
-            Application.Run(new SessionManagerForm());           
+            PsmApplicationContext appContext = new PsmApplicationContext();
+
+            Application.Run(appContext);           
         }
     }
+
+    class PsmApplicationContext : ApplicationContext
+    {
+        private SessionManagerForm smf;
+
+        public PsmApplicationContext()
+        {
+            // Instantiate the SessionManagerForm           
+            smf = new SessionManagerForm();
+
+            // Register it as the main form
+            this.MainForm = smf;
+
+            // Handle the ApplicationExit event to know when the application is exiting.
+            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+
+            if (Properties.Settings.Default.MinimizeOnStart == false)
+            {
+                smf.Show();
+            }
+            
+        }
+
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
+    }
+
 }

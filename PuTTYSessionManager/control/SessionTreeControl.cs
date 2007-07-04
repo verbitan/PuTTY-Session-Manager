@@ -377,6 +377,8 @@ namespace uk.org.riseley.puttySessionManager.control
                     currnode.Nodes.Add(newNode);
                 }
             }
+            // Expand the first node
+            rootNode.Expand();
 
             // Begin repainting the TreeView.
             treeView.EndUpdate();

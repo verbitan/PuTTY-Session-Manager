@@ -43,6 +43,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public SessionManagerForm()
             : base()
         {
+            this.Visible = false;
             InitializeComponent();
             hkc = HotkeyController.getInstance();
             LoadLayout();
@@ -115,6 +116,8 @@ namespace uk.org.riseley.puttySessionManager.form
                 aboutDialog.Close();
                 sessionEditor.Close();
                 hotKeyChooser.Close();
+                hkc.UnregisterAllHotKeys(this);
+                SaveSize();
                 Application.Exit();
             }
         }
@@ -124,22 +127,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Visible = !this.Visible;
             if ( this.Visible == true && this.WindowState == FormWindowState.Minimized )
                  this.WindowState = FormWindowState.Normal;
-        }
-
-
-        private void SessionManagerForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                this.Visible = false;
-            }
-            else
-            {
-                hkc.UnregisterAllHotKeys(this);
-                SaveSize();
-                Properties.Settings.Default.Save();
-            }
         }
 
 
@@ -179,7 +166,7 @@ namespace uk.org.riseley.puttySessionManager.form
             currentSessionControl.Enabled = true;
             currentSessionControl.Visible = true;
             hiddenSessionControl.Enabled = false;
-            hiddenSessionControl.Visible = false;                     
+            hiddenSessionControl.Visible = false;
                        
             this.ResumeLayout(true);
 
@@ -207,7 +194,7 @@ namespace uk.org.riseley.puttySessionManager.form
                 this.Visible == true &&
                 this.ContainsFocus == true )
             {
-                this.Visible = false;
+                Hide();
             }
             else if (m.Msg == hkc.WM_HOTKEY)
             {
@@ -235,42 +222,10 @@ namespace uk.org.riseley.puttySessionManager.form
 
             // Otherwise figure out which session to launch
             String sessionName = "";
-            switch (id)
-            {
-                case (int) HotkeyController.HotKeyId.HKID_NEW:
-                    sessionName = "";
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_1:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession1);
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_2:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession2); 
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_3:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession3); 
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_4:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession4); 
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_5:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession5); 
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_6:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession6);
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_7:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession7);
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_8:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession8);
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_9:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession9);
-                    break;
-                case (int)HotkeyController.HotKeyId.HKID_SESSION_10:
-                    sessionName = Session.convertSessionKeyToDisplay(Properties.Settings.Default.FavouriteSession10);
-                    break;
-            }
+            Session s = hkc.getSessionFromHotkey((HotkeyController.HotKeyId)id);
+            if (s != null)
+                sessionName = s.SessionDisplayText;
+    
             sessionControl_LaunchSession(this, new LaunchSessionEventArgs(sessionName));
         }
 
@@ -322,16 +277,36 @@ namespace uk.org.riseley.puttySessionManager.form
         }
 
         /// <summary>
-        /// This event is fired when the form is first shown.
-        /// If the user has set the MinimizeOnStart option, hide the form
+        /// Event handler for SessionManagerForm deactivate event
+        /// Hide the application when focus is lost
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SessionManagerForm_Shown(object sender, EventArgs e)
+        private void SessionManagerForm_Deactivate(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.MinimizeOnStart == true)
+            if (Properties.Settings.Default.MinimizeOnUse == true)
             {
-                this.Visible = false;
+                Hide();
+            }
+        }
+
+        /// <summary>
+        /// Event handler for SessionManagerForm FormClosing event
+        /// Cancel the close if it was requested by the user and just
+        /// hide the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SessionManagerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+
+                // Make sure the systray icon is visible
+                if (systrayIcon.Visible == false)
+                    systrayIcon.Visible = true;
             }
         }
     }

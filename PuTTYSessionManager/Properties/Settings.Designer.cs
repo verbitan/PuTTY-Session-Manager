@@ -707,5 +707,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["LaunchPageantOnStart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MinimizeOnUse {
+            get {
+                return ((bool)(this["MinimizeOnUse"]));
+            }
+            set {
+                this["MinimizeOnUse"] = value;
+            }
+        }
     }
 }

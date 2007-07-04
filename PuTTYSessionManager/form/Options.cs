@@ -201,7 +201,13 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void launchPageantButton_Click(object sender, EventArgs e)
         {
-            sc.launchPageant();
+            String errMsg = sc.launchPageant();
+            if (errMsg.Equals("") == false)
+            {
+                MessageBox.Show("Pageant Failed to start. Check the Pageant location.\n" +
+                                errMsg
+                    , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

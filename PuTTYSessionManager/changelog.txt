@@ -3,28 +3,39 @@ PuTTY Session Manager v0.2.4.1 ( XX-XX-2007 )
 Sixth release of PuTTY Session Manager
 
 This is a minor release of PSM with the following changes:
-Feature requests:
 
+Feature requests:
+1748080: Minimize on loss of focus.  Added an option to allow PSM
+         to automatically minimize to the system tray when 
+1748076: Pageant Integration.  Added a tab to the options dialog to 
+         enable the launch of Pageant from PSM.  A list of keys can be 
+         supplied , and Pageant can be automatically launched on startup
+         of PSM
 1744520: Expand all folders.  All child folders may now be expanded with
          CTRL Right Arrow , and collapsed with CTRL Left arrow.
-         Also added context menu items to perform the same function
+         Also added context menu items to perform the same function. Changed
+         refresh session functionality to display tree expanded to one level
+         by default.
 1744518: Hit Enter to launch a session.  Implemented on tree and list view
 1746714: More Session Hotkeys.  You can now have up to 10 configurable 
-         session hotkeys.  Hotkeys may be indvidually enabled and disabled.
+         session hotkeys.  Hotkeys may be indvidually enabled and disabled.         
          
 Bugs:
 Not Tracked:  Create HKCU\Software\Microsoft\Windows\CurrentVersion\Run
               if it doesn't exist and auto startup requested
 Not Tracked:  Upgrade settings from one version of PSM to another ( so
-              you don't have to keep resetting everything after an upgrade).              
+              you don't have to keep resetting everything after an upgrade).
+Not Tracked:  Finally fixed PSM so that if you select minimize on startup
+			  the tree no longer displays then hides, instead it just starts
+			  in the system tray
 
 PuTTY Session Manager v0.2.3.1 ( 19-06-2007 )
 =============================================
 Fifth release of PuTTY Session Manager
 
 This is a minor release of PSM with the following changes:
-Feature requests:
 
+Feature requests:
 1651011: Allow sort order of sessions and folders to be configured by 
          the user
 1651897: Create csv session export.  You can now export 
