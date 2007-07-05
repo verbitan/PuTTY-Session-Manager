@@ -25,7 +25,7 @@ namespace uk.org.riseley.puttySessionManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PuTTY\\pagent.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PuTTY\\putty.exe")]
         public string PuttyLocation {
             get {
                 return ((string)(this["PuttyLocation"]));

@@ -1160,12 +1160,23 @@ namespace uk.org.riseley.puttySessionManager.control
                 {
                     if (e.KeyCode == Keys.Right )
                     {
+                         // Suppress repainting the TreeView until all the objects have been updated.
+						treeView.BeginUpdate();
+			
                         selectedNode.ExpandAll();
+                        
+                        treeView.EndUpdate();
+			
                         e.Handled = true;
                     }
                     else if (e.KeyCode == Keys.Left)
                     {
+                    	 // Suppress repainting the TreeView until all the objects have been updated.
+						treeView.BeginUpdate();
+			
                         selectedNode.Collapse(false);
+                        
+                        treeView.EndUpdate();
                     }
                 }
             }
@@ -1183,7 +1194,13 @@ namespace uk.org.riseley.puttySessionManager.control
             TreeNode selectedNode = treeView.SelectedNode;
             if (selectedNode != null)
             {
+            	 // Suppress repainting the TreeView until all the objects have been updated.
+				treeView.BeginUpdate();
+		
                 selectedNode.ExpandAll();                
+                
+                treeView.EndUpdate();
+                
             }
         }
 
@@ -1199,7 +1216,12 @@ namespace uk.org.riseley.puttySessionManager.control
             TreeNode selectedNode = treeView.SelectedNode;
             if (selectedNode != null)
             {
+             	// Suppress repainting the TreeView until all the objects have been updated.
+				treeView.BeginUpdate();
+		
                 selectedNode.Collapse(false);
+                
+                treeView.EndUpdate();
             }
         }
     }

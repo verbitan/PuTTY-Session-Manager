@@ -56,16 +56,11 @@ namespace uk.org.riseley.puttySessionManager
             // Instantiate the SessionManagerForm           
             smf = new SessionManagerForm();
 
-            // Register it as the main form
-            this.MainForm = smf;
-
             // Handle the ApplicationExit event to know when the application is exiting.
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
 
-            if (Properties.Settings.Default.MinimizeOnStart == false)
-            {
-                smf.Show();
-            }
+		    // Only make the form visible if the required
+            smf.Visible = !(Properties.Settings.Default.MinimizeOnStart);
             
         }
 
