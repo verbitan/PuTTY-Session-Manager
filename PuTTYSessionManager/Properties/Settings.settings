@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PuttyLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\PuTTY\pagent.exe</Value>
+      <Value Profile="(Default)">C:\Program Files\PuTTY\putty.exe</Value>
     </Setting>
     <Setting Name="TransparencyEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -176,6 +176,9 @@
     </Setting>
     <Setting Name="MinimizeOnUse" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FileZillaLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\FileZilla\FileZilla.exe</Value>
     </Setting>
   </Settings>
 </SettingsFile>

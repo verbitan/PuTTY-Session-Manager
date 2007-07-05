@@ -1126,7 +1126,9 @@ namespace uk.org.riseley.puttySessionManager.control
             }
 
             SessionSorter sorter = new SessionSorter(order);
+            treeView.BeginUpdate();
             treeView.TreeViewNodeSorter = sorter;
+            treeView.EndUpdate();
             Properties.Settings.Default.SortOrder = (int)order;
         }
 
@@ -1143,12 +1145,17 @@ namespace uk.org.riseley.puttySessionManager.control
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Session s = getSelectedSession();
-                if (s != null)
-                {
-                    OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
-                    e.Handled = true;
-                }
+                // Don't launch subfolders by default
+                bool getSubfolders = false;
+
+                // If the CRTL key has been pressed , 
+                // launch subfolders
+                if (e.Modifiers == Keys.Control)
+                    getSubfolders = true;
+
+                List<Session> sl = getSelectedSessions(getSubfolders);
+                if (confirmNumberOfSessions(sl))
+                    launchFolderSessions(sl);
             }
             else if ((e.KeyCode == Keys.Right || e.KeyCode == Keys.Left )&& 
                      e.Modifiers == Keys.Control ) 
@@ -1161,10 +1168,8 @@ namespace uk.org.riseley.puttySessionManager.control
                     if (e.KeyCode == Keys.Right )
                     {
                          // Suppress repainting the TreeView until all the objects have been updated.
-						treeView.BeginUpdate();
-			
-                        selectedNode.ExpandAll();
-                        
+						treeView.BeginUpdate();			
+                        selectedNode.ExpandAll();                        
                         treeView.EndUpdate();
 			
                         e.Handled = true;
@@ -1172,10 +1177,8 @@ namespace uk.org.riseley.puttySessionManager.control
                     else if (e.KeyCode == Keys.Left)
                     {
                     	 // Suppress repainting the TreeView until all the objects have been updated.
-						treeView.BeginUpdate();
-			
-                        selectedNode.Collapse(false);
-                        
+						treeView.BeginUpdate();			
+                        selectedNode.Collapse(false);                        
                         treeView.EndUpdate();
                     }
                 }

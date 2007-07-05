@@ -719,5 +719,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["MinimizeOnUse"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\FileZilla\\FileZilla.exe")]
+        public string FileZillaLocation {
+            get {
+                return ((string)(this["FileZillaLocation"]));
+            }
+            set {
+                this["FileZillaLocation"] = value;
+            }
+        }
     }
 }

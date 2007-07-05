@@ -96,7 +96,10 @@ namespace uk.org.riseley.puttySessionManager.control
         protected virtual void OnLaunchSession(LaunchSessionEventArgs se)
         {
             if (LaunchSession != null)
-            {
+            {   
+                // Hide the form if the option has been requested
+                if (Properties.Settings.Default.MinimizeOnUse == true && ParentForm.Visible )
+                    ParentForm.Hide();
                 LaunchSession(this, se);
             }
         }

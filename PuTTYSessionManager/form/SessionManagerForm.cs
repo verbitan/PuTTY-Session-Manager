@@ -217,6 +217,8 @@ namespace uk.org.riseley.puttySessionManager.form
             if (id == (int)HotkeyController.HotKeyId.HKID_MINIMIZE)
             {
                 this.Visible = !(this.Visible);
+                if (Visible)
+                    Activate();
                 return;
             }
 
@@ -274,20 +276,6 @@ namespace uk.org.riseley.puttySessionManager.form
             bool result = deleteSessions(currentSessionControl.getSelectedSessions(), sender);
             // if the delete failed or aborted cancel the event
             ce.Cancel = !(result);
-        }
-
-        /// <summary>
-        /// Event handler for SessionManagerForm deactivate event
-        /// Hide the application when focus is lost
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SessionManagerForm_Deactivate(object sender, EventArgs e)
-        {
-            if (Properties.Settings.Default.MinimizeOnUse == true)
-            {
-                Hide();
-            }
         }
 
         /// <summary>

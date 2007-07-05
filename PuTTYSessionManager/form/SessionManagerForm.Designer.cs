@@ -207,7 +207,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PuTTY Session Manager";
             this.TopMost = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;
-            this.Deactivate += new System.EventHandler(this.SessionManagerForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SessionManagerForm_FormClosing);
             this.sysTrayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
