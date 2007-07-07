@@ -80,6 +80,27 @@ namespace uk.org.riseley.puttySessionManager.form
 
             if (Properties.Settings.Default.LaunchPageantOnStart)
                 sc.launchPageant();
+
+            // Reset the filezilla protocol button to the save pref
+            SessionController.FileZillaProtocol fp = (SessionController.FileZillaProtocol)Properties.Settings.Default.FileZillaProtocol;
+            if (fp == SessionController.FileZillaProtocol.FTP)
+            {
+                ftpRadioButton.Checked = true;
+            }
+            else if (fp == SessionController.FileZillaProtocol.FTPS)
+            {
+                ftpsRadioButton.Checked = true;
+            }
+            else if (fp == SessionController.FileZillaProtocol.SFTP)
+            {
+                sftpRadioButton.Checked = true;
+            }
+            else if (fp == SessionController.FileZillaProtocol.AUTO)
+            {
+                sessionInfoRadioButton.Checked = true;
+            }
+
+            setupToolTips();
         }
 
         private void locatePuttyButton_Click(object sender, EventArgs e)
@@ -87,7 +108,7 @@ namespace uk.org.riseley.puttySessionManager.form
             setupOpenFileDialogue(FileDialogType.PUTTY);
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                puttyLocation.Text = openFileDialog.FileName;
+                puttyTextBox.Text = openFileDialog.FileName;
             }
         }
 
@@ -209,5 +230,75 @@ namespace uk.org.riseley.puttySessionManager.form
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// Provide some tool tip help for various options
+        /// </summary>
+        private void setupToolTips()
+        {
+            // Options tab
+            optionsToolTip.SetToolTip(autoMinimizeCheckBox, "If enabled, PSM will hide itself when a new session\n" +
+                                                      "or folder of sessions is lauched");
+            optionsToolTip.SetToolTip(autostartCheckBox, "Automatically start PSM on Windows login");
+
+            // Pageant tab
+            optionsToolTip.SetToolTip(addKeyButton, "Add an SSH private key(s) that will be opened\n" +
+                                              "when pageant launches");
+            optionsToolTip.SetToolTip(removeKeyButton, "Remove selected key from the list");
+            optionsToolTip.SetToolTip(launchPageantCheckBox, "Automatically launch Pageant, with the keys listed below,\n" +
+                                                             "when PSM starts");
+
+
+            // Filezilla tab
+            optionsToolTip.SetToolTip(enableFileZillaCheckBox, "Add support for FileZilla 2.x.\nFileZilla sessions can " +
+                                  "be launched from the Session Tree.\nNOTE: FileZilla 3.x is NOT currently supported.");
+            optionsToolTip.SetToolTip(sessionInfoRadioButton, "Use SFTP and the specified port for sessions defined as SSH,\n" +
+                                  "otherwise default to FTP on port 21");
+            optionsToolTip.SetToolTip(sshAuthCheckBox, "Attempt to use Pageant authentication for any SFTP sessions,\n" +
+                                  "otherwise prompt for a password");
+
+            // Update tab
+        }
+
+        /// <summary>
+        /// Update the FileZillaProtocol setting when any of the radio buttons
+        /// are clicked
+        /// </summary>
+        /// <param name="sender">The button that was clicked</param>
+        /// <param name="e"></param>
+        private void protocolRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ftpRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.FTP;
+            }
+            else if (ftpsRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.FTPS;
+            }
+            else if (sftpRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.SFTP;
+            }
+            else if (sessionInfoRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.AUTO;
+            }
+        }
+
+        /// <summary>
+        /// Display the filezilla file chooser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void locateFileZillaButton_Click(object sender, EventArgs e)
+        {
+            setupOpenFileDialogue(FileDialogType.FILEZILLA);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filezillaTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
     }
 }

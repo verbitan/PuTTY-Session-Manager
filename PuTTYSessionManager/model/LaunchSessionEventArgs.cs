@@ -21,17 +21,34 @@ namespace uk.org.riseley.puttySessionManager.model
 {
     public class LaunchSessionEventArgs : EventArgs 
     {
+        public enum PROGRAM { PUTTY, FILEZILLA };
+
         public LaunchSessionEventArgs()
-            : this("")
+            : this(null, PROGRAM.PUTTY)
         {    
         }
 
-        public LaunchSessionEventArgs(string sessionName)
+        public LaunchSessionEventArgs(Session session)
+            : this(session, PROGRAM.PUTTY)
         {
-            this.sessionName = sessionName;
+        }        
+
+        public LaunchSessionEventArgs(Session session, PROGRAM program )
+        {
+            this.session = session;
+            this.program = program;
         }
 
-        public string sessionName;
+        public Session session;
 
+        public PROGRAM program;
+
+        public string SessionName()
+        {
+            if (session != null)
+                return session.SessionDisplayText;
+            else
+                return "";
+        }
     }
 }

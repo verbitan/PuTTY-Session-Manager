@@ -392,16 +392,13 @@ namespace uk.org.riseley.puttySessionManager.control
         private void launchSessionMenuItem_Click(object sender, EventArgs e)
         {
             Session s = getSelectedSession();
-            string sessionName = "";
-            if ( s != null )
-                sessionName = s.SessionDisplayText;
-            OnLaunchSession(new LaunchSessionEventArgs(sessionName));
+            OnLaunchSession(new LaunchSessionEventArgs(s));
         }
 
         private void launchSessionSystrayMenuItem_Click(object sender, EventArgs e)
         {
-            string sessionName = ((ToolStripMenuItem)sender).Text;
-            OnLaunchSession(new LaunchSessionEventArgs(sessionName));
+            Session s = (Session)((ToolStripMenuItem)sender).Tag;
+            OnLaunchSession(new LaunchSessionEventArgs(s));
         }
 
         private void treeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -409,7 +406,7 @@ namespace uk.org.riseley.puttySessionManager.control
             Session s = (Session)e.Node.Tag;
             if (s.IsFolder == false)
             {
-                OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
+                OnLaunchSession(new LaunchSessionEventArgs(s));
             }
         }
 
@@ -466,6 +463,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
                     launchSessionMenuItem.Enabled = true;
+                    launchFilezillaToolStripMenuItem.Enabled = true;
                     expandTreeToolStripMenuItem.Enabled = false;
                     collapseTreeToolStripMenuItem.Enabled = false;
                 }
@@ -479,6 +477,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     }
 
                     launchSessionMenuItem.Enabled = false;
+                    launchFilezillaToolStripMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
 
@@ -503,6 +502,8 @@ namespace uk.org.riseley.puttySessionManager.control
                     expandTreeToolStripMenuItem.Enabled = true;
                     collapseTreeToolStripMenuItem.Enabled = true;
                 }
+                launchFilezillaToolStripMenuItem.Visible = Properties.Settings.Default.FileZillaEnabled;
+
             }
         }
 
@@ -680,6 +681,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 if (s.IsFolder)
                 {
                     ToolStripMenuItem folder = new ToolStripMenuItem(s.SessionDisplayText);
+                    folder.Tag = s;
                     folder.DisplayStyle = ToolStripItemDisplayStyle.Text;
                     parent.DropDownItems.Add(folder);
                     addSessionMenuItemsFolder(folder, node.Nodes);
@@ -687,6 +689,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 else
                 {
                     ToolStripMenuItem session = new ToolStripMenuItem(s.SessionDisplayText, null, launchSessionSystrayMenuItem_Click);
+                    session.Tag = s;
                     session.DisplayStyle = ToolStripItemDisplayStyle.Text;
                     parent.DropDownItems.Add(session);
                 }
@@ -710,7 +713,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
             foreach (Session s in sl)
             {
-                OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
+                OnLaunchSession(new LaunchSessionEventArgs(s));
             }
         }
 
@@ -1226,6 +1229,12 @@ namespace uk.org.riseley.puttySessionManager.control
                 
                 treeView.EndUpdate();
             }
+        }
+
+        private void launchFilezillaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Session s = getSelectedSession();
+            OnLaunchSession(new LaunchSessionEventArgs(s,LaunchSessionEventArgs.PROGRAM.FILEZILLA));
         }
     }
 }

@@ -180,5 +180,14 @@
     <Setting Name="FileZillaLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files\FileZilla\FileZilla.exe</Value>
     </Setting>
+    <Setting Name="FileZillaEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FileZillaAttemptKeyAuth" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FileZillaProtocol" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

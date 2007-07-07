@@ -132,13 +132,28 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void sessionControl_LaunchSession(object sender, LaunchSessionEventArgs se)
         {
-
-            String errMsg = sc.launchSession(se.sessionName);
-            if (errMsg.Equals("") == false)
+            if (se != null)
             {
-                MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
-                                errMsg
-                    , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (se.program == LaunchSessionEventArgs.PROGRAM.PUTTY)
+                {
+                    String errMsg = sc.launchSession(se.SessionName());
+                    if (errMsg.Equals("") == false)
+                    {
+                        MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
+                                        errMsg
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (se.program == LaunchSessionEventArgs.PROGRAM.FILEZILLA)
+                {
+                    String errMsg = sc.launchFileZilla(se.session);
+                    if (errMsg.Equals("") == false)
+                    {
+                        MessageBox.Show("FileZilla Failed to start. Check the FileZilla location.\n" +
+                                        errMsg
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
@@ -223,12 +238,8 @@ namespace uk.org.riseley.puttySessionManager.form
             }
 
             // Otherwise figure out which session to launch
-            String sessionName = "";
             Session s = hkc.getSessionFromHotkey((HotkeyController.HotKeyId)id);
-            if (s != null)
-                sessionName = s.SessionDisplayText;
-    
-            sessionControl_LaunchSession(this, new LaunchSessionEventArgs(sessionName));
+            sessionControl_LaunchSession(this, new LaunchSessionEventArgs(s));
         }
 
         public void SessionsRefreshed(object sender, RefreshSessionsEventArgs re)

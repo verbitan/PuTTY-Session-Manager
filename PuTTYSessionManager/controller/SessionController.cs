@@ -11,7 +11,7 @@ using System.Windows.Forms;
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
   ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.PUTTY_SESSIONS_REG_KEY)]
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
- ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.AUTOSTART_REG_KEY)]  
+ ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.AUTOSTART_REG_KEY)]
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
@@ -66,6 +66,11 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// The csv export file type
         /// </summary>
         public const string FILE_TYPE_CSV = "csv";
+
+        /// <summary>
+        /// The choice of FileZilla Protocols
+        /// </summary>
+        public enum FileZillaProtocol { AUTO, FTP, FTPS, SFTP };
 
         /// <summary>
         /// The current list of all the sessions stored in the registry
@@ -245,7 +250,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                     else
                         path = path + Session.PATH_SEPARATOR + subfolder;
 
-                    if (fl.Contains(path) == false && 
+                    if (fl.Contains(path) == false &&
                         sfl.Contains(path) == false)
                         sfl.Add(path);
                 }
@@ -256,7 +261,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             fl.Sort();
 
             return fl;
-        
+
         }
 
         public void saveFolderToRegistry(Session s)
@@ -286,7 +291,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                 foreach (Session s in sessionList)
                 {
                     if (saveSession(s, sw, filetype))
-                        savedCount ++;
+                        savedCount++;
                 }
                 sw.Close();
             }
@@ -298,12 +303,12 @@ namespace uk.org.riseley.puttySessionManager.controller
             bool result = false;
             if (filetype.Equals(FILE_TYPE_REG))
                 result = saveSessionToRegExport(s, sw);
-            else if ( filetype.Equals(FILE_TYPE_CSV))
-                result = saveSessionToCsvExport(s,sw);
+            else if (filetype.Equals(FILE_TYPE_CSV))
+                result = saveSessionToCsvExport(s, sw);
             return result;
         }
 
-        private bool saveSessionToCsvExport(Session s, StreamWriter sw) 
+        private bool saveSessionToCsvExport(Session s, StreamWriter sw)
         {
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
             if (rk == null)
@@ -312,9 +317,9 @@ namespace uk.org.riseley.puttySessionManager.controller
             String sessionName = "";
             String username = "";
             String foldername = "";
-            
+
             Object value = rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
-            if ( value != null )
+            if (value != null)
                 hostname = value.ToString();
             sessionName = s.SessionDisplayText;
 
@@ -322,9 +327,9 @@ namespace uk.org.riseley.puttySessionManager.controller
             if (value != null)
                 username = value.ToString();
 
-            if ( hostname != null && hostname.Contains("@") ) 
+            if (hostname != null && hostname.Contains("@"))
             {
-                username = hostname.Substring(0,hostname.IndexOf("@"));
+                username = hostname.Substring(0, hostname.IndexOf("@"));
                 hostname = hostname.Substring(hostname.IndexOf("@") + 1);
             }
             value = rk.GetValue(PUTTY_PSM_FOLDER_ATTRIB);
@@ -332,9 +337,9 @@ namespace uk.org.riseley.puttySessionManager.controller
                 foldername = value.ToString();
 
             sw.WriteLine("\"" + sessionName + "\"," +
-                         "\"" + foldername  + "\"," +   
-                         "\"" + username    + "\"," +   
-                         "\"" + hostname    + "\"" );   
+                         "\"" + foldername + "\"," +
+                         "\"" + username + "\"," +
+                         "\"" + hostname + "\"");
             rk.Close();
             return true;
         }
@@ -397,7 +402,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
 
             // Create the new session 
-            newSession = Registry.CurrentUser.CreateSubKey (PUTTY_SESSIONS_REG_KEY + "\\" + Session.convertDisplayToSessionKey(nsr.SessionName));
+            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + Session.convertDisplayToSessionKey(nsr.SessionName));
 
             // Copy the values
             bool hostnameSet = false;
@@ -406,36 +411,36 @@ namespace uk.org.riseley.puttySessionManager.controller
             object value;
             foreach (string valueName in template.GetValueNames())
             {
-                
-                if ( valueName.Equals ( PUTTY_HOSTNAME_ATTRIB ) ) 
+
+                if (valueName.Equals(PUTTY_HOSTNAME_ATTRIB))
                 {
                     hostnameSet = true;
                     value = nsr.Hostname;
-                } 
-                else if ( valueName.Equals ( PUTTY_PSM_FOLDER_ATTRIB ) )
+                }
+                else if (valueName.Equals(PUTTY_PSM_FOLDER_ATTRIB))
                 {
                     foldernameSet = true;
                     value = nsr.SessionFolder;
                 }
-                else if ( nsr.CopyDefaultUsername == false &&
-                            valueName.Equals (PUTTY_USERNAME_ATTRIB) )
+                else if (nsr.CopyDefaultUsername == false &&
+                            valueName.Equals(PUTTY_USERNAME_ATTRIB))
                 {
                     value = "";
-                } 
-                else 
+                }
+                else
                 {
                     value = template.GetValue(valueName);
                 }
 
-                newSession.SetValue(valueName,value,template.GetValueKind(valueName));
+                newSession.SetValue(valueName, value, template.GetValueKind(valueName));
             }
 
             // Set the hostname if it hasn't already been set
-            if ( hostnameSet == false )
+            if (hostnameSet == false)
                 newSession.SetValue(PUTTY_HOSTNAME_ATTRIB, nsr.Hostname, RegistryValueKind.String);
 
             // Set the foldername if it hasn't already been set
-            if ( foldernameSet == false )
+            if (foldernameSet == false)
                 newSession.SetValue(PUTTY_PSM_FOLDER_ATTRIB, nsr.SessionFolder, RegistryValueKind.String);
 
             template.Close();
@@ -524,7 +529,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Check the old session isn't the default session
             if (s.SessionName.Equals(PUTTY_DEFAULT_SESSION))
                 return false;
-            
+
             // Check the current session is still there
             RegistryKey current = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
             if (current == null)
@@ -563,11 +568,16 @@ namespace uk.org.riseley.puttySessionManager.controller
             return true;
         }
 
-        public bool isDefaultSessionName ( string sessionName )
+        /// <summary>
+        /// Is the passed in session the "Default Session"
+        /// </summary>
+        /// <param name="sessionName">the Session name to test</param>
+        /// <returns></returns>
+        public bool isDefaultSessionName(string sessionName)
         {
-            if ( Session.convertDisplayToSessionKey(sessionName).Equals( PUTTY_DEFAULT_SESSION ))
+            if (Session.convertDisplayToSessionKey(sessionName).Equals(PUTTY_DEFAULT_SESSION))
                 return true;
-            else 
+            else
                 return false;
 
         }
@@ -606,14 +616,14 @@ namespace uk.org.riseley.puttySessionManager.controller
                     // Never copy the hostname onto the default session
                     if (s.SessionName.Equals(SessionController.PUTTY_DEFAULT_SESSION) &&
                         valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB))
-                        copy = false;                        
-                    else if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_ALL ) &&
-                         !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB))&&
+                        copy = false;
+                    else if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_ALL) &&
+                         !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB)) &&
                          !(valueName.Equals(SessionController.PUTTY_PSM_FOLDER_ATTRIB))
                         )
                         copy = true;
                     else if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_EXCLUDE) &&
-                         !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB)) &&                        
+                         !(valueName.Equals(SessionController.PUTTY_HOSTNAME_ATTRIB)) &&
                          !(valueName.Equals(SessionController.PUTTY_PSM_FOLDER_ATTRIB)) &&
                          !(csr.SelectedAttributes.Contains(valueName)))
                         copy = true;
@@ -627,9 +637,9 @@ namespace uk.org.riseley.puttySessionManager.controller
                     }
                 }
                 targetSession.Close();
-             
+
             }
-            
+
             // Close the template session;
             template.Close();
 
@@ -646,19 +656,19 @@ namespace uk.org.riseley.puttySessionManager.controller
             string tooltip = "";
             int portnumber = -1;
 
-            if (rk != null )
+            if (rk != null)
             {
                 // Get all the values from the registry that we are interested in
                 string hostname = (string)rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
                 string username = (string)rk.GetValue(PUTTY_USERNAME_ATTRIB);
-                string portforwards = (string)rk.GetValue ("PortForwardings");
+                string portforwards = (string)rk.GetValue("PortForwardings");
                 string protocol = (string)rk.GetValue("Protocol");
                 string remotecommand = (string)rk.GetValue("RemoteCommand");
 
                 // Get the port number
                 object portnumberObject = rk.GetValue("PortNumber");
                 // Only attempt to cast to an int if the object is not null
-                if ( portnumberObject != null )
+                if (portnumberObject != null)
                     portnumber = (int)portnumberObject;
 
                 // Close the registry key
@@ -671,16 +681,16 @@ namespace uk.org.riseley.puttySessionManager.controller
                 // Ignore the default username if the hostname contains an @
                 if (hostname != null && hostname.Contains("@"))
                     username = null;
-                else if ( username != null && !(username.Equals("")))
+                else if (username != null && !(username.Equals("")))
                     username = username + "@";
 
                 // Set the port number to null if default for the protocol
                 string port = ":" + portnumber;
-                if (  protocol != null &&
+                if (protocol != null &&
                     ((protocol.Equals("ssh") && portnumber == 22) ||
                      (protocol.Equals("telnet") && portnumber == 23) ||
                      (protocol.Equals("rlogin") && portnumber == 513) ||
-                      portnumber == -1 ))
+                      portnumber == -1))
                 {
                     port = "";
                 }
@@ -696,7 +706,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                     tooltip += "Remote Command: " + remotecommand + Environment.NewLine;
                 if (portforwards != null && !portforwards.Equals(""))
                     tooltip += "Port Forwards: " + portforwards + Environment.NewLine;
-                
+
                 // Strip off any trailing newline
                 if (tooltip.EndsWith(Environment.NewLine))
                     tooltip = tooltip.Remove(tooltip.LastIndexOf(Environment.NewLine));
@@ -711,7 +721,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         public bool isAutoStartEnabled()
         {
             bool retval = false;
-            
+
             // Open the autostart registry key
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY);
 
@@ -725,7 +735,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                 // Clost the registry key
                 rk.Close();
             }
-            return retval;                
+            return retval;
         }
 
         /// <summary>
@@ -739,7 +749,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             bool result = false;
 
             // Open the autostart registry key
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY,true);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(AUTOSTART_REG_KEY, true);
 
             // If we are trying to enable autostart and the key doesn't exist
             // try to create it
@@ -774,5 +784,103 @@ namespace uk.org.riseley.puttySessionManager.controller
             return result;
         }
 
+
+        /// <summary>
+        /// Lauch a filezilla session
+        /// </summary>
+        /// <param name="s">The session to launch</param>
+        /// <returns>The error message if the process fails to start</returns>
+        public string launchFileZilla(Session s)
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+
+            // Only try to launch the session if it still exists
+            if (rk != null)
+            {
+                // Get all the values from the registry that we are interested in
+                string hostname = (string)rk.GetValue(PUTTY_HOSTNAME_ATTRIB);
+                string username = (string)rk.GetValue(PUTTY_USERNAME_ATTRIB);
+                string protocol = (string)rk.GetValue("Protocol");
+                object portnumberObject = rk.GetValue("PortNumber");
+                rk.Close();
+
+                int portnumber = -1;
+                // Only attempt to cast to an int if the object is not null
+                if (portnumberObject != null)
+                    portnumber = (int)portnumberObject;
+
+                // Override the default username if stored in the hostname
+                if (hostname != null && hostname.Contains("@"))
+                {
+                    username = hostname.Substring(0, hostname.IndexOf("@"));
+                    if (hostname.IndexOf("@") < hostname.Length)
+                        hostname = hostname.Substring(hostname.IndexOf("@") + 1);
+                }
+
+                // Only bother if we have a hostname set
+                if (hostname != null && hostname.Length > 0)
+                {
+                    // Setup the protocol and port
+                    FileZillaProtocol fp = (FileZillaProtocol)Properties.Settings.Default.FileZillaProtocol;
+                    switch (fp)
+                    {
+                        case FileZillaProtocol.FTP:
+                            protocol = "ftp://";
+                            portnumber = 21;
+                            break;
+                        case FileZillaProtocol.FTPS:
+                            protocol = "ftps://";
+                            portnumber = 990;
+                            break;
+                        case FileZillaProtocol.SFTP:
+                            protocol = "sftp://";
+                            portnumber = 22;
+                            break;
+                        case FileZillaProtocol.AUTO:
+                            if (protocol.Equals("ssh", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                protocol = "sftp://";
+                                if (portnumber == -1)
+                                    portnumber = 22;
+                            }
+                            else
+                            {
+                                protocol = "ftp://";
+                                portnumber = 21;
+                            }
+                            break;
+                    }
+
+                    // Setup Pageaent auth if requested and the protocol is sftp
+                    String password = "";
+                    if (protocol.Equals("sftp://") &&
+                         Properties.Settings.Default.FileZillaAttemptKeyAuth == true)
+                        password = ":";
+
+                    String fileZillaExec = Properties.Settings.Default.FileZillaLocation;                    
+                    String fileZillaArgs = protocol + username + password + "@" + hostname + ":" + portnumber;                    
+                    
+                    Process p = new Process();
+                    p.StartInfo.FileName  = fileZillaExec;
+                    p.StartInfo.Arguments = fileZillaArgs;
+
+                    String errMsg = "";
+                    
+                    // Attempt to start the process
+                    try
+                    {
+                        p.Start();
+                    }
+                    catch (Exception ex)
+                    {
+                        errMsg = ex.Message;
+                    }
+                    p.Close();
+
+                    return errMsg;
+                }
+            }
+            return "";
+        }
     }
 }

@@ -55,6 +55,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.launchSessionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchFolderAndSubfoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchFilezillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expandTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +89,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.hotkey10MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
-            this.launchFilezillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,6 +138,14 @@ namespace uk.org.riseley.puttySessionManager.control
             this.launchFolderAndSubfoldersToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.launchFolderAndSubfoldersToolStripMenuItem.Text = "Launch Folder and Subfolders";
             this.launchFolderAndSubfoldersToolStripMenuItem.Click += new System.EventHandler(this.launchFolderAndSubfoldersToolStripMenuItem_Click);
+            // 
+            // launchFilezillaToolStripMenuItem
+            // 
+            this.launchFilezillaToolStripMenuItem.Enabled = false;
+            this.launchFilezillaToolStripMenuItem.Name = "launchFilezillaToolStripMenuItem";
+            this.launchFilezillaToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchFilezillaToolStripMenuItem.Text = "Launch Filezilla";
+            this.launchFilezillaToolStripMenuItem.Click += new System.EventHandler(this.launchFilezillaToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -426,14 +434,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
             this.treeView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyUp);
             this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView_ItemDrag);
-            // 
-            // launchFilezillaToolStripMenuItem
-            // 
-            this.launchFilezillaToolStripMenuItem.Enabled = false;
-            this.launchFilezillaToolStripMenuItem.Name = "launchFilezillaToolStripMenuItem";
-            this.launchFilezillaToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.launchFilezillaToolStripMenuItem.Text = "Launch Filezilla";
-            this.launchFilezillaToolStripMenuItem.Visible = false;
             // 
             // SessionTreeControl
             // 

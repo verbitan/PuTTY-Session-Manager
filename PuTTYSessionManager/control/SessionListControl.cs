@@ -69,21 +69,17 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            string sessionName = null;
+             Session s = null;
 
             if ( sender is ListBox ) {
-                Session s = (Session)((ListBox)sender).SelectedItem;
-                sessionName = s.SessionDisplayText;
+                s = (Session)((ListBox)sender).SelectedItem;
             }
             else if (sender is ToolStripMenuItem)
             {
-                sessionName = ((ToolStripMenuItem)sender).Text;
+                s = (Session)((ToolStripMenuItem)sender).Tag;
             }
 
-            if ( sessionName != null)
-                OnLaunchSession(new LaunchSessionEventArgs(sessionName));
-            else
-                OnLaunchSession(new LaunchSessionEventArgs());
+            OnLaunchSession(new LaunchSessionEventArgs(s));            
         }
 
         public override void getSessionMenuItems(ToolStripMenuItem parent)
@@ -113,11 +109,8 @@ namespace uk.org.riseley.puttySessionManager.control
             if (e.KeyCode == Keys.Enter)
             {
                 Session s = (Session)listBox1.SelectedItem;
-                if (s != null)
-                {
-                    OnLaunchSession(new LaunchSessionEventArgs(s.SessionDisplayText));
-                    e.Handled = true;
-                }
+                OnLaunchSession(new LaunchSessionEventArgs(s));
+                e.Handled = true;
             }
         }
     }

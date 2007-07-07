@@ -731,5 +731,41 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["FileZillaLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FileZillaEnabled {
+            get {
+                return ((bool)(this["FileZillaEnabled"]));
+            }
+            set {
+                this["FileZillaEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FileZillaAttemptKeyAuth {
+            get {
+                return ((bool)(this["FileZillaAttemptKeyAuth"]));
+            }
+            set {
+                this["FileZillaAttemptKeyAuth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int FileZillaProtocol {
+            get {
+                return ((int)(this["FileZillaProtocol"]));
+            }
+            set {
+                this["FileZillaProtocol"] = value;
+            }
+        }
     }
 }
