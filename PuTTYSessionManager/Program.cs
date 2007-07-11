@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.form;
+using Microsoft.Win32;
 
 namespace uk.org.riseley.puttySessionManager
 {
@@ -33,39 +34,71 @@ namespace uk.org.riseley.puttySessionManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
+            // Instantiate the application context
+            PsmApplicationContext appContext = new PsmApplicationContext();
+
+            // Start the main event loop
+            Application.Run(appContext);           
+        }
+    }
+
+    /// <summary>
+    /// Application context class to handle the application lifecycle
+    /// for PSM
+    /// </summary>
+    class PsmApplicationContext : ApplicationContext
+    {
+        /// <summary>
+        /// The single SessionManagerForm instance
+        /// </summary>
+        private SessionManagerForm smf;
+
+        /// <summary>
+        /// Constructor for the PsmApplicationContext
+        /// </summary>
+        public PsmApplicationContext()
+        {
             // Upgrade settings from a previous release
             if (Properties.Settings.Default.UpgradeRequired == true)
-            {                
+            {
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.UpgradeRequired = false;
                 Properties.Settings.Default.Save();
             }
 
-            PsmApplicationContext appContext = new PsmApplicationContext();
-
-            Application.Run(appContext);           
-        }
-    }
-
-    class PsmApplicationContext : ApplicationContext
-    {
-        private SessionManagerForm smf;
-
-        public PsmApplicationContext()
-        {
             // Instantiate the SessionManagerForm           
             smf = new SessionManagerForm();
 
             // Handle the ApplicationExit event to know when the application is exiting.
-            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+            Application.ApplicationExit += new EventHandler(OnApplicationExit);
+
+            // Attempt to handle session ending ( logoff / shutdown ) events
+            SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
 
 		    // Only make the form visible if the required
             smf.Visible = !(Properties.Settings.Default.MinimizeOnStart);
             
         }
 
+        /// <summary>
+        /// Event handler for the application exit event
+        /// Attempt to save the settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnApplicationExit(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Event handler for the SessionEnding event
+        /// Attempt to save the settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnSessionEnding(object sender, SessionEndingEventArgs e)
+        {           
             Properties.Settings.Default.Save();
         }
     }

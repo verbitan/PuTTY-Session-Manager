@@ -38,7 +38,7 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public enum ProxyMode { PROXY_IE, PROXY_NONE, PROXY_USER };
 
-        private enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA };
+        private enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA, WINSCP };
 
         public Options(Form parentWindow)
         {
@@ -82,22 +82,52 @@ namespace uk.org.riseley.puttySessionManager.form
                 sc.launchPageant();
 
             // Reset the filezilla protocol button to the save pref
-            SessionController.FileZillaProtocol fp = (SessionController.FileZillaProtocol)Properties.Settings.Default.FileZillaProtocol;
-            if (fp == SessionController.FileZillaProtocol.FTP)
+            SessionController.Protocol fp = (SessionController.Protocol)Properties.Settings.Default.FileZillaProtocol;
+            if (fp == SessionController.Protocol.FTP)
             {
-                ftpRadioButton.Checked = true;
+                fzFtpRadioButton.Checked = true;
             }
-            else if (fp == SessionController.FileZillaProtocol.FTPS)
+            else if (fp == SessionController.Protocol.FTPS)
             {
-                ftpsRadioButton.Checked = true;
+                fzFtpsRadioButton.Checked = true;
             }
-            else if (fp == SessionController.FileZillaProtocol.SFTP)
+            else if (fp == SessionController.Protocol.SFTP)
             {
-                sftpRadioButton.Checked = true;
+                fzSftpRadioButton.Checked = true;
             }
-            else if (fp == SessionController.FileZillaProtocol.AUTO)
+            else if (fp == SessionController.Protocol.AUTO)
             {
-                sessionInfoRadioButton.Checked = true;
+                fzSessionInfoRadioButton.Checked = true;
+            }
+
+            // Reset the WinSCP protocol buttons to the saved pref
+            SessionController.Protocol wp = (SessionController.Protocol)Properties.Settings.Default.WinSCPProtocol;
+            if (wp == SessionController.Protocol.FTP)
+            {
+                wsFtpRadioButton.Checked = true;
+            }
+            else if (wp == SessionController.Protocol.SCP)
+            {
+                wsScpRadioButton.Checked = true;
+            }
+            else if (wp == SessionController.Protocol.SFTP)
+            {
+                wsSftpRadioButton.Checked = true;
+            }
+            else if (wp == SessionController.Protocol.AUTO)
+            {
+                wsSessionInfoRadioButton.Checked = true;
+            }
+
+            // Reset the WinSCP pref protocol buttons to the saved pref
+            SessionController.Protocol wpp = (SessionController.Protocol)Properties.Settings.Default.WinSCPPrefProtocol;
+            if (wpp == SessionController.Protocol.SFTP)
+            {
+                wsprefSftpRadioButton.Checked = true;
+            }
+            else if (wpp == SessionController.Protocol.SCP)
+            {
+                wsprefScpRadioButton.Checked = true;
             }
 
             setupToolTips();
@@ -191,14 +221,18 @@ namespace uk.org.riseley.puttySessionManager.form
                     filename = "pageant.exe";
                     fileFilter = filename + "|" + filename + allFilesFilter;
                     break;
-               case FileDialogType.PAGEANT_KEYS:
+                case FileDialogType.PAGEANT_KEYS:
                     filename = "";
                     fileFilter = "*.ppk|*.ppk" + allFilesFilter;
                     break;
                 case FileDialogType.FILEZILLA:
                     filename = "FileZilla.exe";
                     fileFilter = filename + "|" + filename + allFilesFilter;
-                    break;                
+                    break;
+                case FileDialogType.WINSCP:
+                    filename = "WinSCP*.exe";
+                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    break;
             }
             openFileDialog.FileName = filename;
             openFileDialog.Filter = fileFilter;
@@ -252,7 +286,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // Filezilla tab
             optionsToolTip.SetToolTip(enableFileZillaCheckBox, "Add support for FileZilla 2.x.\nFileZilla sessions can " +
                                   "be launched from the Session Tree.\nNOTE: FileZilla 3.x is NOT currently supported.");
-            optionsToolTip.SetToolTip(sessionInfoRadioButton, "Use SFTP and the specified port for sessions defined as SSH,\n" +
+            optionsToolTip.SetToolTip(fzSessionInfoRadioButton, "Use SFTP and the specified port for sessions defined as SSH,\n" +
                                   "otherwise default to FTP on port 21");
             optionsToolTip.SetToolTip(sshAuthCheckBox, "Attempt to use Pageant authentication for any SFTP sessions,\n" +
                                   "otherwise prompt for a password");
@@ -268,21 +302,48 @@ namespace uk.org.riseley.puttySessionManager.form
         /// <param name="e"></param>
         private void protocolRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (ftpRadioButton.Checked == true)
+            if (fzFtpRadioButton.Checked == true)
             {
-                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.FTP;
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.Protocol.FTP;
             }
-            else if (ftpsRadioButton.Checked == true)
+            else if (fzFtpsRadioButton.Checked == true)
             {
-                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.FTPS;
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.Protocol.FTPS;
             }
-            else if (sftpRadioButton.Checked == true)
+            else if (fzSftpRadioButton.Checked == true)
             {
-                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.SFTP;
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.Protocol.SFTP;
             }
-            else if (sessionInfoRadioButton.Checked == true)
+            else if (fzSessionInfoRadioButton.Checked == true)
             {
-                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.FileZillaProtocol.AUTO;
+                Properties.Settings.Default.FileZillaProtocol = (int)SessionController.Protocol.AUTO;
+            }
+
+            wsPrefGroupBox.Enabled = wsSessionInfoRadioButton.Checked;
+
+            if (wsSessionInfoRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.WinSCPProtocol = (int)SessionController.Protocol.AUTO;                
+                if (wsprefScpRadioButton.Checked == true)
+                {
+                    Properties.Settings.Default.WinSCPPrefProtocol = (int)SessionController.Protocol.SCP;
+                }
+                else if (wsprefSftpRadioButton.Checked == true)
+                {
+                    Properties.Settings.Default.WinSCPPrefProtocol = (int)SessionController.Protocol.SFTP;
+                }
+            }
+            else if (wsSftpRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.WinSCPProtocol = (int)SessionController.Protocol.SFTP;
+            }
+            else if (wsScpRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.WinSCPProtocol = (int)SessionController.Protocol.SCP;
+            }
+            else if (wsFtpRadioButton.Checked == true)
+            {
+                Properties.Settings.Default.WinSCPProtocol = (int)SessionController.Protocol.FTP;
             }
         }
 
@@ -300,5 +361,13 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
+        private void locateWinSCPButton_Click(object sender, EventArgs e)
+        {
+            setupOpenFileDialogue(FileDialogType.WINSCP);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                winSCPTextBox.Text = openFileDialog.FileName;
+            }
+        }
     }
 }

@@ -68,9 +68,9 @@ namespace uk.org.riseley.puttySessionManager.controller
         public const string FILE_TYPE_CSV = "csv";
 
         /// <summary>
-        /// The choice of FileZilla Protocols
+        /// The choice of Transfer Protocols
         /// </summary>
-        public enum FileZillaProtocol { AUTO, FTP, FTPS, SFTP };
+        public enum Protocol { AUTO, FTP, FTPS, SFTP, SCP };
 
         /// <summary>
         /// The current list of all the sessions stored in the registry
@@ -786,11 +786,11 @@ namespace uk.org.riseley.puttySessionManager.controller
 
 
         /// <summary>
-        /// Lauch a filezilla session
+        /// Lauch a WinSCP or FileZilla session
         /// </summary>
         /// <param name="s">The session to launch</param>
         /// <returns>The error message if the process fails to start</returns>
-        public string launchFileZilla(Session s)
+        public string launchOtherSession(Session s, LaunchSessionEventArgs.PROGRAM program )
         {
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
 
@@ -820,49 +820,100 @@ namespace uk.org.riseley.puttySessionManager.controller
                 // Only bother if we have a hostname set
                 if (hostname != null && hostname.Length > 0)
                 {
-                    // Setup the protocol and port
-                    FileZillaProtocol fp = (FileZillaProtocol)Properties.Settings.Default.FileZillaProtocol;
-                    switch (fp)
+                    String execLocation = "";
+                    String execArgs     = "";
+
+                    // Setup the FileZilla args
+                    if (program == LaunchSessionEventArgs.PROGRAM.FILEZILLA)
                     {
-                        case FileZillaProtocol.FTP:
-                            protocol = "ftp://";
-                            portnumber = 21;
-                            break;
-                        case FileZillaProtocol.FTPS:
-                            protocol = "ftps://";
-                            portnumber = 990;
-                            break;
-                        case FileZillaProtocol.SFTP:
-                            protocol = "sftp://";
-                            portnumber = 22;
-                            break;
-                        case FileZillaProtocol.AUTO:
-                            if (protocol.Equals("ssh", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                protocol = "sftp://";
-                                if (portnumber == -1)
-                                    portnumber = 22;
-                            }
-                            else
-                            {
+
+                        // Setup the protocol and port
+                        Protocol fp = (Protocol)Properties.Settings.Default.FileZillaProtocol;
+                        switch (fp)
+                        {
+                            case Protocol.FTP:
                                 protocol = "ftp://";
                                 portnumber = 21;
-                            }
-                            break;
+                                break;
+                            case Protocol.FTPS:
+                                protocol = "ftps://";
+                                portnumber = 990;
+                                break;
+                            case Protocol.SFTP:
+                                protocol = "sftp://";
+                                portnumber = 22;
+                                break;
+                            case Protocol.AUTO:
+                                if (protocol.Equals("ssh", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    protocol = "sftp://";
+                                    if (portnumber == -1)
+                                        portnumber = 22;
+                                }
+                                else
+                                {
+                                    protocol = "ftp://";
+                                    portnumber = 21;
+                                }
+                                break;
+                        }
+
+                        // Setup Pageaent auth if requested and the protocol is sftp
+                        String password = "";
+                        if (protocol.Equals("sftp://") &&
+                             Properties.Settings.Default.FileZillaAttemptKeyAuth == true)
+                            password = ":";
+
+                        execLocation = Properties.Settings.Default.FileZillaLocation;
+                        execArgs     = protocol + username + password + "@" + hostname + ":" + portnumber;
+                    } 
+                    else if ( program == LaunchSessionEventArgs.PROGRAM.WINSCP )
+                    {
+                        // Setup the protocol and port
+                        Protocol wp = (Protocol)Properties.Settings.Default.WinSCPProtocol;
+                        switch (wp)
+                        {
+                            case Protocol.FTP:
+                                protocol = "ftp://";
+                                portnumber = 21;
+                                break;
+                            case Protocol.SFTP:
+                                protocol = "sftp://";
+                                portnumber = 22;
+                                break;
+                            case Protocol.SCP:
+                                protocol = "scp://";
+                                portnumber = 22;
+                                break;
+                            case Protocol.AUTO:
+                                if (protocol.Equals("ssh", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    Protocol wpp = (Protocol)Properties.Settings.Default.WinSCPPrefProtocol;
+                                    if (wpp == Protocol.SCP)
+                                    {
+                                        protocol = "scp://";
+                                    }
+                                    else
+                                    {
+                                        protocol = "sftp://";
+                                    }
+                                    if (portnumber == -1)
+                                        portnumber = 22;
+                                }
+                                else
+                                {
+                                    protocol = "ftp://";
+                                    portnumber = 21;
+                                }
+                                break;
+                        }
+                        execLocation = Properties.Settings.Default.WinSCPLocation;
+                        execArgs = protocol + username + "@" + hostname + ":" + portnumber;
                     }
 
-                    // Setup Pageaent auth if requested and the protocol is sftp
-                    String password = "";
-                    if (protocol.Equals("sftp://") &&
-                         Properties.Settings.Default.FileZillaAttemptKeyAuth == true)
-                        password = ":";
-
-                    String fileZillaExec = Properties.Settings.Default.FileZillaLocation;                    
-                    String fileZillaArgs = protocol + username + password + "@" + hostname + ":" + portnumber;                    
-                    
                     Process p = new Process();
-                    p.StartInfo.FileName  = fileZillaExec;
-                    p.StartInfo.Arguments = fileZillaArgs;
+                    p.StartInfo.FileName  = execLocation;
+                    p.StartInfo.Arguments = execArgs;
 
                     String errMsg = "";
                     

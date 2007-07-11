@@ -146,10 +146,20 @@ namespace uk.org.riseley.puttySessionManager.form
                 }
                 else if (se.program == LaunchSessionEventArgs.PROGRAM.FILEZILLA)
                 {
-                    String errMsg = sc.launchFileZilla(se.session);
+                    String errMsg = sc.launchOtherSession(se.session, se.program);
                     if (errMsg.Equals("") == false)
                     {
                         MessageBox.Show("FileZilla Failed to start. Check the FileZilla location.\n" +
+                                        errMsg
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (se.program == LaunchSessionEventArgs.PROGRAM.WINSCP)
+                {
+                    String errMsg = sc.launchOtherSession(se.session, se.program);
+                    if (errMsg.Equals("") == false)
+                    {
+                        MessageBox.Show("WinSCP Failed to start. Check the WinSCP location.\n" +
                                         errMsg
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

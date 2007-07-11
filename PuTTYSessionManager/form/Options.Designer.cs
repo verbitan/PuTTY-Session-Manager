@@ -75,13 +75,25 @@ namespace uk.org.riseley.puttySessionManager.form
             this.filezillaOptionsTab = new System.Windows.Forms.TabPage();
             this.sshAuthCheckBox = new System.Windows.Forms.CheckBox();
             this.protocolGroupBox = new System.Windows.Forms.GroupBox();
-            this.sessionInfoRadioButton = new System.Windows.Forms.RadioButton();
-            this.ftpsRadioButton = new System.Windows.Forms.RadioButton();
-            this.sftpRadioButton = new System.Windows.Forms.RadioButton();
-            this.ftpRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzSessionInfoRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzFtpsRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzSftpRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzFtpRadioButton = new System.Windows.Forms.RadioButton();
             this.locateFileZillaButton = new System.Windows.Forms.Button();
             this.enableFileZillaCheckBox = new System.Windows.Forms.CheckBox();
             this.filezillaTextBox = new System.Windows.Forms.TextBox();
+            this.winSCPOptionsTab = new System.Windows.Forms.TabPage();
+            this.wsGroupBox = new System.Windows.Forms.GroupBox();
+            this.wsPrefGroupBox = new System.Windows.Forms.GroupBox();
+            this.wsprefScpRadioButton = new System.Windows.Forms.RadioButton();
+            this.wsprefSftpRadioButton = new System.Windows.Forms.RadioButton();
+            this.wsSessionInfoRadioButton = new System.Windows.Forms.RadioButton();
+            this.wsScpRadioButton = new System.Windows.Forms.RadioButton();
+            this.wsSftpRadioButton = new System.Windows.Forms.RadioButton();
+            this.wsFtpRadioButton = new System.Windows.Forms.RadioButton();
+            this.locateWinSCPButton = new System.Windows.Forms.Button();
+            this.enableWinSCPCheckBox = new System.Windows.Forms.CheckBox();
+            this.winSCPTextBox = new System.Windows.Forms.TextBox();
             this.updateOptionsTab = new System.Windows.Forms.TabPage();
             this.checkForUpdateButton = new System.Windows.Forms.Button();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
@@ -96,6 +108,10 @@ namespace uk.org.riseley.puttySessionManager.form
             this.ieProxyRadioButton = new System.Windows.Forms.RadioButton();
             this.proxyServerTextBox = new System.Windows.Forms.TextBox();
             this.optionsToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.tableLayoutPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -105,6 +121,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.pageantOptionsTab.SuspendLayout();
             this.filezillaOptionsTab.SuspendLayout();
             this.protocolGroupBox.SuspendLayout();
+            this.winSCPOptionsTab.SuspendLayout();
+            this.wsGroupBox.SuspendLayout();
+            this.wsPrefGroupBox.SuspendLayout();
             this.updateOptionsTab.SuspendLayout();
             this.proxyGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +167,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tabControl1.Controls.Add(this.generalOptionsTab);
             this.tabControl1.Controls.Add(this.pageantOptionsTab);
             this.tabControl1.Controls.Add(this.filezillaOptionsTab);
+            this.tabControl1.Controls.Add(this.winSCPOptionsTab);
             this.tabControl1.Controls.Add(this.updateOptionsTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
@@ -457,10 +477,10 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // protocolGroupBox
             // 
-            this.protocolGroupBox.Controls.Add(this.sessionInfoRadioButton);
-            this.protocolGroupBox.Controls.Add(this.ftpsRadioButton);
-            this.protocolGroupBox.Controls.Add(this.sftpRadioButton);
-            this.protocolGroupBox.Controls.Add(this.ftpRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzSessionInfoRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzFtpsRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzSftpRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzFtpRadioButton);
             this.protocolGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.protocolGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
             this.protocolGroupBox.Location = new System.Drawing.Point(239, 13);
@@ -470,53 +490,54 @@ namespace uk.org.riseley.puttySessionManager.form
             this.protocolGroupBox.TabStop = false;
             this.protocolGroupBox.Text = "Protocol";
             // 
-            // sessionInfoRadioButton
+            // fzSessionInfoRadioButton
             // 
-            this.sessionInfoRadioButton.AutoSize = true;
-            this.sessionInfoRadioButton.Checked = true;
-            this.sessionInfoRadioButton.Location = new System.Drawing.Point(6, 19);
-            this.sessionInfoRadioButton.Name = "sessionInfoRadioButton";
-            this.sessionInfoRadioButton.Size = new System.Drawing.Size(105, 17);
-            this.sessionInfoRadioButton.TabIndex = 3;
-            this.sessionInfoRadioButton.TabStop = true;
-            this.sessionInfoRadioButton.Text = "Use Session Info";
-            this.sessionInfoRadioButton.UseVisualStyleBackColor = true;
+            this.fzSessionInfoRadioButton.AutoSize = true;
+            this.fzSessionInfoRadioButton.Checked = true;
+            this.fzSessionInfoRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.fzSessionInfoRadioButton.Name = "fzSessionInfoRadioButton";
+            this.fzSessionInfoRadioButton.Size = new System.Drawing.Size(105, 17);
+            this.fzSessionInfoRadioButton.TabIndex = 3;
+            this.fzSessionInfoRadioButton.TabStop = true;
+            this.fzSessionInfoRadioButton.Text = "Use Session Info";
+            this.fzSessionInfoRadioButton.UseVisualStyleBackColor = true;
+            this.fzSessionInfoRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
             // 
-            // ftpsRadioButton
+            // fzFtpsRadioButton
             // 
-            this.ftpsRadioButton.AutoSize = true;
-            this.ftpsRadioButton.Location = new System.Drawing.Point(6, 88);
-            this.ftpsRadioButton.Name = "ftpsRadioButton";
-            this.ftpsRadioButton.Size = new System.Drawing.Size(76, 17);
-            this.ftpsRadioButton.TabIndex = 2;
-            this.ftpsRadioButton.TabStop = true;
-            this.ftpsRadioButton.Text = "FTPS(990)";
-            this.ftpsRadioButton.UseVisualStyleBackColor = true;
-            this.ftpsRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            this.fzFtpsRadioButton.AutoSize = true;
+            this.fzFtpsRadioButton.Location = new System.Drawing.Point(6, 88);
+            this.fzFtpsRadioButton.Name = "fzFtpsRadioButton";
+            this.fzFtpsRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.fzFtpsRadioButton.TabIndex = 2;
+            this.fzFtpsRadioButton.TabStop = true;
+            this.fzFtpsRadioButton.Text = "FTPS(990)";
+            this.fzFtpsRadioButton.UseVisualStyleBackColor = true;
+            this.fzFtpsRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
             // 
-            // sftpRadioButton
+            // fzSftpRadioButton
             // 
-            this.sftpRadioButton.AutoSize = true;
-            this.sftpRadioButton.Location = new System.Drawing.Point(6, 65);
-            this.sftpRadioButton.Name = "sftpRadioButton";
-            this.sftpRadioButton.Size = new System.Drawing.Size(70, 17);
-            this.sftpRadioButton.TabIndex = 1;
-            this.sftpRadioButton.TabStop = true;
-            this.sftpRadioButton.Text = "SFTP(22)";
-            this.sftpRadioButton.UseVisualStyleBackColor = true;
-            this.sftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            this.fzSftpRadioButton.AutoSize = true;
+            this.fzSftpRadioButton.Location = new System.Drawing.Point(6, 65);
+            this.fzSftpRadioButton.Name = "fzSftpRadioButton";
+            this.fzSftpRadioButton.Size = new System.Drawing.Size(70, 17);
+            this.fzSftpRadioButton.TabIndex = 1;
+            this.fzSftpRadioButton.TabStop = true;
+            this.fzSftpRadioButton.Text = "SFTP(22)";
+            this.fzSftpRadioButton.UseVisualStyleBackColor = true;
+            this.fzSftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
             // 
-            // ftpRadioButton
+            // fzFtpRadioButton
             // 
-            this.ftpRadioButton.AutoSize = true;
-            this.ftpRadioButton.Location = new System.Drawing.Point(6, 42);
-            this.ftpRadioButton.Name = "ftpRadioButton";
-            this.ftpRadioButton.Size = new System.Drawing.Size(66, 17);
-            this.ftpRadioButton.TabIndex = 0;
-            this.ftpRadioButton.TabStop = true;
-            this.ftpRadioButton.Text = "FTP (21)";
-            this.ftpRadioButton.UseVisualStyleBackColor = true;
-            this.ftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            this.fzFtpRadioButton.AutoSize = true;
+            this.fzFtpRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.fzFtpRadioButton.Name = "fzFtpRadioButton";
+            this.fzFtpRadioButton.Size = new System.Drawing.Size(66, 17);
+            this.fzFtpRadioButton.TabIndex = 0;
+            this.fzFtpRadioButton.TabStop = true;
+            this.fzFtpRadioButton.Text = "FTP (21)";
+            this.fzFtpRadioButton.UseVisualStyleBackColor = true;
+            this.fzFtpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
             // 
             // locateFileZillaButton
             // 
@@ -553,6 +574,155 @@ namespace uk.org.riseley.puttySessionManager.form
             this.filezillaTextBox.Size = new System.Drawing.Size(214, 20);
             this.filezillaTextBox.TabIndex = 18;
             this.filezillaTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaLocation;
+            // 
+            // winSCPOptionsTab
+            // 
+            this.winSCPOptionsTab.Controls.Add(this.wsGroupBox);
+            this.winSCPOptionsTab.Controls.Add(this.locateWinSCPButton);
+            this.winSCPOptionsTab.Controls.Add(this.enableWinSCPCheckBox);
+            this.winSCPOptionsTab.Controls.Add(this.winSCPTextBox);
+            this.winSCPOptionsTab.Location = new System.Drawing.Point(4, 22);
+            this.winSCPOptionsTab.Name = "winSCPOptionsTab";
+            this.winSCPOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.winSCPOptionsTab.TabIndex = 4;
+            this.winSCPOptionsTab.Text = "WinSCP";
+            this.winSCPOptionsTab.UseVisualStyleBackColor = true;
+            // 
+            // wsGroupBox
+            // 
+            this.wsGroupBox.Controls.Add(this.wsPrefGroupBox);
+            this.wsGroupBox.Controls.Add(this.wsSessionInfoRadioButton);
+            this.wsGroupBox.Controls.Add(this.wsScpRadioButton);
+            this.wsGroupBox.Controls.Add(this.wsSftpRadioButton);
+            this.wsGroupBox.Controls.Add(this.wsFtpRadioButton);
+            this.wsGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.wsGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
+            this.wsGroupBox.Location = new System.Drawing.Point(15, 38);
+            this.wsGroupBox.Name = "wsGroupBox";
+            this.wsGroupBox.Size = new System.Drawing.Size(192, 114);
+            this.wsGroupBox.TabIndex = 26;
+            this.wsGroupBox.TabStop = false;
+            this.wsGroupBox.Text = "Protocol";
+            // 
+            // wsPrefGroupBox
+            // 
+            this.wsPrefGroupBox.Controls.Add(this.wsprefScpRadioButton);
+            this.wsPrefGroupBox.Controls.Add(this.wsprefSftpRadioButton);
+            this.wsPrefGroupBox.Location = new System.Drawing.Point(5, 36);
+            this.wsPrefGroupBox.Name = "wsPrefGroupBox";
+            this.wsPrefGroupBox.Size = new System.Drawing.Size(106, 64);
+            this.wsPrefGroupBox.TabIndex = 4;
+            this.wsPrefGroupBox.TabStop = false;
+            this.wsPrefGroupBox.Text = "Preferred Protocol";
+            // 
+            // wsprefScpRadioButton
+            // 
+            this.wsprefScpRadioButton.AutoSize = true;
+            this.wsprefScpRadioButton.Location = new System.Drawing.Point(13, 39);
+            this.wsprefScpRadioButton.Name = "wsprefScpRadioButton";
+            this.wsprefScpRadioButton.Size = new System.Drawing.Size(64, 17);
+            this.wsprefScpRadioButton.TabIndex = 4;
+            this.wsprefScpRadioButton.Text = "SCP(22)";
+            this.wsprefScpRadioButton.UseVisualStyleBackColor = true;
+            this.wsprefScpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // wsprefSftpRadioButton
+            // 
+            this.wsprefSftpRadioButton.AutoSize = true;
+            this.wsprefSftpRadioButton.Checked = true;
+            this.wsprefSftpRadioButton.Location = new System.Drawing.Point(13, 17);
+            this.wsprefSftpRadioButton.Name = "wsprefSftpRadioButton";
+            this.wsprefSftpRadioButton.Size = new System.Drawing.Size(70, 17);
+            this.wsprefSftpRadioButton.TabIndex = 3;
+            this.wsprefSftpRadioButton.TabStop = true;
+            this.wsprefSftpRadioButton.Text = "SFTP(22)";
+            this.wsprefSftpRadioButton.UseVisualStyleBackColor = true;
+            this.wsprefSftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // wsSessionInfoRadioButton
+            // 
+            this.wsSessionInfoRadioButton.AutoSize = true;
+            this.wsSessionInfoRadioButton.Checked = true;
+            this.wsSessionInfoRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.wsSessionInfoRadioButton.Name = "wsSessionInfoRadioButton";
+            this.wsSessionInfoRadioButton.Size = new System.Drawing.Size(105, 17);
+            this.wsSessionInfoRadioButton.TabIndex = 3;
+            this.wsSessionInfoRadioButton.TabStop = true;
+            this.wsSessionInfoRadioButton.Text = "Use Session Info";
+            this.wsSessionInfoRadioButton.UseVisualStyleBackColor = true;
+            this.wsSessionInfoRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // wsScpRadioButton
+            // 
+            this.wsScpRadioButton.AutoSize = true;
+            this.wsScpRadioButton.Location = new System.Drawing.Point(122, 64);
+            this.wsScpRadioButton.Name = "wsScpRadioButton";
+            this.wsScpRadioButton.Size = new System.Drawing.Size(64, 17);
+            this.wsScpRadioButton.TabIndex = 2;
+            this.wsScpRadioButton.TabStop = true;
+            this.wsScpRadioButton.Text = "SCP(22)";
+            this.wsScpRadioButton.UseVisualStyleBackColor = true;
+            this.wsScpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // wsSftpRadioButton
+            // 
+            this.wsSftpRadioButton.AutoSize = true;
+            this.wsSftpRadioButton.Location = new System.Drawing.Point(122, 42);
+            this.wsSftpRadioButton.Name = "wsSftpRadioButton";
+            this.wsSftpRadioButton.Size = new System.Drawing.Size(70, 17);
+            this.wsSftpRadioButton.TabIndex = 1;
+            this.wsSftpRadioButton.TabStop = true;
+            this.wsSftpRadioButton.Text = "SFTP(22)";
+            this.wsSftpRadioButton.UseVisualStyleBackColor = true;
+            this.wsSftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // wsFtpRadioButton
+            // 
+            this.wsFtpRadioButton.AutoSize = true;
+            this.wsFtpRadioButton.Location = new System.Drawing.Point(122, 19);
+            this.wsFtpRadioButton.Name = "wsFtpRadioButton";
+            this.wsFtpRadioButton.Size = new System.Drawing.Size(66, 17);
+            this.wsFtpRadioButton.TabIndex = 0;
+            this.wsFtpRadioButton.TabStop = true;
+            this.wsFtpRadioButton.Text = "FTP (21)";
+            this.wsFtpRadioButton.UseVisualStyleBackColor = true;
+            this.wsFtpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // locateWinSCPButton
+            // 
+            this.locateWinSCPButton.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.locateWinSCPButton.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
+            this.locateWinSCPButton.Location = new System.Drawing.Point(16, 155);
+            this.locateWinSCPButton.Name = "locateWinSCPButton";
+            this.locateWinSCPButton.Size = new System.Drawing.Size(115, 24);
+            this.locateWinSCPButton.TabIndex = 25;
+            this.locateWinSCPButton.Text = "&Locate WinSCP*.exe";
+            this.locateWinSCPButton.UseVisualStyleBackColor = true;
+            this.locateWinSCPButton.Click += new System.EventHandler(this.locateWinSCPButton_Click);
+            // 
+            // enableWinSCPCheckBox
+            // 
+            this.enableWinSCPCheckBox.AutoSize = true;
+            this.enableWinSCPCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
+            this.enableWinSCPCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.enableWinSCPCheckBox.Location = new System.Drawing.Point(16, 15);
+            this.enableWinSCPCheckBox.Name = "enableWinSCPCheckBox";
+            this.enableWinSCPCheckBox.Size = new System.Drawing.Size(178, 17);
+            this.enableWinSCPCheckBox.TabIndex = 23;
+            this.enableWinSCPCheckBox.Text = "Enable WinSCP 3.x/4.x Support";
+            this.enableWinSCPCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // winSCPTextBox
+            // 
+            this.winSCPTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.winSCPTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.winSCPTextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
+            this.winSCPTextBox.Location = new System.Drawing.Point(137, 158);
+            this.winSCPTextBox.Name = "winSCPTextBox";
+            this.winSCPTextBox.ReadOnly = true;
+            this.winSCPTextBox.Size = new System.Drawing.Size(214, 20);
+            this.winSCPTextBox.TabIndex = 24;
+            this.winSCPTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPLocation;
             // 
             // updateOptionsTab
             // 
@@ -707,6 +877,51 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.optionsToolTip.IsBalloon = true;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(105, 17);
+            this.radioButton1.TabIndex = 3;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Use Session Info";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(6, 88);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(76, 17);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "FTPS(990)";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(6, 65);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(70, 17);
+            this.radioButton3.TabIndex = 1;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "SFTP(22)";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(6, 42);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(66, 17);
+            this.radioButton4.TabIndex = 0;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "FTP (21)";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
             // fontDialog
             // 
             this.fontDialog.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TreeFont;
@@ -741,6 +956,12 @@ namespace uk.org.riseley.puttySessionManager.form
             this.filezillaOptionsTab.PerformLayout();
             this.protocolGroupBox.ResumeLayout(false);
             this.protocolGroupBox.PerformLayout();
+            this.winSCPOptionsTab.ResumeLayout(false);
+            this.winSCPOptionsTab.PerformLayout();
+            this.wsGroupBox.ResumeLayout(false);
+            this.wsGroupBox.PerformLayout();
+            this.wsPrefGroupBox.ResumeLayout(false);
+            this.wsPrefGroupBox.PerformLayout();
             this.updateOptionsTab.ResumeLayout(false);
             this.updateOptionsTab.PerformLayout();
             this.proxyGroupBox.ResumeLayout(false);
@@ -796,11 +1017,27 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.TextBox filezillaTextBox;
         private System.Windows.Forms.CheckBox enableFileZillaCheckBox;
         private System.Windows.Forms.GroupBox protocolGroupBox;
-        private System.Windows.Forms.RadioButton sessionInfoRadioButton;
-        private System.Windows.Forms.RadioButton ftpsRadioButton;
-        private System.Windows.Forms.RadioButton sftpRadioButton;
-        private System.Windows.Forms.RadioButton ftpRadioButton;
+        private System.Windows.Forms.RadioButton fzSessionInfoRadioButton;
+        private System.Windows.Forms.RadioButton fzFtpsRadioButton;
+        private System.Windows.Forms.RadioButton fzSftpRadioButton;
+        private System.Windows.Forms.RadioButton fzFtpRadioButton;
         private System.Windows.Forms.ToolTip optionsToolTip;
         private System.Windows.Forms.CheckBox sshAuthCheckBox;
+        private System.Windows.Forms.TabPage winSCPOptionsTab;
+        private System.Windows.Forms.GroupBox wsGroupBox;
+        private System.Windows.Forms.RadioButton wsSessionInfoRadioButton;
+        private System.Windows.Forms.RadioButton wsScpRadioButton;
+        private System.Windows.Forms.RadioButton wsSftpRadioButton;
+        private System.Windows.Forms.RadioButton wsFtpRadioButton;
+        private System.Windows.Forms.Button locateWinSCPButton;
+        private System.Windows.Forms.CheckBox enableWinSCPCheckBox;
+        private System.Windows.Forms.TextBox winSCPTextBox;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.GroupBox wsPrefGroupBox;
+        private System.Windows.Forms.RadioButton wsprefScpRadioButton;
+        private System.Windows.Forms.RadioButton wsprefSftpRadioButton;
     }
 }

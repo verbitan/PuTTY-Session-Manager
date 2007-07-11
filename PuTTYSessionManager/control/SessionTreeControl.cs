@@ -464,6 +464,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     launchFolderToolStripMenuItem.Enabled = false;
                     launchSessionMenuItem.Enabled = true;
                     launchFilezillaToolStripMenuItem.Enabled = true;
+                    launchWinSCPToolStripMenuItem.Enabled = true;
                     expandTreeToolStripMenuItem.Enabled = false;
                     collapseTreeToolStripMenuItem.Enabled = false;
                 }
@@ -478,6 +479,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
                     launchSessionMenuItem.Enabled = false;
                     launchFilezillaToolStripMenuItem.Enabled = false;
+                    launchWinSCPToolStripMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
 
@@ -503,7 +505,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     collapseTreeToolStripMenuItem.Enabled = true;
                 }
                 launchFilezillaToolStripMenuItem.Visible = Properties.Settings.Default.FileZillaEnabled;
-
+                launchWinSCPToolStripMenuItem.Visible = Properties.Settings.Default.WinSCPEnabled;
             }
         }
 
@@ -1235,6 +1237,12 @@ namespace uk.org.riseley.puttySessionManager.control
         {
             Session s = getSelectedSession();
             OnLaunchSession(new LaunchSessionEventArgs(s,LaunchSessionEventArgs.PROGRAM.FILEZILLA));
+        }
+
+        private void launchWinSCPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Session s = getSelectedSession();
+            OnLaunchSession(new LaunchSessionEventArgs(s, LaunchSessionEventArgs.PROGRAM.WINSCP));
         }
     }
 }

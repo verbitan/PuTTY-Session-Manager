@@ -187,7 +187,19 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="FileZillaProtocol" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WinSCPEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WinSCPLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\WinSCP3\WinSCP3.exe</Value>
+    </Setting>
+    <Setting Name="WinSCPProtocol" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WinSCPPrefProtocol" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>
