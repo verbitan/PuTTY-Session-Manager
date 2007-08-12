@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006 David Riseley 
+ * Copyright (C) 2006,2007 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,13 +93,13 @@ namespace uk.org.riseley.puttySessionManager
 
         /// <summary>
         /// Event handler for the SessionEnding event
-        /// Attempt to save the settings
+        /// Attempt to save the settings, by calling Application.Exit()
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnSessionEnding(object sender, SessionEndingEventArgs e)
-        {           
-            Properties.Settings.Default.Save();
+        {
+            Application.Exit();
         }
     }
 

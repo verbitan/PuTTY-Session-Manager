@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006 David Riseley 
+ * Copyright (C) 2006,2007 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -283,8 +283,14 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        // Determine whether one node is a parent 
-        // or ancestor of a second node.
+        
+        /// <summary>
+        /// Determine whether one node is a parent 
+        /// or ancestor of a second node.
+        /// </summary>
+        /// <param name="node1"></param>
+        /// <param name="node2"></param>
+        /// <returns></returns>
         private bool ContainsNode(TreeNode node1, TreeNode node2)
         {
             // Check the parent node of the second node.
@@ -297,6 +303,9 @@ namespace uk.org.riseley.puttySessionManager.control
             return ContainsNode(node1, node2.Parent);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void LoadSessions()
         {
             // Suppress repainting the TreeView until all the objects have been created.
