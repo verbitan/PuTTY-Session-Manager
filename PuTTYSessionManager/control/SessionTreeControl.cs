@@ -50,17 +50,19 @@ namespace uk.org.riseley.puttySessionManager.control
         private Dictionary<HotkeyController.HotKeyId, ToolStripMenuItem> hotkeyDictionary;
 
         private ToolTip toolTip;
-        private int oldNodeIndex = -1; 
+        private int oldNodeIndex = -1;
+
+        private Boolean enterPressed = false;
 
         public SessionTreeControl()
             : base()
         {
             InitializeComponent();
             newSessionForm = new NewSessionForm(null);
-            
+
             hkc = HotkeyController.getInstance();
             setupHotkeyDictionary();
-            setupHotkeyMenuItems(this,EventArgs.Empty);
+            setupHotkeyMenuItems(this, EventArgs.Empty);
             EventHandler hkHandler = new EventHandler(setupHotkeyMenuItems);
             hkc.HotkeysRefreshed += hkHandler;
 
@@ -68,8 +70,8 @@ namespace uk.org.riseley.puttySessionManager.control
             toolTip.InitialDelay = 800;
             toolTip.ReshowDelay = 0;
 
-            SessionSorter.SortOrder order = (SessionSorter.SortOrder)Properties.Settings.Default.SortOrder;          
-            treeView.TreeViewNodeSorter = new SessionSorter( (SessionSorter.SortOrder) Properties.Settings.Default.SortOrder );
+            SessionSorter.SortOrder order = (SessionSorter.SortOrder)Properties.Settings.Default.SortOrder;
+            treeView.TreeViewNodeSorter = new SessionSorter((SessionSorter.SortOrder)Properties.Settings.Default.SortOrder);
             if (order == SessionSorter.SortOrder.FOLDER_FIRST)
                 foldersFirstToolStripMenuItem.Checked = true;
             else if (order == SessionSorter.SortOrder.FOLDER_IGNORE)
@@ -110,7 +112,7 @@ namespace uk.org.riseley.puttySessionManager.control
             hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey7MenuItem.Tag, hotkey7MenuItem);
             hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey8MenuItem.Tag, hotkey8MenuItem);
             hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey9MenuItem.Tag, hotkey9MenuItem);
-            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey10MenuItem.Tag, hotkey10MenuItem); 
+            hotkeyDictionary.Add((HotkeyController.HotKeyId)hotkey10MenuItem.Tag, hotkey10MenuItem);
         }
 
         /// <summary>
@@ -139,7 +141,7 @@ namespace uk.org.riseley.puttySessionManager.control
         {
             e.Effect = e.AllowedEffect;
         }
-       
+
         /// <summary>
         /// Event handler for DragOverEvent from the tree view.
         /// Select the node under the mouse pointer to indicate the 
@@ -264,7 +266,7 @@ namespace uk.org.riseley.puttySessionManager.control
             {
                 // Get the parent node
                 TreeNode parentNode = node.Parent;
-            
+
                 // Remove this node
                 node.Remove();
 
@@ -283,7 +285,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        
+
         /// <summary>
         /// Determine whether one node is a parent 
         /// or ancestor of a second node.
@@ -368,15 +370,15 @@ namespace uk.org.riseley.puttySessionManager.control
                         else
                         {
                             Session sess = new Session(folder, path, true);
-                            
-                            TreeNode folderNode = new TreeNode ( sess.SessionDisplayText );
 
-                            folderNode.Name = sess.getKey();                                                     
+                            TreeNode folderNode = new TreeNode(sess.SessionDisplayText);
+
+                            folderNode.Name = sess.getKey();
                             folderNode.Tag = sess;
                             folderNode.ContextMenuStrip = nodeContextMenuStrip;
                             folderNode.ImageIndex = IMAGE_INDEX_FOLDER;
                             folderNode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
-                            
+
                             currnode.Nodes.Add(folderNode);
                             currnode = folderNode;
                         }
@@ -522,7 +524,7 @@ namespace uk.org.riseley.puttySessionManager.control
         {
 
             FolderForm ff = new FolderForm();
-            if (ff.ShowDialog() == DialogResult.OK )
+            if (ff.ShowDialog() == DialogResult.OK)
             {
                 // Find the selected node
                 TreeNode selectedNode = treeView.SelectedNode;
@@ -541,7 +543,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
 
                 // Suppress repainting the TreeView until all the objects have been created.
-                treeView.BeginUpdate();         
+                treeView.BeginUpdate();
 
                 // Remove the selected node from it's current location
                 parent.Nodes.Remove(selectedNode);
@@ -559,7 +561,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 foldernode.ContextMenuStrip = nodeContextMenuStrip;
                 foldernode.ImageIndex = IMAGE_INDEX_FOLDER;
                 foldernode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
-                
+
                 // Add the selected node back to the folder
                 foldernode.Nodes.Add(selectedNode);
 
@@ -571,7 +573,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
                 // Fire a refresh event
                 sc.invalidateSessionList(this, false);
-            
+
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
             }
@@ -595,7 +597,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // The new folder name must not contain the path separator
             else if (foldername.Contains(treeView.PathSeparator))
             {
-                MessageBox.Show("\""+ treeView.PathSeparator + "\" may not be used in folder name", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("\"" + treeView.PathSeparator + "\" may not be used in folder name", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             // No folder with the same name should exist at the same level
@@ -636,7 +638,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // Display the folder requester
             FolderForm ff = new FolderForm(selectedNode.Text);
 
-            if (ff.ShowDialog() == DialogResult.OK )
+            if (ff.ShowDialog() == DialogResult.OK)
             {
                 // Find it's parent
                 TreeNode parent = selectedNode.Parent;
@@ -935,7 +937,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // Now remove the node itself
             if (parentNode != null)
                 selectedNode.Remove();
-             
+
             // Clean folders
             cleanFolders(parentNode);
 
@@ -1043,7 +1045,7 @@ namespace uk.org.riseley.puttySessionManager.control
             {
                 hotkeyDictionary.TryGetValue(hkid, out tsmi);
                 s = hkc.getSessionFromHotkey((HotkeyController.HotKeyId)tsmi.Tag);
-                
+
                 if (hotkeysEnabled && hkc.isSessionHotkeyEnabled(hkid))
                     tsmi.Enabled = true;
                 else
@@ -1060,7 +1062,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private void hotkeyMenuItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem tsmi = (ToolStripMenuItem) sender;
+            ToolStripMenuItem tsmi = (ToolStripMenuItem)sender;
             HotkeyController.HotKeyId hkid = (HotkeyController.HotKeyId)tsmi.Tag;
             Session s = getSelectedSession();
             hkc.saveSessionnameToHotkey(ParentForm, hkid, s);
@@ -1120,13 +1122,13 @@ namespace uk.org.riseley.puttySessionManager.control
         private void sortOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SessionSorter.SortOrder order = SessionSorter.SortOrder.FOLDER_IGNORE;
-            if ( sender == foldersFirstToolStripMenuItem ) 
+            if (sender == foldersFirstToolStripMenuItem)
             {
-                order =  SessionSorter.SortOrder.FOLDER_FIRST;
+                order = SessionSorter.SortOrder.FOLDER_FIRST;
                 ignoreFoldersToolStripMenuItem.Checked = false;
                 foldersLastToolStripMenuItem.Checked = false;
             }
-            else if ( sender == ignoreFoldersToolStripMenuItem ) 
+            else if (sender == ignoreFoldersToolStripMenuItem)
             {
                 order = SessionSorter.SortOrder.FOLDER_IGNORE;
                 foldersFirstToolStripMenuItem.Checked = false;
@@ -1147,7 +1149,21 @@ namespace uk.org.riseley.puttySessionManager.control
         }
 
         /// <summary>
-        /// Event handler for key press from the tree view
+        /// Capture when the enter key is press in this control 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_KeyDown(object sender, KeyEventArgs e)
+        {
+            enterPressed = false;
+            if (e.KeyCode == Keys.Enter)
+            {
+                enterPressed = true;
+            }
+        }
+
+        /// <summary>
+        /// Event handler for key up event from the tree view
         /// If ENTER is pressed and the selected session isn't 
         /// a folder , launch that session
         /// Also add a handler for CTRL Left and Right arrows
@@ -1157,7 +1173,10 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <param name="e"></param>
         private void treeView_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            // Only grab the key up event for enter if
+            // the key down event also occured in this 
+            // control
+            if (e.KeyCode == Keys.Enter && enterPressed)
             {
                 // Don't launch subfolders by default
                 bool getSubfolders = false;
@@ -1170,31 +1189,38 @@ namespace uk.org.riseley.puttySessionManager.control
                 List<Session> sl = getSelectedSessions(getSubfolders);
                 if (confirmNumberOfSessions(sl))
                     launchFolderSessions(sl);
+
+                // Reset the enter pressed flag
+                // and mark the event as handled
+                enterPressed = false;
+                e.Handled = true;
             }
-            else if ((e.KeyCode == Keys.Right || e.KeyCode == Keys.Left )&& 
-                     e.Modifiers == Keys.Control ) 
+            else if ((e.KeyCode == Keys.Right || e.KeyCode == Keys.Left) &&
+                     e.Modifiers == Keys.Control)
             {
                 // Find the selected node
                 TreeNode selectedNode = treeView.SelectedNode;
 
                 if (selectedNode != null)
                 {
-                    if (e.KeyCode == Keys.Right )
+                    if (e.KeyCode == Keys.Right)
                     {
-                         // Suppress repainting the TreeView until all the objects have been updated.
-						treeView.BeginUpdate();			
-                        selectedNode.ExpandAll();                        
+                        // Suppress repainting the TreeView until all the objects have been updated.
+                        treeView.BeginUpdate();
+                        selectedNode.ExpandAll();
                         treeView.EndUpdate();
-			
-                        e.Handled = true;
+
+
                     }
                     else if (e.KeyCode == Keys.Left)
                     {
-                    	 // Suppress repainting the TreeView until all the objects have been updated.
-						treeView.BeginUpdate();			
-                        selectedNode.Collapse(false);                        
+                        // Suppress repainting the TreeView until all the objects have been updated.
+                        treeView.BeginUpdate();
+                        selectedNode.Collapse(false);
                         treeView.EndUpdate();
                     }
+
+                    e.Handled = true;
                 }
             }
         }
@@ -1211,13 +1237,13 @@ namespace uk.org.riseley.puttySessionManager.control
             TreeNode selectedNode = treeView.SelectedNode;
             if (selectedNode != null)
             {
-            	 // Suppress repainting the TreeView until all the objects have been updated.
-				treeView.BeginUpdate();
-		
-                selectedNode.ExpandAll();                
-                
+                // Suppress repainting the TreeView until all the objects have been updated.
+                treeView.BeginUpdate();
+
+                selectedNode.ExpandAll();
+
                 treeView.EndUpdate();
-                
+
             }
         }
 
@@ -1233,11 +1259,11 @@ namespace uk.org.riseley.puttySessionManager.control
             TreeNode selectedNode = treeView.SelectedNode;
             if (selectedNode != null)
             {
-             	// Suppress repainting the TreeView until all the objects have been updated.
-				treeView.BeginUpdate();
-		
+                // Suppress repainting the TreeView until all the objects have been updated.
+                treeView.BeginUpdate();
+
                 selectedNode.Collapse(false);
-                
+
                 treeView.EndUpdate();
             }
         }
@@ -1245,7 +1271,7 @@ namespace uk.org.riseley.puttySessionManager.control
         private void launchFilezillaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Session s = getSelectedSession();
-            OnLaunchSession(new LaunchSessionEventArgs(s,LaunchSessionEventArgs.PROGRAM.FILEZILLA));
+            OnLaunchSession(new LaunchSessionEventArgs(s, LaunchSessionEventArgs.PROGRAM.FILEZILLA));
         }
 
         private void launchWinSCPToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1253,5 +1279,6 @@ namespace uk.org.riseley.puttySessionManager.control
             Session s = getSelectedSession();
             OnLaunchSession(new LaunchSessionEventArgs(s, LaunchSessionEventArgs.PROGRAM.WINSCP));
         }
+
     }
 }

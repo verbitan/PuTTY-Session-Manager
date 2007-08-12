@@ -205,6 +205,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Name = "NewSessionForm";
             this.ShowInTaskbar = false;
             this.Text = "New Session";
+            this.TopMost = true;
             this.Shown += new System.EventHandler(this.NewSessionForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
