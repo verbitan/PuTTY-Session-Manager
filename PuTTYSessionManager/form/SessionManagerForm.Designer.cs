@@ -62,6 +62,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.control.SessionTreeControl();
             this.sessionListControl1 = new uk.org.riseley.puttySessionManager.control.SessionListControl();
+            this.newSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +78,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.sysTrayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadSessionToolStripMenuItem,
+            this.newSessionToolStripMenuItem,
             this.displayTreeToolStripMenuItem,
             this.toolStripSeparator1,
             this.optionsToolStripMenuItem,
@@ -90,7 +92,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
-            this.sysTrayContextMenu.Size = new System.Drawing.Size(168, 192);
+            this.sysTrayContextMenu.Size = new System.Drawing.Size(168, 236);
             // 
             // loadSessionToolStripMenuItem
             // 
@@ -188,6 +190,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionListControl1.Visible = false;
             this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.control.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
             // 
+            // newSessionToolStripMenuItem
+            // 
+            this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
+            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newSessionToolStripMenuItem.Text = "New Session";
+            this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
+            // 
             // SessionManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,6 +238,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.ToolStripMenuItem refreshSessionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sessionHotkeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newSessionToolStripMenuItem;
     }
 }
 

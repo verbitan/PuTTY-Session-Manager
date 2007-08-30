@@ -18,7 +18,8 @@ Feature requests:
          by default.
 1744518: Hit Enter to launch a session.  Implemented on tree and list view
 1746714: More Session Hotkeys.  You can now have up to 10 configurable 
-         session hotkeys.  Hotkeys may be indvidually enabled and disabled.         
+         session hotkeys.  Hotkeys may be indvidually enabled and disabled.  
+Not Tracked: Added New Session Menu item to PSM System Tray menu       
          
 Bugs:
 Not Tracked:  Create HKCU\Software\Microsoft\Windows\CurrentVersion\Run

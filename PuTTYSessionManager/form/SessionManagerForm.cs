@@ -318,5 +318,16 @@ namespace uk.org.riseley.puttySessionManager.form
                     systrayIcon.Visible = true;
             }
         }
+
+        /// <summary>
+        /// Event handler for the newSessionToolStripMenuItem click event
+        /// Launches an empty PuTTY Session
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void newSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sessionControl_LaunchSession(this, new LaunchSessionEventArgs());
+        }
     }
 }
