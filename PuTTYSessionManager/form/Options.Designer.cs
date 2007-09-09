@@ -83,7 +83,10 @@ namespace uk.org.riseley.puttySessionManager.form
             this.enableFileZillaCheckBox = new System.Windows.Forms.CheckBox();
             this.filezillaTextBox = new System.Windows.Forms.TextBox();
             this.winSCPOptionsTab = new System.Windows.Forms.TabPage();
-            this.wsGroupBox = new System.Windows.Forms.GroupBox();
+            this.wsVerGroupBox = new System.Windows.Forms.GroupBox();
+            this.wsVer4RadioButton = new System.Windows.Forms.RadioButton();
+            this.wsVer3RadioButton = new System.Windows.Forms.RadioButton();
+            this.wsProtoGroupBox = new System.Windows.Forms.GroupBox();
             this.wsPrefGroupBox = new System.Windows.Forms.GroupBox();
             this.wsprefScpRadioButton = new System.Windows.Forms.RadioButton();
             this.wsprefSftpRadioButton = new System.Windows.Forms.RadioButton();
@@ -97,7 +100,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.updateOptionsTab = new System.Windows.Forms.TabPage();
             this.checkForUpdateButton = new System.Windows.Forms.Button();
             this.urlCheckBox = new System.Windows.Forms.CheckBox();
-            this.urlTextBox = new System.Windows.Forms.TextBox();
             this.urlLabel = new System.Windows.Forms.Label();
             this.proxyGroupBox = new System.Windows.Forms.GroupBox();
             this.proxyPortLabel = new System.Windows.Forms.Label();
@@ -107,6 +109,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.directRadioButton = new System.Windows.Forms.RadioButton();
             this.ieProxyRadioButton = new System.Windows.Forms.RadioButton();
             this.proxyServerTextBox = new System.Windows.Forms.TextBox();
+            this.urlTextBox = new System.Windows.Forms.TextBox();
             this.optionsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -122,7 +125,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.filezillaOptionsTab.SuspendLayout();
             this.protocolGroupBox.SuspendLayout();
             this.winSCPOptionsTab.SuspendLayout();
-            this.wsGroupBox.SuspendLayout();
+            this.wsVerGroupBox.SuspendLayout();
+            this.wsProtoGroupBox.SuspendLayout();
             this.wsPrefGroupBox.SuspendLayout();
             this.updateOptionsTab.SuspendLayout();
             this.proxyGroupBox.SuspendLayout();
@@ -577,7 +581,8 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // winSCPOptionsTab
             // 
-            this.winSCPOptionsTab.Controls.Add(this.wsGroupBox);
+            this.winSCPOptionsTab.Controls.Add(this.wsVerGroupBox);
+            this.winSCPOptionsTab.Controls.Add(this.wsProtoGroupBox);
             this.winSCPOptionsTab.Controls.Add(this.locateWinSCPButton);
             this.winSCPOptionsTab.Controls.Add(this.enableWinSCPCheckBox);
             this.winSCPOptionsTab.Controls.Add(this.winSCPTextBox);
@@ -588,21 +593,58 @@ namespace uk.org.riseley.puttySessionManager.form
             this.winSCPOptionsTab.Text = "WinSCP";
             this.winSCPOptionsTab.UseVisualStyleBackColor = true;
             // 
-            // wsGroupBox
+            // wsVerGroupBox
             // 
-            this.wsGroupBox.Controls.Add(this.wsPrefGroupBox);
-            this.wsGroupBox.Controls.Add(this.wsSessionInfoRadioButton);
-            this.wsGroupBox.Controls.Add(this.wsScpRadioButton);
-            this.wsGroupBox.Controls.Add(this.wsSftpRadioButton);
-            this.wsGroupBox.Controls.Add(this.wsFtpRadioButton);
-            this.wsGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.wsGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
-            this.wsGroupBox.Location = new System.Drawing.Point(15, 38);
-            this.wsGroupBox.Name = "wsGroupBox";
-            this.wsGroupBox.Size = new System.Drawing.Size(192, 114);
-            this.wsGroupBox.TabIndex = 26;
-            this.wsGroupBox.TabStop = false;
-            this.wsGroupBox.Text = "Protocol";
+            this.wsVerGroupBox.Controls.Add(this.wsVer4RadioButton);
+            this.wsVerGroupBox.Controls.Add(this.wsVer3RadioButton);
+            this.wsVerGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.wsVerGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
+            this.wsVerGroupBox.Location = new System.Drawing.Point(16, 38);
+            this.wsVerGroupBox.Name = "wsVerGroupBox";
+            this.wsVerGroupBox.Size = new System.Drawing.Size(134, 113);
+            this.wsVerGroupBox.TabIndex = 27;
+            this.wsVerGroupBox.TabStop = false;
+            this.wsVerGroupBox.Text = "WinSCP Version";
+            // 
+            // wsVer4RadioButton
+            // 
+            this.wsVer4RadioButton.AutoSize = true;
+            this.wsVer4RadioButton.Location = new System.Drawing.Point(13, 42);
+            this.wsVer4RadioButton.Name = "wsVer4RadioButton";
+            this.wsVer4RadioButton.Size = new System.Drawing.Size(41, 17);
+            this.wsVer4RadioButton.TabIndex = 1;
+            this.wsVer4RadioButton.Text = "4.X";
+            this.wsVer4RadioButton.UseVisualStyleBackColor = true;
+            this.wsVer4RadioButton.CheckedChanged += new System.EventHandler(this.wsVerRadioButton_CheckedChanged);
+            // 
+            // wsVer3RadioButton
+            // 
+            this.wsVer3RadioButton.AutoSize = true;
+            this.wsVer3RadioButton.Checked = true;
+            this.wsVer3RadioButton.Location = new System.Drawing.Point(13, 19);
+            this.wsVer3RadioButton.Name = "wsVer3RadioButton";
+            this.wsVer3RadioButton.Size = new System.Drawing.Size(41, 17);
+            this.wsVer3RadioButton.TabIndex = 0;
+            this.wsVer3RadioButton.TabStop = true;
+            this.wsVer3RadioButton.Text = "3.X";
+            this.wsVer3RadioButton.UseVisualStyleBackColor = true;
+            this.wsVer3RadioButton.CheckedChanged += new System.EventHandler(this.wsVerRadioButton_CheckedChanged);
+            // 
+            // wsProtoGroupBox
+            // 
+            this.wsProtoGroupBox.Controls.Add(this.wsPrefGroupBox);
+            this.wsProtoGroupBox.Controls.Add(this.wsSessionInfoRadioButton);
+            this.wsProtoGroupBox.Controls.Add(this.wsScpRadioButton);
+            this.wsProtoGroupBox.Controls.Add(this.wsSftpRadioButton);
+            this.wsProtoGroupBox.Controls.Add(this.wsFtpRadioButton);
+            this.wsProtoGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.wsProtoGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.WinSCPEnabled;
+            this.wsProtoGroupBox.Location = new System.Drawing.Point(159, 38);
+            this.wsProtoGroupBox.Name = "wsProtoGroupBox";
+            this.wsProtoGroupBox.Size = new System.Drawing.Size(192, 114);
+            this.wsProtoGroupBox.TabIndex = 26;
+            this.wsProtoGroupBox.TabStop = false;
+            this.wsProtoGroupBox.Text = "Protocol";
             // 
             // wsPrefGroupBox
             // 
@@ -707,9 +749,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.enableWinSCPCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "WinSCPEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.enableWinSCPCheckBox.Location = new System.Drawing.Point(16, 15);
             this.enableWinSCPCheckBox.Name = "enableWinSCPCheckBox";
-            this.enableWinSCPCheckBox.Size = new System.Drawing.Size(178, 17);
+            this.enableWinSCPCheckBox.Size = new System.Drawing.Size(142, 17);
             this.enableWinSCPCheckBox.TabIndex = 23;
-            this.enableWinSCPCheckBox.Text = "Enable WinSCP 3.x/4.x Support";
+            this.enableWinSCPCheckBox.Text = "Enable WinSCP Support";
             this.enableWinSCPCheckBox.UseVisualStyleBackColor = true;
             // 
             // winSCPTextBox
@@ -728,9 +770,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.updateOptionsTab.Controls.Add(this.checkForUpdateButton);
             this.updateOptionsTab.Controls.Add(this.urlCheckBox);
-            this.updateOptionsTab.Controls.Add(this.urlTextBox);
             this.updateOptionsTab.Controls.Add(this.urlLabel);
             this.updateOptionsTab.Controls.Add(this.proxyGroupBox);
+            this.updateOptionsTab.Controls.Add(this.urlTextBox);
             this.updateOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.updateOptionsTab.Name = "updateOptionsTab";
             this.updateOptionsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -762,16 +804,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.urlCheckBox.Text = "Use &default url";
             this.urlCheckBox.UseVisualStyleBackColor = true;
             this.urlCheckBox.CheckedChanged += new System.EventHandler(this.urlCheckBox_CheckedChanged);
-            // 
-            // urlTextBox
-            // 
-            this.urlTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "UpdateUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.urlTextBox.Location = new System.Drawing.Point(93, 27);
-            this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.ReadOnly = true;
-            this.urlTextBox.Size = new System.Drawing.Size(229, 20);
-            this.urlTextBox.TabIndex = 2;
-            this.urlTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.UpdateUrl;
             // 
             // urlLabel
             // 
@@ -873,6 +905,16 @@ namespace uk.org.riseley.puttySessionManager.form
             this.proxyServerTextBox.TabIndex = 6;
             this.proxyServerTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ProxyServer;
             // 
+            // urlTextBox
+            // 
+            this.urlTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "UpdateUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.urlTextBox.Location = new System.Drawing.Point(93, 27);
+            this.urlTextBox.Name = "urlTextBox";
+            this.urlTextBox.ReadOnly = true;
+            this.urlTextBox.Size = new System.Drawing.Size(229, 20);
+            this.urlTextBox.TabIndex = 2;
+            this.urlTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.UpdateUrl;
+            // 
             // optionsToolTip
             // 
             this.optionsToolTip.IsBalloon = true;
@@ -958,8 +1000,10 @@ namespace uk.org.riseley.puttySessionManager.form
             this.protocolGroupBox.PerformLayout();
             this.winSCPOptionsTab.ResumeLayout(false);
             this.winSCPOptionsTab.PerformLayout();
-            this.wsGroupBox.ResumeLayout(false);
-            this.wsGroupBox.PerformLayout();
+            this.wsVerGroupBox.ResumeLayout(false);
+            this.wsVerGroupBox.PerformLayout();
+            this.wsProtoGroupBox.ResumeLayout(false);
+            this.wsProtoGroupBox.PerformLayout();
             this.wsPrefGroupBox.ResumeLayout(false);
             this.wsPrefGroupBox.PerformLayout();
             this.updateOptionsTab.ResumeLayout(false);
@@ -1024,7 +1068,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.ToolTip optionsToolTip;
         private System.Windows.Forms.CheckBox sshAuthCheckBox;
         private System.Windows.Forms.TabPage winSCPOptionsTab;
-        private System.Windows.Forms.GroupBox wsGroupBox;
+        private System.Windows.Forms.GroupBox wsProtoGroupBox;
         private System.Windows.Forms.RadioButton wsSessionInfoRadioButton;
         private System.Windows.Forms.RadioButton wsScpRadioButton;
         private System.Windows.Forms.RadioButton wsSftpRadioButton;
@@ -1039,5 +1083,8 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.GroupBox wsPrefGroupBox;
         private System.Windows.Forms.RadioButton wsprefScpRadioButton;
         private System.Windows.Forms.RadioButton wsprefSftpRadioButton;
+        private System.Windows.Forms.GroupBox wsVerGroupBox;
+        private System.Windows.Forms.RadioButton wsVer4RadioButton;
+        private System.Windows.Forms.RadioButton wsVer3RadioButton;
     }
 }

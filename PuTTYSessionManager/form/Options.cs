@@ -100,6 +100,17 @@ namespace uk.org.riseley.puttySessionManager.form
                 fzSessionInfoRadioButton.Checked = true;
             }
 
+            // Reset the WinSCP Version buttons to the saved pref
+            int wsVer = Properties.Settings.Default.WinSCPVersion;
+            if (wsVer == 3)
+            {
+                wsVer3RadioButton.Checked = true;
+            }
+            else if (wsVer == 4)
+            {
+                wsVer4RadioButton.Checked = true;
+            }
+
             // Reset the WinSCP protocol buttons to the saved pref
             SessionController.Protocol wp = (SessionController.Protocol)Properties.Settings.Default.WinSCPProtocol;
             if (wp == SessionController.Protocol.FTP)
@@ -129,6 +140,11 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 wsprefScpRadioButton.Checked = true;
             }
+
+            // Call the wsVerRadioButton_CheckedChanged method
+            // to ensure only a valid combination of protocol and
+            // version is displayed
+            wsVerRadioButton_CheckedChanged(this, EventArgs.Empty);
 
             setupToolTips();
         }
@@ -367,6 +383,34 @@ namespace uk.org.riseley.puttySessionManager.form
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 winSCPTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Listener for the Checked Changed event from the
+        /// WinSCP Version radio buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void wsVerRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            wsFtpRadioButton.Enabled = wsVer3RadioButton.Checked;
+            if (wsVer3RadioButton.Checked == true)
+            {
+                Properties.Settings.Default.WinSCPVersion = 3;
+                wsFtpRadioButton.Enabled = false;
+                // FTP is not supported in WinSCP v3.x
+                // so switch preference to SFTP
+                if (wsFtpRadioButton.Checked == true)
+                {
+                    wsSftpRadioButton.Checked = true;
+                    Properties.Settings.Default.WinSCPProtocol = (int)SessionController.Protocol.SFTP;
+                }
+            }
+            else if (wsVer4RadioButton.Checked == true)
+            {
+                wsFtpRadioButton.Enabled = true;
+                Properties.Settings.Default.WinSCPVersion = 4;
             }
         }
     }

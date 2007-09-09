@@ -910,6 +910,12 @@ namespace uk.org.riseley.puttySessionManager.controller
                     {
                         // Setup the protocol and port
                         Protocol wp = (Protocol)Properties.Settings.Default.WinSCPProtocol;
+                        int wsVer = Properties.Settings.Default.WinSCPVersion;
+
+                        // FTP isn't supported for v3, so default to SFTP
+                        if (wsVer == 3 && wp == Protocol.FTP)
+                            wp = Protocol.SFTP;
+
                         switch (wp)
                         {
                             case Protocol.FTP:
@@ -939,10 +945,15 @@ namespace uk.org.riseley.puttySessionManager.controller
                                     if (portnumber == -1)
                                         portnumber = 22;
                                 }
-                                else
+                                else if (wsVer == 4)
                                 {
                                     protocol = "ftp://";
                                     portnumber = 21;
+                                }
+                                else
+                                {
+                                    protocol = "sftp://";
+                                    portnumber = 22;
                                 }
                                 break;
                         }

@@ -2,18 +2,21 @@ PuTTY Session Manager v0.30.0.0 ( XX-XX-2007 )
 =============================================
 Sixth release of PuTTY Session Manager
 
-NOTE:  The version numbering for PSM changes in this release. It now follows
-the format:
+This is a significant release of PSM, which focuses on 
+enhancing usability.
+
+NOTE:  The version numbering for PSM changes in this release. 
+It now follows the format:
+
 MajorVersion.MinorVersion.SVNRevNo.BuildType
 
-MajorVersion=0  (Until I complete the document)
-MinorVersion=30 (Two Digits to allow for tweaks)
+MajorVersion=0  ( Until I complete the documention - then I'll go to v1.0)
+MinorVersion=30 ( Two Digits to allow for tweaks )
 SVNRevNo=Svn Revision Number this is built from
          0 - For exported sources
-BuildType=0 - Not Modified
-         =Non-zero - Modified, Switched or Mixed Revision Sources
-
-This is a minor release of PSM with the following changes:
+BuildType=0 - Not Modified ( Reproduceable build from SVN )
+         =Non-zero ( Development build )
+          - Modified, Switched or Mixed Revision Sources
 
 Feature requests / enhancements:
 1748080: Minimize on loss of focus.  Added an option to allow PSM
@@ -30,19 +33,22 @@ Feature requests / enhancements:
          by default.
 1744518: Hit Enter to launch a session.  Implemented on tree and list view
 1746714: More Session Hotkeys.  You can now have up to 10 configurable 
-         session hotkeys.  Hotkeys may be indvidually enabled and disabled.  
+         session hotkeys.  Hotkeys may be indvidually enabled and disabled.
+1740798: Ability to launch third party progs like FileZilla or WinSCP
+         Added support for launching FileZilla or WinSCP session from the 
+         tree. 
 Not Tracked: Added New Session Menu item to PSM System Tray menu   
 Not Tracked: Add F2 shortcut to rename session or folder 
 Not Tracked: Added confirmation dialog for successful session export   
 Not Tracked: Make PSM respond to mimimize requests ( eg Win+M )
 Not Tracked: Add Tooltips to some Options , to provide a bit of help
-Not Tracked: Create Nant script to make releases easier
+Not Tracked: Create Nant build script to make releases easier
+Not Tracked: Upgrade settings from one version of PSM to another ( so
+             you don't have to keep resetting everything after an upgrade )
          
 Bugs:
 Not Tracked:  Create HKCU\Software\Microsoft\Windows\CurrentVersion\Run
               if it doesn't exist and auto startup requested
-Not Tracked:  Upgrade settings from one version of PSM to another ( so
-              you don't have to keep resetting everything after an upgrade).
 Not Tracked:  Finally fixed PSM so that if you select minimize on startup
 			  the tree no longer displays then hides, instead it just starts
 			  in the system tray

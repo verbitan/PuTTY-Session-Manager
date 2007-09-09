@@ -36,8 +36,6 @@
       <fileset>
         <include name="**/bin/**" />
         <include name="**/obj/**" />
-        <include name="**/*.suo" />
-        <include name="**/*.user" />
       </fileset>
     </delete>
   </target>

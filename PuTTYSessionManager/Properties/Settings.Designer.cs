@@ -815,5 +815,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["WinSCPPrefProtocol"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int WinSCPVersion {
+            get {
+                return ((int)(this["WinSCPVersion"]));
+            }
+            set {
+                this["WinSCPVersion"] = value;
+            }
+        }
     }
 }
