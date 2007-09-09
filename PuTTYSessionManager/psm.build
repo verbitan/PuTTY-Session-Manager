@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project xmlns="http://nant.sf.net/release/0.85/nant.xsd"
-         name="PuTTY Session Manager" 
+         name="PuTTY Session Manager"
          default="rebuild"
          basedir="..">
-  
+
   <property name="configuration" value="release"/>
-  
+
   <property name="dir.nantcontrib" value="C:/Program Files/nant/nantcontrib-0.85-nightly-2006-10-08"/>
   <property name="dir.svn" value="C:/Program Files/subversion/bin"/>
   <property name="dir.nsis" value="C:/Program Files/NSIS"/>
@@ -15,7 +15,7 @@
   <property name="dir.installer" value="Installer"/>
   <property name="dir.release" value="release"/>
   <property name="dir.build" value="${dir.psmbase}/bin/${configuration}"/>
-    
+
   <property name="build.version.filename" value="${dir.buildinfo}/basever.txt"/>
   <property name="build.svnrev.filename" value="${dir.buildinfo}/svnrev.txt"/>
   <property name="build.export" value="false"/>
@@ -28,9 +28,9 @@
   <target name="init" >
     <loadtasks assembly="${dir.nantcontrib}/bin/NAnt.Contrib.Tasks.dll" />
   </target>
-  
-  <target name="clean" 
-          depends="init,setversionstring" 
+
+  <target name="cleanbuild"
+          depends="init"
           description="Delete all previously compiled binaries.">
     <delete>
       <fileset>
@@ -40,28 +40,64 @@
         <include name="**/*.user" />
       </fileset>
     </delete>
+  </target>
+
+  <target name="cleaninstall"
+          depends="init"
+          description="Delete all previously compiled binaries.">
     <delete>
       <fileset basedir="${dir.installer}">
-          <include name="psm-setup-*.exe" />
-          <include name="Version.txt" />
-          <include name="GetVersion.exe" />
+        <include name="psm-setup-*.exe" />
+        <include name="Version.txt" />
+        <include name="GetVersion.exe" />
       </fileset>
-    </delete>
-    <delete>      
-      <fileset basedir="${dir.deploy}">
-        <include name="*"/>
-      </fileset>      
     </delete>
   </target>
 
-  <target name="build" 
+  <target name="cleandeploy"
+          depends="init,setversionstring"
+          description="Delete deployment">
+    <delete>
+      <fileset basedir="${dir.deploy}">
+        <include name="*"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="cleanexport"
+          depends="init"
+          description="Delete source export">
+    <delete>
+      <fileset basedir="${project::get-base-directory()}/export">
+        <include name="**/**"/>
+      </fileset>
+    </delete>
+  </target>
+  
+  <target name="build"
           depends="init"
           description="Build all targets.">
     <call target="build.psm"/>
   </target>
 
-  <target name="rebuild" 
-          depends="clean, build" />
+  <target name="rebuild"
+          depends="cleanbuild, build" />
+
+  <target name="preparecommit"
+          description="Build, deploy and cleanup ready to commit back to SVN">
+     <call target="deploy" />
+     <call target="cleanbuild" />
+     <call target="cleaninstall" />
+     <call target="cleanexport" />
+     <call target="revertassembly" />
+  </target>
+
+  <target name="cleanall"
+          depends="cleanbuild,cleaninstall,cleanexport,cleandeploy" />
+
+
+  <target name="redeploy"
+          depends="cleanall,deploy" />
 
   <target name="getversion"
           description="Populate the version properties based on the version.txt file">
@@ -94,9 +130,19 @@
     </script>
   </target>
 
+  <target name="revertassembly"
+          depends="init" >
+
+    <echo message="Reverting ${dir.psmbase}/Properties/AssemblyInfo.cs" />
+    <exec program="${dir.svn}/svn.exe"
+          workingdir="${project::get-base-directory()}"
+          commandline="revert &quot;${dir.psmbase}/Properties/AssemblyInfo.cs&quot;"/>
+
+  </target>
+
   <target name="getsvnversion"
-         depends="getversion"
-         description="Populate the build.version.svnversion and build.export properties" >
+          depends="getversion,revertassembly"
+          description="Populate the build.version.svnversion and build.export properties" >
     <exec program="${dir.svn}/svnversion.exe"
           workingdir="${nant::get-base-directory()}"
           commandline="&quot;${project::get-base-directory()}&quot;"
@@ -112,9 +158,9 @@
   </target>
 
   <target name="setsvnrevision"
-        depends="getsvnversion"
-        unless="${build.export == 'true'}"
-        description ="Parse build.version.svnversion property">
+          depends="getsvnversion"
+          unless="${build.export == 'true'}"
+          description ="Parse build.version.svnversion property">
 
     <property name="svnrev.startindex" value="0"/>
     <property name="svnrev.endindex" value="${string::get-length(build.version.svnversion)}"/>
@@ -137,13 +183,13 @@
       <property name="build.version.revision" value="1"/>
     </if>
     <property name="build.version.svnrev"
-              value="${string::substring(build.version.svnversion, svnrev.startindex, svnrev.endindex)}"/>
+              value="${string::substring(build.version.svnversion, svnrev.startindex, int::parse(svnrev.endindex) - int::parse(svnrev.startindex))}"/>
     <property name="build.version.build" value="${build.version.svnrev}"/>
     <echo message="${build.version.build}.${build.version.revision}"/>
   </target>
 
   <target name="setversionstring"
-        depends="setsvnrevision" 
+        depends="setsvnrevision"
         description="Set the build.version.versionstring property">
     <script language="C#">
       <code>
@@ -210,7 +256,7 @@
       </do>
     </foreach>
   </target>
-  
+
   <target name="build.psm"
          depends="setversion">
 
@@ -244,22 +290,33 @@
     </delete>
   </target>
 
-  <target name="createzip" 
+  <target name="createzip"
           depends="build">
     <zip zipfile="${dir.build}/psm-binaries-${build.version.versionstring}.zip"
          verbose="true"
          failonerror="true">
-      <fileset basedir="${dir.build}" failonempty="true">        
+      <fileset basedir="${dir.build}" failonempty="true">
         <include name="${output.exe}"/>
         <include name="${output.config}"/>
         <include name="${output.changelog}"/>
         <include name="${output.licence}"/>
-      </fileset>      
+      </fileset>
     </zip>
   </target>
 
   <target name="createsrczip"
           depends="build">
+    <mkdir dir="${project::get-base-directory()}/export"/>
+    <exec program="${dir.svn}/svn.exe"
+      workingdir="${project::get-base-directory()}"
+      commandline="export --force . &quot;${project::get-base-directory()}/export/&quot;"/>
+    <zip zipfile="${project::get-base-directory()}/export/psm-src-${build.version.versionstring}.zip"
+         verbose="true"
+         failonerror="true">
+      <fileset basedir="${project::get-base-directory()}/export" failonempty="true">
+        <include name="**/**"/>
+      </fileset>
+    </zip>
   </target>
 
   <target name="deploy"
@@ -269,7 +326,9 @@
           todir="${dir.deploy}"/>
     <copy file="${dir.build}/psm-binaries-${build.version.versionstring}.zip"
           todir="${dir.deploy}"/>
-    <checksum algorithm="MD5" 
+    <copy file="${project::get-base-directory()}/export/psm-src-${build.version.versionstring}.zip"
+          todir="${dir.deploy}"/>
+    <checksum algorithm="MD5"
               fileext="md5">
       <fileset>
         <include name="${dir.deploy}/*.zip"/>
