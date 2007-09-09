@@ -150,6 +150,8 @@
     </exec>
     <loadfile file="${build.svnrev.filename}"
               property="build.version.svnversion"/>
+    <property name="build.version.svnversion"
+              value="${string::trim(build.version.svnversion)}"/>
     <!-- If the code has been exported, leave the properties unchanged-->
     <if test="${build.version.svnversion == 'exported'}">
       <echo message="EXPORTED"/>
