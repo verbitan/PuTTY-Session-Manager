@@ -970,7 +970,6 @@ namespace uk.org.riseley.puttySessionManager.controller
                 }
 
                 Process p = new Process();
-                MessageBox.Show(execLocation + " " + execArgs);
                 p.StartInfo.FileName = execLocation;
                 p.StartInfo.Arguments = execArgs;
 
