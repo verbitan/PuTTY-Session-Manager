@@ -139,7 +139,7 @@ namespace uk.org.riseley.puttySessionManager.form
                     String errMsg = sc.launchSession(se.SessionName());
                     if (errMsg.Equals("") == false)
                     {
-                        MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
+                        MessageBox.Show("PuTTY Failed to start.\nCheck the PuTTY location in System Tray -> Options.\n" +
                                         errMsg
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -149,7 +149,7 @@ namespace uk.org.riseley.puttySessionManager.form
                     String errMsg = sc.launchOtherSession(se.session, se.program);
                     if (errMsg.Equals("") == false)
                     {
-                        MessageBox.Show("FileZilla Failed to start. Check the FileZilla location.\n" +
+                        MessageBox.Show("FileZilla Failed to start.\nCheck the FileZilla location in System Tray -> Options.\n" +
                                         errMsg
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -159,7 +159,7 @@ namespace uk.org.riseley.puttySessionManager.form
                     String errMsg = sc.launchOtherSession(se.session, se.program);
                     if (errMsg.Equals("") == false)
                     {
-                        MessageBox.Show("WinSCP Failed to start. Check the WinSCP location.\n" +
+                        MessageBox.Show("WinSCP Failed to start.\nCheck the WinSCP location in System Tray -> Options.\n" +
                                         errMsg
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -210,7 +210,7 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             // Quick filter to ignore events we're not interested in
             if (m.Msg != hkc.WM_KEYDOWN &&
-                m.Msg != hkc.WM_HOTKEY)
+                m.Msg != hkc.WM_HOTKEY  )
                 return false;
 
             Keys keyCode = (Keys)(int)m.WParam & Keys.KeyCode;
@@ -243,7 +243,14 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 this.Visible = !(this.Visible);
                 if (Visible)
+                {
+                    // If the window has been minimized
+                    // bring it back to it's normal size
+                    if (WindowState == FormWindowState.Minimized)
+                        WindowState = FormWindowState.Normal;
                     Activate();
+                }
+                
                 return;
             }
 
@@ -328,6 +335,19 @@ namespace uk.org.riseley.puttySessionManager.form
         private void newSessionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             sessionControl_LaunchSession(this, new LaunchSessionEventArgs());
+        }
+
+        /// <summary>
+        /// Convert the minimize request into a hide
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SessionManagerForm_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+            }   
         }
     }
 }

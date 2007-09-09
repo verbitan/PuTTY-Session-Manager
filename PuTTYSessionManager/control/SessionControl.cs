@@ -53,7 +53,7 @@ namespace uk.org.riseley.puttySessionManager.control
         /// Fired when a delete session(s) request is made
         /// </summary>
         public event DeleteSessionsEventHandler DeleteSessions;
- 
+
         /// <summary>
         /// Event handler for the <code>LaunchSessionEvent</code>
         /// </summary>
@@ -81,6 +81,12 @@ namespace uk.org.riseley.puttySessionManager.control
         protected SessionController sc;
 
         /// <summary>
+        /// Variable to capture if the enter key has been pressed in this 
+        /// control
+        /// </summary>
+        protected Boolean enterPressed = false;
+
+        /// <summary>
         /// Default constructor for this control
         /// This will get a reference to the singleton SessionController
         /// and register the SessionsRefreshedEventHandler
@@ -96,9 +102,9 @@ namespace uk.org.riseley.puttySessionManager.control
         protected virtual void OnLaunchSession(LaunchSessionEventArgs se)
         {
             if (LaunchSession != null)
-            {   
+            {
                 // Hide the form if the option has been requested
-                if (Properties.Settings.Default.MinimizeOnUse == true && ParentForm.Visible )
+                if (Properties.Settings.Default.MinimizeOnUse == true && ParentForm.Visible)
                     ParentForm.Hide();
                 LaunchSession(this, se);
             }
@@ -149,15 +155,15 @@ namespace uk.org.riseley.puttySessionManager.control
 
         public void SessionsRefreshed(Object sender, RefreshSessionsEventArgs e)
         {
-            if ( !(sender.Equals(this) && e.RefreshSource == false) )
+            if (!(sender.Equals(this) && e.RefreshSource == false))
                 LoadSessions();
         }
-        
+
         public bool ContextMenuVisible
         {
             get
             {
-                return (this.ContextMenuStrip == null? false:true);
+                return (this.ContextMenuStrip == null ? false : true);
             }
 
             set
@@ -172,6 +178,20 @@ namespace uk.org.riseley.puttySessionManager.control
         private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             sc.invalidateSessionList(this, true);
+        }
+
+        /// <summary>
+        /// Capture when the enter key is press in this control 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void sessionControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            enterPressed = false;
+            if (e.KeyCode == Keys.Enter)
+            {
+                enterPressed = true;
+            }
         }
     }
 }

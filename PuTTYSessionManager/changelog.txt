@@ -1,12 +1,24 @@
-PuTTY Session Manager v0.2.4.1 ( XX-XX-2007 )
+PuTTY Session Manager v0.30.0.0 ( XX-XX-2007 )
 =============================================
 Sixth release of PuTTY Session Manager
 
+NOTE:  The version numbering for PSM changes in this release. It now follows
+the format:
+MajorVersion.MinorVersion.SVNRevNo.BuildType
+
+MajorVersion=0  (Until I complete the document)
+MinorVersion=30 (Two Digits to allow for tweaks)
+SVNRevNo=Svn Revision Number this is built from
+         0 - For exported sources
+BuildType=0 - Not Modified
+         =Non-zero - Modified, Switched or Mixed Revision Sources
+
 This is a minor release of PSM with the following changes:
 
-Feature requests:
+Feature requests / enhancements:
 1748080: Minimize on loss of focus.  Added an option to allow PSM
-         to automatically minimize to the system tray when 
+         to automatically minimize to the system tray after a session
+         has been launched
 1748076: Pageant Integration.  Added a tab to the options dialog to 
          enable the launch of Pageant from PSM.  A list of keys can be 
          supplied , and Pageant can be automatically launched on startup
@@ -19,7 +31,12 @@ Feature requests:
 1744518: Hit Enter to launch a session.  Implemented on tree and list view
 1746714: More Session Hotkeys.  You can now have up to 10 configurable 
          session hotkeys.  Hotkeys may be indvidually enabled and disabled.  
-Not Tracked: Added New Session Menu item to PSM System Tray menu       
+Not Tracked: Added New Session Menu item to PSM System Tray menu   
+Not Tracked: Add F2 shortcut to rename session or folder 
+Not Tracked: Added confirmation dialog for successful session export   
+Not Tracked: Make PSM respond to mimimize requests ( eg Win+M )
+Not Tracked: Add Tooltips to some Options , to provide a bit of help
+Not Tracked: Create Nant script to make releases easier
          
 Bugs:
 Not Tracked:  Create HKCU\Software\Microsoft\Windows\CurrentVersion\Run
@@ -49,7 +66,7 @@ Not Tracked:  New sessions ( with a space in their name )
               weren't showing up in the system tray with a 
               session refresh
 Not Tracked:  ArrayIndexOutOfBoundsException when trying to create 
-              a new session when no previoussessions exist
+              a new session when no previous sessions exist
 Not Tracked:  Fix NRE on startup if you don't have access to 
 			  HKCU\Software\Microsoft\Windows\CurrentVersion\Run
 

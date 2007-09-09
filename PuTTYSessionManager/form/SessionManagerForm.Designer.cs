@@ -51,6 +51,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.sysTrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.loadSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displayTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.control.SessionTreeControl();
             this.sessionListControl1 = new uk.org.riseley.puttySessionManager.control.SessionListControl();
-            this.newSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +92,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
-            this.sysTrayContextMenu.Size = new System.Drawing.Size(168, 236);
+            this.sysTrayContextMenu.Size = new System.Drawing.Size(168, 214);
             // 
             // loadSessionToolStripMenuItem
             // 
@@ -101,6 +101,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.loadSessionToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.loadSessionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.loadSessionToolStripMenuItem.Text = "&Load Session";
+            // 
+            // newSessionToolStripMenuItem
+            // 
+            this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
+            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newSessionToolStripMenuItem.Text = "New Session";
+            this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
             // 
             // displayTreeToolStripMenuItem
             // 
@@ -190,13 +197,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionListControl1.Visible = false;
             this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.control.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
             // 
-            // newSessionToolStripMenuItem
-            // 
-            this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
-            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.newSessionToolStripMenuItem.Text = "New Session";
-            this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
-            // 
             // SessionManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,12 +210,12 @@ namespace uk.org.riseley.puttySessionManager.form
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "SessionManagerForm";
             this.Opacity = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyValueDouble;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PuTTY Session Manager";
             this.TopMost = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;
+            this.Resize += new System.EventHandler(this.SessionManagerForm_Resize);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SessionManagerForm_FormClosing);
             this.sysTrayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);

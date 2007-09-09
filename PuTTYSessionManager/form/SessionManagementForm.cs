@@ -87,9 +87,10 @@ namespace uk.org.riseley.puttySessionManager.form
 
                 bool result = true;
                 String errorMessage = "Unknown Error";
+                int savedCount = -1;
                 try
                 {
-                    int savedCount = sc.saveSessionsToFile(
+                    savedCount = sc.saveSessionsToFile(
                                          selectedSessions,
                                          saveFileDialog1.FileName,
                                          filetype);
@@ -110,6 +111,9 @@ namespace uk.org.riseley.puttySessionManager.form
                     MessageBox.Show("Failed to export sessions:\n" +
                                 errorMessage
                     , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show("Successfully exported " + savedCount + " sessions"
+                    , "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -138,7 +142,7 @@ namespace uk.org.riseley.puttySessionManager.form
                          String errMsg = sc.launchSession(nsr.SessionName);
                          if (errMsg.Equals("") == false)
                          {
-                             MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
+                             MessageBox.Show("PuTTY Failed to start.\nCheck the PuTTY location in System Tray -> Options.\n" +
                                  errMsg
                                  , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                          }

@@ -99,19 +99,34 @@ namespace uk.org.riseley.puttySessionManager.control
         }
 
         /// <summary>
-        /// Event handler for key press from the list view
+        /// Event handler for key up from the list view
         /// If ENTER is pressed launch that session
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void listBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter  && enterPressed)
             {
                 Session s = (Session)listBox1.SelectedItem;
                 OnLaunchSession(new LaunchSessionEventArgs(s));
+
+                // Reset the enter pressed flag
+                // and mark the event as handled
+                enterPressed = false;
                 e.Handled = true;
             }
+        }
+
+        /// <summary>
+        /// Event handler for key down event
+        /// Capture if ENTER is pressed in this window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            sessionControl_KeyDown(sender, e);
         }
     }
 }

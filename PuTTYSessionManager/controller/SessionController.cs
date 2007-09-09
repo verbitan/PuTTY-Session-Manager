@@ -807,8 +807,10 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// </summary>
         /// <param name="s">The session to launch</param>
         /// <returns>The error message if the process fails to start</returns>
-        public string launchOtherSession(Session s, LaunchSessionEventArgs.PROGRAM program )
+        public string launchOtherSession(Session s, LaunchSessionEventArgs.PROGRAM program)
         {
+            String errMsg = "";
+
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
 
             // Only try to launch the session if it still exists
@@ -834,15 +836,21 @@ namespace uk.org.riseley.puttySessionManager.controller
                         hostname = hostname.Substring(hostname.IndexOf("@") + 1);
                 }
 
-                // Only bother if we have a hostname set
-                if (hostname != null && hostname.Length > 0)
-                {
-                    String execLocation = "";
-                    String execArgs     = "";
+                String execLocation = "";
+                String execArgs = "";
 
-                    // Setup the FileZilla args
-                    if (program == LaunchSessionEventArgs.PROGRAM.FILEZILLA)
+                // Setup the FileZilla args
+                if (program == LaunchSessionEventArgs.PROGRAM.FILEZILLA)
+                {
+
+                    // Only bother if we have a hostname set
+                    if (hostname == null || hostname.Length == 0)
                     {
+                        execArgs = "";
+                    }
+                    else
+                    {
+
 
                         // Setup the protocol and port
                         Protocol fp = (Protocol)Properties.Settings.Default.FileZillaProtocol;
@@ -881,10 +889,24 @@ namespace uk.org.riseley.puttySessionManager.controller
                              Properties.Settings.Default.FileZillaAttemptKeyAuth == true)
                             password = ":";
 
-                        execLocation = Properties.Settings.Default.FileZillaLocation;
-                        execArgs     = protocol + username + password + "@" + hostname + ":" + portnumber;
-                    } 
-                    else if ( program == LaunchSessionEventArgs.PROGRAM.WINSCP )
+                        // Finalise the auth string
+                        String auth = "";
+                        if (username != null && !(username.Equals("")))
+                            auth = username + password + "@";
+
+                        execArgs = protocol + auth + hostname + ":" + portnumber;
+                    }
+                    execLocation = Properties.Settings.Default.FileZillaLocation;
+
+                }
+                else if (program == LaunchSessionEventArgs.PROGRAM.WINSCP)
+                {
+                    // Only bother if we have a hostname set
+                    if (hostname == null || hostname.Length == 0)
+                    {
+                        execArgs = "";
+                    }
+                    else
                     {
                         // Setup the protocol and port
                         Protocol wp = (Protocol)Properties.Settings.Default.WinSCPProtocol;
@@ -924,31 +946,36 @@ namespace uk.org.riseley.puttySessionManager.controller
                                 }
                                 break;
                         }
-                        execLocation = Properties.Settings.Default.WinSCPLocation;
-                        execArgs = protocol + username + "@" + hostname + ":" + portnumber;
-                    }
 
-                    Process p = new Process();
-                    p.StartInfo.FileName  = execLocation;
-                    p.StartInfo.Arguments = execArgs;
 
-                    String errMsg = "";
-                    
-                    // Attempt to start the process
-                    try
-                    {
-                        p.Start();
-                    }
-                    catch (Exception ex)
-                    {
-                        errMsg = ex.Message;
-                    }
-                    p.Close();
+                        // Finalise the auth string
+                        String auth = "";
+                        if (username != null && !(username.Equals("")))
+                            auth = username + "@";
 
-                    return errMsg;
+                        execArgs = protocol + auth + hostname + ":" + portnumber;
+                    }
+                    execLocation = Properties.Settings.Default.WinSCPLocation;
                 }
+
+                Process p = new Process();
+                MessageBox.Show(execLocation + " " + execArgs);
+                p.StartInfo.FileName = execLocation;
+                p.StartInfo.Arguments = execArgs;
+
+                // Attempt to start the process
+                try
+                {
+                    p.Start();
+                }
+                catch (Exception ex)
+                {
+                    errMsg = ex.Message;
+                }
+                p.Close();
             }
-            return "";
+
+            return errMsg;
         }
     }
 }

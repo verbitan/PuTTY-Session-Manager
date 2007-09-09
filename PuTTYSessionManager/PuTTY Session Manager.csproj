@@ -12,7 +12,7 @@
     <StartupObject>uk.org.riseley.puttySessionManager.Program</StartupObject>
     <ManifestCertificateThumbprint>4DEFC6AAB45740A83BF389C8D27134EEF9BBA34C</ManifestCertificateThumbprint>
     <ManifestKeyFile>PuTTY Session Manager_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetZone>LocalIntranet</TargetZone>
@@ -249,7 +249,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="PuTTY Session Manager_TemporaryKey.pfx" />
+    <None Include="psm.build" />
     <Compile Include="control\SessionTreeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -266,6 +266,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="buildinfo\basever.txt" />
     <Content Include="changelog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

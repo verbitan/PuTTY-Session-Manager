@@ -260,6 +260,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.renameFolderMenuItem.Enabled = false;
             this.renameFolderMenuItem.Name = "renameFolderMenuItem";
+            this.renameFolderMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.renameFolderMenuItem.Size = new System.Drawing.Size(192, 22);
             this.renameFolderMenuItem.Text = "Rename Folder";
             this.renameFolderMenuItem.Click += new System.EventHandler(this.renameFolderMenuItem_Click);
@@ -304,6 +305,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.renameSessionToolStripMenuItem.Enabled = false;
             this.renameSessionToolStripMenuItem.Name = "renameSessionToolStripMenuItem";
+            this.renameSessionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.renameSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.renameSessionToolStripMenuItem.Text = "Rename Session";
             this.renameSessionToolStripMenuItem.Click += new System.EventHandler(this.renameSessionToolStripMenuItem_Click);

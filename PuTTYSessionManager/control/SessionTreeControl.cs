@@ -52,8 +52,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private ToolTip toolTip;
         private int oldNodeIndex = -1;
 
-        private Boolean enterPressed = false;
-
         public SessionTreeControl()
             : base()
         {
@@ -842,7 +840,7 @@ namespace uk.org.riseley.puttySessionManager.control
                         String errMsg = getSessionController().launchSession(nsr.SessionName);
                         if (errMsg.Equals("") == false)
                         {
-                            MessageBox.Show("PuTTY Failed to start. Check the PuTTY location.\n" +
+                            MessageBox.Show("PuTTY Failed to start.\nCheck the PuTTY location in System Tray -> Options.\n" +
                                 errMsg
                                 , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -1149,20 +1147,6 @@ namespace uk.org.riseley.puttySessionManager.control
         }
 
         /// <summary>
-        /// Capture when the enter key is press in this control 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treeView_KeyDown(object sender, KeyEventArgs e)
-        {
-            enterPressed = false;
-            if (e.KeyCode == Keys.Enter)
-            {
-                enterPressed = true;
-            }
-        }
-
-        /// <summary>
         /// Event handler for key up event from the tree view
         /// If ENTER is pressed and the selected session isn't 
         /// a folder , launch that session
@@ -1223,6 +1207,31 @@ namespace uk.org.riseley.puttySessionManager.control
                     e.Handled = true;
                 }
             }
+            else if (e.KeyCode == Keys.F2)
+            {
+                // Renames only allowed if the sessions are unlocked
+                if (lockSessionsToolStripMenuItem.Checked == false)
+                {
+                    // Find the selected node
+                    TreeNode selectedNode = treeView.SelectedNode;
+
+                    Session s = null;
+
+                    // Renames of the top node aren't allowed
+                    if (selectedNode != null && selectedNode.Parent != null)
+                    {
+                        s = (Session)selectedNode.Tag;
+                        if (s != null)
+                        {
+                            if (s.IsFolder == true)
+                                renameFolderMenuItem_Click(this, EventArgs.Empty);
+                            else
+                                renameSessionToolStripMenuItem_Click(this, EventArgs.Empty);
+                            e.Handled = true;
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -1278,6 +1287,11 @@ namespace uk.org.riseley.puttySessionManager.control
         {
             Session s = getSelectedSession();
             OnLaunchSession(new LaunchSessionEventArgs(s, LaunchSessionEventArgs.PROGRAM.WINSCP));
+        }
+
+        private void treeView_KeyDown(object sender, KeyEventArgs e)
+        {
+            sessionControl_KeyDown(sender, e);
         }
 
     }

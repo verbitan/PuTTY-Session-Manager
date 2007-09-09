@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * Copyright (C) 2006,2007 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
@@ -53,5 +53,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.2.4.1")]
-[assembly: AssemblyFileVersion("0.2.4.1")]
+[assembly: AssemblyVersion("0.30.0.0")]
+[assembly: AssemblyFileVersion("0.30.0.0")]
