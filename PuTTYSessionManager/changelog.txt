@@ -1,4 +1,4 @@
-PuTTY Session Manager v0.30.0.0 ( XX-XX-2007 )
+PuTTY Session Manager v0.30 ( 13-09-2007 )
 =============================================
 Sixth release of PuTTY Session Manager
 
@@ -10,11 +10,11 @@ It now follows the format:
 
 MajorVersion.MinorVersion.SVNRevNo.BuildType
 
-MajorVersion=0  ( Until I complete the documention - then I'll go to v1.0)
+MajorVersion=0  ( Until I complete the documentation - then I'll go to v1)
 MinorVersion=30 ( Two Digits to allow for tweaks )
 SVNRevNo=Svn Revision Number this is built from
          0 - For exported sources
-BuildType=0 - Not Modified ( Reproduceable build from SVN )
+BuildType=0 - Not Modified ( Reproducible build from SVN )
          =Non-zero ( Development build )
           - Modified, Switched or Mixed Revision Sources
 

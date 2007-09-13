@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.controller;
 using uk.org.riseley.puttySessionManager.control;
+using System.Runtime.InteropServices;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
@@ -39,6 +40,18 @@ namespace uk.org.riseley.puttySessionManager.form
         private SessionControl hiddenSessionControl;
 
         private HotkeyController hkc;
+
+        private class User32
+        {
+            [DllImport("user32.dll")]
+            private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+            public static void SetForegroundWindow()
+            {
+                SetForegroundWindow(System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle);
+            }
+
+        }
 
         public SessionManagerForm()
             : base()
@@ -122,13 +135,38 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
+        /// <summary>
+        /// Event handler for double click event on th
+        /// system tray icon
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.Visible = !this.Visible;
-            if ( this.Visible == true && this.WindowState == FormWindowState.Minimized )
-                 this.WindowState = FormWindowState.Normal;
+            showApplication(!this.Visible);            
         }
 
+        /// <summary>
+        /// Helper to display the main window
+        /// </summary>
+        /// <param name="visible"></param>
+        private void showApplication(bool visible)
+        {
+            Visible = visible;          
+            if (Visible)
+            {
+                // If the window has been minimized
+                // bring it back to it's normal size
+                if (WindowState == FormWindowState.Minimized)
+                    WindowState = FormWindowState.Normal;
+
+                // Request focus in this window
+                Activate();
+
+                // Bring the window to the front
+                User32.SetForegroundWindow();
+            }
+        }
 
         private void sessionControl_LaunchSession(object sender, LaunchSessionEventArgs se)
         {
@@ -219,7 +257,7 @@ namespace uk.org.riseley.puttySessionManager.form
                 this.Visible == true &&
                 this.ContainsFocus == true )
             {
-                Hide();
+                showApplication(false);
             }
             else if (m.Msg == hkc.WM_HOTKEY)
             {
@@ -241,16 +279,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // If it's the minimize hotkey switch the display state
             if (id == (int)HotkeyController.HotKeyId.HKID_MINIMIZE)
             {
-                this.Visible = !(this.Visible);
-                if (Visible)
-                {
-                    // If the window has been minimized
-                    // bring it back to it's normal size
-                    if (WindowState == FormWindowState.Minimized)
-                        WindowState = FormWindowState.Normal;
-                    Activate();
-                }
-                
+                showApplication(!this.Visible);                
                 return;
             }
 
@@ -318,7 +347,7 @@ namespace uk.org.riseley.puttySessionManager.form
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                Hide();
+                showApplication(false);
 
                 // Make sure the systray icon is visible
                 if (systrayIcon.Visible == false)
@@ -346,7 +375,7 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                Hide();
+                showApplication(false);
             }   
         }
     }
