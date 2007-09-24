@@ -26,23 +26,32 @@ using uk.org.riseley.puttySessionManager.model;
 
 namespace uk.org.riseley.puttySessionManager.control
 {
+    /// <summary>
+    /// This control presents a flat list of sessions
+    /// </summary>
     public partial class SessionListControl : SessionControl
     {
 
         ToolStripMenuItem[] tsmiArray;
 
+        /// <summary>
+        /// Default constructor for the list control
+        /// </summary>
         public SessionListControl() : base()
         {
             InitializeComponent();
         }
 
         
+        /// <summary>
+        /// Load sessions into the list and the system tray
+        /// </summary>
         protected override void LoadSessions()
         {
             // Suppress repainting the ListBox until all the objects have been created.
             listBox1.BeginUpdate();
 
-            // Clear out the current tree
+            // Clear out the current list
             listBox1.Items.Clear();
 
             // Add the contents of the list to the list box
@@ -58,18 +67,27 @@ namespace uk.org.riseley.puttySessionManager.control
             // Begin repainting the TreeView.
             listBox1.EndUpdate();
 
+            // Setup the System tray array of menu items
             tsmiArray = new ToolStripMenuItem[getSessionController().getSessionList().Count];
             int i=0;
             foreach (Session s in getSessionController().getSessionList())
             {
                 tsmiArray[i] = new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick);
+                // Make sure the menu item is tagged with the session
+                tsmiArray[i].Tag = s;
                 i++;
             }
         }
 
+        /// <summary>
+        /// Event handler for the double click event on the list box
+        /// or one of the tool strip menu items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-             Session s = null;
+            Session s = null;
 
             if ( sender is ListBox ) {
                 s = (Session)((ListBox)sender).SelectedItem;
@@ -82,6 +100,10 @@ namespace uk.org.riseley.puttySessionManager.control
             OnLaunchSession(new LaunchSessionEventArgs(s));            
         }
 
+        /// <summary>
+        /// Add the array of menu items to the system tray
+        /// </summary>
+        /// <param name="parent">The root of the systray menu</param>
         public override void getSessionMenuItems(ToolStripMenuItem parent)
         {
             parent.DropDownItems.Clear();
@@ -89,6 +111,10 @@ namespace uk.org.riseley.puttySessionManager.control
                 parent.DropDownItems.AddRange(tsmiArray);            
         }
 
+        /// <summary>
+        /// Get a list of selected items
+        /// </summary>
+        /// <returns></returns>
         public override List<Session> getSelectedSessions()
         {
             List<Session> sl = new List<Session>();
@@ -106,7 +132,7 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <param name="e"></param>
         private void listBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter  && enterPressed)
+            if (e.KeyCode == Keys.Enter && enterPressed)
             {
                 Session s = (Session)listBox1.SelectedItem;
                 OnLaunchSession(new LaunchSessionEventArgs(s));
