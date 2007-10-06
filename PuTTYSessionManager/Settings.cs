@@ -26,16 +26,17 @@ namespace uk.org.riseley.puttySessionManager.Properties
     //  The SettingsSaving event is raised before the setting values are saved.
     internal sealed partial class Settings
     {
+        private bool settingsChanged = false;
 
         public Settings()
         {
-            // // To add event handlers for saving and changing settings, uncomment the lines below:
-            //
+            // To add event handlers for saving and changing settings, uncomment the lines below:
             this.SettingChanging += this.SettingChangingEventHandler;
-            //
-            // this.SettingsSaving += this.SettingsSavingEventHandler;
-            //
-            //this.PropertyChanged += this.PropertyChangedEventHandler;
+            
+            this.PropertyChanged += this.PropertyChangedEventHandler;
+
+            this.SettingsSaving += this.SettingsSavingEventHandler;
+
         }
 
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e)
@@ -67,13 +68,18 @@ namespace uk.org.riseley.puttySessionManager.Properties
 
         private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Add code to handle the SettingsSaving event here.
+            // Cancel the save request if nothing has changed
+            if (settingsChanged == false)
+                e.Cancel = true;
+            else
+                settingsChanged = false;
+
         }
 
         private void PropertyChangedEventHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            
-            // Add code to handle the SettingChangingEvent event here.
+            // Record the fact that the settings have changed
+            settingsChanged = true;
         }
     }
 }

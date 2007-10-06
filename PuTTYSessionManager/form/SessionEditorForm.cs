@@ -41,6 +41,11 @@ namespace uk.org.riseley.puttySessionManager.form
         /// to the selected sessions
         /// </summary>
         private CopySessionForm csf;
+
+        /// <summary>
+        /// Dialog used to choose which 
+        /// </summary>
+        private ExportDialog ed = new ExportDialog();
  
         /// <summary>
         /// Default constructor
@@ -59,7 +64,8 @@ namespace uk.org.riseley.puttySessionManager.form
         /// <param name="e"></param>
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
         {
-            exportSessions(sessionEditorControl1.getSelectedSessions(), new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.REG_TYPE));
+            if ( ed.ShowDialog() == DialogResult.OK )
+                exportSessions(sessionEditorControl1.getSelectedSessions(), new ExportSessionEventArgs(ed.getExportType()));
         }
 
         /// <summary>

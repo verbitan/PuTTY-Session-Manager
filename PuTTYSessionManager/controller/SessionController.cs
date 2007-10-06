@@ -350,13 +350,15 @@ namespace uk.org.riseley.puttySessionManager.controller
                 hostname = hostname.Substring(hostname.IndexOf("@") + 1);
             }
             value = rk.GetValue(PUTTY_PSM_FOLDER_ATTRIB);
-            if (value != null)
+            if (value != null && !value.ToString().Equals(""))
                 foldername = value.ToString();
+            else
+                foldername = Session.SESSIONS_FOLDER_NAME;
 
-            sw.WriteLine("\"" + sessionName + "\"," +
-                         "\"" + foldername + "\"," +
-                         "\"" + username + "\"," +
-                         "\"" + hostname + "\"");
+            sw.WriteLine("\"" + sessionName.Replace("\"","\"\"") + "\"," +
+                         "\"" + foldername.Replace("\"", "\"\"") + "\"," +
+                         "\"" + username.Replace("\"", "\"\"") + "\"," +
+                         "\"" + hostname.Replace("\"", "\"\"") + "\"");
             rk.Close();
             return true;
         }
@@ -399,7 +401,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
             else if (filetype.Equals(FILE_TYPE_CSV))
             {
-                sw.WriteLine("Session Name,Folder Name,Username,Hostname");
+                sw.WriteLine("\"Session Name\",\"Folder Name\",\"Username\",\"Hostname\"");
             }
         }
 

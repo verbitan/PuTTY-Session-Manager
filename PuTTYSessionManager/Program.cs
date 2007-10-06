@@ -75,6 +75,9 @@ namespace uk.org.riseley.puttySessionManager
             // Attempt to handle session ending ( logoff / shutdown ) events
             SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
 
+            // Attempt to handle session ended ( logoff / shutdown ) events
+            SystemEvents.SessionEnded += new SessionEndedEventHandler(OnSessionEnded);
+
 		    // Only make the form visible if the required
             smf.Visible = !(Properties.Settings.Default.MinimizeOnStart);
             
@@ -93,13 +96,24 @@ namespace uk.org.riseley.puttySessionManager
 
         /// <summary>
         /// Event handler for the SessionEnding event
-        /// Attempt to save the settings, by calling Application.Exit()
+        /// Attempt to save the settings
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnSessionEnding(object sender, SessionEndingEventArgs e)
         {
-            Application.Exit();
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Event handler for the SessionEnded event
+        /// Attempt to save the settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnSessionEnded(object sender, SessionEndedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
     }
 

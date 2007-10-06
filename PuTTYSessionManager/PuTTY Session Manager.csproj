@@ -70,6 +70,12 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="controller\HotkeyController.cs" />
+    <Compile Include="form\ExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\ExportDialog.Designer.cs">
+      <DependentUpon>ExportDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\NewSessionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,10 @@
     <EmbeddedResource Include="form\AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\ExportDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExportDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\NewSessionForm.resx">
       <DependentUpon>NewSessionForm.cs</DependentUpon>

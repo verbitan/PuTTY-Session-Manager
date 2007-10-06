@@ -46,15 +46,8 @@ namespace uk.org.riseley.puttySessionManager.form
         /// </summary>
         private void InitializeComponent()
         {
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.sessionEditorControl1 = new SessionEditorControl();
+            this.sessionEditorControl1 = new uk.org.riseley.puttySessionManager.control.SessionEditorControl();
             this.SuspendLayout();
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "reg";
-            this.saveFileDialog1.Filter = "Reg files|*.reg|All files|*.*";
-            this.saveFileDialog1.Title = "Export PuTTY Sessions";
             // 
             // sessionEditorControl1
             // 
@@ -68,7 +61,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionEditorControl1.CopySessionAttributes += new System.EventHandler(this.sessionEditorControl1_CopySessionAttributes);
             this.sessionEditorControl1.NewSession += new System.EventHandler(this.sessionEditorControl1_NewSession);
             this.sessionEditorControl1.CloseSessionEditor += new System.EventHandler(this.sessionEditorControl1_CloseSessionEditor);
-            this.sessionEditorControl1.DeleteSessions += new SessionControl.DeleteSessionsEventHandler(this.sessionEditorControl1_DeleteSessions);
+            this.sessionEditorControl1.DeleteSessions += new uk.org.riseley.puttySessionManager.control.SessionControl.DeleteSessionsEventHandler(this.sessionEditorControl1_DeleteSessions);
             // 
             // SessionEditorForm
             // 
@@ -78,7 +71,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.sessionEditorControl1);
             this.MinimumSize = new System.Drawing.Size(553, 187);
             this.Name = "SessionEditorForm";
-            this.Text = "Session Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SessionEditorForm_FormClosing);
             this.ResumeLayout(false);
 
@@ -87,7 +79,6 @@ namespace uk.org.riseley.puttySessionManager.form
         #endregion
 
         private SessionEditorControl sessionEditorControl1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 
 
 

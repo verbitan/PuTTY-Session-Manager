@@ -193,7 +193,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="WinSCPLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\WinSCP3\WinSCP3.exe</Value>
+      <Value Profile="(Default)">C:\Program Files\WinSCP\WinSCP.exe</Value>
     </Setting>
     <Setting Name="WinSCPProtocol" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

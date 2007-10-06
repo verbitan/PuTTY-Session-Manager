@@ -286,10 +286,12 @@ namespace uk.org.riseley.puttySessionManager.form
         /// </summary>
         private void setupToolTips()
         {
-            // Options tab
+            // General tab
             optionsToolTip.SetToolTip(autoMinimizeCheckBox, "If enabled, PSM will hide itself when a new session\n" +
                                                       "or folder of sessions is lauched");
             optionsToolTip.SetToolTip(autostartCheckBox, "Automatically start PSM on Windows login");
+            optionsToolTip.SetToolTip(numericUpDown1, "Threshold for warning when using \"Launch Folder\" or \n" +
+                                                      "\"Launch Folder and Subfolders\" from the tree view");
 
             // Pageant tab
             optionsToolTip.SetToolTip(addKeyButton, "Add an SSH private key(s) that will be opened\n" +
@@ -306,6 +308,8 @@ namespace uk.org.riseley.puttySessionManager.form
                                   "otherwise default to FTP on port 21");
             optionsToolTip.SetToolTip(sshAuthCheckBox, "Attempt to use Pageant authentication for any SFTP sessions,\n" +
                                   "otherwise prompt for a password");
+
+            // WinSCP tab
 
             // Update tab
         }

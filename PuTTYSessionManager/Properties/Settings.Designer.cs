@@ -782,7 +782,7 @@ namespace uk.org.riseley.puttySessionManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\WinSCP3\\WinSCP3.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\WinSCP\\WinSCP.exe")]
         public string WinSCPLocation {
             get {
                 return ((string)(this["WinSCPLocation"]));

@@ -52,6 +52,8 @@ namespace uk.org.riseley.puttySessionManager.control
         private ToolTip toolTip;
         private int oldNodeIndex = -1;
 
+        private ExportDialog ed;
+
         public SessionTreeControl()
             : base()
         {
@@ -76,6 +78,8 @@ namespace uk.org.riseley.puttySessionManager.control
                 ignoreFoldersToolStripMenuItem.Checked = true;
             else if (order == SessionSorter.SortOrder.FOLDER_LAST)
                 foldersLastToolStripMenuItem.Checked = true;
+
+            ed = new ExportDialog();
 
         }
 
@@ -1026,14 +1030,6 @@ namespace uk.org.riseley.puttySessionManager.control
             return getSelectedSession(false);
         }
 
-        private void exportSessionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (sender == toCSVFileToolStripMenuItem)
-                OnExportSessions(new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.CSV_TYPE));
-            else if (sender == toRegistryFileToolStripMenuItem)
-                OnExportSessions(new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.REG_TYPE));
-        }
-
         private void setupHotkeyMenuItems(object sender, EventArgs e)
         {
             bool hotkeysEnabled = hkc.isFavouriteSessionHotkeysEnabled();
@@ -1292,6 +1288,17 @@ namespace uk.org.riseley.puttySessionManager.control
         private void treeView_KeyDown(object sender, KeyEventArgs e)
         {
             sessionControl_KeyDown(sender, e);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exportSessionsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (ed.ShowDialog() == DialogResult.OK)
+                OnExportSessions(new ExportSessionEventArgs(ed.getExportType()));
         }
 
     }

@@ -73,8 +73,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toRegistryFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toCSVFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveNewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setSessionAsHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,7 +109,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem,
             this.sessionManagementToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 280);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 302);
             // 
             // newSessionMenuItem
             // 
@@ -280,26 +278,10 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // exportSessionsToolStripMenuItem
             // 
-            this.exportSessionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toRegistryFileToolStripMenuItem,
-            this.toCSVFileToolStripMenuItem});
             this.exportSessionsToolStripMenuItem.Name = "exportSessionsToolStripMenuItem";
             this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
-            // 
-            // toRegistryFileToolStripMenuItem
-            // 
-            this.toRegistryFileToolStripMenuItem.Name = "toRegistryFileToolStripMenuItem";
-            this.toRegistryFileToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.toRegistryFileToolStripMenuItem.Text = "To Registry File";
-            this.toRegistryFileToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click);
-            // 
-            // toCSVFileToolStripMenuItem
-            // 
-            this.toCSVFileToolStripMenuItem.Name = "toCSVFileToolStripMenuItem";
-            this.toCSVFileToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.toCSVFileToolStripMenuItem.Text = "To CSV File";
-            this.toCSVFileToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click);
+            this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click_1);
             // 
             // renameSessionToolStripMenuItem
             // 
@@ -490,8 +472,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.ToolStripMenuItem foldersFirstToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ignoreFoldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem foldersLastToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toRegistryFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toCSVFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hotkey6MenuItem;
         private System.Windows.Forms.ToolStripMenuItem hotkey7MenuItem;
         private System.Windows.Forms.ToolStripMenuItem hotkey8MenuItem;

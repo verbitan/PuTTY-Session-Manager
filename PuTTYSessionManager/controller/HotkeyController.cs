@@ -382,37 +382,41 @@ namespace uk.org.riseley.puttySessionManager.controller
             UnregisterHotKey(window, hkid);
             if (RegisterHotkey(window, hkid))
             {
+                String sessionName = "";
+                if (s != null)
+                    sessionName = s.SessionName;
+
                 switch (hkid)
                 {
                     case HotKeyId.HKID_SESSION_1:
-                        Properties.Settings.Default.FavouriteSession1 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession1 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_2:
-                        Properties.Settings.Default.FavouriteSession2 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession2 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_3:
-                        Properties.Settings.Default.FavouriteSession3 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession3 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_4:
-                        Properties.Settings.Default.FavouriteSession4 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession4 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_5:
-                        Properties.Settings.Default.FavouriteSession5 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession5 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_6:
-                        Properties.Settings.Default.FavouriteSession6 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession6 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_7:
-                        Properties.Settings.Default.FavouriteSession7 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession7 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_8:
-                        Properties.Settings.Default.FavouriteSession8 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession8 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_9:
-                        Properties.Settings.Default.FavouriteSession9 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession9 = sessionName;
                         result = true; break;
                     case HotKeyId.HKID_SESSION_10:
-                        Properties.Settings.Default.FavouriteSession10 = s.SessionName;
+                        Properties.Settings.Default.FavouriteSession10 = sessionName;
                         result = true; break;
                     default:
                         result = false; break;

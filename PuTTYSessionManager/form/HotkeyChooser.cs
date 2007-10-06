@@ -58,6 +58,9 @@ namespace uk.org.riseley.puttySessionManager.form
             hkc.registerAllEnabledHotkeys(parentWindow);
         }
 
+        /// <summary>
+        /// Tag the comboBoxes, checkboxes and textboxes with the session ids
+        /// </summary>
         private void createTags()
         {
             comboBox1.Tag = HotkeyController.HotKeyId.HKID_SESSION_1;
@@ -98,6 +101,9 @@ namespace uk.org.riseley.puttySessionManager.form
             minimizeWindowHKTextbox.Tag = HotkeyController.HotKeyId.HKID_MINIMIZE;
         }
 
+        /// <summary>
+        /// Create a dictionary of comboboxes to iterate over later on
+        /// </summary>
         private void createComboDictionary()
         {
             comboDictionary = new Dictionary<HotkeyController.HotKeyId, ComboBox>();
@@ -113,6 +119,9 @@ namespace uk.org.riseley.puttySessionManager.form
             comboDictionary.Add((HotkeyController.HotKeyId)comboBox10.Tag, comboBox10);
         }
 
+        /// <summary>
+        /// Create a dictionary of textboxes to iterate over later on
+        /// </summary>
         private void createTextboxDictionary()
         {
             textboxDictionary = new Dictionary<HotkeyController.HotKeyId, TextBox>();
@@ -130,6 +139,9 @@ namespace uk.org.riseley.puttySessionManager.form
             textboxDictionary.Add((HotkeyController.HotKeyId)newSessionHKTextbox.Tag, newSessionHKTextbox);
         }
 
+        /// <summary>
+        /// Create a dictionary of checkboxes to iterate over later on
+        /// </summary>
         private void createCheckboxDictionary()
         {
             checkboxDictionary = new Dictionary<HotkeyController.HotKeyId, CheckBox>();
@@ -147,7 +159,9 @@ namespace uk.org.riseley.puttySessionManager.form
             checkboxDictionary.Add((HotkeyController.HotKeyId)newSessionHKCheckbox.Tag, newSessionHKCheckbox);
         }
 
-
+        /// <summary>
+        /// Setup the textboxes with the saved values
+        /// </summary>
         private void intialiseTextboxes()
         {
             foreach (TextBox t in textboxDictionary.Values)
@@ -156,29 +170,43 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
-        private void loadLists()
+        
+        /// <summary>
+        /// Load the selected value to the saved hotkey
+        /// and load the combo boxes with the stored sessions
+        /// and set the selected value to the saved hotkey
+        /// </summary>
+        /// <param name="reloadSessions"></param>
+        private void setHotkeys(bool reloadSessions)
         {
-            Session[] sa = sc.getSessionList().ToArray();
+            Session[] sa = null;
             ComboBox c;
+
+            if ( reloadSessions )
+                sa = sc.getSessionList().ToArray();
+
             foreach (HotkeyController.HotKeyId hkid in comboDictionary.Keys)
             {
                 comboDictionary.TryGetValue(hkid, out c);
-                c.Items.AddRange(sa);
+                if ( reloadSessions )
+                    c.Items.AddRange(sa);
                 c.SelectedItem = hkc.getSessionFromHotkey(hkid);
             }
         }
 
+        /// <summary>
+        /// Event handler for the HotKeysRefreshed event
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         private void setHotkeys(object source , EventArgs e)
         {
-            ComboBox c;
-            foreach (HotkeyController.HotKeyId hkid in comboDictionary.Keys)
-            {
-                comboDictionary.TryGetValue(hkid, out c);
-                c.SelectedItem = hkc.getSessionFromHotkey(hkid);               
-            }        
+            setHotkeys(false);
         }
 
-
+        /// <summary>
+        /// Clear each combo box
+        /// </summary>
         private void clearLists()
         {
             foreach (ComboBox c in comboDictionary.Values)
@@ -188,6 +216,11 @@ namespace uk.org.riseley.puttySessionManager.form
         }
 
 
+        /// <summary>
+        /// Event handler for the 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void okButton_Click(object sender, EventArgs e)
         {
             foreach (CheckBox c in checkboxDictionary.Values)
@@ -201,7 +234,7 @@ namespace uk.org.riseley.puttySessionManager.form
                         t.Text = hkc.getHotKeyFromId(hkid);
                 }
             }
-            this.Close();
+            this.Hide();
         }
 
         private void hotkeyCheckbox_Click(object sender, EventArgs e)
@@ -294,7 +327,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public void SessionsRefreshed(Object sender, EventArgs e)
         {
             clearLists();
-            loadLists();
+            setHotkeys(true);
         }
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -331,12 +364,20 @@ namespace uk.org.riseley.puttySessionManager.form
             hkc.setFavouriteSessionHotkeysEnabled(favSessCheckBox.Checked);
         }
 
-        private void HotkeyChooser_FormClosing(object sender, FormClosingEventArgs e)
+        /// <summary>
+        /// This method will clear the hotkey if the delete key 
+        /// is pressed in the combo box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            ComboBox c = (ComboBox)sender;
+            HotkeyController.HotKeyId hkid = (HotkeyController.HotKeyId)c.Tag;
+            if (e.KeyCode == Keys.Delete)
             {
-                e.Cancel = true;
-                this.Visible = false;
+                c.SelectedItem = null;
+                hkc.saveSessionnameToHotkey(parentWindow, hkid, null);
             }
         }
     }
