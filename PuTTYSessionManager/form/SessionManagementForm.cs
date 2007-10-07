@@ -57,6 +57,7 @@ namespace uk.org.riseley.puttySessionManager.form
         protected void exportSessions(List<Session> selectedSessions, ExportSessionEventArgs se)
         {
             String filetype;
+            String filedescription;
 
             if (selectedSessions.Count == 0)
             {
@@ -65,17 +66,11 @@ namespace uk.org.riseley.puttySessionManager.form
                 return;
             }
             else
-            {                
-                if (se.type == ExportSessionEventArgs.ExportType.REG_TYPE)
-                {
-                    filetype = SessionController.FILE_TYPE_REG;
-                    saveFileDialog1.Filter = "reg files|*.reg|All files|*.*";
-                }
-                else
-                {
-                    filetype = SessionController.FILE_TYPE_CSV;
-                    saveFileDialog1.Filter = "csv files|*.csv|All files|*.*";
-                }
+            {
+                filetype = sc.getExportFileTypeExtension(se.type);
+                filedescription = sc.getExportFileTypeExtension(se.type);
+
+                saveFileDialog1.Filter = filedescription + "|*." + filetype + "|All files|*.*";
 
                 saveFileDialog1.Title = SAVE_FILE_DIALOG_TITLE + filetype + " file: " +
                                         selectedSessions.Count + " sessions selected";
@@ -93,7 +88,7 @@ namespace uk.org.riseley.puttySessionManager.form
                     savedCount = sc.saveSessionsToFile(
                                          selectedSessions,
                                          saveFileDialog1.FileName,
-                                         filetype);
+                                         se.type);
                     if (savedCount != selectedSessions.Count)
                     {
                         result = false;

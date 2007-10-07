@@ -13,7 +13,7 @@
     <ManifestCertificateThumbprint>4DEFC6AAB45740A83BF389C8D27134EEF9BBA34C</ManifestCertificateThumbprint>
     <ManifestKeyFile>PuTTY Session Manager_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetZone>LocalIntranet</TargetZone>
     <ApplicationIcon>icons\Putty.ico</ApplicationIcon>
@@ -30,7 +30,7 @@
     <ProductName>PuTTY Session Manager</ProductName>
     <PublisherName>PuTTY</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>0.2.4.1</ApplicationVersion>
+    <ApplicationVersion>0.31.0.0</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,6 +55,10 @@
     </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileHelpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\FileHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -63,6 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\CsvSessionExportImpl.cs" />
+    <Compile Include="controller\RegistrySessionStorageImpl.cs" />
+    <Compile Include="controller\SessionExportInterface.cs" />
+    <Compile Include="controller\SessionStorageInterface.cs" />
     <Compile Include="form\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +133,7 @@
       <DependentUpon>UpdateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="model\CopySessionRequest.cs" />
+    <Compile Include="model\CsvRecord.cs" />
     <Compile Include="model\ExportSessionEventArgs.cs" />
     <Compile Include="model\NewSessionRequest.cs" />
     <Compile Include="model\RefreshSessionsEventArgs.cs" />

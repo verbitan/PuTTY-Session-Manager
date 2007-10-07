@@ -234,7 +234,7 @@ namespace uk.org.riseley.puttySessionManager.control
             if (s.IsFolder == false)
             {
                 s.FolderName = parent.FullPath;
-                getSessionController().saveFolderToRegistry(s);
+                getSessionController().saveFolder(s);
             }
             else
             {
