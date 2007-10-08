@@ -106,6 +106,7 @@ Section "MainSection" SEC01
   File "${PSM_EXE}.config"
   File "${PSM_BUILD_DIR}\gpl.txt"
   File "${PSM_BUILD_DIR}\changelog.txt"
+  File "${PSM_BUILD_DIR}\FileHelpers.dll"
 
 ; Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
