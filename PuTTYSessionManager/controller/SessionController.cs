@@ -786,5 +786,14 @@ namespace uk.org.riseley.puttySessionManager.controller
         {
             return sessionAttribProvider.getAttributeGroup(group);
         }
+
+        /// <summary>
+        /// Check to see if we can locate the PuTTY exec
+        /// </summary>
+        /// <returns></returns>
+        public bool isPuTTYExecutableAccessible()
+        {
+            return File.Exists(Properties.Settings.Default.PuttyLocation);
+        }
     }
 }

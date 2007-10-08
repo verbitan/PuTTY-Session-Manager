@@ -62,13 +62,37 @@ namespace uk.org.riseley.puttySessionManager.form
             LoadLayout();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
-            Application.AddMessageFilter(this); 
+            Application.AddMessageFilter(this);
+        }
+
+        /// <summary>
+        /// Check PuTTY is accessible on startup
+        /// and launch pageant if required
+        /// </summary>
+        public void doStartupActions()
+        {
+            // Check to see if PuTTY is accessible
+            if (sc.isPuTTYExecutableAccessible() == false)
+            {
+                if (MessageBox.Show("PuTTY location is not accessible\n.Would you like to specify this now?"
+                    , "Warning"
+                    , MessageBoxButtons.YesNo
+                    , MessageBoxIcon.Warning
+                    , MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                {
+                    optionsDialog.ShowDialog();
+                }
+            }
+
+            // Launch Pageant if required
+            if (Properties.Settings.Default.LaunchPageantOnStart)
+                sc.launchPageant();
         }
 
         private void LoadLayout()
         {
             optionsDialog = new Options(this);
-            aboutDialog = new AboutBox();
+            aboutDialog   = new AboutBox();
             sessionEditor = new SessionEditorForm();
             hotKeyChooser = new HotkeyChooser(this);
 

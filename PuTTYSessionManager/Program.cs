@@ -66,9 +66,6 @@ namespace uk.org.riseley.puttySessionManager
                 Properties.Settings.Default.Save();
             }
 
-            // Instantiate the SessionManagerForm           
-            smf = new SessionManagerForm();
-
             // Handle the ApplicationExit event to know when the application is exiting.
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
@@ -77,6 +74,12 @@ namespace uk.org.riseley.puttySessionManager
 
             // Attempt to handle session ended ( logoff / shutdown ) events
             SystemEvents.SessionEnded += new SessionEndedEventHandler(OnSessionEnded);
+
+            // Instantiate the SessionManagerForm           
+            smf = new SessionManagerForm();
+
+            // Perform startup actions
+            smf.doStartupActions();
 
 		    // Only make the form visible if the required
             smf.Visible = !(Properties.Settings.Default.MinimizeOnStart);

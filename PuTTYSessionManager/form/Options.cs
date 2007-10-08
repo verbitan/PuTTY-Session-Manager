@@ -78,9 +78,6 @@ namespace uk.org.riseley.puttySessionManager.form
                 keysListBox.Items.Add(key);
             }
 
-            if (Properties.Settings.Default.LaunchPageantOnStart)
-                sc.launchPageant();
-
             // Reset the filezilla protocol button to the save pref
             SessionController.Protocol fp = (SessionController.Protocol)Properties.Settings.Default.FileZillaProtocol;
             if (fp == SessionController.Protocol.FTP)
