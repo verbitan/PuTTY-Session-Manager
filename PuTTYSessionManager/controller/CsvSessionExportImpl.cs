@@ -113,10 +113,15 @@ namespace uk.org.riseley.puttySessionManager.controller
             if (foldername == null || foldername.ToString().Equals(""))
                 foldername = Session.SESSIONS_FOLDER_NAME;
 
-            sw.WriteLine("\"" + sessionName.Replace("\"", "\"\"") + "\"," +
-                         "\"" + foldername.Replace("\"", "\"\"") + "\"," +
-                         "\"" + username.Replace("\"", "\"\"") + "\"," +
-                         "\"" + hostname.Replace("\"", "\"\"") + "\"");
+            if (hostname    != null) hostname    = hostname.Replace("\"", "\"\"");
+            if (sessionName != null) sessionName = sessionName.Replace("\"", "\"\"");
+            if (username    != null) username    = username.Replace("\"", "\"\"");
+            if (foldername  != null) foldername  = foldername.Replace("\"", "\"\"");
+            
+            sw.WriteLine("\"" + sessionName + "\"," +
+                         "\"" + foldername  + "\"," +
+                         "\"" + username    + "\"," +
+                         "\"" + hostname    + "\"");
 
             return true;
         }

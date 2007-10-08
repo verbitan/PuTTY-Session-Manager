@@ -82,5 +82,19 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="fileName"></param>
         /// <returns></returns>
         int backupSessionsToFile(List<Session> sessionList, String fileName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        List<string> getAttributeGroup(SessionAttributes.AttribGroups group);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="attrib"></param>
+        /// <returns></returns>
+        string getSpecialAttribute(SessionAttributes.SpecialAttributes attrib);
     }
 }

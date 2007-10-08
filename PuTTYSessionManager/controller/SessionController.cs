@@ -38,21 +38,6 @@ namespace uk.org.riseley.puttySessionManager.controller
     public class SessionController
     {
         /// <summary>
-        /// The registry value which stores the Session folder
-        /// </summary>
-        public const string PUTTY_PSM_FOLDER_ATTRIB = "PsmPath";
-
-        /// <summary>
-        /// The hostname registry value
-        /// </summary>
-        public const string PUTTY_HOSTNAME_ATTRIB = "HostName";
-
-        /// <summary>
-        /// The default username registry value
-        /// </summary>
-        public const string PUTTY_USERNAME_ATTRIB = "UserName";
-
-        /// <summary>
         /// The registry key of the "Default Session"
         /// </summary>
         private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
@@ -103,6 +88,11 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// </summary>
         private SessionExportInterface regExportProvider = null;
 
+        /// <summary>
+        /// Session Attribute Provider
+        /// </summary>
+        private SessionAttributesInterface sessionAttribProvider = null;
+
 
         /// <summary>
         /// This event is fired when the list of sessions has been altered
@@ -130,8 +120,9 @@ namespace uk.org.riseley.puttySessionManager.controller
             RegistrySessionStorageImpl regSSI = new RegistrySessionStorageImpl();
             sessionProvider = regSSI;
             regExportProvider = regSSI;
+            sessionAttribProvider = regSSI;
             csvExportProvider = new CsvSessionExportImpl();
-            
+
             invalidateSessionList(this, true);
         }
 
@@ -772,6 +763,28 @@ namespace uk.org.riseley.puttySessionManager.controller
 
 
             return errMsg;
+        }
+
+        /// <summary>
+        /// Gets special attributes.
+        /// Delegates to the sessionAttribProvider
+        /// </summary>
+        /// <param name="attrib">The attribute to find</param>
+        /// <returns>The attribute name</returns>
+        public string getSpecialAttribute(SessionAttributes.SpecialAttributes attrib)
+        {
+            return sessionAttribProvider.getSpecialAttribute(attrib);
+        }
+
+        /// <summary>
+        /// Get a list for attribute names for the group
+        /// Delegates to the sessionAttribProvider
+        /// </summary>
+        /// <param name="group">The attribute group to find</param>
+        /// <returns>The list of attributes</returns>
+        public List<string> getAttributeGroup(SessionAttributes.AttribGroups group)
+        {
+            return sessionAttribProvider.getAttributeGroup(group);
         }
     }
 }

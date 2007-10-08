@@ -31,7 +31,7 @@ namespace uk.org.riseley.puttySessionManager.form
     {
         private Form parentWindow;
         private CopySessionRequest csr;
-        private Dictionary<CopySessionRequest.AttribGroups, CheckBox> checkboxDictionary;
+        private Dictionary<SessionAttributes.AttribGroups, CheckBox> checkboxDictionary;
 
         public CopySessionForm(Form parent)
             : base()
@@ -49,16 +49,16 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void tagCheckboxes()
         {
-            coloursCheckBox.Tag = CopySessionRequest.AttribGroups.COLOURS;
-            userNameCheckBox.Tag = CopySessionRequest.AttribGroups.DEFAULT_USERNAME;
-            scrollBackCheckBox.Tag = CopySessionRequest.AttribGroups.SCROLLBACK;
-            fontCheckBox.Tag = CopySessionRequest.AttribGroups.FONT;
-            hostnameCheckBox.Tag = CopySessionRequest.AttribGroups.HOSTNAME;
-            protocoCheckBox.Tag = CopySessionRequest.AttribGroups.PROTOCOL_PORT;
-            portForwardCheckBox.Tag = CopySessionRequest.AttribGroups.SSH_PORT_FORWARDS;
-            keepalivesCheckBox.Tag = CopySessionRequest.AttribGroups.KEEP_ALIVES;
-            selectionCheckBox.Tag = CopySessionRequest.AttribGroups.SELECTION_CHARS;
-            folderCheckBox.Tag = CopySessionRequest.AttribGroups.SESSION_FOLDER;
+            coloursCheckBox.Tag = SessionAttributes.AttribGroups.COLOURS;
+            userNameCheckBox.Tag = SessionAttributes.AttribGroups.DEFAULT_USERNAME;
+            scrollBackCheckBox.Tag = SessionAttributes.AttribGroups.SCROLLBACK;
+            fontCheckBox.Tag = SessionAttributes.AttribGroups.FONT;
+            hostnameCheckBox.Tag = SessionAttributes.AttribGroups.HOSTNAME;
+            protocoCheckBox.Tag = SessionAttributes.AttribGroups.PROTOCOL_PORT;
+            portForwardCheckBox.Tag = SessionAttributes.AttribGroups.SSH_PORT_FORWARDS;
+            keepalivesCheckBox.Tag = SessionAttributes.AttribGroups.KEEP_ALIVES;
+            selectionCheckBox.Tag = SessionAttributes.AttribGroups.SELECTION_CHARS;
+            folderCheckBox.Tag = SessionAttributes.AttribGroups.SESSION_FOLDER;
         }
 
         private void tagRadioButtons()
@@ -70,17 +70,17 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void createDictonary()
         {
-            checkboxDictionary = new Dictionary<CopySessionRequest.AttribGroups, CheckBox>();
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)coloursCheckBox.Tag, coloursCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)userNameCheckBox.Tag, userNameCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)scrollBackCheckBox.Tag, scrollBackCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)fontCheckBox.Tag, fontCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)hostnameCheckBox.Tag, hostnameCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)protocoCheckBox.Tag, protocoCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)portForwardCheckBox.Tag, portForwardCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)keepalivesCheckBox.Tag, keepalivesCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)selectionCheckBox.Tag, selectionCheckBox);
-            checkboxDictionary.Add((CopySessionRequest.AttribGroups)folderCheckBox.Tag, folderCheckBox);
+            checkboxDictionary = new Dictionary<SessionAttributes.AttribGroups, CheckBox>();
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)coloursCheckBox.Tag, coloursCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)userNameCheckBox.Tag, userNameCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)scrollBackCheckBox.Tag, scrollBackCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)fontCheckBox.Tag, fontCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)hostnameCheckBox.Tag, hostnameCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)protocoCheckBox.Tag, protocoCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)portForwardCheckBox.Tag, portForwardCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)keepalivesCheckBox.Tag, keepalivesCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)selectionCheckBox.Tag, selectionCheckBox);
+            checkboxDictionary.Add((SessionAttributes.AttribGroups)folderCheckBox.Tag, folderCheckBox);
         }
 
         private void loadList()
@@ -133,7 +133,7 @@ namespace uk.org.riseley.puttySessionManager.form
             }
 
             if (csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_INCLUDE
-                && csr.selectionContainsHostname())
+                && selectionContainsHostname(csr.SelectedAttributes))
             {
                 if (MessageBox.Show("You are going to overwrite the hostname on all your target sessions.\n" +
                           "Are you sure?"
@@ -145,7 +145,7 @@ namespace uk.org.riseley.puttySessionManager.form
             }
 
             if (csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_INCLUDE
-                && csr.selectionContainsFolder())
+                && selectionContainsFolder(csr.SelectedAttributes))
             {
                 if (MessageBox.Show("You are going to overwrite the folders on all your target sessions.\n" +
                           "Are you sure?"
@@ -266,7 +266,7 @@ namespace uk.org.riseley.puttySessionManager.form
 
             foreach (CheckBox cb in checkboxDictionary.Values)
             {
-                cb.CheckState = csr.getGroupStatus((CopySessionRequest.AttribGroups)cb.Tag);
+                cb.CheckState = getGroupStatus((SessionAttributes.AttribGroups)cb.Tag);
             }
         }
 
@@ -276,10 +276,10 @@ namespace uk.org.riseley.puttySessionManager.form
             bool buttonChecked = cb.Checked;
 
             // Figure out which attribute group the button is tagged with
-            CopySessionRequest.AttribGroups ag = (CopySessionRequest.AttribGroups)cb.Tag;
+            SessionAttributes.AttribGroups ag = (SessionAttributes.AttribGroups)cb.Tag;
 
             // Get the list of attributes associated with this group
-            List<string> attribs = csr.getAttribs(ag);
+            List<string> attribs = sc.getAttributeGroup(ag);
 
             int index = -1;
             int attribCount = 0;
@@ -323,6 +323,53 @@ namespace uk.org.riseley.puttySessionManager.form
         public void setTargetSessions(List<Session> targetSessions)
         {
             csr.TargetSessions = targetSessions;
-        }       
+        }
+
+
+        private CheckState getGroupStatus(SessionAttributes.AttribGroups ag)
+        {
+            CheckState cs = CheckState.Unchecked;
+
+            // Get the list of attributes associated with this group
+            List<string> attribList = sc.getAttributeGroup(ag);
+
+            // Get the selected attributes
+            List<string> selectedAttributes = getSelectedAttributes();
+
+            int attribCount = 0;
+            foreach (string attrib in attribList)
+            {
+                if (selectedAttributes.Contains(attrib))
+                {
+                    attribCount++;
+                }
+            }
+
+            if (attribCount == 0)
+                cs = CheckState.Unchecked;
+            else if (attribCount < attribList.Count)
+                cs = CheckState.Indeterminate;
+            else
+                cs = CheckState.Checked;
+
+            return cs;
+        }
+
+        private bool selectionContainsHostname(List<string> selectedAttributes)
+        {
+            if (selectedAttributes == null)
+                return false;
+            else
+                return selectedAttributes.Contains(sc.getSpecialAttribute(SessionAttributes.SpecialAttributes.HOSTNAME));
+        }
+
+        private bool selectionContainsFolder(List<string> selectedAttributes)
+        {
+            if (selectedAttributes == null)
+                return false;
+            else
+                return selectedAttributes.Contains(sc.getSpecialAttribute(SessionAttributes.SpecialAttributes.FOLDER));
+        }
+
     }
 }

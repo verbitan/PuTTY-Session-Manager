@@ -68,7 +68,7 @@ namespace uk.org.riseley.puttySessionManager.form
             else
             {
                 filetype = sc.getExportFileTypeExtension(se.type);
-                filedescription = sc.getExportFileTypeExtension(se.type);
+                filedescription = sc.getExportFileDescription(se.type);
 
                 saveFileDialog1.Filter = filedescription + "|*." + filetype + "|All files|*.*";
 

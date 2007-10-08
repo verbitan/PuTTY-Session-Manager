@@ -81,8 +81,8 @@
   <target name="rebuild"
           depends="cleanbuild, build" />
 
-  <target name="preparecommit"
-          description="Build, deploy and cleanup ready to commit back to SVN">
+  <target name="preparerelease"
+          description="Build, deploy and cleanup ready to release to SF">
      <call target="deploy" />
      <call target="cleanbuild" />
      <call target="cleaninstall" />

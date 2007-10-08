@@ -32,7 +32,7 @@ namespace uk.org.riseley.puttySessionManager.controller
     /// <summary>
     /// 
     /// </summary>
-    class RegistrySessionStorageImpl : SessionStorageInterface, SessionExportInterface
+    class RegistrySessionStorageImpl : SessionAttributesInterface, SessionStorageInterface, SessionExportInterface
     {
 
         /// <summary>
@@ -69,6 +69,28 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// The registry key of the "Default Session"
         /// </summary>
         private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
+
+        private List<string> attribColours = new List<string>();
+        private List<string> attribDefaultUsername = new List<string>();
+        private List<string> attribFont = new List<string>();
+        private List<string> attribHostName = new List<string>();
+        private List<string> attribKeepAlives = new List<string>();
+        private List<string> attribProtocolPort = new List<string>();
+        private List<string> attribScrollback = new List<string>();
+        private List<string> attribSelectionChars = new List<string>();
+        private List<string> attribSessionFolder = new List<string>();
+        private List<string> attribSshPortForwards = new List<string>();
+
+        private Dictionary<SessionAttributes.AttribGroups, List<string>> dictAllAttribGroups; 
+
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public RegistrySessionStorageImpl()
+        {
+            initialiseLists();
+        }
 
         #region SessionStorageInterface Members
 
@@ -444,6 +466,41 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         #endregion
 
+        #region SessionAttributesInterface Members
+
+        /// <summary>
+        /// Get a list for attribute names for the group
+        /// </summary>
+        /// <param name="group">The attribute group to find</param>
+        /// <returns>The list of attributes</returns>
+        public List<string> getAttributeGroup(SessionAttributes.AttribGroups group)
+        {
+            List<string> attribList;
+            dictAllAttribGroups.TryGetValue(group, out attribList);
+            return attribList;
+        }
+
+        /// <summary>
+        /// Gets special attributes.
+        /// </summary>
+        /// <param name="attrib">The attribute to find</param>
+        /// <returns>The attribute name</returns>
+        public string getSpecialAttribute(SessionAttributes.SpecialAttributes attrib)
+        {
+            switch (attrib)
+            {
+                case SessionAttributes.SpecialAttributes.FOLDER:
+                    return PUTTY_PSM_FOLDER_ATTRIB;
+                case SessionAttributes.SpecialAttributes.HOSTNAME:
+                    return PUTTY_HOSTNAME_ATTRIB;
+                case SessionAttributes.SpecialAttributes.USERNAME:
+                    return PUTTY_USERNAME_ATTRIB;
+            }
+            return "";
+        }
+
+        #endregion
+
         /// <summary>
         /// Write the file header to the stream
         /// </summary>
@@ -488,5 +545,154 @@ namespace uk.org.riseley.puttySessionManager.controller
             rk.Close();
             return true;
         }
+
+        /// <summary>
+        /// Setup the lists of attributes
+        /// </summary>
+        private void initialiseLists()
+        {
+            dictAllAttribGroups = new Dictionary<SessionAttributes.AttribGroups, List<string>>();
+
+            initialiseColours();
+            initialiseDefaultUsername();
+            initialiseFont();
+            initialiseHostName();
+            initialiseKeepAlives();
+            initialiseProtocolPort();
+            initialiseScrollback();
+            initialiseSelectionChars();
+            initialiseSessionFolder();
+            initialiseSshPortForwards();
+
+            // Consolidate the attributes
+            initialiseDictionary();
+        }
+
+        /// <summary>
+        /// Setup the colours list
+        /// </summary>
+        private void initialiseColours()
+        {
+            for (int i = 0; i <= 21; i++)
+            {
+                attribColours.Add("Colour" + i);
+            }
+        }
+
+        /// <summary>
+        /// Setup the username
+        /// </summary>
+        private void initialiseDefaultUsername()
+        {
+            attribDefaultUsername.Add(getSpecialAttribute(SessionAttributes.SpecialAttributes.USERNAME));
+        }
+
+        /// <summary>
+        /// Setup the font list 
+        /// </summary>
+        private void initialiseFont()
+        {
+            attribFont.Add("Font");
+            attribFont.Add("FontCharSet");
+            attribFont.Add("FontHeight");
+            attribFont.Add("FontIsBold");
+            attribFont.Add("FontVTMode");
+            attribFont.Add("WideBoldFont");
+            attribFont.Add("WideBoldFontCharSet");
+            attribFont.Add("WideBoldFontHeight");
+            attribFont.Add("WideBoldFontIsBold");
+            attribFont.Add("BoldFont");
+            attribFont.Add("BoldFontCharSet");
+            attribFont.Add("BoldFontHeight");
+            attribFont.Add("BoldFontIsBold");
+        }
+
+        /// <summary>
+        /// Setup the hostname
+        /// </summary>
+        private void initialiseHostName()
+        {
+            attribHostName.Add(getSpecialAttribute(SessionAttributes.SpecialAttributes.HOSTNAME));
+        }
+
+        /// <summary>
+        /// Setup the keep alives
+        /// </summary>
+        private void initialiseKeepAlives()
+        {
+            attribKeepAlives.Add("PingInterval");
+            attribKeepAlives.Add("PingIntervalSecs");
+        }
+
+        /// <summary>
+        /// Setup the Protocol and port attributes
+        /// </summary>
+        private void initialiseProtocolPort()
+        {
+            attribProtocolPort.Add("Protocol");
+            attribProtocolPort.Add("PortNumber");
+        }
+
+        /// <summary>
+        /// Setup the scrollback attributes
+        /// </summary>
+        private void initialiseScrollback()
+        {
+            attribScrollback.Add("ScrollbackLines");
+            attribScrollback.Add("ScrollBar");
+            attribScrollback.Add("ScrollBarFullScreen");
+            attribScrollback.Add("ScrollbarOnLeft");
+            attribScrollback.Add("ScrollOnDisp");
+            attribScrollback.Add("ScrollOnKey");
+        }
+
+        /// <summary>
+        /// Setup the selection characters attributes
+        /// </summary>
+        private void initialiseSelectionChars()
+        {
+            attribSelectionChars.Add("Wordness0");
+            attribSelectionChars.Add("Wordness32");
+            attribSelectionChars.Add("Wordness64");
+            attribSelectionChars.Add("Wordness96");
+            attribSelectionChars.Add("Wordness128");
+            attribSelectionChars.Add("Wordness160");
+            attribSelectionChars.Add("Wordness192");
+            attribSelectionChars.Add("Wordness224");
+        }
+
+        /// <summary>
+        /// Setup the folder attribute
+        /// </summary>
+        private void initialiseSessionFolder()
+        {
+            attribSessionFolder.Add(getSpecialAttribute(SessionAttributes.SpecialAttributes.FOLDER));
+        }
+
+        /// <summary>
+        /// Get the port forwards attributes
+        /// </summary>
+        private void initialiseSshPortForwards()
+        {
+            attribSshPortForwards.Add("PortForwardings");
+        }
+
+        /// <summary>
+        /// Setup a dictionary to make it easy to find the attribute groups
+        /// </summary>
+        private void initialiseDictionary()
+        {
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.COLOURS, attribColours);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.DEFAULT_USERNAME, attribDefaultUsername);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.FONT, attribFont);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.HOSTNAME, attribHostName);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.KEEP_ALIVES, attribKeepAlives);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.PROTOCOL_PORT, attribProtocolPort);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.SCROLLBACK, attribScrollback);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.SELECTION_CHARS, attribSelectionChars);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.SESSION_FOLDER, attribSessionFolder);
+            dictAllAttribGroups.Add(SessionAttributes.AttribGroups.SSH_PORT_FORWARDS, attribSshPortForwards);
+        }
+
     }
 }

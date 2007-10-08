@@ -64,7 +64,7 @@ namespace uk.org.riseley.puttySessionManager.form
         /// <param name="e"></param>
         private void sessionEditorControl1_ExportSessions(object sender, EventArgs e)
         {
-            if ( ed.ShowDialog() == DialogResult.OK )
+            if (ed.ShowDialog() == DialogResult.OK)
                 exportSessions(sessionEditorControl1.getSelectedSessions(), new ExportSessionEventArgs(ed.getExportType()));
         }
 
