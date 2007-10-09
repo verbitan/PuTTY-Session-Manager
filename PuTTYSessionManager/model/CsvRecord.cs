@@ -25,9 +25,20 @@ namespace uk.org.riseley.puttySessionManager.model
     [IgnoreEmptyLines()]
     [IgnoreCommentedLines("#", true)]
     [DelimitedRecord(",")]
-    [IgnoreFirst(1)]
     public sealed class CsvRecord
     {
+
+        public CsvRecord()
+        {
+        }
+
+        public CsvRecord(Session s)
+        {
+            SessionName = s.SessionDisplayText;
+            FolderName = s.FolderName;
+            Username = s.Username;
+            Hostname = s.Hostname;
+        }
 
         [FieldQuoted('"', QuoteMode.OptionalForRead, MultilineMode.AllowForRead)]
         private String mSessionName;

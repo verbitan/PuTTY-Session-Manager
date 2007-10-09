@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Text;
 using uk.org.riseley.puttySessionManager.model;
 using System.IO;
+using FileHelpers;
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
@@ -64,66 +65,26 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns>Count of exported sessions</returns>
         public int saveSessionsToFile(List<Session> sessionList, string fileName)
         {
-            int savedCount = 0;
-            if (sessionList.Count == 0)
-                return 0;
-
-            using (StreamWriter sw = File.CreateText(fileName))
-            {
-                writeSessionExportHeader(sw);
-                foreach (Session s in sessionList)
-                {
-                    if (saveSession(s, sw))
-                        savedCount++;
-                }
-                sw.Close();
-            }
-            return savedCount;
+            FileHelperEngine<CsvRecord> engine = new FileHelperEngine<CsvRecord>();
+            engine.WriteFile(fileName, createCsvRecords(sessionList));           
+            return engine.TotalRecords;
         }
 
         #endregion
 
         /// <summary>
-        /// Write the file header to the stream
+        /// Create a list of CsvRecords from a list of Sessions
         /// </summary>
-        /// <param name="sw"></param>
-        private void writeSessionExportHeader(StreamWriter sw)
+        /// <param name="list"></param>
+        /// <returns></returns>
+        private List<CsvRecord> createCsvRecords(List<Session> list)
         {
-            sw.WriteLine("\"Session Name\",\"Folder Name\",\"Username\",\"Hostname\"");
-        }
-
-        /// <summary>
-        /// Save a single session to the stream
-        /// </summary>
-        /// <param name="s">The session to save</param>
-        /// <param name="sw"></param>
-        /// <returns>true if sucessful, false otherwise</returns>
-        private bool saveSession(Session s, StreamWriter sw)
-        {
-            String hostname = s.Hostname;
-            String sessionName = s.SessionDisplayText;
-            String username = s.Username;
-            String foldername = s.FolderName;
-
-            if (hostname != null && hostname.Contains("@"))
+            List<CsvRecord> csvList = new List<CsvRecord>();
+            foreach ( Session s in list )
             {
-                username = hostname.Substring(0, hostname.IndexOf("@"));
-                hostname = hostname.Substring(hostname.IndexOf("@") + 1);
+                csvList.Add(new CsvRecord(s));
             }
-            if (foldername == null || foldername.ToString().Equals(""))
-                foldername = Session.SESSIONS_FOLDER_NAME;
-
-            if (hostname    != null) hostname    = hostname.Replace("\"", "\"\"");
-            if (sessionName != null) sessionName = sessionName.Replace("\"", "\"\"");
-            if (username    != null) username    = username.Replace("\"", "\"\"");
-            if (foldername  != null) foldername  = foldername.Replace("\"", "\"\"");
-            
-            sw.WriteLine("\"" + sessionName + "\"," +
-                         "\"" + foldername  + "\"," +
-                         "\"" + username    + "\"," +
-                         "\"" + hostname    + "\"");
-
-            return true;
+            return csvList;
         }
     }
 }
