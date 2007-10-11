@@ -35,6 +35,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private AboutBox aboutDialog;
         private SessionEditorForm sessionEditor;
         private HotkeyChooser hotKeyChooser;
+        private SynchronizeForm synchronizeForm;
 
         private SessionControl currentSessionControl;
         private SessionControl hiddenSessionControl;
@@ -95,6 +96,7 @@ namespace uk.org.riseley.puttySessionManager.form
             aboutDialog   = new AboutBox();
             sessionEditor = new SessionEditorForm();
             hotKeyChooser = new HotkeyChooser(this);
+            synchronizeForm = new SynchronizeForm();
 
             // Restore the size of the application
             this.ClientSize = Properties.Settings.Default.WindowSize;
@@ -153,6 +155,7 @@ namespace uk.org.riseley.puttySessionManager.form
                 aboutDialog.Close();
                 sessionEditor.Close();
                 hotKeyChooser.Close();
+                synchronizeForm.Close();
                 hkc.UnregisterAllHotKeys(this);
                 SaveSize();
                 Application.Exit();
@@ -401,6 +404,11 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 showApplication(false);
             }   
+        }
+
+        private void synchronizeSessionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            synchronizeForm.Show();
         }
     }
 }

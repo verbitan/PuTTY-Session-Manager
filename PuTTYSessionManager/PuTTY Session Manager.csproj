@@ -73,6 +73,18 @@
     <Compile Include="controller\SessionAttributes.cs" />
     <Compile Include="controller\SessionExportInterface.cs" />
     <Compile Include="controller\SessionStorageInterface.cs" />
+    <Compile Include="control\synchronize\TableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\synchronize\TableControl.Designer.cs">
+      <DependentUpon>TableControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\synchronize\OptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\synchronize\OptionsControl.Designer.cs">
+      <DependentUpon>OptionsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +97,12 @@
     </Compile>
     <Compile Include="form\ExportDialog.Designer.cs">
       <DependentUpon>ExportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\synchronize\SynchronizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\synchronize\SynchronizeForm.Designer.cs">
+      <DependentUpon>SynchronizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\NewSessionForm.cs">
       <SubType>Form</SubType>
@@ -186,6 +204,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="control\synchronize\OptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\synchronize\TableControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TableControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -245,6 +271,10 @@
     <EmbeddedResource Include="form\SessionManagerForm.resx">
       <DependentUpon>SessionManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\synchronize\SynchronizeForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SynchronizeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\UpdateForm.resx">
       <SubType>Designer</SubType>

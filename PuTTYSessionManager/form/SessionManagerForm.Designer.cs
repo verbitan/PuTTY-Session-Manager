@@ -63,6 +63,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.control.SessionTreeControl();
             this.sessionListControl1 = new uk.org.riseley.puttySessionManager.control.SessionListControl();
+            this.synchronizeSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sysTrayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +86,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.refreshSessionsToolStripMenuItem,
             this.sessionEditorToolStripMenuItem,
             this.sessionHotkeysToolStripMenuItem,
+            this.synchronizeSessionsToolStripMenuItem,
             this.toolStripSeparator2,
             this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -92,20 +94,20 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
-            this.sysTrayContextMenu.Size = new System.Drawing.Size(168, 214);
+            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 258);
             // 
             // loadSessionToolStripMenuItem
             // 
             this.loadSessionToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.loadSessionToolStripMenuItem.Name = "loadSessionToolStripMenuItem";
             this.loadSessionToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.loadSessionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.loadSessionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.loadSessionToolStripMenuItem.Text = "&Load Session";
             // 
             // newSessionToolStripMenuItem
             // 
             this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
-            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.newSessionToolStripMenuItem.Text = "New Session";
             this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
             // 
@@ -115,59 +117,59 @@ namespace uk.org.riseley.puttySessionManager.form
             this.displayTreeToolStripMenuItem.CheckOnClick = true;
             this.displayTreeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.displayTreeToolStripMenuItem.Name = "displayTreeToolStripMenuItem";
-            this.displayTreeToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.displayTreeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.displayTreeToolStripMenuItem.Text = "&Display Tree";
             this.displayTreeToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.displayTreeToolStripMenuItem_CheckStateChanged);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.sessionControl_ShowOptions);
             // 
             // refreshSessionsToolStripMenuItem
             // 
             this.refreshSessionsToolStripMenuItem.Name = "refreshSessionsToolStripMenuItem";
-            this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.refreshSessionsToolStripMenuItem.Text = "&Refresh Sessions";
             this.refreshSessionsToolStripMenuItem.Click += new System.EventHandler(this.refreshSessionsToolStripMenuItem_Click);
             // 
             // sessionEditorToolStripMenuItem
             // 
             this.sessionEditorToolStripMenuItem.Name = "sessionEditorToolStripMenuItem";
-            this.sessionEditorToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.sessionEditorToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.sessionEditorToolStripMenuItem.Text = "Session &Editor";
             this.sessionEditorToolStripMenuItem.Click += new System.EventHandler(this.sessionEditorToolStripMenuItem_Click);
             // 
             // sessionHotkeysToolStripMenuItem
             // 
             this.sessionHotkeysToolStripMenuItem.Name = "sessionHotkeysToolStripMenuItem";
-            this.sessionHotkeysToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.sessionHotkeysToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.sessionHotkeysToolStripMenuItem.Text = "Session &Hotkeys";
             this.sessionHotkeysToolStripMenuItem.Click += new System.EventHandler(this.sessionHotkeysToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(184, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.sessionControl_ShowAbout);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -196,6 +198,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionListControl1.TabIndex = 6;
             this.sessionListControl1.Visible = false;
             this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.control.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
+            // 
+            // synchronizeSessionsToolStripMenuItem
+            // 
+            this.synchronizeSessionsToolStripMenuItem.Name = "synchronizeSessionsToolStripMenuItem";
+            this.synchronizeSessionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.synchronizeSessionsToolStripMenuItem.Text = "&Synchronize Sessions";
+            this.synchronizeSessionsToolStripMenuItem.Click += new System.EventHandler(this.synchronizeSessionsToolStripMenuItem_Click);
             // 
             // SessionManagerForm
             // 
@@ -239,6 +248,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.ToolStripMenuItem sessionHotkeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newSessionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem synchronizeSessionsToolStripMenuItem;
     }
 }
 
