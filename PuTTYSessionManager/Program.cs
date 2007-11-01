@@ -19,6 +19,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.form;
+using System.Configuration;
+using System.IO;
 using Microsoft.Win32;
 
 namespace uk.org.riseley.puttySessionManager
@@ -37,8 +39,12 @@ namespace uk.org.riseley.puttySessionManager
             // Instantiate the application context
             PsmApplicationContext appContext = new PsmApplicationContext();
 
-            // Start the main event loop
-            Application.Run(appContext);           
+            // Only start the application if the intialisation succeeds
+            if ( appContext.initialise())
+            {
+                // Start the main event loop
+                Application.Run(appContext);
+            }
         }
     }
 
@@ -58,32 +64,108 @@ namespace uk.org.riseley.puttySessionManager
         /// </summary>
         public PsmApplicationContext()
         {
-            // Upgrade settings from a previous release
-            if (Properties.Settings.Default.UpgradeRequired == true)
+        }
+
+        /// <summary>
+        /// Initialise the application
+        /// </summary>
+        /// <returns>true if initialisation succeeds</returns>
+        public bool initialise()
+        {
+            // Upgrade settings
+            if (upgradeSettings())
             {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpgradeRequired = false;
+                // Handle the ApplicationExit event to know when the application is exiting.
+                Application.ApplicationExit += new EventHandler(OnApplicationExit);
+
+                // Attempt to handle session ending ( logoff / shutdown ) events
+                SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
+
+                // Attempt to handle session ended ( logoff / shutdown ) events
+                SystemEvents.SessionEnded += new SessionEndedEventHandler(OnSessionEnded);
+
+                // Instantiate the SessionManagerForm           
+                smf = new SessionManagerForm();
+
+                // Perform startup actions
+                smf.doStartupActions();
+
+                // Only make the form visible if the required
+                smf.Visible = !(Properties.Settings.Default.MinimizeOnStart);
+
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Attempt to upgrade settings.
+        /// If the user.config file is corrupted, we will
+        /// detect it here.  Attempt to recover from this
+        /// </summary>
+        /// <returns>false if the user.config file corrupted</returns>
+        private bool upgradeSettings()
+        {
+            bool result = true;
+
+            // Upgrade settings from a previous release
+            try
+            {
+                if (Properties.Settings.Default.UpgradeRequired == true)
+                {
+                    Properties.Settings.Default.Upgrade();
+                    Properties.Settings.Default.UpgradeRequired = false;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch (ConfigurationErrorsException ce)
+            {
+                // Something has gone wrong with the user.config file
+                string fileName = ce.Filename;
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    if (ce.InnerException is ConfigurationErrorsException)
+                    {
+                        fileName = ((ConfigurationErrorsException)ce.InnerException).Filename;
+                    }
+                }
+                if (File.Exists(fileName))
+                {
+                    if (MessageBox.Show("Your preferences stored at:\n" + fileName + "\n" +
+                                    "are corrupt. Do you want to delete and recreate them?"
+                                   , "ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                    {
+                        System.IO.File.Delete(fileName);
+                        MessageBox.Show("File deleted.\n"+
+                                        "Please restart PuTTY Session Manager"
+                                        , "ABORT", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please correct this manually.\nThe application will now exit"
+                                        , "ABORT", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Attempt to save settings
+        /// If something goes wrong - it's too late,
+        /// we only call this when we are exiting the app
+        /// </summary>
+        private void saveSettings()
+        {
+            try
+            {
                 Properties.Settings.Default.Save();
             }
-
-            // Handle the ApplicationExit event to know when the application is exiting.
-            Application.ApplicationExit += new EventHandler(OnApplicationExit);
-
-            // Attempt to handle session ending ( logoff / shutdown ) events
-            SystemEvents.SessionEnding += new SessionEndingEventHandler(OnSessionEnding);
-
-            // Attempt to handle session ended ( logoff / shutdown ) events
-            SystemEvents.SessionEnded += new SessionEndedEventHandler(OnSessionEnded);
-
-            // Instantiate the SessionManagerForm           
-            smf = new SessionManagerForm();
-
-            // Perform startup actions
-            smf.doStartupActions();
-
-		    // Only make the form visible if the required
-            smf.Visible = !(Properties.Settings.Default.MinimizeOnStart);
-            
+            catch (Exception)
+            {
+                // Do nothing!
+            }
         }
 
         /// <summary>
@@ -94,7 +176,7 @@ namespace uk.org.riseley.puttySessionManager
         /// <param name="e"></param>
         private void OnApplicationExit(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Save();
+            saveSettings();
         }
 
         /// <summary>
@@ -105,7 +187,7 @@ namespace uk.org.riseley.puttySessionManager
         /// <param name="e"></param>
         private void OnSessionEnding(object sender, SessionEndingEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            saveSettings();
         }
 
         /// <summary>
@@ -116,7 +198,7 @@ namespace uk.org.riseley.puttySessionManager
         /// <param name="e"></param>
         private void OnSessionEnded(object sender, SessionEndedEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            saveSettings();
         }
     }
 
