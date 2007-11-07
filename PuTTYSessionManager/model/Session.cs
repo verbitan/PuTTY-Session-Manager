@@ -74,7 +74,7 @@ namespace uk.org.riseley.puttySessionManager.model
                 folderCellValue = FolderName.Remove(0, (SESSIONS_FOLDER_NAME.Length + PATH_SEPARATOR.Length));
             }
             IsFolder = isFolder;
-            cellValues = new String[] { SessionDisplayText, folderCellValue };
+            cellValues = new String[] { SessionDisplayText, folderCellValue, "" };
         }
 
         public override string ToString()
@@ -133,7 +133,11 @@ namespace uk.org.riseley.puttySessionManager.model
         public string Hostname
         {
             get { return hostname; }
-            set { hostname = value; }
+            set
+            {
+                hostname = value;
+                cellValues[2] = hostname;
+            }
         }
         private string username = "";
 

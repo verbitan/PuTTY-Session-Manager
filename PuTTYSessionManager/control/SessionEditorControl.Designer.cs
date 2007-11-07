@@ -54,6 +54,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.sessionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sessionPathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hostnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -146,7 +147,8 @@ namespace uk.org.riseley.puttySessionManager.control
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sessionNameColumn,
-            this.sessionPathColumn});
+            this.sessionPathColumn,
+            this.hostnameColumn});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 5);
             this.dataGridView1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TreeFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -170,10 +172,18 @@ namespace uk.org.riseley.puttySessionManager.control
             // sessionPathColumn
             // 
             this.sessionPathColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.sessionPathColumn.FillWeight = 70F;
+            this.sessionPathColumn.FillWeight = 35F;
             this.sessionPathColumn.HeaderText = "Path";
             this.sessionPathColumn.Name = "sessionPathColumn";
             this.sessionPathColumn.ReadOnly = true;
+            // 
+            // hostnameColumn
+            // 
+            this.hostnameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.hostnameColumn.FillWeight = 35F;
+            this.hostnameColumn.HeaderText = "Hostname";
+            this.hostnameColumn.Name = "hostnameColumn";
+            this.hostnameColumn.ReadOnly = true;
             // 
             // SessionEditorControl
             // 
@@ -198,5 +208,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn sessionNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sessionPathColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hostnameColumn;
     }
 }

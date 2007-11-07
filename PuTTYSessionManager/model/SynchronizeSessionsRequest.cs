@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006,2007 David Riseley 
+ * Copyright (C) 2007 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,13 @@ using System.Text;
 
 namespace uk.org.riseley.puttySessionManager.model
 {
-    public class CopySessionRequest
+    public class SynchronizeSessionsRequest
     {
-        public CopySessionRequest()
+        public SynchronizeSessionsRequest()
         {          
         }
 
-        public enum CopySessionOptions 
+        public enum SynchronizeSessionsOptions 
         { 
               COPY_ALL
             , COPY_INCLUDE
@@ -42,29 +42,12 @@ namespace uk.org.riseley.puttySessionManager.model
             get { return sessionTemplate; }
         }
 
-        private List<string> selectedAttributes;
+        private SynchronizeSessionsOptions syncOptions;
 
-        public List<string> SelectedAttributes
+        public SynchronizeSessionsOptions SyncOptions
         {
-            set { selectedAttributes = value; }
-            get { return selectedAttributes; }        
-        }
-
-        private CopySessionOptions copyOptions;
-
-        public CopySessionOptions CopyOptions
-        {
-            set { copyOptions = value; }
-            get { return copyOptions; }
-        }
-
-        private List<Session> targetSessions;
-
-        public List<Session> TargetSessions
-        {
-            set { targetSessions = value; }
-            get { return targetSessions; }
-
+            set { syncOptions = value; }
+            get { return syncOptions; }
         }
     }
 }
