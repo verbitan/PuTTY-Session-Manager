@@ -557,7 +557,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 TreeNode foldernode = new TreeNode(sess.SessionDisplayText);
 
                 // Set the key so that we can find it again
-                foldernode.Name = folder;
+                foldernode.Name = sess.getKey();
 
                 foldernode.Tag = sess;
                 foldernode.ContextMenuStrip = nodeContextMenuStrip;
