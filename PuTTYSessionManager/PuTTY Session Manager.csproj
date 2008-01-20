@@ -68,6 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\CsvSessionImportImpl.cs" />
+    <Compile Include="controller\SessionImportInterface.cs" />
     <Compile Include="controller\CsvSessionExportImpl.cs" />
     <Compile Include="controller\SessionAttributesInterface.cs" />
     <Compile Include="controller\RegistrySessionStorageImpl.cs" />

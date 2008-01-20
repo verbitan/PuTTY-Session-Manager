@@ -38,13 +38,13 @@ namespace uk.org.riseley.puttySessionManager.control
             this.urlGroupBox = new System.Windows.Forms.GroupBox();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.optionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.sessionComboBox = new System.Windows.Forms.ComboBox();
             this.ignoreCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.validateButton = new System.Windows.Forms.Button();
-            this.sessionComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.sessionGroupBox.SuspendLayout();
             this.fileGroupBox.SuspendLayout();
             this.urlGroupBox.SuspendLayout();
@@ -163,6 +163,24 @@ namespace uk.org.riseley.puttySessionManager.control
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Synchronization Options";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(253, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Choose Session Template";
+            // 
+            // sessionComboBox
+            // 
+            this.sessionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sessionComboBox.FormattingEnabled = true;
+            this.sessionComboBox.Location = new System.Drawing.Point(389, 17);
+            this.sessionComboBox.Name = "sessionComboBox";
+            this.sessionComboBox.Size = new System.Drawing.Size(269, 21);
+            this.sessionComboBox.TabIndex = 1;
+            // 
             // ignoreCheckBox
             // 
             this.ignoreCheckBox.AutoSize = true;
@@ -224,24 +242,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.validateButton.TabIndex = 0;
             this.validateButton.Text = "Load and validate session list";
             this.validateButton.UseVisualStyleBackColor = true;
-            // 
-            // sessionComboBox
-            // 
-            this.sessionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sessionComboBox.FormattingEnabled = true;
-            this.sessionComboBox.Location = new System.Drawing.Point(389, 17);
-            this.sessionComboBox.Name = "sessionComboBox";
-            this.sessionComboBox.Size = new System.Drawing.Size(269, 21);
-            this.sessionComboBox.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(253, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Choose Session Template";
+            this.validateButton.Click += new System.EventHandler(this.validateButton_Click);
             // 
             // OptionsControl
             // 
