@@ -238,7 +238,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
             else
             {
-                s.FolderName = parent.FullPath;
+                s.FolderName = parent.FullPath + treeView.PathSeparator + node.Text ;
                 node.Name = s.getKey();
 
                 System.Collections.IEnumerator nodeEnumerator = node.Nodes.GetEnumerator();
@@ -818,7 +818,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     TreeNode[] ta = treeView.Nodes.Find(Session.getFolderKey(nsr.SessionFolder), true);
                     if (ta.Length > 0)
                     {
-                        Session newSession = new Session(Session.convertDisplayToSessionKey(nsr.SessionName), nsr.SessionFolder, false);
+                        Session newSession = getSessionController().findSession(nsr.SessionName);
                         TreeNode newNode = new TreeNode(newSession.SessionDisplayText);
                         newNode.Tag = newSession;
                         newNode.ContextMenuStrip = nodeContextMenuStrip;
