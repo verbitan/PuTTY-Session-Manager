@@ -879,7 +879,7 @@ namespace uk.org.riseley.puttySessionManager.control
             if (snf.ShowDialog() == DialogResult.OK && validateSessionName(snf.getSessionName()))
             {
                 // Try to rename the session
-                bool result = getSessionController().renameSession(s, snf.getSessionName());
+                bool result = getSessionController().renameSession(s, snf.getSessionName(), this);
 
                 // Check it worked
                 if (result == false)
@@ -890,7 +890,11 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
 
                 // Create the new session object
-                Session newSession = new Session(Session.convertDisplayToSessionKey(snf.getSessionName()), s.FolderName, false);
+                Session newSession = getSessionController().findSession(Session.convertDisplayToSessionKey(snf.getSessionName()));
+
+                // Something's gone wrong here....
+                if (newSession == null)
+                    return;
 
                 // Suppress repainting the TreeView until all the objects have been created.
                 treeView.BeginUpdate();
@@ -899,9 +903,6 @@ namespace uk.org.riseley.puttySessionManager.control
                 treeView.SelectedNode.Tag = newSession;
                 treeView.SelectedNode.Text = newSession.SessionDisplayText;
                 treeView.SelectedNode.Name = newSession.getKey();
-
-                // Fire a refresh event
-                sc.invalidateSessionList(this, false);
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();

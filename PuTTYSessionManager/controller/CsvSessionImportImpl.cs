@@ -86,7 +86,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                 {
                     csvList = new List<CsvRecord>(engine.ReadFile(uri.LocalPath));
                 }
-                catch (Exception e)
+                catch
                 {
                     throw new Exception("Unable to parse sessions file - is it corrupted?");
                 }
@@ -101,7 +101,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                     {
                         csvList = new List<CsvRecord>(engine.ReadStream(new StreamReader(s)));
                     }
-                    catch (Exception e)
+                    catch
                     {
                         throw new Exception("Unable to parse sessions file - is it corrupted?");
                     }

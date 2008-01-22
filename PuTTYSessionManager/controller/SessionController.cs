@@ -418,7 +418,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Don't refresh the sender - this should have done it's own update
             invalidateSessionList(sender, false);
 
-            return true;
+            return result;
         }
 
         /// <summary>
@@ -487,9 +487,14 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="s">The session to rename</param>
         /// <param name="newSessionName">It's new name</param>
         /// <returns>true if sucessful, false otherwise</returns>
-        public bool renameSession(Session s, string newSessionName)
+        public bool renameSession(Session s, string newSessionName, object sender)
         {
-            return sessionProvider.renameSession(s, newSessionName);
+            bool result = sessionProvider.renameSession(s, newSessionName);
+        
+            // Don't refresh the sender - this should have done it's own update
+            invalidateSessionList(sender, false);
+
+            return result;
         }
 
         /// <summary>
