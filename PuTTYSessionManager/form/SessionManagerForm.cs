@@ -195,6 +195,14 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
+        /// <summary>
+        /// Allow other parts of the code to request display of the main window
+        /// </summary>
+        public void showApplication()
+        {
+            showApplication(true);
+        }
+
         private void sessionControl_LaunchSession(object sender, LaunchSessionEventArgs se)
         {
             if (se != null)

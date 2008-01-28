@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006,2007 David Riseley 
+ * Copyright (C) 2006,2007,2008 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,17 +33,36 @@ namespace uk.org.riseley.puttySessionManager
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            
-            // Instantiate the application context
-            PsmApplicationContext appContext = new PsmApplicationContext();
-
-            // Only start the application if the intialisation succeeds
-            if ( appContext.initialise())
+            // Use the SingleInstanceManager to ensure that only one instance
+            // of PSM can be launched
+            using (SingleInstanceManager sim = new SingleInstanceManager())
             {
-                // Start the main event loop
-                Application.Run(appContext);
+                // If there is already one running, request the process
+                // to come to the foreground
+                if (sim.EventAlreadyExists())
+                {
+                    sim.SignalEvent();
+                }
+                else
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+
+                    // Instantiate the application context
+                    PsmApplicationContext appContext = new PsmApplicationContext();
+
+                    // Only start the application if the intialisation succeeds
+                    if (appContext.initialise())
+                    {
+                        // Set the callback for displaying the main window
+                        sim.setObject(appContext.getSmf(), appContext.getSmf().showApplication); 
+                        // Start the main event loop
+                        Application.Run(appContext);
+
+                        // Make sure all threads exit after the end of the Run method
+                        Environment.Exit(0);
+                    }
+                }
             }
         }
     }
@@ -64,6 +83,15 @@ namespace uk.org.riseley.puttySessionManager
         /// </summary>
         public PsmApplicationContext()
         {
+        }
+
+        /// <summary>
+        /// Get a handle to the SessionManagerForm
+        /// </summary>
+        /// <returns></returns>
+        public SessionManagerForm getSmf()
+        {
+            return smf;
         }
 
         /// <summary>
@@ -136,7 +164,7 @@ namespace uk.org.riseley.puttySessionManager
                                    , "ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                     {
                         System.IO.File.Delete(fileName);
-                        MessageBox.Show("File deleted.\n"+
+                        MessageBox.Show("File deleted.\n" +
                                         "Please restart PuTTY Session Manager"
                                         , "ABORT", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
