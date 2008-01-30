@@ -38,7 +38,7 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public enum ProxyMode { PROXY_IE, PROXY_NONE, PROXY_USER };
 
-        private enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA, WINSCP };
+        private enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA, WINSCP, WINSCPINI };
 
         public Options(Form parentWindow)
         {
@@ -246,6 +246,11 @@ namespace uk.org.riseley.puttySessionManager.form
                     filename = "WinSCP*.exe";
                     fileFilter = filename + "|" + filename + allFilesFilter;
                     break;
+                case FileDialogType.WINSCPINI:
+                    filename = "*.ini";
+                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    break;
+
             }
             openFileDialog.FileName = filename;
             openFileDialog.Filter = fileFilter;
@@ -307,6 +312,9 @@ namespace uk.org.riseley.puttySessionManager.form
                                   "otherwise prompt for a password");
 
             // WinSCP tab
+            optionsToolTip.SetToolTip(useWinSCPIniCheckBox,"Pass the /ini option to WinSCP.\n" +
+                                   "Use the ini file in the location specified below." );
+
 
             // Update tab
         }
@@ -378,12 +386,31 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
+        /// <summary>
+        /// Display the WinSCP file chooser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void locateWinSCPButton_Click(object sender, EventArgs e)
         {
             setupOpenFileDialogue(FileDialogType.WINSCP);
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 winSCPTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Display the WinSCP ini file chooser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void locateWinSCPIniButton_Click(object sender, EventArgs e)
+        {
+            setupOpenFileDialogue(FileDialogType.WINSCPINI);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                winSCPIniTextBox.Text = openFileDialog.FileName;
             }
         }
 

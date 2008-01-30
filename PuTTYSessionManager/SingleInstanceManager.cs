@@ -154,7 +154,8 @@ namespace uk.org.riseley.puttySessionManager
                 if (result == 0)
                 {
                     ResetEvent(m_EventHandle);
-                    m_Instance.Invoke(m_callback, null);
+                    if ( m_Instance != null && m_callback != null )
+                        m_Instance.Invoke(m_callback, null);
                 }
                 else
                 {

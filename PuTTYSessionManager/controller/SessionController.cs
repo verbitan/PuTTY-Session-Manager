@@ -683,12 +683,16 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
             else if (program == LaunchSessionEventArgs.PROGRAM.WINSCP)
             {
-                // Only bother if we have a hostname set
-                if (hostname == null || hostname.Length == 0)
+                // Setup the /ini option
+
+                if (Properties.Settings.Default.WinSCPIniEnabled == true &&
+                    Properties.Settings.Default.WinSCPIniLocation != null &&
+                    !Properties.Settings.Default.WinSCPIniLocation.Equals("") )
                 {
-                    execArgs = "";
+                    execArgs = "/ini=\"" + Properties.Settings.Default.WinSCPIniLocation + "\" ";
                 }
-                else
+                // Only bother if we have a hostname set
+                if (hostname != null && hostname.Length != 0)
                 {
                     // Setup the protocol and port
                     Protocol wp = (Protocol)Properties.Settings.Default.WinSCPProtocol;
@@ -746,7 +750,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                     if (username != null && !(username.Equals("")))
                         auth = username + "@";
 
-                    execArgs = protocol + auth + hostname + ":" + portnumber;
+                    execArgs = execArgs + protocol + auth + hostname + ":" + portnumber;
                 }
                 execLocation = Properties.Settings.Default.WinSCPLocation;
             }
