@@ -818,7 +818,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     TreeNode[] ta = treeView.Nodes.Find(Session.getFolderKey(nsr.SessionFolder), true);
                     if (ta.Length > 0)
                     {
-                        Session newSession = getSessionController().findSession(nsr.SessionName);
+                        Session newSession = getSessionController().findSession(Session.convertDisplayToSessionKey(nsr.SessionName));
                         TreeNode newNode = new TreeNode(newSession.SessionDisplayText);
                         newNode.Tag = newSession;
                         newNode.ContextMenuStrip = nodeContextMenuStrip;
