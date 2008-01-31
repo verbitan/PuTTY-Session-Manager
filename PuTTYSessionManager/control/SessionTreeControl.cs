@@ -818,24 +818,35 @@ namespace uk.org.riseley.puttySessionManager.control
                     TreeNode[] ta = treeView.Nodes.Find(Session.getFolderKey(nsr.SessionFolder), true);
                     if (ta.Length > 0)
                     {
-                        Session newSession = getSessionController().findSession(Session.convertDisplayToSessionKey(nsr.SessionName));
-                        TreeNode newNode = new TreeNode(newSession.SessionDisplayText);
-                        newNode.Tag = newSession;
-                        newNode.ContextMenuStrip = nodeContextMenuStrip;
-                        newNode.ImageIndex = IMAGE_INDEX_SESSION;
-                        newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
+                        Session newSession = getSessionController().findSession(nsr.SessionName);
 
-                        // Setup the key so that we can find the node again
-                        newNode.Name = newSession.getKey();
+                        // If we can't find the session immediately after creating it - something
+                        // has gone wrong - so just refresh the sessions including the tree
+                        if (newSession == null)
+                        {
+                            // Refresh the session list in the system tray
+                            sc.invalidateSessionList(this, true);
+                        }
+                        else
+                        {
+                            TreeNode newNode = new TreeNode(newSession.SessionDisplayText);
+                            newNode.Tag = newSession;
+                            newNode.ContextMenuStrip = nodeContextMenuStrip;
+                            newNode.ImageIndex = IMAGE_INDEX_SESSION;
+                            newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
 
-                        // Add the new node
-                        ta[0].Nodes.Add(newNode);
+                            // Setup the key so that we can find the node again
+                            newNode.Name = newSession.getKey();
 
-                        // Select the new node
-                        ta[0].Expand();
+                            // Add the new node
+                            ta[0].Nodes.Add(newNode);
 
-                        // Refresh the session list in the system tray
-                        sc.invalidateSessionList(this, false);
+                            // Select the new node
+                            ta[0].Expand();
+
+                            // Refresh the session list in the system tray
+                            sc.invalidateSessionList(this, false);
+                        }
 
                     }
 
@@ -890,7 +901,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
 
                 // Create the new session object
-                Session newSession = getSessionController().findSession(Session.convertDisplayToSessionKey(snf.getSessionName()));
+                Session newSession = getSessionController().findSession(snf.getSessionName());
 
                 // Something's gone wrong here....
                 if (newSession == null)

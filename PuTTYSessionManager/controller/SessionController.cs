@@ -227,7 +227,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns>The session if found, null if not</returns>
         private Session findSession(List<Session> sl, string sessionName)
         {
-            Session s = new Session(sessionName, "", false);
+            Session s = new Session(Session.convertDisplayToSessionKey(sessionName), "", false);
             int index = sl.BinarySearch(s);
             if (index >= 0)
                 s = sessionList[index];
