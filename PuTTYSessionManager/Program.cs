@@ -215,6 +215,7 @@ namespace uk.org.riseley.puttySessionManager
         /// <param name="e"></param>
         private void OnSessionEnding(object sender, SessionEndingEventArgs e)
         {
+            smf.Exit();
             saveSettings();
         }
 
@@ -226,6 +227,7 @@ namespace uk.org.riseley.puttySessionManager
         /// <param name="e"></param>
         private void OnSessionEnded(object sender, SessionEndedEventArgs e)
         {
+            smf.Exit();
             saveSettings();
         }
     }

@@ -150,16 +150,21 @@ namespace uk.org.riseley.puttySessionManager.form
                                    , MessageBoxButtons.YesNo
                                    , MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                systrayIcon.Visible = false;
-                optionsDialog.Close();
-                aboutDialog.Close();
-                sessionEditor.Close();
-                hotKeyChooser.Close();
-                synchronizeForm.Close();
-                hkc.UnregisterAllHotKeys(this);
-                SaveSize();
-                Application.Exit();
+            	Exit();
             }
+        }
+        
+        public void Exit()
+        {
+            systrayIcon.Visible = false;
+	    optionsDialog.Close();
+	    aboutDialog.Close();
+	    sessionEditor.Close();
+	    hotKeyChooser.Close();
+	    synchronizeForm.Close();
+	    hkc.UnregisterAllHotKeys(this);
+	    SaveSize();
+	    Application.Exit();        
         }
 
         /// <summary>
