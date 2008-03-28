@@ -92,14 +92,77 @@ namespace uk.org.riseley.puttySessionManager.model
             return (this.SessionName.Equals(s.SessionName));
         }
 
+        /// <summary>
+        /// This method strips hex encoded characters from the session
+        /// name stored in the registry
+        /// Based on the unmungestr() method in WINDOWS\WINSTORE.c
+        /// from the PuTTY v0.60 src tree 
+        /// </summary>
+        /// <param name="key">The registry key name to convert</param>
+        /// <returns>The display formatted session name</returns>
         public static String convertSessionKeyToDisplay(string key)
         {
-            return key.Replace("%20", " ");
+            CharEnumerator ce = key.GetEnumerator();
+            StringBuilder sb = new StringBuilder();
+            while (ce.MoveNext())
+            {
+                if (ce.Current == '%')
+                {
+                    CharEnumerator clone = (CharEnumerator)ce.Clone();
+                    StringBuilder hexVal = new StringBuilder();
+                    if ( clone.MoveNext() )
+                        hexVal.Append(clone.Current);
+                    if ( clone.MoveNext())
+                        hexVal.Append(clone.Current);
+                    if (hexVal.Length == 2)
+                    {
+                        int intVal = Int32.Parse(hexVal.ToString(), System.Globalization.NumberStyles.HexNumber);
+                        sb.Append((char)intVal);
+                        ce.MoveNext();
+                        ce.MoveNext();
+                    }
+                    else
+                    {
+                        sb.Append(ce.Current);
+                    }
+                }
+                else
+                {
+                    sb.Append(ce.Current);
+                }
+
+            }
+            return sb.ToString();
         }
 
+        /// <summary>
+        /// This method encodes special characters to make the session
+        /// display name suitable for storage as a key in the registry
+        /// Based on the mungestr() method in WINDOWS\WINSTORE.c
+        /// from the PuTTY v0.60 src tree 
+        /// </summary>
+        /// <param name="display">The session name displayed</param>
+        /// <returns>The registry key to be stored</returns>
         public static String convertDisplayToSessionKey(string display)
         {
-            return display.Replace(" ", "%20");
+            CharEnumerator ce = display.GetEnumerator();
+            StringBuilder sb = new StringBuilder();
+            int i = 0;
+            while (ce.MoveNext())
+            {
+                Char c = ce.Current;
+                if (c == ' ' || c == '\\' || c == '*' || c == '?' ||
+                    c == '%' || c < ' ' || c > '~' || (c == '.' && i == 0))
+                {
+                    sb.Append("%" + Convert.ToString((int)c, 16));
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+                i++;
+            }
+            return sb.ToString();
         }
 
         private string[] cellValues;
