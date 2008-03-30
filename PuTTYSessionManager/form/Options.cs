@@ -294,6 +294,8 @@ namespace uk.org.riseley.puttySessionManager.form
             optionsToolTip.SetToolTip(autostartCheckBox, "Automatically start PSM on Windows login");
             optionsToolTip.SetToolTip(numericUpDown1, "Threshold for warning when using \"Launch Folder\" or \n" +
                                                       "\"Launch Folder and Subfolders\" from the tree view");
+            optionsToolTip.SetToolTip(expandTreeCheckBox, "The tree view will be fully expanded on startup.\n" +
+                                                          "Not recommended if you have 100's of sessions.");
 
             // Pageant tab
             optionsToolTip.SetToolTip(addKeyButton, "Add an SSH private key(s) that will be opened\n" +

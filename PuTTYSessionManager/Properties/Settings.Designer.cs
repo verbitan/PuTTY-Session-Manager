@@ -851,5 +851,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["WinSCPIniEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExpandTreeOnStartup {
+            get {
+                return ((bool)(this["ExpandTreeOnStartup"]));
+            }
+            set {
+                this["ExpandTreeOnStartup"] = value;
+            }
+        }
     }
 }

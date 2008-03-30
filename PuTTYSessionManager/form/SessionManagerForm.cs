@@ -128,6 +128,10 @@ namespace uk.org.riseley.puttySessionManager.form
             // Invalidate the session list to force a refresh of all forms
             sc.invalidateSessionList(this, true); 
 
+            // Expand the tree if requested on startup
+            if (Properties.Settings.Default.ExpandTreeOnStartup)
+                sessionTreeControl1.expandFullTree();
+
             // Setup the display
             setDisplay();
         }
@@ -157,14 +161,14 @@ namespace uk.org.riseley.puttySessionManager.form
         public void Exit()
         {
             systrayIcon.Visible = false;
-	    optionsDialog.Close();
-	    aboutDialog.Close();
-	    sessionEditor.Close();
-	    hotKeyChooser.Close();
-	    synchronizeForm.Close();
-	    hkc.UnregisterAllHotKeys(this);
-	    SaveSize();
-	    Application.Exit();        
+	        optionsDialog.Close();
+	        aboutDialog.Close();
+	        sessionEditor.Close();
+	        hotKeyChooser.Close();
+	        synchronizeForm.Close();
+	        hkc.UnregisterAllHotKeys(this);
+	        SaveSize();
+	        Application.Exit();        
         }
 
         /// <summary>

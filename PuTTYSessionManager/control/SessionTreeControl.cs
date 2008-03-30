@@ -1313,5 +1313,20 @@ namespace uk.org.riseley.puttySessionManager.control
                 OnExportSessions(new ExportSessionEventArgs(ed.getExportType()));
         }
 
+        /// <summary>
+        /// Allows the tree to be fully expanded
+        /// </summary>
+        public void expandFullTree()
+        {
+            // Suppress repainting the TreeView until all the objects have been updated.
+            treeView.BeginUpdate();
+
+            TreeNode rootNode = treeView.Nodes[0];
+            if (rootNode != null)
+                rootNode.ExpandAll();
+
+            treeView.EndUpdate();
+        }
+
     }
 }
