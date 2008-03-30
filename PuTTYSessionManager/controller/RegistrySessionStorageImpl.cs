@@ -161,7 +161,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns>The list of attributes</returns>
         public List<string> getSessionAttributes(Session s)
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey);
             List<string> attributes = new List<string>();
             if (rk != null)
             {
@@ -178,7 +178,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="s"></param>
         public void saveFolder(Session s)
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, true);
             if (rk != null)
             {
                 rk.SetValue(PUTTY_PSM_FOLDER_ATTRIB, s.FolderName, RegistryValueKind.String);
@@ -194,7 +194,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         public bool createNewSession(NewSessionRequest nsr)
         {
             // Check the template session is still there
-            RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionTemplate.SessionName, false);
+            RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + nsr.SessionTemplate.SessionKey, false);
             if (template == null)
                 return false;
 
@@ -265,7 +265,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             RegistryKey rk;
             foreach (Session s in sl)
             {
-                rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+                rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey);
                 if (rk == null)
                     return false;
                 rk.Close();
@@ -274,7 +274,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Delete the sessions
             foreach (Session s in sl)
             {
-                Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
+                Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, false);
             }
 
             return true;
@@ -289,11 +289,11 @@ namespace uk.org.riseley.puttySessionManager.controller
         public bool renameSession(Session s, string newSessionName)
         {
             // Check the old session isn't the default session
-            if (s.SessionName.Equals(PUTTY_DEFAULT_SESSION))
+            if (s.SessionKey.Equals(PUTTY_DEFAULT_SESSION))
                 return false;
 
             // Check the current session is still there
-            RegistryKey current = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
+            RegistryKey current = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, false);
             if (current == null)
                 return false;
 
@@ -329,7 +329,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             current.Close();
 
             // Delete the current session
-            Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            Registry.CurrentUser.DeleteSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey);
 
             return true;
         }
@@ -343,14 +343,14 @@ namespace uk.org.riseley.puttySessionManager.controller
         public bool copySessionAttributes(CopySessionRequest csr)
         {
             // Check the template session is still there
-            RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + csr.SessionTemplate.SessionName, false);
+            RegistryKey template = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + csr.SessionTemplate.SessionKey, false);
             if (template == null)
                 return false;
 
             // Check all the target sessions still exist
             foreach (Session s in csr.TargetSessions)
             {
-                RegistryKey targetSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, false);
+                RegistryKey targetSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, false);
                 if (targetSession == null)
                 {
                     template.Close();
@@ -365,14 +365,14 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Copy all the attributes
             foreach (Session s in csr.TargetSessions)
             {
-                RegistryKey targetSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName, true);
+                RegistryKey targetSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, true);
                 object value;
                 bool copy;
                 foreach (string valueName in template.GetValueNames())
                 {
                     copy = false;
                     // Never copy the hostname onto the default session
-                    if (s.SessionName.Equals(PUTTY_DEFAULT_SESSION) &&
+                    if (s.SessionKey.Equals(PUTTY_DEFAULT_SESSION) &&
                         valueName.Equals(PUTTY_HOSTNAME_ATTRIB))
                         copy = false;
                     else if ((csr.CopyOptions == CopySessionRequest.CopySessionOptions.COPY_ALL) &&
@@ -521,9 +521,9 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns>true if sucessful, false otherwise</returns>
         private bool saveSession(Session s, StreamWriter sw)
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey);
             if (rk != null)
-                sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionName + "]");
+                sw.WriteLine("[" + Registry.CurrentUser.Name + "\\" + PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey + "]");
             else
                 return false;
             foreach (string valueName in rk.GetValueNames())

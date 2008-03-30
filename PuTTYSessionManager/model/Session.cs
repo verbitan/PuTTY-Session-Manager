@@ -30,11 +30,11 @@ namespace uk.org.riseley.puttySessionManager.model
         private const string KEY_SESSION = "SESSION|";
         private const string KEY_FOLDER = "FOLDER|";
 
-        private string sessionName = "";
-        public string SessionName
+        private string sessionKey = "";
+        public string SessionKey
         {
-            get { return sessionName; }
-            private set { sessionName = value; }
+            get { return sessionKey; }
+            private set { sessionKey = value; }
         }
 
         private string sessionDisplayText = "";
@@ -60,7 +60,7 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public Session(string regKey, string folderName, bool isFolder)
         {
-            SessionName = regKey;
+            SessionKey = regKey;
             SessionDisplayText = convertSessionKeyToDisplay(regKey);
             string folderCellValue;
             if (folderName == null || folderName.Equals("") || folderName.Equals(SESSIONS_FOLDER_NAME))
@@ -84,12 +84,12 @@ namespace uk.org.riseley.puttySessionManager.model
 
         public int CompareTo(Session s)
         {
-            return this.SessionName.CompareTo(s.SessionName);
+            return this.SessionKey.CompareTo(s.SessionKey);
         }
 
         public bool Equals(Session s)
         {
-            return (this.SessionName.Equals(s.SessionName));
+            return (this.SessionKey.Equals(s.SessionKey));
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace uk.org.riseley.puttySessionManager.model
                 if (c == ' ' || c == '\\' || c == '*' || c == '?' ||
                     c == '%' || c < ' ' || c > '~' || (c == '.' && i == 0))
                 {
-                    sb.Append("%" + Convert.ToString((int)c, 16));
+                    sb.Append("%" + Convert.ToString((int)c, 16).ToUpper());
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace uk.org.riseley.puttySessionManager.model
             if (IsFolder == true)
                 return KEY_FOLDER + FolderName;
             else
-                return KEY_SESSION + SessionName;
+                return KEY_SESSION + SessionKey;
         }
 
         public static string getFolderKey(string folder)

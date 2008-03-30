@@ -199,7 +199,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns></returns>
         public Session findDefaultSession(List<Session> sl, bool defaultSessionOnly)
         {
-            Session s = findSession(sl, PUTTY_DEFAULT_SESSION);
+            Session s = findSession(sl, PUTTY_DEFAULT_SESSION, true);
 
             // If we can't find the default session
             // return the first one in the list
@@ -214,9 +214,19 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// </summary>
         /// <param name="sessionName">The session name</param>
         /// <returns>The session if found, null if not</returns>
-        public Session findSession(string sessionName)
+        public Session findSessionByName(string sessionName)
         {
-            return findSession(sessionList, sessionName);
+            return findSession(sessionList, sessionName, false);
+        }
+
+        /// <summary>
+        /// Try to find a session by key
+        /// </summary>
+        /// <param name="sessionName">The session key</param>
+        /// <returns>The session if found, null if not</returns>
+        public Session findSessionByKey(string sessionKey)
+        {
+            return findSession(sessionList, sessionKey, true);
         }
 
         /// <summary>
@@ -225,9 +235,15 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="sl">The session list to search</param>
         /// <param name="sessionName">The session name</param>
         /// <returns>The session if found, null if not</returns>
-        private Session findSession(List<Session> sl, string sessionName)
+        private Session findSession(List<Session> sl, string sessionName, bool keySupplied)
         {
-            Session s = new Session(Session.convertDisplayToSessionKey(sessionName), "", false);
+            String key = "";
+            if (keySupplied)
+                key = sessionName;
+            else 
+                key = Session.convertDisplayToSessionKey(sessionName);
+
+            Session s = new Session(key, "", false);
             int index = sl.BinarySearch(s);
             if (index >= 0)
                 s = sessionList[index];

@@ -1,3 +1,41 @@
+PuTTY Session Manager v0.31 ( xx-04-2008 )
+=============================================
+Seventh release of PuTTY Session Manager
+
+This is mainly a bugfix release with a fair amount of code refactoring
+and some minor enhancements
+
+Feature requests / enhancements:
+1915388: Expand on startup for the tree view.  Adds an option to allow the
+         tree view to be fully expanded on startup
+1882231: Add support for /ini option for launching WinSCP. Ini file location
+         can be specified in the options dialog
+1824160: Get .NET 2.0 error when launching PSM with corrupted prefs. PSM will 
+         now detect a corrupted prefs file and prompt you to delete the file
+         and relaunch PSM
+
+Not Tracked: Make PSM a single instance application - if you try to launch it
+             twice the existing window will be brought to the foreground                 
+Not Tracked: Add hostname column to session editor
+Not Tracked: Check the PuTTY executable is accessible on startup and prompt to 
+             select the location if it isn't
+Not Tracked: Use FileHelpers.dll for CSV export - this is a start for implementing
+             storage providers for sync session functionality and portable PuTTY
+             implementations. WIP.
+             
+Bugs:
+1927128: Special chars not recognized. Ensure that special characters in the
+         session name are handled properly ( i.e. the same way PuTTY handles them)
+1801589: Launch Session from Systray fails in list view.
+1806695: Attempt to make sure that settings are saved on logoff or shutdown. 
+         Ensure window size is saved on logoff.
+                
+Not Tracked: Ensure duplicate session names are identified when they have a space in them
+Not Tracked: Ensure external programs can be launched for sessions that have just
+             been renamed
+Not Tracked: Ensure that that moved folders have the correct path set. 
+Not Tracked: Ensure that new sessions can be exported with all the details.
+
 PuTTY Session Manager v0.30 ( 13-09-2007 )
 =============================================
 Sixth release of PuTTY Session Manager

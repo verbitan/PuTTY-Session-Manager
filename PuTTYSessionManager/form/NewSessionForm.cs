@@ -87,7 +87,7 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 // use the session controller to find the session as the objects held
                 // held in the session control may not be the same
-                sessionComboBox.SelectedItem = sc.findSession(nsr.SessionTemplate.SessionName);
+                sessionComboBox.SelectedItem = sc.findSessionByKey(nsr.SessionTemplate.SessionKey);
                 if (nsr.SessionFolder == null)
                     sessionFolderComboBox.SelectedItem = nsr.SessionTemplate.FolderName;
                 else
@@ -113,7 +113,7 @@ namespace uk.org.riseley.puttySessionManager.form
                   , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
-            else if (sc.findSession(sessionnameTextBox.Text) != null)
+            else if (sc.findSessionByName(sessionnameTextBox.Text) != null)
             {
                 MessageBox.Show("Session: " + sessionnameTextBox.Text +
                                 " already exists.\nPlease choose another name."

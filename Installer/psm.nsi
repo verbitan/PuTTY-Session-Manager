@@ -105,6 +105,7 @@ Section "MainSection" SEC01
   File "${PSM_EXE}"
   File "${PSM_EXE}.config"
   File "${PSM_BUILD_DIR}\gpl.txt"
+  File "${PSM_BUILD_DIR}\FileHelpers-LGPL.txt"
   File "${PSM_BUILD_DIR}\changelog.txt"
   File "${PSM_BUILD_DIR}\FileHelpers.dll"
 
@@ -162,6 +163,7 @@ Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\gpl.txt"
+  Delete "$INSTDIR\FileHelpers-LGPL.txt"
   Delete "$INSTDIR\changelog.txt"
   Delete "$INSTDIR\${PRODUCT_NAME}.exe.config"
   Delete "$INSTDIR\${PRODUCT_NAME}.exe"

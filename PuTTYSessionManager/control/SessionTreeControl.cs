@@ -619,7 +619,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 MessageBox.Show("Session name must be supplied", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (getSessionController().findSession(sessionName) != null)
+            else if (getSessionController().findSessionByName(sessionName) != null)
             {
                 MessageBox.Show("Session name must be unique", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -818,7 +818,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     TreeNode[] ta = treeView.Nodes.Find(Session.getFolderKey(nsr.SessionFolder), true);
                     if (ta.Length > 0)
                     {
-                        Session newSession = getSessionController().findSession(nsr.SessionName);
+                        Session newSession = getSessionController().findSessionByName(nsr.SessionName);
 
                         // If we can't find the session immediately after creating it - something
                         // has gone wrong - so just refresh the sessions including the tree
@@ -877,7 +877,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
             // Check we are not renaming the default session
             Session defaultSession = getSessionController().findDefaultSession();
-            if (defaultSession != null && defaultSession.SessionName.Equals(s.SessionName))
+            if (defaultSession != null && defaultSession.SessionKey.Equals(s.SessionKey))
             {
                 MessageBox.Show("Cannot rename the default session"
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -901,7 +901,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
 
                 // Create the new session object
-                Session newSession = getSessionController().findSession(snf.getSessionName());
+                Session newSession = getSessionController().findSessionByName(snf.getSessionName());
 
                 // Something's gone wrong here....
                 if (newSession == null)

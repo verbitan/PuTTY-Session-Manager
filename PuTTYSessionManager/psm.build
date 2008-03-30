@@ -25,6 +25,7 @@
   <property name="output.filehelpers" value="FileHelpers.dll"/>
   <property name="output.changelog" value="changelog.txt"/>
   <property name="output.licence" value="gpl.txt"/>
+  <property name="output.filehelpers.licence" value="FileHelpers-LGPL.txt"/>
 
   <target name="init" >
     <loadtasks assembly="${dir.nantcontrib}/bin/NAnt.Contrib.Tasks.dll" />
@@ -72,7 +73,7 @@
       </fileset>
     </delete>
   </target>
-  
+
   <target name="build"
           depends="init"
           description="Build all targets.">
@@ -84,11 +85,11 @@
 
   <target name="preparerelease"
           description="Build, deploy and cleanup ready to release to SF">
-     <call target="deploy" />
-     <call target="cleanbuild" />
-     <call target="cleaninstall" />
-     <call target="cleanexport" />
-     <call target="revertassembly" />
+    <call target="deploy" />
+    <call target="cleanbuild" />
+    <call target="cleaninstall" />
+    <call target="cleanexport" />
+    <call target="revertassembly" />
   </target>
 
   <target name="cleanall"
@@ -302,6 +303,7 @@
         <include name="${output.changelog}"/>
         <include name="${output.licence}"/>
         <include name="${output.filehelpers}"/>
+        <include name="${output.filehelpers.licence}"/>
       </fileset>
     </zip>
   </target>
