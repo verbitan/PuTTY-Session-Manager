@@ -94,7 +94,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
-            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 258);
+            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 236);
             // 
             // loadSessionToolStripMenuItem
             // 
@@ -217,12 +217,14 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.sessionListControl1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Opacity", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyValueDouble", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("TopMost", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "AlwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ShowInTaskbar", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ShowInTaskbar", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SessionManagerForm";
             this.Opacity = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyValueDouble;
+            this.ShowInTaskbar = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ShowInTaskbar;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PuTTY Session Manager";
             this.TopMost = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;

@@ -296,6 +296,7 @@ namespace uk.org.riseley.puttySessionManager.form
                                                       "\"Launch Folder and Subfolders\" from the tree view");
             optionsToolTip.SetToolTip(expandTreeCheckBox, "The tree view will be fully expanded on startup.\n" +
                                                           "Not recommended if you have 100's of sessions.");
+            optionsToolTip.SetToolTip(taskbarCheckBox, "Show PSM in the taskbar when the window is visible");
 
             // Pageant tab
             optionsToolTip.SetToolTip(addKeyButton, "Add an SSH private key(s) that will be opened\n" +

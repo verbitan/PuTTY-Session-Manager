@@ -13,6 +13,7 @@ Feature requests / enhancements:
 1824160: Get .NET 2.0 error when launching PSM with corrupted prefs. PSM will 
          now detect a corrupted prefs file and prompt you to delete the file
          and relaunch PSM
+1931924: Implemented option to not show PSM in the taskbar         
 
 Not Tracked: Make PSM a single instance application - if you try to launch it
              twice the existing window will be brought to the foreground                 

@@ -24,7 +24,8 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("PuTTY Session Manager")]
 [assembly: AssemblyDescription("Organise your PuTTY ( © Simon Tatham ) sessions into folders.\r\n" 
-    + "Inspired by QuickPuTTY by Olivier Deckmyn, re-written in C#.\r\n\r\n" 
+    + "Inspired by QuickPuTTY by Olivier Deckmyn, re-written in C#.\r\n\r\n"
+    + "Uses the FileHelpers Library ( ©2005-2006 Marcos Meli ) released under the LGPL.\r\n\r\n"
     + "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License " 
     + "as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\r\n\r\n"
     + "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of "
@@ -34,7 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PuTTY Session Manager")]
-[assembly: AssemblyCopyright("Copyright © David Riseley 2006,2007")]
+[assembly: AssemblyCopyright("Copyright © David Riseley 2006,2007,2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
