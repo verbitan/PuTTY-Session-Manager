@@ -46,6 +46,8 @@ namespace uk.org.riseley.puttySessionManager.form
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.modifierLabel = new System.Windows.Forms.Label();
+            this.modifierComboBox = new System.Windows.Forms.ComboBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -56,15 +58,15 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk7TextBox = new System.Windows.Forms.TextBox();
             this.hk6TextBox = new System.Windows.Forms.TextBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.hkLabel10 = new System.Windows.Forms.Label();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.hkLabel9 = new System.Windows.Forms.Label();
             this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.hkLabel8 = new System.Windows.Forms.Label();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.hkLabel7 = new System.Windows.Forms.Label();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.hkLabel6 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -80,15 +82,15 @@ namespace uk.org.riseley.puttySessionManager.form
             this.minimizeWindowHKTextbox = new System.Windows.Forms.TextBox();
             this.minimizeWindowHKCheckbox = new System.Windows.Forms.CheckBox();
             this.favSessCheckBox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.hkLabel5 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.hkLabel4 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.hkLabel3 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.hkLabel2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.hkLabel1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.newSessionHKLabel = new System.Windows.Forms.Label();
             this.newSessionHKTextbox = new System.Windows.Forms.TextBox();
@@ -101,6 +103,8 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.modifierLabel);
+            this.groupBox1.Controls.Add(this.modifierComboBox);
             this.groupBox1.Controls.Add(this.checkBox10);
             this.groupBox1.Controls.Add(this.checkBox9);
             this.groupBox1.Controls.Add(this.checkBox8);
@@ -111,15 +115,15 @@ namespace uk.org.riseley.puttySessionManager.form
             this.groupBox1.Controls.Add(this.hk7TextBox);
             this.groupBox1.Controls.Add(this.hk6TextBox);
             this.groupBox1.Controls.Add(this.checkBox6);
-            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.hkLabel10);
             this.groupBox1.Controls.Add(this.comboBox10);
-            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.hkLabel9);
             this.groupBox1.Controls.Add(this.comboBox9);
-            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.hkLabel8);
             this.groupBox1.Controls.Add(this.comboBox8);
-            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.hkLabel7);
             this.groupBox1.Controls.Add(this.comboBox7);
-            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.hkLabel6);
             this.groupBox1.Controls.Add(this.comboBox6);
             this.groupBox1.Controls.Add(this.checkBox5);
             this.groupBox1.Controls.Add(this.checkBox4);
@@ -135,15 +139,15 @@ namespace uk.org.riseley.puttySessionManager.form
             this.groupBox1.Controls.Add(this.minimizeWindowHKTextbox);
             this.groupBox1.Controls.Add(this.minimizeWindowHKCheckbox);
             this.groupBox1.Controls.Add(this.favSessCheckBox);
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.hkLabel5);
             this.groupBox1.Controls.Add(this.comboBox5);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.hkLabel4);
             this.groupBox1.Controls.Add(this.comboBox4);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.hkLabel3);
             this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.hkLabel2);
             this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.hkLabel1);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.newSessionHKLabel);
             this.groupBox1.Controls.Add(this.newSessionHKTextbox);
@@ -151,10 +155,28 @@ namespace uk.org.riseley.puttySessionManager.form
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(378, 358);
+            this.groupBox1.Size = new System.Drawing.Size(378, 376);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // modifierLabel
+            // 
+            this.modifierLabel.AutoSize = true;
+            this.modifierLabel.Location = new System.Drawing.Point(56, 16);
+            this.modifierLabel.Name = "modifierLabel";
+            this.modifierLabel.Size = new System.Drawing.Size(120, 13);
+            this.modifierLabel.TabIndex = 51;
+            this.modifierLabel.Text = "Choose Hotkey Modifier";
+            // 
+            // modifierComboBox
+            // 
+            this.modifierComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modifierComboBox.Location = new System.Drawing.Point(182, 10);
+            this.modifierComboBox.Name = "modifierComboBox";
+            this.modifierComboBox.Size = new System.Drawing.Size(89, 21);
+            this.modifierComboBox.TabIndex = 50;
+            this.modifierComboBox.SelectedIndexChanged += new System.EventHandler(this.modifierComboBox_SelectedIndexChanged);
             // 
             // checkBox10
             // 
@@ -164,7 +186,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox10.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey10Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox10.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox10.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox10.Location = new System.Drawing.Point(304, 326);
+            this.checkBox10.Location = new System.Drawing.Point(304, 347);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(65, 17);
             this.checkBox10.TabIndex = 25;
@@ -180,7 +202,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox9.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey9Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox9.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox9.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox9.Location = new System.Drawing.Point(304, 300);
+            this.checkBox9.Location = new System.Drawing.Point(304, 321);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(65, 17);
             this.checkBox9.TabIndex = 24;
@@ -196,7 +218,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox8.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey8Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox8.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox8.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox8.Location = new System.Drawing.Point(304, 273);
+            this.checkBox8.Location = new System.Drawing.Point(304, 294);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(65, 17);
             this.checkBox8.TabIndex = 23;
@@ -212,7 +234,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox7.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey7Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox7.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox7.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox7.Location = new System.Drawing.Point(304, 246);
+            this.checkBox7.Location = new System.Drawing.Point(304, 267);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(65, 17);
             this.checkBox7.TabIndex = 22;
@@ -225,7 +247,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk10TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey10Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk10TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk10TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk10TextBox.Location = new System.Drawing.Point(50, 324);
+            this.hk10TextBox.Location = new System.Drawing.Point(50, 345);
             this.hk10TextBox.MaxLength = 1;
             this.hk10TextBox.Name = "hk10TextBox";
             this.hk10TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey10Enabled;
@@ -240,7 +262,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk9TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey9Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk9TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk9TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk9TextBox.Location = new System.Drawing.Point(50, 298);
+            this.hk9TextBox.Location = new System.Drawing.Point(50, 319);
             this.hk9TextBox.MaxLength = 1;
             this.hk9TextBox.Name = "hk9TextBox";
             this.hk9TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey9Enabled;
@@ -255,7 +277,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk8TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey8Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk8TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk8TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk8TextBox.Location = new System.Drawing.Point(50, 271);
+            this.hk8TextBox.Location = new System.Drawing.Point(50, 292);
             this.hk8TextBox.MaxLength = 1;
             this.hk8TextBox.Name = "hk8TextBox";
             this.hk8TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey8Enabled;
@@ -270,7 +292,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk7TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey7Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk7TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk7TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk7TextBox.Location = new System.Drawing.Point(50, 244);
+            this.hk7TextBox.Location = new System.Drawing.Point(50, 265);
             this.hk7TextBox.MaxLength = 1;
             this.hk7TextBox.Name = "hk7TextBox";
             this.hk7TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey7Enabled;
@@ -285,7 +307,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk6TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey6Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk6TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk6TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk6TextBox.Location = new System.Drawing.Point(50, 218);
+            this.hk6TextBox.Location = new System.Drawing.Point(50, 239);
             this.hk6TextBox.MaxLength = 1;
             this.hk6TextBox.Name = "hk6TextBox";
             this.hk6TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey6Enabled;
@@ -303,7 +325,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox6.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey6Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox6.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox6.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox6.Location = new System.Drawing.Point(304, 219);
+            this.checkBox6.Location = new System.Drawing.Point(304, 240);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(65, 17);
             this.checkBox6.TabIndex = 21;
@@ -311,14 +333,14 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.Click += new System.EventHandler(this.hotkeyCheckbox_Click);
             // 
-            // label10
+            // hkLabel10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 327);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(35, 13);
-            this.label10.TabIndex = 43;
-            this.label10.Text = "Win +";
+            this.hkLabel10.AutoSize = true;
+            this.hkLabel10.Location = new System.Drawing.Point(10, 348);
+            this.hkLabel10.Name = "hkLabel10";
+            this.hkLabel10.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel10.TabIndex = 43;
+            this.hkLabel10.Text = "Win +";
             // 
             // comboBox10
             // 
@@ -326,21 +348,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox10.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(86, 324);
+            this.comboBox10.Location = new System.Drawing.Point(86, 345);
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(212, 21);
             this.comboBox10.TabIndex = 15;
             this.comboBox10.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox10.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label9
+            // hkLabel9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(9, 301);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 41;
-            this.label9.Text = "Win +";
+            this.hkLabel9.AutoSize = true;
+            this.hkLabel9.Location = new System.Drawing.Point(9, 322);
+            this.hkLabel9.Name = "hkLabel9";
+            this.hkLabel9.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel9.TabIndex = 41;
+            this.hkLabel9.Text = "Win +";
             // 
             // comboBox9
             // 
@@ -348,21 +370,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox9.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(86, 298);
+            this.comboBox9.Location = new System.Drawing.Point(86, 319);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(212, 21);
             this.comboBox9.TabIndex = 14;
             this.comboBox9.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox9.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label8
+            // hkLabel8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 274);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 39;
-            this.label8.Text = "Win +";
+            this.hkLabel8.AutoSize = true;
+            this.hkLabel8.Location = new System.Drawing.Point(9, 295);
+            this.hkLabel8.Name = "hkLabel8";
+            this.hkLabel8.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel8.TabIndex = 39;
+            this.hkLabel8.Text = "Win +";
             // 
             // comboBox8
             // 
@@ -370,21 +392,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox8.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(86, 271);
+            this.comboBox8.Location = new System.Drawing.Point(86, 292);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(212, 21);
             this.comboBox8.TabIndex = 13;
             this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label7
+            // hkLabel7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 247);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "Win +";
+            this.hkLabel7.AutoSize = true;
+            this.hkLabel7.Location = new System.Drawing.Point(9, 268);
+            this.hkLabel7.Name = "hkLabel7";
+            this.hkLabel7.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel7.TabIndex = 37;
+            this.hkLabel7.Text = "Win +";
             // 
             // comboBox7
             // 
@@ -392,21 +414,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox7.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(86, 244);
+            this.comboBox7.Location = new System.Drawing.Point(86, 265);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(212, 21);
             this.comboBox7.TabIndex = 12;
             this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label6
+            // hkLabel6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 220);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Win +";
+            this.hkLabel6.AutoSize = true;
+            this.hkLabel6.Location = new System.Drawing.Point(9, 241);
+            this.hkLabel6.Name = "hkLabel6";
+            this.hkLabel6.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel6.TabIndex = 35;
+            this.hkLabel6.Text = "Win +";
             // 
             // comboBox6
             // 
@@ -415,7 +437,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox6.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(86, 216);
+            this.comboBox6.Location = new System.Drawing.Point(86, 237);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(212, 21);
             this.comboBox6.TabIndex = 11;
@@ -430,7 +452,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox5.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey5Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox5.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox5.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox5.Location = new System.Drawing.Point(304, 192);
+            this.checkBox5.Location = new System.Drawing.Point(304, 213);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(65, 17);
             this.checkBox5.TabIndex = 20;
@@ -446,7 +468,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey4Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox4.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox4.Location = new System.Drawing.Point(304, 166);
+            this.checkBox4.Location = new System.Drawing.Point(304, 187);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(65, 17);
             this.checkBox4.TabIndex = 19;
@@ -462,7 +484,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox3.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey3Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox3.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox3.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox3.Location = new System.Drawing.Point(304, 139);
+            this.checkBox3.Location = new System.Drawing.Point(304, 160);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(65, 17);
             this.checkBox3.TabIndex = 18;
@@ -478,7 +500,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey2Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox2.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox2.Location = new System.Drawing.Point(304, 112);
+            this.checkBox2.Location = new System.Drawing.Point(304, 133);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(65, 17);
             this.checkBox2.TabIndex = 17;
@@ -491,7 +513,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk5TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey5Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk5TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk5TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk5TextBox.Location = new System.Drawing.Point(50, 190);
+            this.hk5TextBox.Location = new System.Drawing.Point(50, 211);
             this.hk5TextBox.MaxLength = 1;
             this.hk5TextBox.Name = "hk5TextBox";
             this.hk5TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey5Enabled;
@@ -506,7 +528,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk4TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey4Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk4TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk4TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk4TextBox.Location = new System.Drawing.Point(50, 164);
+            this.hk4TextBox.Location = new System.Drawing.Point(50, 185);
             this.hk4TextBox.MaxLength = 1;
             this.hk4TextBox.Name = "hk4TextBox";
             this.hk4TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey4Enabled;
@@ -521,7 +543,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk3TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey3Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk3TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk3TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk3TextBox.Location = new System.Drawing.Point(50, 137);
+            this.hk3TextBox.Location = new System.Drawing.Point(50, 158);
             this.hk3TextBox.MaxLength = 1;
             this.hk3TextBox.Name = "hk3TextBox";
             this.hk3TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey3Enabled;
@@ -536,7 +558,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey2Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk2TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk2TextBox.Location = new System.Drawing.Point(50, 110);
+            this.hk2TextBox.Location = new System.Drawing.Point(50, 131);
             this.hk2TextBox.MaxLength = 1;
             this.hk2TextBox.Name = "hk2TextBox";
             this.hk2TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey2Enabled;
@@ -551,7 +573,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey1Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk1TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk1TextBox.Location = new System.Drawing.Point(50, 84);
+            this.hk1TextBox.Location = new System.Drawing.Point(50, 105);
             this.hk1TextBox.MaxLength = 1;
             this.hk1TextBox.Name = "hk1TextBox";
             this.hk1TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey1Enabled;
@@ -569,7 +591,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey1Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox1.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.checkBox1.Location = new System.Drawing.Point(304, 85);
+            this.checkBox1.Location = new System.Drawing.Point(304, 106);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(65, 17);
             this.checkBox1.TabIndex = 16;
@@ -580,7 +602,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // minimizeWindowHKLabel
             // 
             this.minimizeWindowHKLabel.AutoSize = true;
-            this.minimizeWindowHKLabel.Location = new System.Drawing.Point(200, 40);
+            this.minimizeWindowHKLabel.Location = new System.Drawing.Point(200, 61);
             this.minimizeWindowHKLabel.Name = "minimizeWindowHKLabel";
             this.minimizeWindowHKLabel.Size = new System.Drawing.Size(35, 13);
             this.minimizeWindowHKLabel.TabIndex = 23;
@@ -589,7 +611,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // minimizeWindowHKTextbox
             // 
             this.minimizeWindowHKTextbox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyMinimizeEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.minimizeWindowHKTextbox.Location = new System.Drawing.Point(241, 37);
+            this.minimizeWindowHKTextbox.Location = new System.Drawing.Point(241, 58);
             this.minimizeWindowHKTextbox.MaxLength = 1;
             this.minimizeWindowHKTextbox.Name = "minimizeWindowHKTextbox";
             this.minimizeWindowHKTextbox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyMinimizeEnabled;
@@ -605,7 +627,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.minimizeWindowHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyMinimizeEnabled;
             this.minimizeWindowHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.minimizeWindowHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyMinimizeEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.minimizeWindowHKCheckbox.Location = new System.Drawing.Point(13, 39);
+            this.minimizeWindowHKCheckbox.Location = new System.Drawing.Point(13, 60);
             this.minimizeWindowHKCheckbox.Name = "minimizeWindowHKCheckbox";
             this.minimizeWindowHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.minimizeWindowHKCheckbox.Size = new System.Drawing.Size(181, 17);
@@ -620,7 +642,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.favSessCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.favSessCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.favSessCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.favSessCheckBox.Location = new System.Drawing.Point(6, 60);
+            this.favSessCheckBox.Location = new System.Drawing.Point(6, 81);
             this.favSessCheckBox.Name = "favSessCheckBox";
             this.favSessCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.favSessCheckBox.Size = new System.Drawing.Size(188, 17);
@@ -629,14 +651,14 @@ namespace uk.org.riseley.puttySessionManager.form
             this.favSessCheckBox.UseVisualStyleBackColor = true;
             this.favSessCheckBox.CheckedChanged += new System.EventHandler(this.favSessCheckBox_CheckedChanged);
             // 
-            // label5
+            // hkLabel5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 193);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Win +";
+            this.hkLabel5.AutoSize = true;
+            this.hkLabel5.Location = new System.Drawing.Point(10, 214);
+            this.hkLabel5.Name = "hkLabel5";
+            this.hkLabel5.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel5.TabIndex = 19;
+            this.hkLabel5.Text = "Win +";
             // 
             // comboBox5
             // 
@@ -644,21 +666,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox5.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(86, 190);
+            this.comboBox5.Location = new System.Drawing.Point(86, 211);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(212, 21);
             this.comboBox5.TabIndex = 10;
             this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label4
+            // hkLabel4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 167);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Win +";
+            this.hkLabel4.AutoSize = true;
+            this.hkLabel4.Location = new System.Drawing.Point(9, 188);
+            this.hkLabel4.Name = "hkLabel4";
+            this.hkLabel4.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel4.TabIndex = 17;
+            this.hkLabel4.Text = "Win +";
             // 
             // comboBox4
             // 
@@ -666,21 +688,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(86, 164);
+            this.comboBox4.Location = new System.Drawing.Point(86, 185);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(212, 21);
             this.comboBox4.TabIndex = 9;
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label3
+            // hkLabel3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 140);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Win +";
+            this.hkLabel3.AutoSize = true;
+            this.hkLabel3.Location = new System.Drawing.Point(9, 161);
+            this.hkLabel3.Name = "hkLabel3";
+            this.hkLabel3.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel3.TabIndex = 15;
+            this.hkLabel3.Text = "Win +";
             // 
             // comboBox3
             // 
@@ -688,21 +710,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(86, 137);
+            this.comboBox3.Location = new System.Drawing.Point(86, 158);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(212, 21);
             this.comboBox3.TabIndex = 8;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label2
+            // hkLabel2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 113);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Win +";
+            this.hkLabel2.AutoSize = true;
+            this.hkLabel2.Location = new System.Drawing.Point(9, 134);
+            this.hkLabel2.Name = "hkLabel2";
+            this.hkLabel2.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel2.TabIndex = 13;
+            this.hkLabel2.Text = "Win +";
             // 
             // comboBox2
             // 
@@ -710,21 +732,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(86, 110);
+            this.comboBox2.Location = new System.Drawing.Point(86, 131);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(212, 21);
             this.comboBox2.TabIndex = 7;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
             // 
-            // label1
+            // hkLabel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 86);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Win +";
+            this.hkLabel1.AutoSize = true;
+            this.hkLabel1.Location = new System.Drawing.Point(9, 107);
+            this.hkLabel1.Name = "hkLabel1";
+            this.hkLabel1.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel1.TabIndex = 11;
+            this.hkLabel1.Text = "Win +";
             // 
             // comboBox1
             // 
@@ -733,7 +755,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(86, 82);
+            this.comboBox1.Location = new System.Drawing.Point(86, 103);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(212, 21);
             this.comboBox1.TabIndex = 6;
@@ -743,7 +765,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // newSessionHKLabel
             // 
             this.newSessionHKLabel.AutoSize = true;
-            this.newSessionHKLabel.Location = new System.Drawing.Point(200, 17);
+            this.newSessionHKLabel.Location = new System.Drawing.Point(200, 38);
             this.newSessionHKLabel.Name = "newSessionHKLabel";
             this.newSessionHKLabel.Size = new System.Drawing.Size(35, 13);
             this.newSessionHKLabel.TabIndex = 9;
@@ -752,7 +774,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // newSessionHKTextbox
             // 
             this.newSessionHKTextbox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyNewEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.newSessionHKTextbox.Location = new System.Drawing.Point(241, 13);
+            this.newSessionHKTextbox.Location = new System.Drawing.Point(241, 34);
             this.newSessionHKTextbox.MaxLength = 1;
             this.newSessionHKTextbox.Name = "newSessionHKTextbox";
             this.newSessionHKTextbox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyNewEnabled;
@@ -768,7 +790,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.newSessionHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyNewEnabled;
             this.newSessionHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.newSessionHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyNewEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.newSessionHKCheckbox.Location = new System.Drawing.Point(33, 16);
+            this.newSessionHKCheckbox.Location = new System.Drawing.Point(33, 37);
             this.newSessionHKCheckbox.Name = "newSessionHKCheckbox";
             this.newSessionHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.newSessionHKCheckbox.Size = new System.Drawing.Size(161, 17);
@@ -790,14 +812,14 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.67136F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.32864F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(384, 406);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(384, 427);
             this.tableLayoutPanel.TabIndex = 1;
             // 
             // okButton
             // 
             this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(158, 374);
+            this.okButton.Location = new System.Drawing.Point(158, 393);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(67, 22);
             this.okButton.TabIndex = 0;
@@ -810,15 +832,15 @@ namespace uk.org.riseley.puttySessionManager.form
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 406);
+            this.ClientSize = new System.Drawing.Size(384, 427);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(390, 438);
+            this.MaximumSize = new System.Drawing.Size(390, 459);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(390, 438);
+            this.MinimumSize = new System.Drawing.Size(390, 459);
             this.Name = "HotkeyChooser";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -842,15 +864,15 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.TextBox newSessionHKTextbox;
         private System.Windows.Forms.Label newSessionHKLabel;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label hkLabel1;
         private System.Windows.Forms.CheckBox favSessCheckBox;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label hkLabel5;
         private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label hkLabel4;
         private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label hkLabel3;
         private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label hkLabel2;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label minimizeWindowHKLabel;
         private System.Windows.Forms.TextBox minimizeWindowHKTextbox;
@@ -866,15 +888,15 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.TextBox hk7TextBox;
         private System.Windows.Forms.TextBox hk6TextBox;
         private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label hkLabel10;
         private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label hkLabel9;
         private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label hkLabel8;
         private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label hkLabel7;
         private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label hkLabel6;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox4;
@@ -885,5 +907,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.TextBox hk3TextBox;
         private System.Windows.Forms.TextBox hk2TextBox;
         private System.Windows.Forms.TextBox hk1TextBox;
+        private System.Windows.Forms.Label modifierLabel;
+        private System.Windows.Forms.ComboBox modifierComboBox;
     }
 }

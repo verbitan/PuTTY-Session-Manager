@@ -247,6 +247,12 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
         }
 
+        private enum Modifier
+        {
+            WIN = User32.Modifiers.MOD_WIN,
+            CTRL_ALT = User32.Modifiers.MOD_CONTROL | User32.Modifiers.MOD_ALT
+        };
+
         private static HotkeyController instance = null;
         private SessionController sc;
 
@@ -254,9 +260,12 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         private Dictionary<char, HotKeyId> hotkeyDictionary;
 
+        private Dictionary<Modifier, HotkeyModifier> modifierDictionary;
+
         private HotkeyController()
         {
             sc = SessionController.getInstance();
+            intitialiseModifierDictionary();
             initialiseHotkeyDictionary();
         }
 
@@ -278,11 +287,11 @@ namespace uk.org.riseley.puttySessionManager.controller
             return RegisterHotkey(form, getHotKeyCharFromId(id), id);
         }
 
-        public bool RegisterHotkey(Form form, char winkey, HotKeyId id)
+        public bool RegisterHotkey(Form form, char key, HotKeyId id)
         {
-            bool result = User32.RegisterHotKey(form.Handle, (int)id, (int)User32.Modifiers.MOD_WIN, (int)(Char.ToUpper(winkey)));
+            bool result = User32.RegisterHotKey(form.Handle, (int)id, getModifier().Modifier, (int)(Char.ToUpper(key)));
             if (result)
-                saveHotkey(winkey, id);
+                saveHotkey(key, id);
             return result;
         }
 
@@ -297,8 +306,8 @@ namespace uk.org.riseley.puttySessionManager.controller
         {
             foreach (HotKeyId hk in Enum.GetValues(typeof(HotKeyId)))
             {
-                // Skip over the SYSTEM hotkey
-                if (hk != HotKeyId.HKID_SYSTEM)
+                // Skip over any protected hotkey
+                if (hk != HotKeyId.HKID_PROTECTED)
                     UnregisterHotKey(form, hk);
             }
             return true;
@@ -483,7 +492,7 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         public enum HotKeyId
         {
-            HKID_SYSTEM = -1,
+            HKID_PROTECTED = -1,
             HKID_NEW = 0,
             HKID_SESSION_1 = 1,
             HKID_SESSION_2 = 2,
@@ -502,14 +511,8 @@ namespace uk.org.riseley.puttySessionManager.controller
         {
             hotkeyDictionary = new Dictionary<char, HotKeyId>();
 
-            // Add the default system hotkeys so they can't be duplicated
-            hotkeyDictionary.Add('D', HotKeyId.HKID_SYSTEM);
-            hotkeyDictionary.Add('E', HotKeyId.HKID_SYSTEM);
-            hotkeyDictionary.Add('F', HotKeyId.HKID_SYSTEM);
-            hotkeyDictionary.Add('L', HotKeyId.HKID_SYSTEM);
-            hotkeyDictionary.Add('M', HotKeyId.HKID_SYSTEM);
-            hotkeyDictionary.Add('R', HotKeyId.HKID_SYSTEM);
-            hotkeyDictionary.Add('U', HotKeyId.HKID_SYSTEM);
+            // Add any protected hotkeys
+            addProtectedHotkeys(getModifier());
 
             // Add all the enabled hotkeys
             if (Properties.Settings.Default.HotkeyNewEnabled)
@@ -536,6 +539,21 @@ namespace uk.org.riseley.puttySessionManager.controller
                 hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession9), HotKeyId.HKID_SESSION_9);
             if (Properties.Settings.Default.Hotkey10Enabled)
                 hotkeyDictionary.Add(Char.ToUpper(Properties.Settings.Default.HotkeySession10), HotKeyId.HKID_SESSION_10);
+        }
+
+        private void intitialiseModifierDictionary()
+        {
+            modifierDictionary = new Dictionary<Modifier,HotkeyModifier>();
+
+            modifierDictionary.Add(Modifier.CTRL_ALT, 
+                                   new HotkeyModifier((int)Modifier.CTRL_ALT, 
+                                                      "Ctrl+Alt", 
+                                                      new char[]{}));
+            modifierDictionary.Add(Modifier.WIN,      
+                                   new HotkeyModifier( (int)Modifier.WIN,      
+                                                        "Win"    , 
+                                                        new char[] {'D','E','F','L','M','R','U'} ));
+
         }
 
         public void registerAllEnabledHotkeys( Form form )
@@ -625,6 +643,74 @@ namespace uk.org.riseley.puttySessionManager.controller
                         Properties.Settings.Default.HotkeySession10 = hotkey;
                         break;
                 }               
+            }
+            return result;
+        }
+
+        public HotkeyModifier getModifier()
+        {
+            HotkeyModifier m = null;
+            modifierDictionary.TryGetValue((Modifier)Properties.Settings.Default.HotkeyModifier,out m);
+            return m;
+        }
+
+        public void setModifier(HotkeyModifier m)
+        {
+            // Remove any protected hotkeys for the old modifier
+            removeProtectedHotkeys(getModifier());
+
+            // Set the new modifier
+            Properties.Settings.Default.HotkeyModifier = m.Modifier;
+
+            // Add in any protected keys for the new modifier
+            addProtectedHotkeys(getModifier());
+        }
+
+        public HotkeyModifier[] getAllModifiers()
+        {
+            HotkeyModifier[] array = new HotkeyModifier[modifierDictionary.Count];
+            modifierDictionary.Values.CopyTo(array, 0);
+            return array;
+        }
+
+        private void addProtectedHotkeys(HotkeyModifier modifier)
+        {
+            foreach ( char c in modifier.ProtectedKeys)
+            {
+                // Add the default system hotkeys so they can't be duplicated
+                hotkeyDictionary.Add(c, HotKeyId.HKID_PROTECTED);
+            }
+        }
+
+        private void removeProtectedHotkeys ( HotkeyModifier modifier )
+        {
+            foreach (char c in modifier.ProtectedKeys)
+            {
+                // Remove any protected keys
+                hotkeyDictionary.Remove(c);             
+            }
+        }
+
+        /// <summary>
+        /// Check to see if the exisiting set of hotkeys contains any protected
+        /// hotkeys for the new modifier
+        /// </summary>
+        /// <param name="modifier"></param>
+        /// <returns></returns>
+        public bool validateNewModifier(HotkeyModifier modifier)
+        {
+            bool result = true;
+            foreach (char c in modifier.ProtectedKeys)
+            {
+                if (hotkeyDictionary.ContainsKey(c))
+                {
+                    HotKeyId id;
+                    hotkeyDictionary.TryGetValue(c, out id);
+                    if (id != HotKeyId.HKID_PROTECTED)
+                    {
+                        result = false;
+                    }
+                }
             }
             return result;
         }

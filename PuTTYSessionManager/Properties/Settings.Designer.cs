@@ -875,5 +875,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["ShowInTaskbar"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int HotkeyModifier {
+            get {
+                return ((int)(this["HotkeyModifier"]));
+            }
+            set {
+                this["HotkeyModifier"] = value;
+            }
+        }
     }
 }

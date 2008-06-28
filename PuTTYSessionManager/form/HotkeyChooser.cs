@@ -40,6 +40,8 @@ namespace uk.org.riseley.puttySessionManager.form
         private Dictionary<HotkeyController.HotKeyId,TextBox>  textboxDictionary;
         private Dictionary<HotkeyController.HotKeyId,CheckBox> checkboxDictionary;
 
+        private int currentModifierIndex = -1;
+
         public HotkeyChooser(Form parent)
         {
             parentWindow = parent;
@@ -51,6 +53,7 @@ namespace uk.org.riseley.puttySessionManager.form
             createTextboxDictionary();
             createCheckboxDictionary();
             intialiseTextboxes();
+            setModifierLabels();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
             EventHandler hkHandler = new EventHandler(setHotkeys);
@@ -168,6 +171,12 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 t.Text = hkc.getHotKeyFromId((HotkeyController.HotKeyId)t.Tag);
             }
+
+            modifierComboBox.BeginUpdate();
+            modifierComboBox.Items.AddRange(hkc.getAllModifiers());
+            modifierComboBox.Text = hkc.getModifier().Description;
+            currentModifierIndex = modifierComboBox.SelectedIndex;
+            modifierComboBox.EndUpdate();
         }
 
         
@@ -265,13 +274,7 @@ namespace uk.org.riseley.puttySessionManager.form
                                    , MessageBoxIcon.Warning);
                 }
                 tb.Text = hkc.getHotKeyFromId(hkid);
-                hkc.refreshHotkeys();
-
-                // Try to disable any associated combox box
-                ComboBox cmb = null;
-                comboDictionary.TryGetValue(hkid, out cmb);
-                if (cb != null)
-                    cb.Enabled = false;
+                hkc.refreshHotkeys();             
             }
             else
             {
@@ -288,7 +291,12 @@ namespace uk.org.riseley.puttySessionManager.form
                     char newHotkey = tb.Text.ToCharArray(0,1)[0];
                     if (hkc.isHotkeyAvailable(newHotkey) == false)
                     {
-                        MessageBox.Show(this, "Hotkey may not be duplicated or D,E,F,L,M,R or U"
+                        string warningMessage = "Hotkey may not be duplicated";
+                        if ( hkc.getModifier().ProtectedKeys.Length > 0 )
+                        {
+                            warningMessage = warningMessage + " or one of the system keys: "  + hkc.getModifier().ProtectedKeysDescription;
+                        }
+                        MessageBox.Show(this, warningMessage
                                        , "Warning"
                                        , MessageBoxButtons.OK
                                        , MessageBoxIcon.Warning);
@@ -379,6 +387,51 @@ namespace uk.org.riseley.puttySessionManager.form
                 c.SelectedItem = null;
                 hkc.saveSessionnameToHotkey(parentWindow, hkid, null);
             }
+        }
+
+        /// <summary>
+        /// Set all the modifier labels to be the current modifier text
+        /// </summary>
+        private void setModifierLabels()
+        {
+            String modifier = hkc.getModifier().Description;            
+            hkLabel1.Text = modifier;
+            hkLabel2.Text = modifier;
+            hkLabel3.Text = modifier;
+            hkLabel4.Text = modifier;
+            hkLabel5.Text = modifier;
+            hkLabel6.Text = modifier;
+            hkLabel7.Text = modifier;
+            hkLabel8.Text = modifier;
+            hkLabel9.Text = modifier;
+            hkLabel10.Text = modifier;
+            newSessionHKLabel.Text = modifier;
+            minimizeWindowHKLabel.Text = modifier;
+        }
+
+        private void modifierComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HotkeyModifier modifier = (HotkeyModifier)modifierComboBox.SelectedItem;
+            if (hkc.validateNewModifier(modifier) == false)
+            {
+                MessageBox.Show(this, "Your current hotkeys contain one or more protected keys for \n" +
+                                      "the " + modifier.Description + " modifier: " + modifier.ProtectedKeysDescription + "\n" + 
+                                      "Please disable or remove these hotkeys first."
+               , "Warning"
+               , MessageBoxButtons.OK
+               , MessageBoxIcon.Warning);
+                modifierComboBox.SelectedIndex = currentModifierIndex;
+                return;
+            }
+
+            hkc.setModifier((HotkeyModifier)modifierComboBox.SelectedItem);
+            setModifierLabels();
+            hkc.UnregisterAllHotKeys(parentWindow);
+            hkc.registerAllEnabledHotkeys(parentWindow);
+            currentModifierIndex = modifierComboBox.SelectedIndex;
+
+            // Fire a refresh event
+            hkc.refreshHotkeys();
         }
     }
 }

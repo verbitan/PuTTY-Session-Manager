@@ -155,6 +155,7 @@
     <Compile Include="form\UpdateForm.Designer.cs">
       <DependentUpon>UpdateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\HotkeyModifier.cs" />
     <Compile Include="model\SynchronizeSessionsRequest.cs" />
     <Compile Include="model\CopySessionRequest.cs" />
     <Compile Include="model\CsvRecord.cs" />

@@ -6,6 +6,8 @@ This is mainly a bugfix release with a fair amount of code refactoring
 and some minor enhancements
 
 Feature requests / enhancements:
+1746714: More Session Hotkeys. Hotkey modifier can now be chosen to provide
+         support for Vista
 1915388: Expand on startup for the tree view.  Adds an option to allow the
          tree view to be fully expanded on startup
 1882231: Add support for /ini option for launching WinSCP. Ini file location
