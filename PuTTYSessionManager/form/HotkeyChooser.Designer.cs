@@ -163,16 +163,16 @@ namespace uk.org.riseley.puttySessionManager.form
             // modifierLabel
             // 
             this.modifierLabel.AutoSize = true;
-            this.modifierLabel.Location = new System.Drawing.Point(56, 16);
+            this.modifierLabel.Location = new System.Drawing.Point(77, 16);
             this.modifierLabel.Name = "modifierLabel";
-            this.modifierLabel.Size = new System.Drawing.Size(120, 13);
+            this.modifierLabel.Size = new System.Drawing.Size(121, 13);
             this.modifierLabel.TabIndex = 51;
             this.modifierLabel.Text = "Choose Hotkey Modifier";
             // 
             // modifierComboBox
             // 
             this.modifierComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.modifierComboBox.Location = new System.Drawing.Point(182, 10);
+            this.modifierComboBox.Location = new System.Drawing.Point(209, 10);
             this.modifierComboBox.Name = "modifierComboBox";
             this.modifierComboBox.Size = new System.Drawing.Size(89, 21);
             this.modifierComboBox.TabIndex = 50;
@@ -188,7 +188,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox10.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox10.Location = new System.Drawing.Point(304, 347);
             this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(65, 17);
+            this.checkBox10.Size = new System.Drawing.Size(64, 17);
             this.checkBox10.TabIndex = 25;
             this.checkBox10.Text = "Enabled";
             this.checkBox10.UseVisualStyleBackColor = true;
@@ -204,7 +204,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox9.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox9.Location = new System.Drawing.Point(304, 321);
             this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(65, 17);
+            this.checkBox9.Size = new System.Drawing.Size(64, 17);
             this.checkBox9.TabIndex = 24;
             this.checkBox9.Text = "Enabled";
             this.checkBox9.UseVisualStyleBackColor = true;
@@ -220,7 +220,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox8.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox8.Location = new System.Drawing.Point(304, 294);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(65, 17);
+            this.checkBox8.Size = new System.Drawing.Size(64, 17);
             this.checkBox8.TabIndex = 23;
             this.checkBox8.Text = "Enabled";
             this.checkBox8.UseVisualStyleBackColor = true;
@@ -236,7 +236,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox7.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox7.Location = new System.Drawing.Point(304, 267);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(65, 17);
+            this.checkBox7.Size = new System.Drawing.Size(64, 17);
             this.checkBox7.TabIndex = 22;
             this.checkBox7.Text = "Enabled";
             this.checkBox7.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk10TextBox.MaxLength = 1;
             this.hk10TextBox.Name = "hk10TextBox";
             this.hk10TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey10Enabled;
-            this.hk10TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk10TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk10TextBox.TabIndex = 49;
             this.hk10TextBox.TabStop = false;
             this.hk10TextBox.Text = "0";
@@ -266,7 +266,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk9TextBox.MaxLength = 1;
             this.hk9TextBox.Name = "hk9TextBox";
             this.hk9TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey9Enabled;
-            this.hk9TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk9TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk9TextBox.TabIndex = 48;
             this.hk9TextBox.TabStop = false;
             this.hk9TextBox.Text = "9";
@@ -281,7 +281,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk8TextBox.MaxLength = 1;
             this.hk8TextBox.Name = "hk8TextBox";
             this.hk8TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey8Enabled;
-            this.hk8TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk8TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk8TextBox.TabIndex = 47;
             this.hk8TextBox.TabStop = false;
             this.hk8TextBox.Text = "8";
@@ -296,7 +296,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk7TextBox.MaxLength = 1;
             this.hk7TextBox.Name = "hk7TextBox";
             this.hk7TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey7Enabled;
-            this.hk7TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk7TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk7TextBox.TabIndex = 46;
             this.hk7TextBox.TabStop = false;
             this.hk7TextBox.Text = "7";
@@ -307,11 +307,11 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk6TextBox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "Hotkey6Enabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk6TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.hk6TextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.hk6TextBox.Location = new System.Drawing.Point(50, 239);
+            this.hk6TextBox.Location = new System.Drawing.Point(50, 237);
             this.hk6TextBox.MaxLength = 1;
             this.hk6TextBox.Name = "hk6TextBox";
             this.hk6TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey6Enabled;
-            this.hk6TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk6TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk6TextBox.TabIndex = 45;
             this.hk6TextBox.TabStop = false;
             this.hk6TextBox.Text = "6";
@@ -327,7 +327,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox6.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox6.Location = new System.Drawing.Point(304, 240);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(65, 17);
+            this.checkBox6.Size = new System.Drawing.Size(64, 17);
             this.checkBox6.TabIndex = 21;
             this.checkBox6.Text = "Enabled";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -336,9 +336,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel10
             // 
             this.hkLabel10.AutoSize = true;
-            this.hkLabel10.Location = new System.Drawing.Point(10, 348);
+            this.hkLabel10.Location = new System.Drawing.Point(6, 348);
             this.hkLabel10.Name = "hkLabel10";
-            this.hkLabel10.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel10.Size = new System.Drawing.Size(36, 13);
             this.hkLabel10.TabIndex = 43;
             this.hkLabel10.Text = "Win +";
             // 
@@ -358,9 +358,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel9
             // 
             this.hkLabel9.AutoSize = true;
-            this.hkLabel9.Location = new System.Drawing.Point(9, 322);
+            this.hkLabel9.Location = new System.Drawing.Point(5, 322);
             this.hkLabel9.Name = "hkLabel9";
-            this.hkLabel9.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel9.Size = new System.Drawing.Size(36, 13);
             this.hkLabel9.TabIndex = 41;
             this.hkLabel9.Text = "Win +";
             // 
@@ -380,9 +380,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel8
             // 
             this.hkLabel8.AutoSize = true;
-            this.hkLabel8.Location = new System.Drawing.Point(9, 295);
+            this.hkLabel8.Location = new System.Drawing.Point(5, 295);
             this.hkLabel8.Name = "hkLabel8";
-            this.hkLabel8.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel8.Size = new System.Drawing.Size(36, 13);
             this.hkLabel8.TabIndex = 39;
             this.hkLabel8.Text = "Win +";
             // 
@@ -402,9 +402,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel7
             // 
             this.hkLabel7.AutoSize = true;
-            this.hkLabel7.Location = new System.Drawing.Point(9, 268);
+            this.hkLabel7.Location = new System.Drawing.Point(5, 268);
             this.hkLabel7.Name = "hkLabel7";
-            this.hkLabel7.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel7.Size = new System.Drawing.Size(36, 13);
             this.hkLabel7.TabIndex = 37;
             this.hkLabel7.Text = "Win +";
             // 
@@ -424,9 +424,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel6
             // 
             this.hkLabel6.AutoSize = true;
-            this.hkLabel6.Location = new System.Drawing.Point(9, 241);
+            this.hkLabel6.Location = new System.Drawing.Point(5, 241);
             this.hkLabel6.Name = "hkLabel6";
-            this.hkLabel6.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel6.Size = new System.Drawing.Size(36, 13);
             this.hkLabel6.TabIndex = 35;
             this.hkLabel6.Text = "Win +";
             // 
@@ -454,7 +454,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox5.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox5.Location = new System.Drawing.Point(304, 213);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(65, 17);
+            this.checkBox5.Size = new System.Drawing.Size(64, 17);
             this.checkBox5.TabIndex = 20;
             this.checkBox5.Text = "Enabled";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -470,7 +470,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox4.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox4.Location = new System.Drawing.Point(304, 187);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(65, 17);
+            this.checkBox4.Size = new System.Drawing.Size(64, 17);
             this.checkBox4.TabIndex = 19;
             this.checkBox4.Text = "Enabled";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -486,7 +486,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox3.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox3.Location = new System.Drawing.Point(304, 160);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(65, 17);
+            this.checkBox3.Size = new System.Drawing.Size(64, 17);
             this.checkBox3.TabIndex = 18;
             this.checkBox3.Text = "Enabled";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -502,7 +502,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox2.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox2.Location = new System.Drawing.Point(304, 133);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(65, 17);
+            this.checkBox2.Size = new System.Drawing.Size(64, 17);
             this.checkBox2.TabIndex = 17;
             this.checkBox2.Text = "Enabled";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -517,7 +517,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk5TextBox.MaxLength = 1;
             this.hk5TextBox.Name = "hk5TextBox";
             this.hk5TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey5Enabled;
-            this.hk5TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk5TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk5TextBox.TabIndex = 29;
             this.hk5TextBox.TabStop = false;
             this.hk5TextBox.Text = "5";
@@ -532,7 +532,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk4TextBox.MaxLength = 1;
             this.hk4TextBox.Name = "hk4TextBox";
             this.hk4TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey4Enabled;
-            this.hk4TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk4TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk4TextBox.TabIndex = 28;
             this.hk4TextBox.TabStop = false;
             this.hk4TextBox.Text = "4";
@@ -547,7 +547,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk3TextBox.MaxLength = 1;
             this.hk3TextBox.Name = "hk3TextBox";
             this.hk3TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey3Enabled;
-            this.hk3TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk3TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk3TextBox.TabIndex = 27;
             this.hk3TextBox.TabStop = false;
             this.hk3TextBox.Text = "3";
@@ -562,7 +562,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk2TextBox.MaxLength = 1;
             this.hk2TextBox.Name = "hk2TextBox";
             this.hk2TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey2Enabled;
-            this.hk2TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk2TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk2TextBox.TabIndex = 26;
             this.hk2TextBox.TabStop = false;
             this.hk2TextBox.Text = "2";
@@ -577,7 +577,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk1TextBox.MaxLength = 1;
             this.hk1TextBox.Name = "hk1TextBox";
             this.hk1TextBox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.Hotkey1Enabled;
-            this.hk1TextBox.Size = new System.Drawing.Size(30, 20);
+            this.hk1TextBox.Size = new System.Drawing.Size(30, 21);
             this.hk1TextBox.TabIndex = 25;
             this.hk1TextBox.TabStop = false;
             this.hk1TextBox.Text = "1";
@@ -593,7 +593,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.checkBox1.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.checkBox1.Location = new System.Drawing.Point(304, 106);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
+            this.checkBox1.Size = new System.Drawing.Size(64, 17);
             this.checkBox1.TabIndex = 16;
             this.checkBox1.Text = "Enabled";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -602,20 +602,20 @@ namespace uk.org.riseley.puttySessionManager.form
             // minimizeWindowHKLabel
             // 
             this.minimizeWindowHKLabel.AutoSize = true;
-            this.minimizeWindowHKLabel.Location = new System.Drawing.Point(200, 61);
+            this.minimizeWindowHKLabel.Location = new System.Drawing.Point(221, 61);
             this.minimizeWindowHKLabel.Name = "minimizeWindowHKLabel";
-            this.minimizeWindowHKLabel.Size = new System.Drawing.Size(35, 13);
+            this.minimizeWindowHKLabel.Size = new System.Drawing.Size(36, 13);
             this.minimizeWindowHKLabel.TabIndex = 23;
             this.minimizeWindowHKLabel.Text = "Win +";
             // 
             // minimizeWindowHKTextbox
             // 
             this.minimizeWindowHKTextbox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyMinimizeEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.minimizeWindowHKTextbox.Location = new System.Drawing.Point(241, 58);
+            this.minimizeWindowHKTextbox.Location = new System.Drawing.Point(268, 58);
             this.minimizeWindowHKTextbox.MaxLength = 1;
             this.minimizeWindowHKTextbox.Name = "minimizeWindowHKTextbox";
             this.minimizeWindowHKTextbox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyMinimizeEnabled;
-            this.minimizeWindowHKTextbox.Size = new System.Drawing.Size(30, 20);
+            this.minimizeWindowHKTextbox.Size = new System.Drawing.Size(30, 21);
             this.minimizeWindowHKTextbox.TabIndex = 4;
             this.minimizeWindowHKTextbox.TabStop = false;
             this.minimizeWindowHKTextbox.Text = "Q";
@@ -627,10 +627,10 @@ namespace uk.org.riseley.puttySessionManager.form
             this.minimizeWindowHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyMinimizeEnabled;
             this.minimizeWindowHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.minimizeWindowHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyMinimizeEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.minimizeWindowHKCheckbox.Location = new System.Drawing.Point(13, 60);
+            this.minimizeWindowHKCheckbox.Location = new System.Drawing.Point(34, 60);
             this.minimizeWindowHKCheckbox.Name = "minimizeWindowHKCheckbox";
             this.minimizeWindowHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.minimizeWindowHKCheckbox.Size = new System.Drawing.Size(181, 17);
+            this.minimizeWindowHKCheckbox.Size = new System.Drawing.Size(178, 17);
             this.minimizeWindowHKCheckbox.TabIndex = 3;
             this.minimizeWindowHKCheckbox.Text = "Enable Minimize Window Hotkey";
             this.minimizeWindowHKCheckbox.UseVisualStyleBackColor = true;
@@ -642,7 +642,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.favSessCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
             this.favSessCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.favSessCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.favSessCheckBox.Location = new System.Drawing.Point(6, 81);
+            this.favSessCheckBox.Location = new System.Drawing.Point(24, 81);
             this.favSessCheckBox.Name = "favSessCheckBox";
             this.favSessCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.favSessCheckBox.Size = new System.Drawing.Size(188, 17);
@@ -654,9 +654,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel5
             // 
             this.hkLabel5.AutoSize = true;
-            this.hkLabel5.Location = new System.Drawing.Point(10, 214);
+            this.hkLabel5.Location = new System.Drawing.Point(6, 214);
             this.hkLabel5.Name = "hkLabel5";
-            this.hkLabel5.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel5.Size = new System.Drawing.Size(36, 13);
             this.hkLabel5.TabIndex = 19;
             this.hkLabel5.Text = "Win +";
             // 
@@ -676,9 +676,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel4
             // 
             this.hkLabel4.AutoSize = true;
-            this.hkLabel4.Location = new System.Drawing.Point(9, 188);
+            this.hkLabel4.Location = new System.Drawing.Point(5, 188);
             this.hkLabel4.Name = "hkLabel4";
-            this.hkLabel4.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel4.Size = new System.Drawing.Size(36, 13);
             this.hkLabel4.TabIndex = 17;
             this.hkLabel4.Text = "Win +";
             // 
@@ -698,9 +698,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel3
             // 
             this.hkLabel3.AutoSize = true;
-            this.hkLabel3.Location = new System.Drawing.Point(9, 161);
+            this.hkLabel3.Location = new System.Drawing.Point(5, 161);
             this.hkLabel3.Name = "hkLabel3";
-            this.hkLabel3.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel3.Size = new System.Drawing.Size(36, 13);
             this.hkLabel3.TabIndex = 15;
             this.hkLabel3.Text = "Win +";
             // 
@@ -720,9 +720,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel2
             // 
             this.hkLabel2.AutoSize = true;
-            this.hkLabel2.Location = new System.Drawing.Point(9, 134);
+            this.hkLabel2.Location = new System.Drawing.Point(5, 134);
             this.hkLabel2.Name = "hkLabel2";
-            this.hkLabel2.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel2.Size = new System.Drawing.Size(36, 13);
             this.hkLabel2.TabIndex = 13;
             this.hkLabel2.Text = "Win +";
             // 
@@ -742,9 +742,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // hkLabel1
             // 
             this.hkLabel1.AutoSize = true;
-            this.hkLabel1.Location = new System.Drawing.Point(9, 107);
+            this.hkLabel1.Location = new System.Drawing.Point(5, 107);
             this.hkLabel1.Name = "hkLabel1";
-            this.hkLabel1.Size = new System.Drawing.Size(35, 13);
+            this.hkLabel1.Size = new System.Drawing.Size(36, 13);
             this.hkLabel1.TabIndex = 11;
             this.hkLabel1.Text = "Win +";
             // 
@@ -765,20 +765,20 @@ namespace uk.org.riseley.puttySessionManager.form
             // newSessionHKLabel
             // 
             this.newSessionHKLabel.AutoSize = true;
-            this.newSessionHKLabel.Location = new System.Drawing.Point(200, 38);
+            this.newSessionHKLabel.Location = new System.Drawing.Point(221, 38);
             this.newSessionHKLabel.Name = "newSessionHKLabel";
-            this.newSessionHKLabel.Size = new System.Drawing.Size(35, 13);
+            this.newSessionHKLabel.Size = new System.Drawing.Size(36, 13);
             this.newSessionHKLabel.TabIndex = 9;
             this.newSessionHKLabel.Text = "Win +";
             // 
             // newSessionHKTextbox
             // 
             this.newSessionHKTextbox.DataBindings.Add(new System.Windows.Forms.Binding("ReadOnly", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyNewEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.newSessionHKTextbox.Location = new System.Drawing.Point(241, 34);
+            this.newSessionHKTextbox.Location = new System.Drawing.Point(268, 34);
             this.newSessionHKTextbox.MaxLength = 1;
             this.newSessionHKTextbox.Name = "newSessionHKTextbox";
             this.newSessionHKTextbox.ReadOnly = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyNewEnabled;
-            this.newSessionHKTextbox.Size = new System.Drawing.Size(30, 20);
+            this.newSessionHKTextbox.Size = new System.Drawing.Size(30, 21);
             this.newSessionHKTextbox.TabIndex = 2;
             this.newSessionHKTextbox.TabStop = false;
             this.newSessionHKTextbox.Text = "N";
@@ -790,10 +790,10 @@ namespace uk.org.riseley.puttySessionManager.form
             this.newSessionHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyNewEnabled;
             this.newSessionHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.newSessionHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyNewEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.newSessionHKCheckbox.Location = new System.Drawing.Point(33, 37);
+            this.newSessionHKCheckbox.Location = new System.Drawing.Point(54, 37);
             this.newSessionHKCheckbox.Name = "newSessionHKCheckbox";
             this.newSessionHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.newSessionHKCheckbox.Size = new System.Drawing.Size(161, 17);
+            this.newSessionHKCheckbox.Size = new System.Drawing.Size(158, 17);
             this.newSessionHKCheckbox.TabIndex = 1;
             this.newSessionHKCheckbox.Text = "Enable New Session Hotkey";
             this.newSessionHKCheckbox.UseVisualStyleBackColor = true;
@@ -835,7 +835,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.ClientSize = new System.Drawing.Size(384, 427);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(390, 459);

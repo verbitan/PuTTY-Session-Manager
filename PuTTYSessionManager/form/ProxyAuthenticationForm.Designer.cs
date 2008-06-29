@@ -59,14 +59,14 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.usernameTextBox.Location = new System.Drawing.Point(100, 65);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(186, 20);
+            this.usernameTextBox.Size = new System.Drawing.Size(186, 21);
             this.usernameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(100, 98);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(186, 20);
+            this.passwordTextBox.Size = new System.Drawing.Size(186, 21);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
@@ -113,7 +113,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(196, 13);
+            this.label3.Size = new System.Drawing.Size(205, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Enter username and password for proxy:";
             // 
@@ -141,6 +141,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.label1);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

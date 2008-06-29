@@ -315,6 +315,11 @@ namespace uk.org.riseley.puttySessionManager.control
             // Suppress repainting the TreeView until all the objects have been created.
             treeView.BeginUpdate();
 
+            if (Properties.Settings.Default.DisplayTreeIcons)
+                treeView.ImageList = treeImageList;
+            else
+                treeView.ImageList = null;
+
             // Store the root node and path
             TreeNode rootNode = treeView.Nodes[0];
             string rootPath = rootNode.FullPath;
@@ -333,14 +338,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
             foreach (Session s in getSessionController().getSessionList())
             {
-                TreeNode newNode = new TreeNode(s.SessionDisplayText);
-                newNode.Tag = s;
-                newNode.ContextMenuStrip = nodeContextMenuStrip;
-                newNode.ImageIndex = IMAGE_INDEX_SESSION;
-                newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
-
-                // Setup the key so that we can find the node again
-                newNode.Name = s.getKey();
+                TreeNode newNode = createNode(s);
 
                 if (s.FolderName == null || s.FolderName.Equals("") || s.FolderName.Equals(rootPath))
                 {
@@ -373,13 +371,7 @@ namespace uk.org.riseley.puttySessionManager.control
                         {
                             Session sess = new Session(folder, path, true);
 
-                            TreeNode folderNode = new TreeNode(sess.SessionDisplayText);
-
-                            folderNode.Name = sess.getKey();
-                            folderNode.Tag = sess;
-                            folderNode.ContextMenuStrip = nodeContextMenuStrip;
-                            folderNode.ImageIndex = IMAGE_INDEX_FOLDER;
-                            folderNode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
+                            TreeNode folderNode = createNode(sess);
 
                             currnode.Nodes.Add(folderNode);
                             currnode = folderNode;
@@ -554,15 +546,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 Session sess = new Session(folder, newpath, true);
 
                 // Create the folder node
-                TreeNode foldernode = new TreeNode(sess.SessionDisplayText);
-
-                // Set the key so that we can find it again
-                foldernode.Name = sess.getKey();
-
-                foldernode.Tag = sess;
-                foldernode.ContextMenuStrip = nodeContextMenuStrip;
-                foldernode.ImageIndex = IMAGE_INDEX_FOLDER;
-                foldernode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
+                TreeNode foldernode = createNode(sess);
 
                 // Add the selected node back to the folder
                 foldernode.Nodes.Add(selectedNode);
@@ -829,14 +813,7 @@ namespace uk.org.riseley.puttySessionManager.control
                         }
                         else
                         {
-                            TreeNode newNode = new TreeNode(newSession.SessionDisplayText);
-                            newNode.Tag = newSession;
-                            newNode.ContextMenuStrip = nodeContextMenuStrip;
-                            newNode.ImageIndex = IMAGE_INDEX_SESSION;
-                            newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
-
-                            // Setup the key so that we can find the node again
-                            newNode.Name = newSession.getKey();
+                            TreeNode newNode = createNode(newSession);
 
                             // Add the new node
                             ta[0].Nodes.Add(newNode);
@@ -1326,6 +1303,34 @@ namespace uk.org.riseley.puttySessionManager.control
                 rootNode.ExpandAll();
 
             treeView.EndUpdate();
+        }
+
+
+        /// <summary>
+        /// Method to ensure a consistent setup of new tree nodes
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private TreeNode createNode(Session s)
+        {
+            TreeNode newNode = new TreeNode(s.SessionDisplayText);
+            newNode.Tag = s;
+            newNode.ContextMenuStrip = nodeContextMenuStrip;
+            if (s.IsFolder == false)
+            {
+                newNode.ImageIndex = IMAGE_INDEX_SESSION;
+                newNode.SelectedImageIndex = IMAGE_INDEX_SESSION;
+            }
+            else
+            {
+                newNode.ImageIndex = IMAGE_INDEX_FOLDER;
+                newNode.SelectedImageIndex = IMAGE_INDEX_SELECTED_FOLDER;
+            }
+
+            // Setup the key so that we can find the node again
+            newNode.Name = s.getKey();
+
+            return newNode;
         }
 
     }

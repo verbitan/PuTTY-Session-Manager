@@ -147,15 +147,24 @@ namespace uk.org.riseley.puttySessionManager.form
             confirmExit();
         }
 
+        /// <summary>
+        /// Comfirm exit if required
+        /// </summary>
         private void confirmExit()
         {
-            if (MessageBox.Show(this, "Exit application?"
+            bool doExit = true;
+
+            if (Properties.Settings.Default.ConfirmExit == true &&
+                MessageBox.Show(this, "Exit application?"
                                    , "Exit"
                                    , MessageBoxButtons.YesNo
-                                   , MessageBoxIcon.Question) == DialogResult.Yes)
+                                   , MessageBoxIcon.Question) == DialogResult.No)
             {
-            	Exit();
+                doExit = false;
             }
+
+            if (doExit)
+                Exit();
         }
         
         public void Exit()

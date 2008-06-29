@@ -157,9 +157,21 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void chooseFontButton_Click(object sender, EventArgs e)
         {
-            if (fontDialog.ShowDialog() == DialogResult.OK)
+            if (sender == chooseDialogFontButton)
             {
-                sampletextTextbox.Font = fontDialog.Font;
+                fontDialog.Font = Properties.Settings.Default.DialogFont;
+                if (fontDialog.ShowDialog() == DialogResult.OK)
+                {
+                    sampleDialogTextbox.Font = fontDialog.Font;
+                }
+            }
+            else if (sender == chooseTreeFontButton)
+            {
+                fontDialog.Font = Properties.Settings.Default.TreeFont;
+                if (fontDialog.ShowDialog() == DialogResult.OK)
+                {
+                    sampleTreeTextbox.Font = fontDialog.Font;
+                }
             }
         }
 
@@ -292,11 +304,21 @@ namespace uk.org.riseley.puttySessionManager.form
             optionsToolTip.SetToolTip(autoMinimizeCheckBox, "If enabled, PSM will hide itself when a new session\n" +
                                                       "or folder of sessions is lauched");
             optionsToolTip.SetToolTip(autostartCheckBox, "Automatically start PSM on Windows login");
+            optionsToolTip.SetToolTip(taskbarCheckBox, "Show PSM in the taskbar when the window is visible");
+
+            
+            // Tree tab
             optionsToolTip.SetToolTip(numericUpDown1, "Threshold for warning when using \"Launch Folder\" or \n" +
                                                       "\"Launch Folder and Subfolders\" from the tree view");
             optionsToolTip.SetToolTip(expandTreeCheckBox, "The tree view will be fully expanded on startup.\n" +
                                                           "Not recommended if you have 100's of sessions.");
-            optionsToolTip.SetToolTip(taskbarCheckBox, "Show PSM in the taskbar when the window is visible");
+            optionsToolTip.SetToolTip(chooseDialogFontButton, "Set the font for all dialogs in the application.\n" +
+                                                              "Warning: This may upset the dialog layouts.\n" +
+                                                              "You are advised to restart after altering this");
+            optionsToolTip.SetToolTip(displayTreeIconsCheckBox, "Display icons in the tree view.\n");
+            optionsToolTip.SetToolTip(toolTipsCheckBox, "Enable the display of the session information\n" +
+                                                        "in tooltips in the tree view");
+                                                                
 
             // Pageant tab
             optionsToolTip.SetToolTip(addKeyButton, "Add an SSH private key(s) that will be opened\n" +
@@ -443,6 +465,17 @@ namespace uk.org.riseley.puttySessionManager.form
                 wsFtpRadioButton.Enabled = true;
                 Properties.Settings.Default.WinSCPVersion = 4;
             }
+        }
+
+        /// <summary>
+        /// Event handler for displayTreeIconsCheckBox Click event
+        /// Send a refresh request to the tree view when this value is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void displayTreeIconsCheckBox_Click(object sender, EventArgs e)
+        {
+            sc.invalidateSessionList(this, false);
         }
     }
 }

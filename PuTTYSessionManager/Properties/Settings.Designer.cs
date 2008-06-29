@@ -49,7 +49,7 @@ namespace uk.org.riseley.puttySessionManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 8.25pt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Tahoma, 8pt")]
         public global::System.Drawing.Font TreeFont {
             get {
                 return ((global::System.Drawing.Font)(this["TreeFont"]));
@@ -885,6 +885,42 @@ namespace uk.org.riseley.puttySessionManager.Properties {
             }
             set {
                 this["HotkeyModifier"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConfirmExit {
+            get {
+                return ((bool)(this["ConfirmExit"]));
+            }
+            set {
+                this["ConfirmExit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Tahoma, 8.25pt")]
+        public global::System.Drawing.Font DialogFont {
+            get {
+                return ((global::System.Drawing.Font)(this["DialogFont"]));
+            }
+            set {
+                this["DialogFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DisplayTreeIcons {
+            get {
+                return ((bool)(this["DisplayTreeIcons"]));
+            }
+            set {
+                this["DisplayTreeIcons"] = value;
             }
         }
     }

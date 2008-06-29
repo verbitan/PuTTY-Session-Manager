@@ -54,7 +54,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(52, 65);
+            this.okButton.Location = new System.Drawing.Point(53, 65);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -64,7 +64,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(166, 65);
+            this.cancelButton.Location = new System.Drawing.Point(167, 65);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 1;
@@ -74,7 +74,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 20);
+            this.label1.Location = new System.Drawing.Point(10, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 2;
@@ -82,10 +82,10 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 17);
+            this.textBox1.Location = new System.Drawing.Point(83, 25);
             this.textBox1.MaxLength = 100;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 20);
+            this.textBox1.Size = new System.Drawing.Size(202, 21);
             this.textBox1.TabIndex = 0;
             // 
             // FolderForm
@@ -100,6 +100,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.MaximizeBox = false;

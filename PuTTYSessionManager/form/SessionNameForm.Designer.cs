@@ -76,7 +76,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionNameLabel.AutoSize = true;
             this.sessionNameLabel.Location = new System.Drawing.Point(5, 20);
             this.sessionNameLabel.Name = "sessionNameLabel";
-            this.sessionNameLabel.Size = new System.Drawing.Size(75, 13);
+            this.sessionNameLabel.Size = new System.Drawing.Size(73, 13);
             this.sessionNameLabel.TabIndex = 2;
             this.sessionNameLabel.Text = "Session Name";
             // 
@@ -85,7 +85,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionNameTextBox.Location = new System.Drawing.Point(94, 17);
             this.sessionNameTextBox.MaxLength = 60;
             this.sessionNameTextBox.Name = "sessionNameTextBox";
-            this.sessionNameTextBox.Size = new System.Drawing.Size(188, 20);
+            this.sessionNameTextBox.Size = new System.Drawing.Size(188, 21);
             this.sessionNameTextBox.TabIndex = 0;
             // 
             // SessionNameForm
@@ -100,6 +100,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.sessionNameLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.MaximizeBox = false;

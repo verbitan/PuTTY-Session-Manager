@@ -93,12 +93,12 @@ namespace uk.org.riseley.puttySessionManager.form
             // resultsTextBox
             // 
             this.resultsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resultsTextBox.Location = new System.Drawing.Point(3, 16);
+            this.resultsTextBox.Location = new System.Drawing.Point(3, 17);
             this.resultsTextBox.Multiline = true;
             this.resultsTextBox.Name = "resultsTextBox";
             this.resultsTextBox.ReadOnly = true;
             this.resultsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.resultsTextBox.Size = new System.Drawing.Size(467, 107);
+            this.resultsTextBox.Size = new System.Drawing.Size(467, 106);
             this.resultsTextBox.TabIndex = 0;
             // 
             // currVersionLabel
@@ -106,7 +106,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.currVersionLabel.AutoSize = true;
             this.currVersionLabel.Location = new System.Drawing.Point(9, 148);
             this.currVersionLabel.Name = "currVersionLabel";
-            this.currVersionLabel.Size = new System.Drawing.Size(79, 13);
+            this.currVersionLabel.Size = new System.Drawing.Size(82, 13);
             this.currVersionLabel.TabIndex = 14;
             this.currVersionLabel.Text = "Current Version";
             // 
@@ -115,7 +115,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.currVersionTextBox.Location = new System.Drawing.Point(107, 145);
             this.currVersionTextBox.Name = "currVersionTextBox";
             this.currVersionTextBox.ReadOnly = true;
-            this.currVersionTextBox.Size = new System.Drawing.Size(378, 20);
+            this.currVersionTextBox.Size = new System.Drawing.Size(378, 21);
             this.currVersionTextBox.TabIndex = 13;
             // 
             // availVersionLabel
@@ -132,7 +132,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.availVersionTextBox.Location = new System.Drawing.Point(107, 171);
             this.availVersionTextBox.Name = "availVersionTextBox";
             this.availVersionTextBox.ReadOnly = true;
-            this.availVersionTextBox.Size = new System.Drawing.Size(378, 20);
+            this.availVersionTextBox.Size = new System.Drawing.Size(378, 21);
             this.availVersionTextBox.TabIndex = 15;
             // 
             // label1
@@ -140,7 +140,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 200);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "Update Link";
             // 
@@ -171,6 +171,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.resultsGroupBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.checkForUpdateButton);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(505, 304);
             this.MinimizeBox = false;

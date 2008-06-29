@@ -1,4 +1,4 @@
-PuTTY Session Manager v0.31 ( xx-04-2008 )
+PuTTY Session Manager v0.31 ( xx-07-2008 )
 =============================================
 Seventh release of PuTTY Session Manager
 
@@ -16,6 +16,8 @@ Feature requests / enhancements:
          now detect a corrupted prefs file and prompt you to delete the file
          and relaunch PSM
 1931924: Implemented option to not show PSM in the taskbar         
+1934134: Implemented option to not confirm exiting
+1931925: Implemented option to hide icons from the tree view
 
 Not Tracked: Make PSM a single instance application - if you try to launch it
              twice the existing window will be brought to the foreground                 
@@ -25,6 +27,7 @@ Not Tracked: Check the PuTTY executable is accessible on startup and prompt to
 Not Tracked: Use FileHelpers.dll for CSV export - this is a start for implementing
              storage providers for sync session functionality and portable PuTTY
              implementations. WIP.
+Not Tracked: Added option to make fonts for dialogs configurable             
              
 Bugs:
 1927128: Special chars not recognized. Ensure that special characters in the

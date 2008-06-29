@@ -64,7 +64,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.chooseSessionLabel.AutoSize = true;
             this.chooseSessionLabel.Location = new System.Drawing.Point(12, 33);
             this.chooseSessionLabel.Name = "chooseSessionLabel";
-            this.chooseSessionLabel.Size = new System.Drawing.Size(130, 13);
+            this.chooseSessionLabel.Size = new System.Drawing.Size(129, 13);
             this.chooseSessionLabel.TabIndex = 13;
             this.chooseSessionLabel.Text = "Choose Session Template";
             // 
@@ -83,16 +83,16 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.hostnameTextBox.Location = new System.Drawing.Point(148, 84);
             this.hostnameTextBox.Name = "hostnameTextBox";
-            this.hostnameTextBox.Size = new System.Drawing.Size(295, 20);
+            this.hostnameTextBox.Size = new System.Drawing.Size(295, 21);
             this.hostnameTextBox.TabIndex = 1;
             this.hostnameTextBox.TextChanged += new System.EventHandler(this.hostnameTextBox_TextChanged);
             // 
             // hostnameLabel
             // 
             this.hostnameLabel.AutoSize = true;
-            this.hostnameLabel.Location = new System.Drawing.Point(29, 87);
+            this.hostnameLabel.Location = new System.Drawing.Point(26, 87);
             this.hostnameLabel.Name = "hostnameLabel";
-            this.hostnameLabel.Size = new System.Drawing.Size(113, 13);
+            this.hostnameLabel.Size = new System.Drawing.Size(115, 13);
             this.hostnameLabel.TabIndex = 15;
             this.hostnameLabel.Text = "Enter Hostname String";
             // 
@@ -122,7 +122,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionNameLabel.AutoSize = true;
             this.sessionNameLabel.Location = new System.Drawing.Point(39, 113);
             this.sessionNameLabel.Name = "sessionNameLabel";
-            this.sessionNameLabel.Size = new System.Drawing.Size(103, 13);
+            this.sessionNameLabel.Size = new System.Drawing.Size(102, 13);
             this.sessionNameLabel.TabIndex = 19;
             this.sessionNameLabel.Text = "Enter Session Name";
             // 
@@ -131,7 +131,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionnameTextBox.Location = new System.Drawing.Point(148, 110);
             this.sessionnameTextBox.MaxLength = 60;
             this.sessionnameTextBox.Name = "sessionnameTextBox";
-            this.sessionnameTextBox.Size = new System.Drawing.Size(295, 20);
+            this.sessionnameTextBox.Size = new System.Drawing.Size(295, 21);
             this.sessionnameTextBox.TabIndex = 2;
             // 
             // copyUsernameCheckBox
@@ -142,7 +142,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.copyUsernameCheckBox.Location = new System.Drawing.Point(97, 143);
             this.copyUsernameCheckBox.Name = "copyUsernameCheckBox";
             this.copyUsernameCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.copyUsernameCheckBox.Size = new System.Drawing.Size(138, 17);
+            this.copyUsernameCheckBox.Size = new System.Drawing.Size(140, 17);
             this.copyUsernameCheckBox.TabIndex = 3;
             this.copyUsernameCheckBox.Text = "Copy Default Username";
             this.copyUsernameCheckBox.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // sessionFolderLabel
             // 
             this.sessionFolderLabel.AutoSize = true;
-            this.sessionFolderLabel.Location = new System.Drawing.Point(27, 60);
+            this.sessionFolderLabel.Location = new System.Drawing.Point(26, 60);
             this.sessionFolderLabel.Name = "sessionFolderLabel";
             this.sessionFolderLabel.Size = new System.Drawing.Size(115, 13);
             this.sessionFolderLabel.TabIndex = 23;
@@ -174,7 +174,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.launchSessionCheckBox.Location = new System.Drawing.Point(241, 143);
             this.launchSessionCheckBox.Name = "launchSessionCheckBox";
             this.launchSessionCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.launchSessionCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.launchSessionCheckBox.Size = new System.Drawing.Size(123, 17);
             this.launchSessionCheckBox.TabIndex = 4;
             this.launchSessionCheckBox.Text = "Launch Session Now";
             this.launchSessionCheckBox.UseVisualStyleBackColor = true;
@@ -199,9 +199,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Controls.Add(this.hostnameTextBox);
             this.Controls.Add(this.chooseSessionLabel);
             this.Controls.Add(this.sessionComboBox);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(465, 252);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(465, 252);
             this.Name = "NewSessionForm";
             this.ShowInTaskbar = false;
             this.Text = "New Session";

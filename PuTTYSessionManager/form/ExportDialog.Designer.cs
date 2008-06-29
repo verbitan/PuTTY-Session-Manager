@@ -57,7 +57,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.csvRadioButton.Location = new System.Drawing.Point(73, 41);
             this.csvRadioButton.Name = "csvRadioButton";
             this.csvRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.csvRadioButton.Size = new System.Drawing.Size(65, 17);
+            this.csvRadioButton.Size = new System.Drawing.Size(63, 17);
             this.csvRadioButton.TabIndex = 1;
             this.csvRadioButton.Text = "CSV File";
             this.csvRadioButton.UseVisualStyleBackColor = true;
@@ -70,7 +70,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.registryRadioButton.Location = new System.Drawing.Point(56, 18);
             this.registryRadioButton.Name = "registryRadioButton";
             this.registryRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.registryRadioButton.Size = new System.Drawing.Size(82, 17);
+            this.registryRadioButton.Size = new System.Drawing.Size(84, 17);
             this.registryRadioButton.TabIndex = 0;
             this.registryRadioButton.TabStop = true;
             this.registryRadioButton.Text = "Registry File";
@@ -124,6 +124,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.ClientSize = new System.Drawing.Size(215, 110);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

@@ -64,7 +64,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tableLayoutPanel.ColumnCount = 3;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.37288F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.62712F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
             this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.textBoxVersion, 1, 1);
@@ -95,7 +95,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 7);
-            this.logoPictureBox.Size = new System.Drawing.Size(163, 347);
+            this.logoPictureBox.Size = new System.Drawing.Size(161, 347);
             this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logoPictureBox.TabIndex = 12;
             this.logoPictureBox.TabStop = false;
@@ -104,11 +104,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.tableLayoutPanel.SetColumnSpan(this.labelProductName, 2);
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(175, 0);
+            this.labelProductName.Location = new System.Drawing.Point(173, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(291, 17);
+            this.labelProductName.Size = new System.Drawing.Size(293, 17);
             this.labelProductName.TabIndex = 0;
             this.labelProductName.Text = "Product Name";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -117,11 +117,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.textBoxVersion.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tableLayoutPanel.SetColumnSpan(this.textBoxVersion, 2);
-            this.textBoxVersion.Location = new System.Drawing.Point(179, 25);
+            this.textBoxVersion.Location = new System.Drawing.Point(177, 25);
             this.textBoxVersion.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.textBoxVersion.Name = "textBoxVersion";
             this.textBoxVersion.ReadOnly = true;
-            this.textBoxVersion.Size = new System.Drawing.Size(228, 13);
+            this.textBoxVersion.Size = new System.Drawing.Size(228, 14);
             this.textBoxVersion.TabIndex = 1;
             this.textBoxVersion.Text = "Version";
             // 
@@ -129,11 +129,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.tableLayoutPanel.SetColumnSpan(this.labelCopyright, 2);
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(175, 44);
+            this.labelCopyright.Location = new System.Drawing.Point(173, 44);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(291, 17);
+            this.labelCopyright.Size = new System.Drawing.Size(293, 17);
             this.labelCopyright.TabIndex = 2;
             this.labelCopyright.Text = "Copyright";
             this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,11 +142,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.tableLayoutPanel.SetColumnSpan(this.labelCompanyName, 2);
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(175, 69);
+            this.labelCompanyName.Location = new System.Drawing.Point(173, 69);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(291, 17);
+            this.labelCompanyName.Size = new System.Drawing.Size(293, 17);
             this.labelCompanyName.TabIndex = 3;
             this.labelCompanyName.Text = "Company Name";
             this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -155,13 +155,13 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.tableLayoutPanel.SetColumnSpan(this.textBoxDescription, 2);
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(175, 121);
+            this.textBoxDescription.Location = new System.Drawing.Point(173, 121);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(291, 201);
+            this.textBoxDescription.Size = new System.Drawing.Size(293, 201);
             this.textBoxDescription.TabIndex = 5;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "Description";
@@ -170,11 +170,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.tableLayoutPanel.SetColumnSpan(this.sfLinkLabel, 2);
             this.sfLinkLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sfLinkLabel.Location = new System.Drawing.Point(175, 92);
+            this.sfLinkLabel.Location = new System.Drawing.Point(173, 92);
             this.sfLinkLabel.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.sfLinkLabel.MaximumSize = new System.Drawing.Size(0, 17);
             this.sfLinkLabel.Name = "sfLinkLabel";
-            this.sfLinkLabel.Size = new System.Drawing.Size(291, 17);
+            this.sfLinkLabel.Size = new System.Drawing.Size(293, 17);
             this.sfLinkLabel.TabIndex = 4;
             this.sfLinkLabel.TabStop = true;
             this.sfLinkLabel.Text = "http://puttysm.sourceforge.net";
@@ -185,15 +185,15 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.okButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.okButton.Location = new System.Drawing.Point(401, 328);
+            this.okButton.Location = new System.Drawing.Point(398, 328);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(65, 22);
+            this.okButton.Size = new System.Drawing.Size(68, 22);
             this.okButton.TabIndex = 0;
             this.okButton.Text = "&OK";
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(172, 328);
+            this.updateButton.Location = new System.Drawing.Point(170, 328);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(111, 22);
             this.updateButton.TabIndex = 6;
@@ -207,6 +207,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 371);
             this.Controls.Add(this.tableLayoutPanel);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
