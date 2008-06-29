@@ -1,4 +1,4 @@
-PuTTY Session Manager v0.31 ( xx-07-2008 )
+PuTTY Session Manager v0.31 ( 29-06-2008 )
 =============================================
 Seventh release of PuTTY Session Manager
 
