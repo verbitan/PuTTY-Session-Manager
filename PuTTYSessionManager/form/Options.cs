@@ -24,6 +24,7 @@ using System.Text;
 using System.Windows.Forms;
 using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.controller;
+using System.IO;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
@@ -235,36 +236,47 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             String filename = "";
             String fileFilter = "";
+            String currentFile = "";
             const String allFilesFilter = "|All Files|*.*";
             switch ( fdt) 
             {
                 case FileDialogType.PUTTY:
                     filename = "putty.exe";
-                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    currentFile = Properties.Settings.Default.PuttyLocation;
                     break;
                 case FileDialogType.PAGEANT:
                     filename = "pageant.exe";
-                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    currentFile = Properties.Settings.Default.PageantLocation;
                     break;
                 case FileDialogType.PAGEANT_KEYS:
-                    filename = "";
-                    fileFilter = "*.ppk|*.ppk" + allFilesFilter;
+                    filename = "*.ppk";
                     break;
                 case FileDialogType.FILEZILLA:
                     filename = "FileZilla.exe";
-                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    currentFile = Properties.Settings.Default.FileZillaLocation;
                     break;
                 case FileDialogType.WINSCP:
                     filename = "WinSCP*.exe";
-                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    currentFile = Properties.Settings.Default.WinSCPLocation;
                     break;
                 case FileDialogType.WINSCPINI:
                     filename = "*.ini";
-                    fileFilter = filename + "|" + filename + allFilesFilter;
+                    currentFile = Properties.Settings.Default.WinSCPIniLocation;
                     break;
-
             }
+
+            // Attempt to set the working directory
+            string directory = "";
+            if ( currentFile != null && !currentFile.Equals("") )
+                directory = Path.GetFullPath(currentFile);
+            if (File.Exists(directory))
+                openFileDialog.InitialDirectory = directory;
+
+            // And the filename
             openFileDialog.FileName = filename;
+
+            // And the file filter
+            fileFilter = filename + "|" + filename + allFilesFilter;
             openFileDialog.Filter = fileFilter;
         }
 
