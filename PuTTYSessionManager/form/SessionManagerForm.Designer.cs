@@ -72,7 +72,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.systrayIcon.ContextMenuStrip = this.sysTrayContextMenu;
             this.systrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systrayIcon.Icon")));
             this.systrayIcon.Text = "PuTTY Session Manager";
-            this.systrayIcon.Visible = true;
             this.systrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // sysTrayContextMenu

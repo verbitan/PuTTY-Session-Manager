@@ -26,6 +26,7 @@ using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.controller;
 using uk.org.riseley.puttySessionManager.control;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
@@ -97,6 +98,23 @@ namespace uk.org.riseley.puttySessionManager.form
             sessionEditor = new SessionEditorForm();
             hotKeyChooser = new HotkeyChooser(this);
             synchronizeForm = new SynchronizeForm();
+
+            // Attempt to override the system and taskbar tray icons
+            string iconFile = Path.GetDirectoryName(Application.ExecutablePath) + "\\psm.ico";
+            if (File.Exists(iconFile))
+            {
+                try
+                {
+                    Icon psmIcon = new Icon(iconFile);
+                    systrayIcon.Icon = psmIcon;
+                    this.Icon = psmIcon;
+                }
+                catch (Exception)
+                {
+                  // Do nothing
+                }
+            }
+            systrayIcon.Visible = true;
 
             // Restore the size of the application
             this.ClientSize = Properties.Settings.Default.WindowSize;
@@ -353,12 +371,26 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void sessionControl_ShowAbout(object sender, EventArgs e)
         {
-            aboutDialog.ShowDialog();
+            if (aboutDialog.Visible == false)
+            {
+                aboutDialog.ShowDialog();
+            }
+            else
+            {
+                aboutDialog.BringToFront();
+            }
         }
 
         private void sessionControl_ShowOptions(object sender, EventArgs e)
         {
-            optionsDialog.ShowDialog();
+            if (optionsDialog.Visible == false)
+            {
+                optionsDialog.ShowDialog();
+            }
+            else
+            {
+                optionsDialog.BringToFront();
+            }
         }
 
         private void sessionEditorToolStripMenuItem_Click(object sender, EventArgs e)

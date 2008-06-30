@@ -237,6 +237,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.taskbarCheckBox.TabIndex = 27;
             this.taskbarCheckBox.Text = "&Show in taskbar";
             this.taskbarCheckBox.UseVisualStyleBackColor = true;
+            this.taskbarCheckBox.Click += new System.EventHandler(this.taskbarCheckBox_Click);
             // 
             // autoMinimizeCheckBox
             // 

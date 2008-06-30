@@ -30,7 +30,7 @@
     <ProductName>PuTTY Session Manager</ProductName>
     <PublisherName>PuTTY</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>0.31.0.0</ApplicationVersion>
+    <ApplicationVersion>0.32.0.0</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

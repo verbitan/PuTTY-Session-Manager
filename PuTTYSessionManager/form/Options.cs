@@ -31,9 +31,10 @@ namespace uk.org.riseley.puttySessionManager.form
     public partial class Options : Form
     {
         private Form parentWindow;
-        private HotkeyChooser hkChooser;
 
         private SessionController sc;
+
+        private HotkeyController hc;
 
         private UpdateForm uf;
 
@@ -45,8 +46,8 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.parentWindow = parentWindow;
             InitializeComponent();
-            hkChooser = new HotkeyChooser(parentWindow);
             sc = SessionController.getInstance();
+            hc = HotkeyController.getInstance();
             autostartCheckBox.Checked = sc.isAutoStartEnabled();
 
             // Create the update form
@@ -488,6 +489,18 @@ namespace uk.org.riseley.puttySessionManager.form
         private void displayTreeIconsCheckBox_Click(object sender, EventArgs e)
         {
             sc.invalidateSessionList(this, false);
+        }
+
+        /// <summary>
+        /// Changing the state of the taskbar icon seems to unregister all the hotkeys
+        /// so re-register them here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void taskbarCheckBox_Click(object sender, EventArgs e)
+        {
+            hc.UnregisterAllHotKeys(parentWindow);
+            hc.registerAllEnabledHotkeys(parentWindow);
         }
     }
 }
