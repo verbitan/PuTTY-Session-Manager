@@ -17,30 +17,38 @@
  */
 using System;
 
-namespace uk.org.riseley.puttySessionManager.model
+namespace uk.org.riseley.puttySessionManager.model.eventargs
 {
-    public class RefreshSessionsEventArgs : EventArgs 
+    public class LaunchSessionEventArgs : EventArgs 
     {
-        public RefreshSessionsEventArgs()
-            : this(true)
+        public enum PROGRAM { PUTTY, FILEZILLA, WINSCP };
+
+        public LaunchSessionEventArgs()
+            : this(null, PROGRAM.PUTTY)
         {    
-            
         }
 
-        public RefreshSessionsEventArgs(bool refreshSource)
+        public LaunchSessionEventArgs(Session session)
+            : this(session, PROGRAM.PUTTY)
         {
-            this.refreshSource = refreshSource;
+        }        
+
+        public LaunchSessionEventArgs(Session session, PROGRAM program )
+        {
+            this.session = session;
+            this.program = program;
         }
 
-        private bool refreshSource;
-    
-        public bool RefreshSource {
-            get 
-            {
-                return this.refreshSource;
-            }
-       
-        }
+        public Session session;
 
+        public PROGRAM program;
+
+        public string SessionName()
+        {
+            if (session != null)
+                return session.SessionDisplayText;
+            else
+                return "";
+        }
     }
 }

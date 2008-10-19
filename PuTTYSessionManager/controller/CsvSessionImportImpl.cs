@@ -60,7 +60,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
-        /// Create an export of the sessions in this providers type
+        /// Import the sessions in this providers type
         /// This may throw an exception if there are File I/O issues
         /// </summary>
         /// <param name="location">The location of the csv file</param>
@@ -79,6 +79,7 @@ namespace uk.org.riseley.puttySessionManager.controller
 
             FileHelperEngine<CsvRecord> engine = new FileHelperEngine<CsvRecord>();
             List<CsvRecord> csvList = null;
+            List<Session> sessionList = null;
 
             if (uri.Scheme == Uri.UriSchemeFile)
             {
@@ -117,26 +118,36 @@ namespace uk.org.riseley.puttySessionManager.controller
                 throw new Exception("Unable to parse location: unsupported protocol");
             }
 
-            return csvList.ConvertAll(new Converter<CsvRecord, Session>(CsvToSessionConvertor));
+            if (csvList != null)
+            {
+                sessionList = csvList.ConvertAll(new Converter<CsvRecord, Session>(CsvToSessionConvertor));
+            }
+
+            return sessionList;
         }
 
         #endregion
 
         /// <summary>
-        /// 
+        /// Convert the csv record to a Session
         /// </summary>
         /// <param name="rec"></param>
         /// <returns></returns>
         private Session CsvToSessionConvertor(CsvRecord rec)
         {
-            Session s = new Session(rec.SessionName, rec.FolderName, false);
+            Session s = new Session(Session.convertDisplayToSessionKey(rec.SessionName), rec.FolderName, false);
             s.Hostname = rec.Hostname;
             s.Username = rec.Username;
             return s;
 
         }
 
-        private Stream getRemoteCsvFile(Uri uri)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        private Stream getRemoteCsvFile(Uri sessionsUri)
         {
             WebClient wc = new WebClient();
             Stream stream = null;
@@ -180,23 +191,10 @@ namespace uk.org.riseley.puttySessionManager.controller
             for (int i = 0; i < 3 && tryAgain == true && connected == false; i++)
             {
                 try
-                {
-                    Uri updateUri = null;
-                    try
-                    {
-                        // Create a new Uri object.
-                        updateUri = new Uri(Properties.Settings.Default.UpdateUrl);
-                    }
-                    catch (UriFormatException ufe)
-                    {
-                        MessageBox.Show(null, "Check Update URL: " + Environment.NewLine + ufe.Message
-                                          , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return null;
-                    }
-
+                {                    
                     // Make sure that the file hasn't been cached by a proxy
                     wc.Headers.Add("Cache-Control: max-age=0");
-                    stream = wc.OpenRead(updateUri);
+                    stream = wc.OpenRead(sessionsUri);
                     connected = true;
                 }
                 catch (WebException we)

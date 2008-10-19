@@ -149,6 +149,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.Name = "ProxyAuthenticationForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter Web Proxy Password...";
             this.TopMost = true;
             this.ResumeLayout(false);

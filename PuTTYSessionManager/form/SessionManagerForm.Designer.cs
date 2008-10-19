@@ -93,7 +93,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
-            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 236);
+            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 258);
             // 
             // loadSessionToolStripMenuItem
             // 
@@ -155,11 +155,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // synchronizeSessionsToolStripMenuItem
             // 
-            this.synchronizeSessionsToolStripMenuItem.Enabled = false;
             this.synchronizeSessionsToolStripMenuItem.Name = "synchronizeSessionsToolStripMenuItem";
             this.synchronizeSessionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.synchronizeSessionsToolStripMenuItem.Text = "&Synchronize Sessions";
-            this.synchronizeSessionsToolStripMenuItem.Visible = false;
             this.synchronizeSessionsToolStripMenuItem.Click += new System.EventHandler(this.synchronizeSessionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2

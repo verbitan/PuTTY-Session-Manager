@@ -23,6 +23,7 @@ using System.IO;
 using Microsoft.Win32;
 using System.Diagnostics;
 using uk.org.riseley.puttySessionManager.model;
+using uk.org.riseley.puttySessionManager.model.eventargs;
 using System.Windows.Forms;
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
@@ -92,7 +93,6 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// Session Attribute Provider
         /// </summary>
         private SessionAttributesInterface sessionAttribProvider = null;
-
 
         /// <summary>
         /// This event is fired when the list of sessions has been altered

@@ -29,12 +29,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.sessionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localFolderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remoteFolderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +36,12 @@ namespace uk.org.riseley.puttySessionManager.control
             this.remoteHostnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actionColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.syncButton = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.ignoreButton = new System.Windows.Forms.Button();
+            this.removeUnchangedButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -66,79 +66,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(687, 267);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 365F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 4, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.94267F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.05732F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 314);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.Location = new System.Drawing.Point(3, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Invert Actions";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.Location = new System.Drawing.Point(83, 282);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Update All";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.Location = new System.Drawing.Point(165, 282);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Ignore All";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.Location = new System.Drawing.Point(249, 282);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Reset";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button5.Location = new System.Drawing.Point(438, 282);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 23);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Synchronize Sessions";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // sessionNameColumn
             // 
@@ -184,6 +111,84 @@ namespace uk.org.riseley.puttySessionManager.control
             "Update"});
             this.actionColumn.Name = "actionColumn";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.47161F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.52839F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.resetButton, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.syncButton, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.updateButton, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ignoreButton, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.removeUnchangedButton, 2, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.94267F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.05732F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 314);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // resetButton
+            // 
+            this.resetButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.resetButton.Location = new System.Drawing.Point(338, 282);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(51, 23);
+            this.resetButton.TabIndex = 5;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
+            // syncButton
+            // 
+            this.syncButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.syncButton.Location = new System.Drawing.Point(470, 282);
+            this.syncButton.Name = "syncButton";
+            this.syncButton.Size = new System.Drawing.Size(144, 23);
+            this.syncButton.TabIndex = 6;
+            this.syncButton.Text = "Synchronize Sessions";
+            this.syncButton.UseVisualStyleBackColor = true;
+            this.syncButton.Click += new System.EventHandler(this.syncButton_Click);
+            // 
+            // updateButton
+            // 
+            this.updateButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.updateButton.Location = new System.Drawing.Point(3, 282);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(97, 23);
+            this.updateButton.TabIndex = 3;
+            this.updateButton.Text = "Update Selection";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            // 
+            // ignoreButton
+            // 
+            this.ignoreButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ignoreButton.Location = new System.Drawing.Point(109, 282);
+            this.ignoreButton.Name = "ignoreButton";
+            this.ignoreButton.Size = new System.Drawing.Size(97, 23);
+            this.ignoreButton.TabIndex = 4;
+            this.ignoreButton.Text = "Ignore Selection";
+            this.ignoreButton.UseVisualStyleBackColor = true;
+            this.ignoreButton.Click += new System.EventHandler(this.ignoreButton_Click);
+            // 
+            // removeUnchangedButton
+            // 
+            this.removeUnchangedButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.removeUnchangedButton.Location = new System.Drawing.Point(215, 282);
+            this.removeUnchangedButton.Name = "removeUnchangedButton";
+            this.removeUnchangedButton.Size = new System.Drawing.Size(116, 23);
+            this.removeUnchangedButton.TabIndex = 7;
+            this.removeUnchangedButton.Text = "Remove Unchanged";
+            this.removeUnchangedButton.UseVisualStyleBackColor = true;
+            this.removeUnchangedButton.Click += new System.EventHandler(this.removeUnchangedButton_Click);
+            // 
             // TableControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,11 +206,10 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Button ignoreButton;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Button syncButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn sessionNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn localFolderColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remoteFolderColumn;
@@ -213,5 +217,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.DataGridViewTextBoxColumn remoteHostnameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn actionColumn;
+        private System.Windows.Forms.Button removeUnchangedButton;
     }
 }

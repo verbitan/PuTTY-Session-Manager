@@ -51,6 +51,12 @@ namespace uk.org.riseley.puttySessionManager.model
             set { folderName = value; }
         }
 
+        private string folderDisplayText = "";
+        public string FolderDisplayText
+        {
+            get { return folderDisplayText; }
+            set { folderDisplayText = value; }
+        }
         private bool isFolder = false;
         public bool IsFolder
         {
@@ -62,19 +68,19 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             SessionKey = regKey;
             SessionDisplayText = convertSessionKeyToDisplay(regKey);
-            string folderCellValue;
+
             if (folderName == null || folderName.Equals("") || folderName.Equals(SESSIONS_FOLDER_NAME))
             {
                 FolderName = SESSIONS_FOLDER_NAME;
-                folderCellValue = "";
+                FolderDisplayText = "";
             }
             else
             {
                 FolderName = folderName;
-                folderCellValue = FolderName.Remove(0, (SESSIONS_FOLDER_NAME.Length + PATH_SEPARATOR.Length));
+                FolderDisplayText = FolderName.Remove(0, (SESSIONS_FOLDER_NAME.Length + PATH_SEPARATOR.Length));
             }
             IsFolder = isFolder;
-            cellValues = new String[] { SessionDisplayText, folderCellValue, "" };
+            cellValues = new String[] { SessionDisplayText, FolderDisplayText, "" };
         }
 
         public override string ToString()

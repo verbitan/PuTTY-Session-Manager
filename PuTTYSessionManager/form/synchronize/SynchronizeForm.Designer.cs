@@ -67,6 +67,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.optionsControl1.Name = "optionsControl1";
             this.optionsControl1.Size = new System.Drawing.Size(721, 297);
             this.optionsControl1.TabIndex = 0;
+            this.optionsControl1.SyncSessionsLoaded += new uk.org.riseley.puttySessionManager.control.OptionsControl.SyncSessionsLoadedEventHandler(this.optionsControl1_SyncSessionsLoaded);
             // 
             // tabPage2
             // 

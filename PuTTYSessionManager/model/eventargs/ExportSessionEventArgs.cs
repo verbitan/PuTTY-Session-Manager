@@ -19,35 +19,25 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace uk.org.riseley.puttySessionManager.model
+namespace uk.org.riseley.puttySessionManager.model.eventargs
 {
-    public class SynchronizeSessionsRequest
+    public class ExportSessionEventArgs : EventArgs 
     {
-        public SynchronizeSessionsRequest()
-        {          
+        public enum ExportType {
+            REG_TYPE ,
+            CSV_TYPE 
+        }
+        public ExportSessionEventArgs()
+            : this(ExportType.REG_TYPE)
+        {    
         }
 
-        public enum SynchronizeSessionsOptions 
-        { 
-              COPY_ALL
-            , COPY_INCLUDE
-            , COPY_EXCLUDE 
-        };
-
-        private Session sessionTemplate;
-
-        public Session SessionTemplate
+        public ExportSessionEventArgs(ExportType type)
         {
-            set { sessionTemplate = value; }
-            get { return sessionTemplate; }
+            this.type = type;
         }
 
-        private SynchronizeSessionsOptions syncOptions;
+        public ExportType type;
 
-        public SynchronizeSessionsOptions SyncOptions
-        {
-            set { syncOptions = value; }
-            get { return syncOptions; }
-        }
     }
 }

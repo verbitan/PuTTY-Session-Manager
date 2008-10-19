@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2007 David Riseley 
+ * Copyright (C) 2006,2007 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,28 +16,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace uk.org.riseley.puttySessionManager.model
+namespace uk.org.riseley.puttySessionManager.model.eventargs
 {
-    public class ExportSessionEventArgs : EventArgs 
+    public class RefreshSessionsEventArgs : EventArgs 
     {
-        public enum ExportType {
-            REG_TYPE ,
-            CSV_TYPE 
-        }
-        public ExportSessionEventArgs()
-            : this(ExportType.REG_TYPE)
+        public RefreshSessionsEventArgs()
+            : this(true)
         {    
+            
         }
 
-        public ExportSessionEventArgs(ExportType type)
+        public RefreshSessionsEventArgs(bool refreshSource)
         {
-            this.type = type;
+            this.refreshSource = refreshSource;
         }
 
-        public ExportType type;
+        private bool refreshSource;
+    
+        public bool RefreshSource {
+            get 
+            {
+                return this.refreshSource;
+            }
+       
+        }
 
     }
 }

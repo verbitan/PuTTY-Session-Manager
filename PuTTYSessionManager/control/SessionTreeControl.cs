@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using System.Collections;
 using Microsoft.Win32;
 using uk.org.riseley.puttySessionManager.model;
+using uk.org.riseley.puttySessionManager.model.eventargs;
 using uk.org.riseley.puttySessionManager.controller;
 using uk.org.riseley.puttySessionManager.form;
 

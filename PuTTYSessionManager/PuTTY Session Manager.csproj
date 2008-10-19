@@ -155,14 +155,15 @@
     <Compile Include="form\UpdateForm.Designer.cs">
       <DependentUpon>UpdateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\eventargs\SyncSessionsRequestedEventArgs.cs" />
+    <Compile Include="model\eventargs\SyncSessionsLoadedEventArgs.cs" />
     <Compile Include="model\HotkeyModifier.cs" />
-    <Compile Include="model\SynchronizeSessionsRequest.cs" />
     <Compile Include="model\CopySessionRequest.cs" />
     <Compile Include="model\CsvRecord.cs" />
-    <Compile Include="model\ExportSessionEventArgs.cs" />
+    <Compile Include="model\eventargs\ExportSessionEventArgs.cs" />
     <Compile Include="model\NewSessionRequest.cs" />
-    <Compile Include="model\RefreshSessionsEventArgs.cs" />
-    <Compile Include="model\LaunchSessionEventArgs.cs" />
+    <Compile Include="model\eventargs\RefreshSessionsEventArgs.cs" />
+    <Compile Include="model\eventargs\LaunchSessionEventArgs.cs" />
     <Compile Include="model\Session.cs" />
     <Compile Include="controller\SessionController.cs" />
     <Compile Include="form\Options.cs">

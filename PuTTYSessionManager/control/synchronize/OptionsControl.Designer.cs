@@ -42,19 +42,18 @@ namespace uk.org.riseley.puttySessionManager.control
             this.sessionComboBox = new System.Windows.Forms.ComboBox();
             this.ignoreCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.outputTextBox = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.validateButton = new System.Windows.Forms.Button();
+            this.outputTextBox = new System.Windows.Forms.TextBox();
             this.sessionGroupBox.SuspendLayout();
             this.fileGroupBox.SuspendLayout();
             this.urlGroupBox.SuspendLayout();
             this.optionsGroupBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // locateFileButton
             // 
+            this.locateFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.locateFileButton.Location = new System.Drawing.Point(6, 21);
             this.locateFileButton.Name = "locateFileButton";
             this.locateFileButton.Size = new System.Drawing.Size(75, 23);
@@ -65,6 +64,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // fileTextBox
             // 
+            this.fileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.fileTextBox.Location = new System.Drawing.Point(87, 23);
             this.fileTextBox.Name = "fileTextBox";
             this.fileTextBox.ReadOnly = true;
@@ -79,7 +79,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.sessionGroupBox.Location = new System.Drawing.Point(3, 3);
             this.sessionGroupBox.Name = "sessionGroupBox";
             this.tableLayoutPanel1.SetRowSpan(this.sessionGroupBox, 2);
-            this.sessionGroupBox.Size = new System.Drawing.Size(181, 116);
+            this.sessionGroupBox.Size = new System.Drawing.Size(181, 106);
             this.sessionGroupBox.TabIndex = 2;
             this.sessionGroupBox.TabStop = false;
             this.sessionGroupBox.Text = "Choose Session Location";
@@ -88,7 +88,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.urlRadioButton.AutoSize = true;
             this.urlRadioButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.urlRadioButton.Location = new System.Drawing.Point(105, 81);
+            this.urlRadioButton.Location = new System.Drawing.Point(103, 74);
             this.urlRadioButton.Name = "urlRadioButton";
             this.urlRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.urlRadioButton.Size = new System.Drawing.Size(70, 17);
@@ -118,7 +118,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.fileGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileGroupBox.Location = new System.Drawing.Point(190, 3);
             this.fileGroupBox.Name = "fileGroupBox";
-            this.fileGroupBox.Size = new System.Drawing.Size(485, 55);
+            this.fileGroupBox.Size = new System.Drawing.Size(485, 51);
             this.fileGroupBox.TabIndex = 3;
             this.fileGroupBox.TabStop = false;
             this.fileGroupBox.Text = "File Location";
@@ -134,18 +134,20 @@ namespace uk.org.riseley.puttySessionManager.control
             this.urlGroupBox.Controls.Add(this.urlTextBox);
             this.urlGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.urlGroupBox.Enabled = false;
-            this.urlGroupBox.Location = new System.Drawing.Point(190, 64);
+            this.urlGroupBox.Location = new System.Drawing.Point(190, 60);
             this.urlGroupBox.Name = "urlGroupBox";
-            this.urlGroupBox.Size = new System.Drawing.Size(485, 55);
+            this.urlGroupBox.Size = new System.Drawing.Size(485, 49);
             this.urlGroupBox.TabIndex = 4;
             this.urlGroupBox.TabStop = false;
             this.urlGroupBox.Text = "HTTP Url";
             // 
             // urlTextBox
             // 
-            this.urlTextBox.Location = new System.Drawing.Point(6, 19);
+            this.urlTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.urlTextBox.Location = new System.Drawing.Point(3, 16);
+            this.urlTextBox.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(465, 20);
+            this.urlTextBox.Size = new System.Drawing.Size(479, 20);
             this.urlTextBox.TabIndex = 1;
             this.urlTextBox.Text = "http://";
             // 
@@ -156,15 +158,16 @@ namespace uk.org.riseley.puttySessionManager.control
             this.optionsGroupBox.Controls.Add(this.sessionComboBox);
             this.optionsGroupBox.Controls.Add(this.ignoreCheckBox);
             this.optionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.optionsGroupBox.Location = new System.Drawing.Point(3, 125);
+            this.optionsGroupBox.Location = new System.Drawing.Point(3, 115);
             this.optionsGroupBox.Name = "optionsGroupBox";
-            this.optionsGroupBox.Size = new System.Drawing.Size(672, 52);
+            this.optionsGroupBox.Size = new System.Drawing.Size(672, 46);
             this.optionsGroupBox.TabIndex = 5;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Synchronization Options";
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(253, 20);
             this.label1.Name = "label1";
@@ -174,6 +177,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // sessionComboBox
             // 
+            this.sessionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.sessionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sessionComboBox.FormattingEnabled = true;
             this.sessionComboBox.Location = new System.Drawing.Point(389, 17);
@@ -183,6 +187,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // ignoreCheckBox
             // 
+            this.ignoreCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.ignoreCheckBox.AutoSize = true;
             this.ignoreCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ignoreCheckBox.Location = new System.Drawing.Point(6, 19);
@@ -197,46 +202,29 @@ namespace uk.org.riseley.puttySessionManager.control
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.72861F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.27139F));
+            this.tableLayoutPanel1.Controls.Add(this.validateButton, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.outputTextBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.urlGroupBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.optionsGroupBox, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.fileGroupBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.sessionGroupBox, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 269);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 264);
             this.tableLayoutPanel1.TabIndex = 6;
-            // 
-            // outputTextBox
-            // 
-            this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outputTextBox.Location = new System.Drawing.Point(190, 183);
-            this.outputTextBox.Multiline = true;
-            this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputTextBox.Size = new System.Drawing.Size(485, 83);
-            this.outputTextBox.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.validateButton);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 183);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(181, 83);
-            this.panel1.TabIndex = 6;
             // 
             // validateButton
             // 
-            this.validateButton.Location = new System.Drawing.Point(6, 30);
+            this.validateButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.validateButton.Location = new System.Drawing.Point(8, 202);
+            this.validateButton.MaximumSize = new System.Drawing.Size(170, 23);
+            this.validateButton.MinimumSize = new System.Drawing.Size(170, 23);
             this.validateButton.Name = "validateButton";
             this.validateButton.Size = new System.Drawing.Size(170, 23);
             this.validateButton.TabIndex = 0;
@@ -244,13 +232,24 @@ namespace uk.org.riseley.puttySessionManager.control
             this.validateButton.UseVisualStyleBackColor = true;
             this.validateButton.Click += new System.EventHandler(this.validateButton_Click);
             // 
+            // outputTextBox
+            // 
+            this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputTextBox.Location = new System.Drawing.Point(190, 167);
+            this.outputTextBox.Multiline = true;
+            this.outputTextBox.Name = "outputTextBox";
+            this.outputTextBox.ReadOnly = true;
+            this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.outputTextBox.Size = new System.Drawing.Size(485, 94);
+            this.outputTextBox.TabIndex = 1;
+            // 
             // OptionsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "OptionsControl";
-            this.Size = new System.Drawing.Size(678, 269);
+            this.Size = new System.Drawing.Size(678, 264);
             this.sessionGroupBox.ResumeLayout(false);
             this.sessionGroupBox.PerformLayout();
             this.fileGroupBox.ResumeLayout(false);
@@ -261,7 +260,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.optionsGroupBox.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -280,7 +278,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.GroupBox optionsGroupBox;
         private System.Windows.Forms.CheckBox ignoreCheckBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button validateButton;
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Label label1;
