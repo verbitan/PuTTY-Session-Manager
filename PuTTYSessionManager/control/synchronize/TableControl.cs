@@ -60,13 +60,19 @@ namespace uk.org.riseley.puttySessionManager.control
         [Description("Fires when sessions have been successfully loaded")]
         public event SyncSessionsRequestedEventHandler SyncSessionsRequested;
 
-
+        /// <summary>
+        /// Default constructor for TableControl 
+        /// </summary>
         public TableControl()
         {
             InitializeComponent();
             sc = SessionController.getInstance();
         }
 
+        /// <summary>
+        /// Load sessions into the table
+        /// </summary>
+        /// <param name="ea"></param>
         public void LoadSessions(SyncSessionsLoadedEventArgs ea)
         {
             DataGridViewRow dgvr = null;
@@ -107,6 +113,12 @@ namespace uk.org.riseley.puttySessionManager.control
             dataGridView1.ResumeLayout();
         }
 
+        /// <summary>
+        /// Get the values to populate each row of the table
+        /// </summary>
+        /// <param name="newSession">The session from the file</param>
+        /// <param name="existingSession">The current session that matches newSession</param>
+        /// <returns></returns>
         private String [] getCellValues( Session newSession , Session existingSession )
         {
             STATUS s = getStatus(newSession, existingSession);
@@ -142,7 +154,11 @@ namespace uk.org.riseley.puttySessionManager.control
             return cellValues;                                                              
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         private String getStatusDescription (STATUS s)
         {
             switch (s)
@@ -191,8 +207,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
             }
             dataGridView1.ResumeLayout();
-        }
-       
+        }       
 
         private void resetButton_Click(object sender, EventArgs e)
         {
@@ -232,6 +247,17 @@ namespace uk.org.riseley.puttySessionManager.control
         private void syncButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Fire the SyncSessionsRequested event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected virtual void OnSyncSessionsRequested(Object sender, SyncSessionsRequestedEventArgs e)
+        {
+            if (SyncSessionsRequested != null)
+                SyncSessionsRequested(sender, e);
         }
     }
 }

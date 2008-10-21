@@ -47,30 +47,33 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.components = new System.ComponentModel.Container();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.tabsTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.okButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.generalOptionsTab = new System.Windows.Forms.TabPage();
-            this.confirmExitCheckBox = new System.Windows.Forms.CheckBox();
-            this.taskbarCheckBox = new System.Windows.Forms.CheckBox();
-            this.autoMinimizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.generalTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.autostartCheckBox = new System.Windows.Forms.CheckBox();
-            this.startupMinimizeCheckBox = new System.Windows.Forms.CheckBox();
-            this.onTopCheckBox = new System.Windows.Forms.CheckBox();
-            this.trackBar = new System.Windows.Forms.TrackBar();
-            this.sampleDialogTextbox = new System.Windows.Forms.TextBox();
-            this.chooseDialogFontButton = new System.Windows.Forms.Button();
-            this.locatePuttyButton = new System.Windows.Forms.Button();
             this.puttyTextBox = new System.Windows.Forms.TextBox();
+            this.trackBar = new System.Windows.Forms.TrackBar();
+            this.locatePuttyButton = new System.Windows.Forms.Button();
+            this.taskbarCheckBox = new System.Windows.Forms.CheckBox();
+            this.startupMinimizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.confirmExitCheckBox = new System.Windows.Forms.CheckBox();
+            this.chooseDialogFontButton = new System.Windows.Forms.Button();
+            this.sampleDialogTextbox = new System.Windows.Forms.TextBox();
+            this.autoMinimizeCheckBox = new System.Windows.Forms.CheckBox();
             this.transparencyCheckBox = new System.Windows.Forms.CheckBox();
+            this.onTopCheckBox = new System.Windows.Forms.CheckBox();
             this.treeOptionsTab = new System.Windows.Forms.TabPage();
-            this.toolTipsCheckBox = new System.Windows.Forms.CheckBox();
+            this.treeTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.subfolderTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.sessionWarningLabel = new System.Windows.Forms.Label();
-            this.chooseTreeFontButton = new System.Windows.Forms.Button();
-            this.displayTreeIconsCheckBox = new System.Windows.Forms.CheckBox();
             this.sampleTreeTextbox = new System.Windows.Forms.TextBox();
+            this.chooseTreeFontButton = new System.Windows.Forms.Button();
             this.expandTreeCheckBox = new System.Windows.Forms.CheckBox();
+            this.displayTreeIconsCheckBox = new System.Windows.Forms.CheckBox();
+            this.toolTipsCheckBox = new System.Windows.Forms.CheckBox();
             this.pageantOptionsTab = new System.Windows.Forms.TabPage();
             this.launchPageantButton = new System.Windows.Forms.Button();
             this.removeKeyButton = new System.Windows.Forms.Button();
@@ -81,11 +84,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.pageantTextBox = new System.Windows.Forms.TextBox();
             this.filezillaOptionsTab = new System.Windows.Forms.TabPage();
             this.sshAuthCheckBox = new System.Windows.Forms.CheckBox();
-            this.protocolGroupBox = new System.Windows.Forms.GroupBox();
-            this.fzSessionInfoRadioButton = new System.Windows.Forms.RadioButton();
-            this.fzFtpsRadioButton = new System.Windows.Forms.RadioButton();
-            this.fzSftpRadioButton = new System.Windows.Forms.RadioButton();
-            this.fzFtpRadioButton = new System.Windows.Forms.RadioButton();
             this.locateFileZillaButton = new System.Windows.Forms.Button();
             this.enableFileZillaCheckBox = new System.Windows.Forms.CheckBox();
             this.filezillaTextBox = new System.Windows.Forms.TextBox();
@@ -122,21 +120,33 @@ namespace uk.org.riseley.puttySessionManager.form
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.optionsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.tableLayoutPanel.SuspendLayout();
+            this.pageantTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.filezillaTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.fzFtpRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzSftpRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzFtpsRadioButton = new System.Windows.Forms.RadioButton();
+            this.fzSessionInfoRadioButton = new System.Windows.Forms.RadioButton();
+            this.protocolGroupBox = new System.Windows.Forms.GroupBox();
+            this.tabsTableLayout.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.generalOptionsTab.SuspendLayout();
+            this.generalTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.treeOptionsTab.SuspendLayout();
+            this.treeTableLayout.SuspendLayout();
+            this.subfolderTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.pageantOptionsTab.SuspendLayout();
             this.filezillaOptionsTab.SuspendLayout();
-            this.protocolGroupBox.SuspendLayout();
             this.winSCPOptionsTab.SuspendLayout();
             this.wsVerGroupBox.SuspendLayout();
             this.wsProtoGroupBox.SuspendLayout();
             this.wsPrefGroupBox.SuspendLayout();
             this.updateOptionsTab.SuspendLayout();
             this.proxyGroupBox.SuspendLayout();
+            this.pageantTableLayout.SuspendLayout();
+            this.filezillaTableLayout.SuspendLayout();
+            this.protocolGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -145,29 +155,30 @@ namespace uk.org.riseley.puttySessionManager.form
             this.openFileDialog.Filter = "putty.exe|putty.exe|All Files|*.*";
             this.openFileDialog.RestoreDirectory = true;
             // 
-            // tableLayoutPanel
+            // tabsTableLayout
             // 
-            this.tableLayoutPanel.ColumnCount = 1;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Controls.Add(this.okButton, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.tabControl1, 0, 0);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 2;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.88288F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.11712F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(381, 268);
-            this.tableLayoutPanel.TabIndex = 1;
+            this.tabsTableLayout.ColumnCount = 1;
+            this.tabsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tabsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tabsTableLayout.Controls.Add(this.okButton, 0, 1);
+            this.tabsTableLayout.Controls.Add(this.tabControl1, 0, 0);
+            this.tabsTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsTableLayout.Location = new System.Drawing.Point(0, 0);
+            this.tabsTableLayout.Name = "tabsTableLayout";
+            this.tabsTableLayout.RowCount = 2;
+            this.tabsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.72839F));
+            this.tabsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.2716F));
+            this.tabsTableLayout.Size = new System.Drawing.Size(380, 248);
+            this.tabsTableLayout.TabIndex = 1;
             // 
             // okButton
             // 
             this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.okButton.AutoSize = true;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(157, 234);
+            this.okButton.Location = new System.Drawing.Point(156, 220);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(67, 22);
+            this.okButton.Size = new System.Drawing.Size(67, 23);
             this.okButton.TabIndex = 1;
             this.okButton.Text = "&OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -181,81 +192,65 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tabControl1.Controls.Add(this.filezillaOptionsTab);
             this.tabControl1.Controls.Add(this.winSCPOptionsTab);
             this.tabControl1.Controls.Add(this.updateOptionsTab);
+            this.tabControl1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(375, 216);
+            this.tabControl1.Size = new System.Drawing.Size(374, 209);
             this.tabControl1.TabIndex = 2;
             // 
             // generalOptionsTab
             // 
-            this.generalOptionsTab.Controls.Add(this.confirmExitCheckBox);
-            this.generalOptionsTab.Controls.Add(this.taskbarCheckBox);
-            this.generalOptionsTab.Controls.Add(this.autoMinimizeCheckBox);
-            this.generalOptionsTab.Controls.Add(this.autostartCheckBox);
-            this.generalOptionsTab.Controls.Add(this.startupMinimizeCheckBox);
-            this.generalOptionsTab.Controls.Add(this.onTopCheckBox);
-            this.generalOptionsTab.Controls.Add(this.trackBar);
-            this.generalOptionsTab.Controls.Add(this.sampleDialogTextbox);
-            this.generalOptionsTab.Controls.Add(this.chooseDialogFontButton);
-            this.generalOptionsTab.Controls.Add(this.locatePuttyButton);
-            this.generalOptionsTab.Controls.Add(this.puttyTextBox);
-            this.generalOptionsTab.Controls.Add(this.transparencyCheckBox);
+            this.generalOptionsTab.Controls.Add(this.generalTableLayout);
             this.generalOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.generalOptionsTab.Name = "generalOptionsTab";
             this.generalOptionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.generalOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.generalOptionsTab.Size = new System.Drawing.Size(366, 183);
             this.generalOptionsTab.TabIndex = 0;
             this.generalOptionsTab.Text = "General";
             this.generalOptionsTab.UseVisualStyleBackColor = true;
             // 
-            // confirmExitCheckBox
+            // generalTableLayout
             // 
-            this.confirmExitCheckBox.AutoSize = true;
-            this.confirmExitCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ConfirmExit;
-            this.confirmExitCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.confirmExitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ConfirmExit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.confirmExitCheckBox.Location = new System.Drawing.Point(17, 37);
-            this.confirmExitCheckBox.Name = "confirmExitCheckBox";
-            this.confirmExitCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.confirmExitCheckBox.Size = new System.Drawing.Size(99, 17);
-            this.confirmExitCheckBox.TabIndex = 28;
-            this.confirmExitCheckBox.Text = "&Confirm on exit";
-            this.confirmExitCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // taskbarCheckBox
-            // 
-            this.taskbarCheckBox.AutoSize = true;
-            this.taskbarCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.taskbarCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ShowInTaskbar;
-            this.taskbarCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.taskbarCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ShowInTaskbar", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.taskbarCheckBox.Location = new System.Drawing.Point(14, 60);
-            this.taskbarCheckBox.Name = "taskbarCheckBox";
-            this.taskbarCheckBox.Size = new System.Drawing.Size(102, 17);
-            this.taskbarCheckBox.TabIndex = 27;
-            this.taskbarCheckBox.Text = "&Show in taskbar";
-            this.taskbarCheckBox.UseVisualStyleBackColor = true;
-            this.taskbarCheckBox.Click += new System.EventHandler(this.taskbarCheckBox_Click);
-            // 
-            // autoMinimizeCheckBox
-            // 
-            this.autoMinimizeCheckBox.AutoSize = true;
-            this.autoMinimizeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.MinimizeOnUse;
-            this.autoMinimizeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "MinimizeOnUse", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoMinimizeCheckBox.Location = new System.Drawing.Point(263, 37);
-            this.autoMinimizeCheckBox.Name = "autoMinimizeCheckBox";
-            this.autoMinimizeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.autoMinimizeCheckBox.Size = new System.Drawing.Size(91, 17);
-            this.autoMinimizeCheckBox.TabIndex = 25;
-            this.autoMinimizeCheckBox.Text = "&Auto minimize";
-            this.autoMinimizeCheckBox.UseVisualStyleBackColor = true;
+            this.generalTableLayout.ColumnCount = 5;
+            this.generalTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.generalTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.generalTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.generalTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.generalTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.generalTableLayout.Controls.Add(this.autostartCheckBox, 0, 0);
+            this.generalTableLayout.Controls.Add(this.puttyTextBox, 2, 5);
+            this.generalTableLayout.Controls.Add(this.trackBar, 0, 3);
+            this.generalTableLayout.Controls.Add(this.locatePuttyButton, 0, 5);
+            this.generalTableLayout.Controls.Add(this.taskbarCheckBox, 0, 2);
+            this.generalTableLayout.Controls.Add(this.startupMinimizeCheckBox, 3, 0);
+            this.generalTableLayout.Controls.Add(this.confirmExitCheckBox, 0, 1);
+            this.generalTableLayout.Controls.Add(this.chooseDialogFontButton, 0, 4);
+            this.generalTableLayout.Controls.Add(this.sampleDialogTextbox, 2, 4);
+            this.generalTableLayout.Controls.Add(this.autoMinimizeCheckBox, 3, 1);
+            this.generalTableLayout.Controls.Add(this.transparencyCheckBox, 2, 2);
+            this.generalTableLayout.Controls.Add(this.onTopCheckBox, 5, 2);
+            this.generalTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.generalTableLayout.Location = new System.Drawing.Point(3, 3);
+            this.generalTableLayout.Name = "generalTableLayout";
+            this.generalTableLayout.RowCount = 6;
+            this.generalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalTableLayout.Size = new System.Drawing.Size(360, 177);
+            this.generalTableLayout.TabIndex = 29;
             // 
             // autostartCheckBox
             // 
+            this.autostartCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.autostartCheckBox.AutoSize = true;
-            this.autostartCheckBox.Location = new System.Drawing.Point(22, 14);
+            this.generalTableLayout.SetColumnSpan(this.autostartCheckBox, 2);
+            this.autostartCheckBox.Location = new System.Drawing.Point(32, 3);
             this.autostartCheckBox.Name = "autostartCheckBox";
             this.autostartCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.autostartCheckBox.Size = new System.Drawing.Size(94, 17);
@@ -264,12 +259,74 @@ namespace uk.org.riseley.puttySessionManager.form
             this.autostartCheckBox.UseVisualStyleBackColor = true;
             this.autostartCheckBox.CheckedChanged += new System.EventHandler(this.autostartCheckBox_CheckedChanged);
             // 
+            // puttyTextBox
+            // 
+            this.puttyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.generalTableLayout.SetColumnSpan(this.puttyTextBox, 3);
+            this.puttyTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "PuttyLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.puttyTextBox.Location = new System.Drawing.Point(132, 152);
+            this.puttyTextBox.Name = "puttyTextBox";
+            this.puttyTextBox.ReadOnly = true;
+            this.puttyTextBox.Size = new System.Drawing.Size(226, 21);
+            this.puttyTextBox.TabIndex = 14;
+            this.puttyTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.PuttyLocation;
+            // 
+            // trackBar
+            // 
+            this.trackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.generalTableLayout.SetColumnSpan(this.trackBar, 5);
+            this.trackBar.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.trackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyValueInt", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.trackBar.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
+            this.trackBar.Location = new System.Drawing.Point(3, 72);
+            this.trackBar.Maximum = 99;
+            this.trackBar.Minimum = 20;
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(355, 45);
+            this.trackBar.TabIndex = 18;
+            this.trackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar.Value = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyValueInt;
+            // 
+            // locatePuttyButton
+            // 
+            this.locatePuttyButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.locatePuttyButton.AutoSize = true;
+            this.generalTableLayout.SetColumnSpan(this.locatePuttyButton, 2);
+            this.locatePuttyButton.Location = new System.Drawing.Point(3, 152);
+            this.locatePuttyButton.Name = "locatePuttyButton";
+            this.locatePuttyButton.Size = new System.Drawing.Size(123, 23);
+            this.locatePuttyButton.TabIndex = 15;
+            this.locatePuttyButton.Text = "&Locate putty.exe";
+            this.locatePuttyButton.UseVisualStyleBackColor = true;
+            this.locatePuttyButton.Click += new System.EventHandler(this.locatePuttyButton_Click);
+            // 
+            // taskbarCheckBox
+            // 
+            this.taskbarCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.taskbarCheckBox.AutoSize = true;
+            this.taskbarCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.taskbarCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ShowInTaskbar;
+            this.taskbarCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.generalTableLayout.SetColumnSpan(this.taskbarCheckBox, 2);
+            this.taskbarCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ShowInTaskbar", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.taskbarCheckBox.Location = new System.Drawing.Point(24, 49);
+            this.taskbarCheckBox.Name = "taskbarCheckBox";
+            this.taskbarCheckBox.Size = new System.Drawing.Size(102, 17);
+            this.taskbarCheckBox.TabIndex = 27;
+            this.taskbarCheckBox.Text = "&Show in taskbar";
+            this.taskbarCheckBox.UseVisualStyleBackColor = true;
+            this.taskbarCheckBox.Click += new System.EventHandler(this.taskbarCheckBox_Click);
+            // 
             // startupMinimizeCheckBox
             // 
+            this.startupMinimizeCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.startupMinimizeCheckBox.AutoSize = true;
             this.startupMinimizeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.MinimizeOnStart;
+            this.generalTableLayout.SetColumnSpan(this.startupMinimizeCheckBox, 2);
             this.startupMinimizeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "MinimizeOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.startupMinimizeCheckBox.Location = new System.Drawing.Point(236, 14);
+            this.startupMinimizeCheckBox.Location = new System.Drawing.Point(240, 3);
             this.startupMinimizeCheckBox.Name = "startupMinimizeCheckBox";
             this.startupMinimizeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.startupMinimizeCheckBox.Size = new System.Drawing.Size(118, 17);
@@ -277,13 +334,87 @@ namespace uk.org.riseley.puttySessionManager.form
             this.startupMinimizeCheckBox.Text = "Minimize on &startup";
             this.startupMinimizeCheckBox.UseVisualStyleBackColor = true;
             // 
+            // confirmExitCheckBox
+            // 
+            this.confirmExitCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.confirmExitCheckBox.AutoSize = true;
+            this.confirmExitCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ConfirmExit;
+            this.confirmExitCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.generalTableLayout.SetColumnSpan(this.confirmExitCheckBox, 2);
+            this.confirmExitCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ConfirmExit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.confirmExitCheckBox.Location = new System.Drawing.Point(27, 26);
+            this.confirmExitCheckBox.Name = "confirmExitCheckBox";
+            this.confirmExitCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.confirmExitCheckBox.Size = new System.Drawing.Size(99, 17);
+            this.confirmExitCheckBox.TabIndex = 28;
+            this.confirmExitCheckBox.Text = "&Confirm on exit";
+            this.confirmExitCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // chooseDialogFontButton
+            // 
+            this.chooseDialogFontButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chooseDialogFontButton.AutoSize = true;
+            this.generalTableLayout.SetColumnSpan(this.chooseDialogFontButton, 2);
+            this.chooseDialogFontButton.Location = new System.Drawing.Point(3, 123);
+            this.chooseDialogFontButton.Name = "chooseDialogFontButton";
+            this.chooseDialogFontButton.Size = new System.Drawing.Size(123, 23);
+            this.chooseDialogFontButton.TabIndex = 16;
+            this.chooseDialogFontButton.Text = "C&hoose Dialog Font";
+            this.chooseDialogFontButton.UseVisualStyleBackColor = true;
+            this.chooseDialogFontButton.Click += new System.EventHandler(this.chooseFontButton_Click);
+            // 
+            // sampleDialogTextbox
+            // 
+            this.sampleDialogTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.generalTableLayout.SetColumnSpan(this.sampleDialogTextbox, 3);
+            this.sampleDialogTextbox.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.sampleDialogTextbox.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
+            this.sampleDialogTextbox.Location = new System.Drawing.Point(132, 124);
+            this.sampleDialogTextbox.Name = "sampleDialogTextbox";
+            this.sampleDialogTextbox.ReadOnly = true;
+            this.sampleDialogTextbox.Size = new System.Drawing.Size(226, 21);
+            this.sampleDialogTextbox.TabIndex = 17;
+            this.sampleDialogTextbox.Text = "Sample Text for Dialogs";
+            this.sampleDialogTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // autoMinimizeCheckBox
+            // 
+            this.autoMinimizeCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.autoMinimizeCheckBox.AutoSize = true;
+            this.autoMinimizeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.MinimizeOnUse;
+            this.generalTableLayout.SetColumnSpan(this.autoMinimizeCheckBox, 2);
+            this.autoMinimizeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "MinimizeOnUse", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoMinimizeCheckBox.Location = new System.Drawing.Point(267, 26);
+            this.autoMinimizeCheckBox.Name = "autoMinimizeCheckBox";
+            this.autoMinimizeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.autoMinimizeCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.autoMinimizeCheckBox.TabIndex = 25;
+            this.autoMinimizeCheckBox.Text = "&Auto minimize";
+            this.autoMinimizeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // transparencyCheckBox
+            // 
+            this.transparencyCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.transparencyCheckBox.AutoSize = true;
+            this.transparencyCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.transparencyCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
+            this.generalTableLayout.SetColumnSpan(this.transparencyCheckBox, 2);
+            this.transparencyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.transparencyCheckBox.Location = new System.Drawing.Point(132, 49);
+            this.transparencyCheckBox.Name = "transparencyCheckBox";
+            this.transparencyCheckBox.Size = new System.Drawing.Size(125, 17);
+            this.transparencyCheckBox.TabIndex = 13;
+            this.transparencyCheckBox.Text = "Enable trans&parency";
+            this.transparencyCheckBox.UseVisualStyleBackColor = true;
+            // 
             // onTopCheckBox
             // 
+            this.onTopCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.onTopCheckBox.AutoSize = true;
             this.onTopCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.AlwaysOnTop;
             this.onTopCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.onTopCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "AlwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.onTopCheckBox.Location = new System.Drawing.Point(260, 60);
+            this.onTopCheckBox.Location = new System.Drawing.Point(264, 49);
             this.onTopCheckBox.Name = "onTopCheckBox";
             this.onTopCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.onTopCheckBox.Size = new System.Drawing.Size(94, 17);
@@ -291,145 +422,136 @@ namespace uk.org.riseley.puttySessionManager.form
             this.onTopCheckBox.Text = "Always on &top";
             this.onTopCheckBox.UseVisualStyleBackColor = true;
             // 
-            // trackBar
-            // 
-            this.trackBar.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.trackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyValueInt", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.trackBar.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
-            this.trackBar.Location = new System.Drawing.Point(21, 82);
-            this.trackBar.Maximum = 99;
-            this.trackBar.Minimum = 20;
-            this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(332, 45);
-            this.trackBar.TabIndex = 18;
-            this.trackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trackBar.Value = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyValueInt;
-            // 
-            // sampleDialogTextbox
-            // 
-            this.sampleDialogTextbox.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.sampleDialogTextbox.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
-            this.sampleDialogTextbox.Location = new System.Drawing.Point(150, 136);
-            this.sampleDialogTextbox.Name = "sampleDialogTextbox";
-            this.sampleDialogTextbox.ReadOnly = true;
-            this.sampleDialogTextbox.Size = new System.Drawing.Size(203, 21);
-            this.sampleDialogTextbox.TabIndex = 17;
-            this.sampleDialogTextbox.Text = "Sample Text for Dialogs";
-            this.sampleDialogTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // chooseDialogFontButton
-            // 
-            this.chooseDialogFontButton.Location = new System.Drawing.Point(21, 134);
-            this.chooseDialogFontButton.Name = "chooseDialogFontButton";
-            this.chooseDialogFontButton.Size = new System.Drawing.Size(123, 22);
-            this.chooseDialogFontButton.TabIndex = 16;
-            this.chooseDialogFontButton.Text = "C&hoose Dialog Font";
-            this.chooseDialogFontButton.UseVisualStyleBackColor = true;
-            this.chooseDialogFontButton.Click += new System.EventHandler(this.chooseFontButton_Click);
-            // 
-            // locatePuttyButton
-            // 
-            this.locatePuttyButton.Location = new System.Drawing.Point(21, 161);
-            this.locatePuttyButton.Name = "locatePuttyButton";
-            this.locatePuttyButton.Size = new System.Drawing.Size(123, 22);
-            this.locatePuttyButton.TabIndex = 15;
-            this.locatePuttyButton.Text = "&Locate putty.exe";
-            this.locatePuttyButton.UseVisualStyleBackColor = true;
-            this.locatePuttyButton.Click += new System.EventHandler(this.locatePuttyButton_Click);
-            // 
-            // puttyTextBox
-            // 
-            this.puttyTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "PuttyLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.puttyTextBox.Location = new System.Drawing.Point(150, 162);
-            this.puttyTextBox.Name = "puttyTextBox";
-            this.puttyTextBox.ReadOnly = true;
-            this.puttyTextBox.Size = new System.Drawing.Size(203, 21);
-            this.puttyTextBox.TabIndex = 14;
-            this.puttyTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.PuttyLocation;
-            // 
-            // transparencyCheckBox
-            // 
-            this.transparencyCheckBox.AutoSize = true;
-            this.transparencyCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.transparencyCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TransparencyEnabled;
-            this.transparencyCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.transparencyCheckBox.Location = new System.Drawing.Point(122, 60);
-            this.transparencyCheckBox.Name = "transparencyCheckBox";
-            this.transparencyCheckBox.Size = new System.Drawing.Size(125, 17);
-            this.transparencyCheckBox.TabIndex = 13;
-            this.transparencyCheckBox.Text = "Enable trans&parency";
-            this.transparencyCheckBox.UseVisualStyleBackColor = true;
-            // 
             // treeOptionsTab
             // 
-            this.treeOptionsTab.Controls.Add(this.toolTipsCheckBox);
-            this.treeOptionsTab.Controls.Add(this.numericUpDown1);
-            this.treeOptionsTab.Controls.Add(this.sessionWarningLabel);
-            this.treeOptionsTab.Controls.Add(this.chooseTreeFontButton);
-            this.treeOptionsTab.Controls.Add(this.displayTreeIconsCheckBox);
-            this.treeOptionsTab.Controls.Add(this.sampleTreeTextbox);
-            this.treeOptionsTab.Controls.Add(this.expandTreeCheckBox);
+            this.treeOptionsTab.Controls.Add(this.treeTableLayout);
             this.treeOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.treeOptionsTab.Name = "treeOptionsTab";
-            this.treeOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.treeOptionsTab.Size = new System.Drawing.Size(366, 183);
             this.treeOptionsTab.TabIndex = 5;
             this.treeOptionsTab.Text = "Tree";
             this.treeOptionsTab.UseVisualStyleBackColor = true;
             // 
-            // toolTipsCheckBox
+            // treeTableLayout
             // 
-            this.toolTipsCheckBox.AutoSize = true;
-            this.toolTipsCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ToolTipsEnabled;
-            this.toolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolTipsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ToolTipsEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.toolTipsCheckBox.Location = new System.Drawing.Point(255, 60);
-            this.toolTipsCheckBox.Name = "toolTipsCheckBox";
-            this.toolTipsCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolTipsCheckBox.Size = new System.Drawing.Size(96, 17);
-            this.toolTipsCheckBox.TabIndex = 33;
-            this.toolTipsCheckBox.Text = "&Enable tooltips";
-            this.toolTipsCheckBox.UseVisualStyleBackColor = true;
+            this.treeTableLayout.ColumnCount = 2;
+            this.treeTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.treeTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.treeTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.treeTableLayout.Controls.Add(this.subfolderTableLayout, 0, 3);
+            this.treeTableLayout.Controls.Add(this.sampleTreeTextbox, 1, 4);
+            this.treeTableLayout.Controls.Add(this.chooseTreeFontButton, 0, 4);
+            this.treeTableLayout.Controls.Add(this.expandTreeCheckBox, 1, 0);
+            this.treeTableLayout.Controls.Add(this.displayTreeIconsCheckBox, 1, 1);
+            this.treeTableLayout.Controls.Add(this.toolTipsCheckBox, 1, 2);
+            this.treeTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeTableLayout.Location = new System.Drawing.Point(0, 0);
+            this.treeTableLayout.Name = "treeTableLayout";
+            this.treeTableLayout.RowCount = 5;
+            this.treeTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.treeTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.treeTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.treeTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.treeTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.treeTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.treeTableLayout.Size = new System.Drawing.Size(366, 183);
+            this.treeTableLayout.TabIndex = 34;
+            // 
+            // subfolderTableLayout
+            // 
+            this.subfolderTableLayout.AutoSize = true;
+            this.subfolderTableLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.subfolderTableLayout.ColumnCount = 2;
+            this.treeTableLayout.SetColumnSpan(this.subfolderTableLayout, 2);
+            this.subfolderTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.subfolderTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.subfolderTableLayout.Controls.Add(this.numericUpDown1, 1, 0);
+            this.subfolderTableLayout.Controls.Add(this.sessionWarningLabel, 0, 0);
+            this.subfolderTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.subfolderTableLayout.Location = new System.Drawing.Point(3, 72);
+            this.subfolderTableLayout.Name = "subfolderTableLayout";
+            this.subfolderTableLayout.RowCount = 1;
+            this.subfolderTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.subfolderTableLayout.Size = new System.Drawing.Size(360, 27);
+            this.subfolderTableLayout.TabIndex = 34;
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.numericUpDown1.AutoSize = true;
             this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "SubfolderSessionWarning", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Location = new System.Drawing.Point(308, 91);
+            this.numericUpDown1.Location = new System.Drawing.Point(322, 3);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(43, 21);
+            this.numericUpDown1.Size = new System.Drawing.Size(35, 21);
             this.numericUpDown1.TabIndex = 32;
             this.numericUpDown1.Value = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.SubfolderSessionWarning;
             // 
             // sessionWarningLabel
             // 
+            this.sessionWarningLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.sessionWarningLabel.AutoSize = true;
-            this.sessionWarningLabel.Location = new System.Drawing.Point(22, 93);
+            this.sessionWarningLabel.Location = new System.Drawing.Point(3, 7);
             this.sessionWarningLabel.Name = "sessionWarningLabel";
             this.sessionWarningLabel.Size = new System.Drawing.Size(280, 13);
             this.sessionWarningLabel.TabIndex = 31;
             this.sessionWarningLabel.Text = "&Number of sessions in subfolders to open before warning";
+            this.sessionWarningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // sampleTreeTextbox
+            // 
+            this.sampleTreeTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.sampleTreeTextbox.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TreeFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.sampleTreeTextbox.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TreeFont;
+            this.sampleTreeTextbox.Location = new System.Drawing.Point(112, 105);
+            this.sampleTreeTextbox.Name = "sampleTreeTextbox";
+            this.sampleTreeTextbox.ReadOnly = true;
+            this.sampleTreeTextbox.Size = new System.Drawing.Size(251, 20);
+            this.sampleTreeTextbox.TabIndex = 29;
+            this.sampleTreeTextbox.Text = "Sample Text for Tree";
+            this.sampleTreeTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // chooseTreeFontButton
             // 
-            this.chooseTreeFontButton.Location = new System.Drawing.Point(17, 120);
+            this.chooseTreeFontButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.chooseTreeFontButton.AutoSize = true;
+            this.chooseTreeFontButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.chooseTreeFontButton.Location = new System.Drawing.Point(3, 105);
             this.chooseTreeFontButton.Name = "chooseTreeFontButton";
-            this.chooseTreeFontButton.Size = new System.Drawing.Size(137, 22);
+            this.chooseTreeFontButton.Size = new System.Drawing.Size(103, 23);
             this.chooseTreeFontButton.TabIndex = 28;
             this.chooseTreeFontButton.Text = "&Choose Tree Font";
             this.chooseTreeFontButton.UseVisualStyleBackColor = true;
             this.chooseTreeFontButton.Click += new System.EventHandler(this.chooseFontButton_Click);
             // 
+            // expandTreeCheckBox
+            // 
+            this.expandTreeCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.expandTreeCheckBox.AutoSize = true;
+            this.expandTreeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ExpandTreeOnStartup;
+            this.expandTreeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ExpandTreeOnStartup", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.expandTreeCheckBox.Location = new System.Drawing.Point(225, 3);
+            this.expandTreeCheckBox.Name = "expandTreeCheckBox";
+            this.expandTreeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.expandTreeCheckBox.Size = new System.Drawing.Size(138, 17);
+            this.expandTreeCheckBox.TabIndex = 27;
+            this.expandTreeCheckBox.Text = "E&xpand tree on startup";
+            this.expandTreeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // displayTreeIconsCheckBox
             // 
+            this.displayTreeIconsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.displayTreeIconsCheckBox.AutoSize = true;
             this.displayTreeIconsCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DisplayTreeIcons;
             this.displayTreeIconsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.displayTreeIconsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DisplayTreeIcons", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.displayTreeIconsCheckBox.Location = new System.Drawing.Point(230, 37);
+            this.displayTreeIconsCheckBox.Location = new System.Drawing.Point(242, 26);
             this.displayTreeIconsCheckBox.Name = "displayTreeIconsCheckBox";
             this.displayTreeIconsCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.displayTreeIconsCheckBox.Size = new System.Drawing.Size(121, 17);
@@ -438,50 +560,36 @@ namespace uk.org.riseley.puttySessionManager.form
             this.displayTreeIconsCheckBox.UseVisualStyleBackColor = true;
             this.displayTreeIconsCheckBox.Click += new System.EventHandler(this.displayTreeIconsCheckBox_Click);
             // 
-            // sampleTreeTextbox
+            // toolTipsCheckBox
             // 
-            this.sampleTreeTextbox.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TreeFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.sampleTreeTextbox.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.TreeFont;
-            this.sampleTreeTextbox.Location = new System.Drawing.Point(165, 122);
-            this.sampleTreeTextbox.Name = "sampleTreeTextbox";
-            this.sampleTreeTextbox.ReadOnly = true;
-            this.sampleTreeTextbox.Size = new System.Drawing.Size(186, 20);
-            this.sampleTreeTextbox.TabIndex = 29;
-            this.sampleTreeTextbox.Text = "Sample Text for Tree";
-            this.sampleTreeTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // expandTreeCheckBox
-            // 
-            this.expandTreeCheckBox.AutoSize = true;
-            this.expandTreeCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ExpandTreeOnStartup;
-            this.expandTreeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ExpandTreeOnStartup", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.expandTreeCheckBox.Location = new System.Drawing.Point(213, 14);
-            this.expandTreeCheckBox.Name = "expandTreeCheckBox";
-            this.expandTreeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.expandTreeCheckBox.Size = new System.Drawing.Size(138, 17);
-            this.expandTreeCheckBox.TabIndex = 27;
-            this.expandTreeCheckBox.Text = "E&xpand tree on startup";
-            this.expandTreeCheckBox.UseVisualStyleBackColor = true;
+            this.toolTipsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.toolTipsCheckBox.AutoSize = true;
+            this.toolTipsCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.ToolTipsEnabled;
+            this.toolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolTipsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "ToolTipsEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.toolTipsCheckBox.Location = new System.Drawing.Point(267, 49);
+            this.toolTipsCheckBox.Name = "toolTipsCheckBox";
+            this.toolTipsCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolTipsCheckBox.Size = new System.Drawing.Size(96, 17);
+            this.toolTipsCheckBox.TabIndex = 33;
+            this.toolTipsCheckBox.Text = "&Enable tooltips";
+            this.toolTipsCheckBox.UseVisualStyleBackColor = true;
             // 
             // pageantOptionsTab
             // 
-            this.pageantOptionsTab.Controls.Add(this.launchPageantButton);
-            this.pageantOptionsTab.Controls.Add(this.removeKeyButton);
-            this.pageantOptionsTab.Controls.Add(this.addKeyButton);
-            this.pageantOptionsTab.Controls.Add(this.keysListBox);
-            this.pageantOptionsTab.Controls.Add(this.locatePageantButton);
-            this.pageantOptionsTab.Controls.Add(this.launchPageantCheckBox);
-            this.pageantOptionsTab.Controls.Add(this.pageantTextBox);
+            this.pageantOptionsTab.Controls.Add(this.pageantTableLayout);
             this.pageantOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.pageantOptionsTab.Name = "pageantOptionsTab";
-            this.pageantOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.pageantOptionsTab.Size = new System.Drawing.Size(366, 183);
             this.pageantOptionsTab.TabIndex = 2;
             this.pageantOptionsTab.Text = "Pageant";
             this.pageantOptionsTab.UseVisualStyleBackColor = true;
             // 
             // launchPageantButton
             // 
-            this.launchPageantButton.Location = new System.Drawing.Point(16, 14);
+            this.launchPageantButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.launchPageantButton.AutoSize = true;
+            this.launchPageantButton.Location = new System.Drawing.Point(8, 3);
             this.launchPageantButton.Name = "launchPageantButton";
             this.launchPageantButton.Size = new System.Drawing.Size(109, 23);
             this.launchPageantButton.TabIndex = 22;
@@ -491,7 +599,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // removeKeyButton
             // 
-            this.removeKeyButton.Location = new System.Drawing.Point(17, 99);
+            this.removeKeyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeKeyButton.AutoSize = true;
+            this.removeKeyButton.Location = new System.Drawing.Point(8, 61);
             this.removeKeyButton.Name = "removeKeyButton";
             this.removeKeyButton.Size = new System.Drawing.Size(109, 23);
             this.removeKeyButton.TabIndex = 21;
@@ -501,7 +611,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // addKeyButton
             // 
-            this.addKeyButton.Location = new System.Drawing.Point(17, 70);
+            this.addKeyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addKeyButton.AutoSize = true;
+            this.addKeyButton.Location = new System.Drawing.Point(8, 32);
             this.addKeyButton.Name = "addKeyButton";
             this.addKeyButton.Size = new System.Drawing.Size(109, 23);
             this.addKeyButton.TabIndex = 20;
@@ -511,18 +623,22 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // keysListBox
             // 
+            this.keysListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.keysListBox.FormattingEnabled = true;
             this.keysListBox.HorizontalScrollbar = true;
-            this.keysListBox.Location = new System.Drawing.Point(132, 44);
+            this.keysListBox.Location = new System.Drawing.Point(123, 32);
             this.keysListBox.Name = "keysListBox";
-            this.keysListBox.Size = new System.Drawing.Size(217, 108);
+            this.pageantTableLayout.SetRowSpan(this.keysListBox, 2);
+            this.keysListBox.Size = new System.Drawing.Size(240, 108);
             this.keysListBox.TabIndex = 19;
             // 
             // locatePageantButton
             // 
-            this.locatePageantButton.Location = new System.Drawing.Point(17, 156);
+            this.locatePageantButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.locatePageantButton.AutoSize = true;
+            this.locatePageantButton.Location = new System.Drawing.Point(3, 146);
             this.locatePageantButton.Name = "locatePageantButton";
-            this.locatePageantButton.Size = new System.Drawing.Size(110, 24);
+            this.locatePageantButton.Size = new System.Drawing.Size(114, 23);
             this.locatePageantButton.TabIndex = 17;
             this.locatePageantButton.Text = "&Locate pageant.exe";
             this.locatePageantButton.UseVisualStyleBackColor = true;
@@ -530,10 +646,11 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // launchPageantCheckBox
             // 
+            this.launchPageantCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.launchPageantCheckBox.AutoSize = true;
             this.launchPageantCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.LaunchPageantOnStart;
             this.launchPageantCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "LaunchPageantOnStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.launchPageantCheckBox.Location = new System.Drawing.Point(195, 14);
+            this.launchPageantCheckBox.Location = new System.Drawing.Point(209, 6);
             this.launchPageantCheckBox.Name = "launchPageantCheckBox";
             this.launchPageantCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.launchPageantCheckBox.Size = new System.Drawing.Size(154, 17);
@@ -543,37 +660,37 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // pageantTextBox
             // 
+            this.pageantTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pageantTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "PageantLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.pageantTextBox.Location = new System.Drawing.Point(132, 158);
+            this.pageantTextBox.Location = new System.Drawing.Point(123, 146);
             this.pageantTextBox.Name = "pageantTextBox";
             this.pageantTextBox.ReadOnly = true;
-            this.pageantTextBox.Size = new System.Drawing.Size(217, 21);
+            this.pageantTextBox.Size = new System.Drawing.Size(240, 21);
             this.pageantTextBox.TabIndex = 16;
             this.pageantTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.PageantLocation;
             // 
             // filezillaOptionsTab
             // 
-            this.filezillaOptionsTab.Controls.Add(this.sshAuthCheckBox);
-            this.filezillaOptionsTab.Controls.Add(this.protocolGroupBox);
-            this.filezillaOptionsTab.Controls.Add(this.locateFileZillaButton);
-            this.filezillaOptionsTab.Controls.Add(this.enableFileZillaCheckBox);
-            this.filezillaOptionsTab.Controls.Add(this.filezillaTextBox);
+            this.filezillaOptionsTab.Controls.Add(this.filezillaTableLayout);
             this.filezillaOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.filezillaOptionsTab.Name = "filezillaOptionsTab";
-            this.filezillaOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.filezillaOptionsTab.Size = new System.Drawing.Size(366, 183);
             this.filezillaOptionsTab.TabIndex = 3;
             this.filezillaOptionsTab.Text = "FileZilla";
             this.filezillaOptionsTab.UseVisualStyleBackColor = true;
             // 
             // sshAuthCheckBox
             // 
+            this.sshAuthCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sshAuthCheckBox.AutoSize = true;
             this.sshAuthCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaAttemptKeyAuth;
             this.sshAuthCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.filezillaTableLayout.SetColumnSpan(this.sshAuthCheckBox, 2);
             this.sshAuthCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.sshAuthCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaAttemptKeyAuth", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.sshAuthCheckBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
-            this.sshAuthCheckBox.Location = new System.Drawing.Point(18, 79);
+            this.sshAuthCheckBox.Location = new System.Drawing.Point(3, 26);
             this.sshAuthCheckBox.Name = "sshAuthCheckBox";
             this.sshAuthCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.sshAuthCheckBox.Size = new System.Drawing.Size(178, 17);
@@ -582,79 +699,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sshAuthCheckBox.UseVisualStyleBackColor = true;
             this.sshAuthCheckBox.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
             // 
-            // protocolGroupBox
-            // 
-            this.protocolGroupBox.Controls.Add(this.fzSessionInfoRadioButton);
-            this.protocolGroupBox.Controls.Add(this.fzFtpsRadioButton);
-            this.protocolGroupBox.Controls.Add(this.fzSftpRadioButton);
-            this.protocolGroupBox.Controls.Add(this.fzFtpRadioButton);
-            this.protocolGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.protocolGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
-            this.protocolGroupBox.Location = new System.Drawing.Point(216, 22);
-            this.protocolGroupBox.Name = "protocolGroupBox";
-            this.protocolGroupBox.Size = new System.Drawing.Size(137, 114);
-            this.protocolGroupBox.TabIndex = 20;
-            this.protocolGroupBox.TabStop = false;
-            this.protocolGroupBox.Text = "Protocol";
-            // 
-            // fzSessionInfoRadioButton
-            // 
-            this.fzSessionInfoRadioButton.AutoSize = true;
-            this.fzSessionInfoRadioButton.Checked = true;
-            this.fzSessionInfoRadioButton.Location = new System.Drawing.Point(12, 20);
-            this.fzSessionInfoRadioButton.Name = "fzSessionInfoRadioButton";
-            this.fzSessionInfoRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.fzSessionInfoRadioButton.Size = new System.Drawing.Size(105, 17);
-            this.fzSessionInfoRadioButton.TabIndex = 3;
-            this.fzSessionInfoRadioButton.TabStop = true;
-            this.fzSessionInfoRadioButton.Text = "Use Session Info";
-            this.fzSessionInfoRadioButton.UseVisualStyleBackColor = true;
-            this.fzSessionInfoRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
-            // 
-            // fzFtpsRadioButton
-            // 
-            this.fzFtpsRadioButton.AutoSize = true;
-            this.fzFtpsRadioButton.Location = new System.Drawing.Point(42, 88);
-            this.fzFtpsRadioButton.Name = "fzFtpsRadioButton";
-            this.fzFtpsRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.fzFtpsRadioButton.Size = new System.Drawing.Size(75, 17);
-            this.fzFtpsRadioButton.TabIndex = 2;
-            this.fzFtpsRadioButton.TabStop = true;
-            this.fzFtpsRadioButton.Text = "FTPS(990)";
-            this.fzFtpsRadioButton.UseVisualStyleBackColor = true;
-            this.fzFtpsRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
-            // 
-            // fzSftpRadioButton
-            // 
-            this.fzSftpRadioButton.AutoSize = true;
-            this.fzSftpRadioButton.Location = new System.Drawing.Point(48, 65);
-            this.fzSftpRadioButton.Name = "fzSftpRadioButton";
-            this.fzSftpRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.fzSftpRadioButton.Size = new System.Drawing.Size(69, 17);
-            this.fzSftpRadioButton.TabIndex = 1;
-            this.fzSftpRadioButton.TabStop = true;
-            this.fzSftpRadioButton.Text = "SFTP(22)";
-            this.fzSftpRadioButton.UseVisualStyleBackColor = true;
-            this.fzSftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
-            // 
-            // fzFtpRadioButton
-            // 
-            this.fzFtpRadioButton.AutoSize = true;
-            this.fzFtpRadioButton.Location = new System.Drawing.Point(51, 42);
-            this.fzFtpRadioButton.Name = "fzFtpRadioButton";
-            this.fzFtpRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.fzFtpRadioButton.Size = new System.Drawing.Size(66, 17);
-            this.fzFtpRadioButton.TabIndex = 0;
-            this.fzFtpRadioButton.TabStop = true;
-            this.fzFtpRadioButton.Text = "FTP (21)";
-            this.fzFtpRadioButton.UseVisualStyleBackColor = true;
-            this.fzFtpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
-            // 
             // locateFileZillaButton
             // 
+            this.locateFileZillaButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.locateFileZillaButton.AutoSize = true;
             this.locateFileZillaButton.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.locateFileZillaButton.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
-            this.locateFileZillaButton.Location = new System.Drawing.Point(18, 156);
+            this.locateFileZillaButton.Location = new System.Drawing.Point(3, 156);
             this.locateFileZillaButton.Name = "locateFileZillaButton";
             this.locateFileZillaButton.Size = new System.Drawing.Size(115, 24);
             this.locateFileZillaButton.TabIndex = 19;
@@ -664,10 +715,12 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // enableFileZillaCheckBox
             // 
+            this.enableFileZillaCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.enableFileZillaCheckBox.AutoSize = true;
             this.enableFileZillaCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
+            this.filezillaTableLayout.SetColumnSpan(this.enableFileZillaCheckBox, 2);
             this.enableFileZillaCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.enableFileZillaCheckBox.Location = new System.Drawing.Point(41, 55);
+            this.enableFileZillaCheckBox.Location = new System.Drawing.Point(26, 3);
             this.enableFileZillaCheckBox.Name = "enableFileZillaCheckBox";
             this.enableFileZillaCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.enableFileZillaCheckBox.Size = new System.Drawing.Size(155, 17);
@@ -677,13 +730,16 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             // filezillaTextBox
             // 
+            this.filezillaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.filezillaTableLayout.SetColumnSpan(this.filezillaTextBox, 2);
             this.filezillaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.filezillaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.filezillaTextBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
-            this.filezillaTextBox.Location = new System.Drawing.Point(139, 159);
+            this.filezillaTextBox.Location = new System.Drawing.Point(124, 156);
             this.filezillaTextBox.Name = "filezillaTextBox";
             this.filezillaTextBox.ReadOnly = true;
-            this.filezillaTextBox.Size = new System.Drawing.Size(214, 21);
+            this.filezillaTextBox.Size = new System.Drawing.Size(239, 21);
             this.filezillaTextBox.TabIndex = 18;
             this.filezillaTextBox.Text = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaLocation;
             // 
@@ -699,7 +755,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.winSCPOptionsTab.Controls.Add(this.winSCPTextBox);
             this.winSCPOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.winSCPOptionsTab.Name = "winSCPOptionsTab";
-            this.winSCPOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.winSCPOptionsTab.Size = new System.Drawing.Size(483, 183);
             this.winSCPOptionsTab.TabIndex = 4;
             this.winSCPOptionsTab.Text = "WinSCP";
             this.winSCPOptionsTab.UseVisualStyleBackColor = true;
@@ -935,7 +991,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.updateOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.updateOptionsTab.Name = "updateOptionsTab";
             this.updateOptionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.updateOptionsTab.Size = new System.Drawing.Size(367, 190);
+            this.updateOptionsTab.Size = new System.Drawing.Size(483, 183);
             this.updateOptionsTab.TabIndex = 1;
             this.updateOptionsTab.Text = "Update";
             this.updateOptionsTab.UseVisualStyleBackColor = true;
@@ -1084,39 +1140,157 @@ namespace uk.org.riseley.puttySessionManager.form
             this.fontDialog.ShowColor = true;
             this.fontDialog.ShowEffects = false;
             // 
+            // pageantTableLayout
+            // 
+            this.pageantTableLayout.AutoSize = true;
+            this.pageantTableLayout.ColumnCount = 2;
+            this.pageantTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pageantTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pageantTableLayout.Controls.Add(this.launchPageantButton, 0, 0);
+            this.pageantTableLayout.Controls.Add(this.launchPageantCheckBox, 1, 0);
+            this.pageantTableLayout.Controls.Add(this.keysListBox, 1, 1);
+            this.pageantTableLayout.Controls.Add(this.removeKeyButton, 0, 2);
+            this.pageantTableLayout.Controls.Add(this.locatePageantButton, 0, 3);
+            this.pageantTableLayout.Controls.Add(this.pageantTextBox, 1, 3);
+            this.pageantTableLayout.Controls.Add(this.addKeyButton, 0, 1);
+            this.pageantTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pageantTableLayout.Location = new System.Drawing.Point(0, 0);
+            this.pageantTableLayout.Name = "pageantTableLayout";
+            this.pageantTableLayout.RowCount = 4;
+            this.pageantTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pageantTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pageantTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pageantTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pageantTableLayout.Size = new System.Drawing.Size(366, 183);
+            this.pageantTableLayout.TabIndex = 23;
+            // 
+            // filezillaTableLayout
+            // 
+            this.filezillaTableLayout.ColumnCount = 3;
+            this.filezillaTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.filezillaTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.filezillaTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.filezillaTableLayout.Controls.Add(this.locateFileZillaButton, 0, 2);
+            this.filezillaTableLayout.Controls.Add(this.protocolGroupBox, 2, 0);
+            this.filezillaTableLayout.Controls.Add(this.sshAuthCheckBox, 0, 1);
+            this.filezillaTableLayout.Controls.Add(this.enableFileZillaCheckBox, 0, 0);
+            this.filezillaTableLayout.Controls.Add(this.filezillaTextBox, 1, 2);
+            this.filezillaTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.filezillaTableLayout.Location = new System.Drawing.Point(0, 0);
+            this.filezillaTableLayout.Name = "filezillaTableLayout";
+            this.filezillaTableLayout.RowCount = 3;
+            this.filezillaTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.filezillaTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.filezillaTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.filezillaTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.filezillaTableLayout.Size = new System.Drawing.Size(366, 183);
+            this.filezillaTableLayout.TabIndex = 23;
+            // 
+            // fzFtpRadioButton
+            // 
+            this.fzFtpRadioButton.AutoSize = true;
+            this.fzFtpRadioButton.Location = new System.Drawing.Point(51, 42);
+            this.fzFtpRadioButton.Name = "fzFtpRadioButton";
+            this.fzFtpRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.fzFtpRadioButton.Size = new System.Drawing.Size(66, 17);
+            this.fzFtpRadioButton.TabIndex = 0;
+            this.fzFtpRadioButton.TabStop = true;
+            this.fzFtpRadioButton.Text = "FTP (21)";
+            this.fzFtpRadioButton.UseVisualStyleBackColor = true;
+            this.fzFtpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // fzSftpRadioButton
+            // 
+            this.fzSftpRadioButton.AutoSize = true;
+            this.fzSftpRadioButton.Location = new System.Drawing.Point(48, 65);
+            this.fzSftpRadioButton.Name = "fzSftpRadioButton";
+            this.fzSftpRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.fzSftpRadioButton.Size = new System.Drawing.Size(69, 17);
+            this.fzSftpRadioButton.TabIndex = 1;
+            this.fzSftpRadioButton.TabStop = true;
+            this.fzSftpRadioButton.Text = "SFTP(22)";
+            this.fzSftpRadioButton.UseVisualStyleBackColor = true;
+            this.fzSftpRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // fzFtpsRadioButton
+            // 
+            this.fzFtpsRadioButton.AutoSize = true;
+            this.fzFtpsRadioButton.Location = new System.Drawing.Point(42, 88);
+            this.fzFtpsRadioButton.Name = "fzFtpsRadioButton";
+            this.fzFtpsRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.fzFtpsRadioButton.Size = new System.Drawing.Size(75, 17);
+            this.fzFtpsRadioButton.TabIndex = 2;
+            this.fzFtpsRadioButton.TabStop = true;
+            this.fzFtpsRadioButton.Text = "FTPS(990)";
+            this.fzFtpsRadioButton.UseVisualStyleBackColor = true;
+            this.fzFtpsRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // fzSessionInfoRadioButton
+            // 
+            this.fzSessionInfoRadioButton.AutoSize = true;
+            this.fzSessionInfoRadioButton.Checked = true;
+            this.fzSessionInfoRadioButton.Location = new System.Drawing.Point(12, 20);
+            this.fzSessionInfoRadioButton.Name = "fzSessionInfoRadioButton";
+            this.fzSessionInfoRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.fzSessionInfoRadioButton.Size = new System.Drawing.Size(105, 17);
+            this.fzSessionInfoRadioButton.TabIndex = 3;
+            this.fzSessionInfoRadioButton.TabStop = true;
+            this.fzSessionInfoRadioButton.Text = "Use Session Info";
+            this.fzSessionInfoRadioButton.UseVisualStyleBackColor = true;
+            this.fzSessionInfoRadioButton.CheckedChanged += new System.EventHandler(this.protocolRadioButton_CheckedChanged);
+            // 
+            // protocolGroupBox
+            // 
+            this.protocolGroupBox.Controls.Add(this.fzSessionInfoRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzFtpsRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzSftpRadioButton);
+            this.protocolGroupBox.Controls.Add(this.fzFtpRadioButton);
+            this.protocolGroupBox.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "FileZillaEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.protocolGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.protocolGroupBox.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.FileZillaEnabled;
+            this.protocolGroupBox.Location = new System.Drawing.Point(187, 3);
+            this.protocolGroupBox.Name = "protocolGroupBox";
+            this.filezillaTableLayout.SetRowSpan(this.protocolGroupBox, 2);
+            this.protocolGroupBox.Size = new System.Drawing.Size(176, 147);
+            this.protocolGroupBox.TabIndex = 20;
+            this.protocolGroupBox.TabStop = false;
+            this.protocolGroupBox.Text = "Protocol";
+            // 
             // Options
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 268);
-            this.Controls.Add(this.tableLayoutPanel);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(380, 248);
+            this.Controls.Add(this.tabsTableLayout);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
             this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(389, 302);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(389, 302);
+            this.MinimumSize = new System.Drawing.Size(388, 282);
             this.Name = "Options";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Options";
             this.TopMost = true;
-            this.tableLayoutPanel.ResumeLayout(false);
+            this.tabsTableLayout.ResumeLayout(false);
+            this.tabsTableLayout.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.generalOptionsTab.ResumeLayout(false);
-            this.generalOptionsTab.PerformLayout();
+            this.generalTableLayout.ResumeLayout(false);
+            this.generalTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.treeOptionsTab.ResumeLayout(false);
-            this.treeOptionsTab.PerformLayout();
+            this.treeTableLayout.ResumeLayout(false);
+            this.treeTableLayout.PerformLayout();
+            this.subfolderTableLayout.ResumeLayout(false);
+            this.subfolderTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.pageantOptionsTab.ResumeLayout(false);
             this.pageantOptionsTab.PerformLayout();
             this.filezillaOptionsTab.ResumeLayout(false);
-            this.filezillaOptionsTab.PerformLayout();
-            this.protocolGroupBox.ResumeLayout(false);
-            this.protocolGroupBox.PerformLayout();
             this.winSCPOptionsTab.ResumeLayout(false);
             this.winSCPOptionsTab.PerformLayout();
             this.wsVerGroupBox.ResumeLayout(false);
@@ -1129,6 +1303,12 @@ namespace uk.org.riseley.puttySessionManager.form
             this.updateOptionsTab.PerformLayout();
             this.proxyGroupBox.ResumeLayout(false);
             this.proxyGroupBox.PerformLayout();
+            this.pageantTableLayout.ResumeLayout(false);
+            this.pageantTableLayout.PerformLayout();
+            this.filezillaTableLayout.ResumeLayout(false);
+            this.filezillaTableLayout.PerformLayout();
+            this.protocolGroupBox.ResumeLayout(false);
+            this.protocolGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1136,7 +1316,7 @@ namespace uk.org.riseley.puttySessionManager.form
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.TableLayoutPanel tabsTableLayout;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.FontDialog fontDialog;
         private System.Windows.Forms.TabControl tabControl1;
@@ -1176,11 +1356,6 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.Button locateFileZillaButton;
         private System.Windows.Forms.TextBox filezillaTextBox;
         private System.Windows.Forms.CheckBox enableFileZillaCheckBox;
-        private System.Windows.Forms.GroupBox protocolGroupBox;
-        private System.Windows.Forms.RadioButton fzSessionInfoRadioButton;
-        private System.Windows.Forms.RadioButton fzFtpsRadioButton;
-        private System.Windows.Forms.RadioButton fzSftpRadioButton;
-        private System.Windows.Forms.RadioButton fzFtpRadioButton;
         private System.Windows.Forms.ToolTip optionsToolTip;
         private System.Windows.Forms.CheckBox sshAuthCheckBox;
         private System.Windows.Forms.TabPage winSCPOptionsTab;
@@ -1205,11 +1380,21 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.CheckBox confirmExitCheckBox;
         private System.Windows.Forms.TabPage treeOptionsTab;
         private System.Windows.Forms.CheckBox displayTreeIconsCheckBox;
-        private System.Windows.Forms.TextBox sampleTreeTextbox;
-        private System.Windows.Forms.Button chooseTreeFontButton;
         private System.Windows.Forms.CheckBox expandTreeCheckBox;
+        private System.Windows.Forms.CheckBox toolTipsCheckBox;
+        private System.Windows.Forms.TableLayoutPanel generalTableLayout;
+        private System.Windows.Forms.TableLayoutPanel treeTableLayout;
+        private System.Windows.Forms.TableLayoutPanel subfolderTableLayout;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label sessionWarningLabel;
-        private System.Windows.Forms.CheckBox toolTipsCheckBox;
+        private System.Windows.Forms.TextBox sampleTreeTextbox;
+        private System.Windows.Forms.Button chooseTreeFontButton;
+        private System.Windows.Forms.TableLayoutPanel pageantTableLayout;
+        private System.Windows.Forms.TableLayoutPanel filezillaTableLayout;
+        private System.Windows.Forms.GroupBox protocolGroupBox;
+        private System.Windows.Forms.RadioButton fzSessionInfoRadioButton;
+        private System.Windows.Forms.RadioButton fzFtpsRadioButton;
+        private System.Windows.Forms.RadioButton fzSftpRadioButton;
+        private System.Windows.Forms.RadioButton fzFtpRadioButton;
     }
 }
