@@ -48,10 +48,18 @@ namespace uk.org.riseley.puttySessionManager.form
             InitializeComponent();
             sc = SessionController.getInstance();
             hc = HotkeyController.getInstance();
-            autostartCheckBox.Checked = sc.isAutoStartEnabled();
 
             // Create the update form
             uf = new UpdateForm();
+
+            setupToolTips();
+
+            resetState();
+        }
+
+        private void resetState()
+        {
+                        autostartCheckBox.Checked = sc.isAutoStartEnabled();
 
             // Reset the proxy mode button to the save pref
             ProxyMode pm = (ProxyMode)Properties.Settings.Default.ProxyMode;
@@ -73,6 +81,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // Check if the update url is changed
             if (!urlTextBox.Text.Equals(Properties.Settings.Default.DefaultUpdateUrl))
                 urlCheckBox.Checked = false;
+
+            // Clear the keys list box
+            keysListBox.Items.Clear();
 
             // Initialise the key list from the properties
             foreach (String key in Properties.Settings.Default.PageantKeyList)
@@ -145,7 +156,6 @@ namespace uk.org.riseley.puttySessionManager.form
             // version is displayed
             wsVerRadioButton_CheckedChanged(this, EventArgs.Empty);
 
-            setupToolTips();
         }
 
         private void locatePuttyButton_Click(object sender, EventArgs e)
@@ -179,6 +189,7 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Save();
             this.Close();
         }
 
@@ -293,8 +304,11 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void removeKeyButton_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.PageantKeyList.Remove(keysListBox.SelectedItem.ToString());
-            keysListBox.Items.Remove(keysListBox.SelectedItem);            
+            if (keysListBox.SelectedItem != null)
+            {
+                Properties.Settings.Default.PageantKeyList.Remove(keysListBox.SelectedItem.ToString());
+                keysListBox.Items.Remove(keysListBox.SelectedItem);
+            }
         }
 
         private void launchPageantButton_Click(object sender, EventArgs e)
@@ -501,6 +515,15 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             hc.UnregisterAllHotKeys(parentWindow);
             hc.registerAllEnabledHotkeys(parentWindow);
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.SuspendLayout();
+            Properties.Settings.Default.Reload();
+            resetState();
+            this.ResumeLayout();
         }
     }
 }
