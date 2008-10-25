@@ -26,9 +26,9 @@ using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.model.eventargs;
 using uk.org.riseley.puttySessionManager.controller;
 
-namespace uk.org.riseley.puttySessionManager.control
+namespace uk.org.riseley.puttySessionManager.control.options
 {
-    public partial class OptionsControl : UserControl
+    public partial class SyncOptionsControl : OptionsControl
     {
         private CsvSessionImportImpl csvImporter;
 
@@ -49,7 +49,7 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <summary>
         /// Constructor for OptionsControl
         /// </summary>
-        public OptionsControl()
+        public SyncOptionsControl()
         {
             InitializeComponent();
             csvImporter = new CsvSessionImportImpl();            
@@ -96,9 +96,10 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <param name="e"></param>
         private void locateFileButton_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            setupOpenFileDialogue(FileDialogType.CSV);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                fileTextBox.Text = openFileDialog1.FileName;
+                fileTextBox.Text = openFileDialog.FileName;
             }
         }
 

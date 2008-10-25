@@ -30,7 +30,7 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.optionsControl1 = new uk.org.riseley.puttySessionManager.control.OptionsControl();
+            this.optionsControl1 = new uk.org.riseley.puttySessionManager.control.options.SyncOptionsControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableControl1 = new uk.org.riseley.puttySessionManager.control.TableControl();
             this.tabControl1.SuspendLayout();
@@ -67,7 +67,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.optionsControl1.Name = "optionsControl1";
             this.optionsControl1.Size = new System.Drawing.Size(721, 297);
             this.optionsControl1.TabIndex = 0;
-            this.optionsControl1.SyncSessionsLoaded += new uk.org.riseley.puttySessionManager.control.OptionsControl.SyncSessionsLoadedEventHandler(this.optionsControl1_SyncSessionsLoaded);
+            this.optionsControl1.SyncSessionsLoaded += new uk.org.riseley.puttySessionManager.control.options.SyncOptionsControl.SyncSessionsLoadedEventHandler(this.optionsControl1_SyncSessionsLoaded);
             // 
             // tabPage2
             // 
@@ -111,7 +111,7 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private uk.org.riseley.puttySessionManager.control.OptionsControl optionsControl1;
+        private uk.org.riseley.puttySessionManager.control.options.SyncOptionsControl optionsControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private uk.org.riseley.puttySessionManager.control.TableControl tableControl1;
 

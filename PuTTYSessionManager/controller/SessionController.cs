@@ -59,6 +59,11 @@ namespace uk.org.riseley.puttySessionManager.controller
         public enum Protocol { AUTO, FTP, FTPS, SFTP, SCP };
 
         /// <summary>
+        /// The choice of Proxy Modes
+        /// </summary>
+        public enum ProxyMode { PROXY_IE, PROXY_NONE, PROXY_USER };
+
+        /// <summary>
         /// The current list of all the sessions
         /// </summary>
         private static List<Session> sessionList = new List<Session>();

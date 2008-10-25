@@ -26,6 +26,7 @@ using System.Net;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
+using uk.org.riseley.puttySessionManager.controller;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
@@ -53,15 +54,15 @@ namespace uk.org.riseley.puttySessionManager.form
 
             // Set the proxy options
             int proxyMode = Properties.Settings.Default.ProxyMode;  
-            if (  proxyMode == (int) Options.ProxyMode.PROXY_IE )
+            if (  proxyMode == (int) SessionController.ProxyMode.PROXY_IE )
             {
                 wc.Proxy = WebRequest.GetSystemWebProxy();
             }
-            else if ( proxyMode == (int) Options.ProxyMode.PROXY_NONE )
+            else if (proxyMode == (int)SessionController.ProxyMode.PROXY_NONE)
             {
                 wc.Proxy = null;
             }
-            else if ( proxyMode == (int) Options.ProxyMode.PROXY_USER )
+            else if (proxyMode == (int)SessionController.ProxyMode.PROXY_USER)
             {
                 WebProxy wp = new WebProxy();
 

@@ -76,17 +76,60 @@
     <Compile Include="controller\SessionAttributes.cs" />
     <Compile Include="controller\SessionExportInterface.cs" />
     <Compile Include="controller\SessionStorageInterface.cs" />
+    <Compile Include="control\options\FileZillaOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\FileZillaOptionsControl.Designer.cs">
+      <DependentUpon>FileZillaOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\options\GeneralOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\GeneralOptionsControl.Designer.cs">
+      <DependentUpon>GeneralOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\options\OptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\OptionsControl.Designer.cs">
+      <DependentUpon>OptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\options\PageantOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\PageantOptionsControl.Designer.cs">
+      <DependentUpon>PageantOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\options\ResetableOptionsControl.cs" />
+    <Compile Include="control\options\TreeOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\TreeOptionsControl.Designer.cs">
+      <DependentUpon>TreeOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\options\UpdateOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\UpdateOptionsControl.Designer.cs">
+      <DependentUpon>UpdateOptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\options\WinSCPOptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\options\WinSCPOptionsControl.Designer.cs">
+      <DependentUpon>WinSCPOptionsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="control\synchronize\TableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="control\synchronize\TableControl.Designer.cs">
       <DependentUpon>TableControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="control\synchronize\OptionsControl.cs">
+    <Compile Include="control\options\SyncOptionsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="control\synchronize\OptionsControl.Designer.cs">
-      <DependentUpon>OptionsControl.cs</DependentUpon>
+    <Compile Include="control\options\SyncOptionsControl.Designer.cs">
+      <DependentUpon>SyncOptionsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="form\AboutBox.cs">
       <SubType>Form</SubType>
@@ -210,9 +253,37 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="control\synchronize\OptionsControl.resx">
+    <EmbeddedResource Include="control\options\FileZillaOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FileZillaOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\GeneralOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GeneralOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\OptionsControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>OptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\PageantOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PageantOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\TreeOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TreeOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\UpdateOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UpdateOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\WinSCPOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WinSCPOptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\options\SyncOptionsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SyncOptionsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="control\synchronize\TableControl.resx">
       <SubType>Designer</SubType>
