@@ -66,6 +66,8 @@ namespace uk.org.riseley.puttySessionManager.form
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
             Application.AddMessageFilter(this);
+            EventHandler dialogFontHandler = new EventHandler(this.dialogFontChanged);
+            optionsDialog.DialogFontChanged += dialogFontHandler;
         }
 
         /// <summary>
@@ -468,6 +470,14 @@ namespace uk.org.riseley.puttySessionManager.form
         private void synchronizeSessionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             synchronizeForm.Show();
+        }
+
+        private void dialogFontChanged(object sender, EventArgs e)
+        {
+            aboutDialog.resetDialogFont();    
+            sessionEditor.resetDialogFont();
+            hotKeyChooser.resetDialogFont();
+            synchronizeForm.resetDialogFont();
         }
     }
 }

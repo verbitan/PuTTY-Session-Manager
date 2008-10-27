@@ -53,8 +53,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(545, 419);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SessionManagementForm";
             this.Text = "Session Editor";
             this.ResumeLayout(false);

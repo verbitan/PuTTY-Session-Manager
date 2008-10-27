@@ -33,6 +33,11 @@ namespace uk.org.riseley.puttySessionManager.control.options
         private HotkeyController hc;
         private Form parentWindow;
 
+        /// <summary>
+        /// Fired when the dialog font is changed
+        /// </summary>
+        public event System.EventHandler DialogFontChanged;
+
         public GeneralOptionsControl()
         {
             InitializeComponent();
@@ -69,6 +74,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 sampleDialogTextbox.Font = fontDialog.Font;
+                OnDialogFontChanged(new EventArgs());
             }
         }
 
@@ -94,6 +100,14 @@ namespace uk.org.riseley.puttySessionManager.control.options
         {
             hc.UnregisterAllHotKeys(parentWindow);
             hc.registerAllEnabledHotkeys(parentWindow);
+        }
+
+        protected virtual void OnDialogFontChanged(EventArgs e)
+        {
+            if (DialogFontChanged != null)
+            {
+                DialogFontChanged(this, e);
+            }
         }
     }
 }

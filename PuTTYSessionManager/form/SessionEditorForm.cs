@@ -44,7 +44,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private CopySessionForm csf;
 
         /// <summary>
-        /// Dialog used to choose which 
+        /// Dialog used to choose which type of export to use
         /// </summary>
         private ExportDialog ed = new ExportDialog();
  
@@ -140,6 +140,16 @@ namespace uk.org.riseley.puttySessionManager.form
         private void sessionEditorControl1_CloseSessionEditor(object sender, EventArgs e)
         {
             closeSessionManagementForm(sender, e);
+        }
+
+        public override void resetDialogFont()
+        {
+            base.resetDialogFont();
+            if ( csf != null )
+                csf.resetDialogFont();
+            ed.resetDialogFont();
+            if ( sessionEditorControl1 != null )
+                sessionEditorControl1.resetDialogFont();
         }
     }
 }

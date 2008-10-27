@@ -40,6 +40,7 @@ namespace uk.org.riseley.puttySessionManager.form
             InitializeComponent();
             sc = SessionController.getInstance();
             nsf = new NewSessionForm(this);
+            resetDialogFont();
         }
 
 
@@ -193,6 +194,11 @@ namespace uk.org.riseley.puttySessionManager.form
         protected void closeSessionManagementForm(object sender, EventArgs e)
         {
             this.Visible = false;
+        }
+
+        public virtual void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }

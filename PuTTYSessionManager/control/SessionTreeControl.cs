@@ -1040,7 +1040,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 else
                     tsmi.ToolTipText = "";
 
-                tsmi.Text = hkc.getModifier().Description + "+" + hkc.getHotKeyFromId(hkid);
+                tsmi.Text = hkc.getModifier().Description + " " + hkc.getHotKeyFromId(hkid);
             }
         }
 

@@ -38,6 +38,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public ExportDialog()
         {
             InitializeComponent();
+            resetDialogFont();
         }
 
         /// <summary>
@@ -61,6 +62,11 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             DialogResult = DialogResult.OK;
             Hide();
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }

@@ -55,12 +55,12 @@ namespace uk.org.riseley.puttySessionManager.form
             this.winSCPOptionsTab = new System.Windows.Forms.TabPage();
             this.updateOptionsTab = new System.Windows.Forms.TabPage();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.generalOptionsControl1 = new uk.org.riseley.puttySessionManager.control.options.GeneralOptionsControl();
             this.treeOptionsControl = new uk.org.riseley.puttySessionManager.control.options.TreeOptionsControl();
             this.pageantOptionsControl = new uk.org.riseley.puttySessionManager.control.options.PageantOptionsControl();
             this.fileZillaOptionsControl = new uk.org.riseley.puttySessionManager.control.options.FileZillaOptionsControl();
             this.winSCPOptionsControl = new uk.org.riseley.puttySessionManager.control.options.WinSCPOptionsControl();
             this.updateOptionsControl = new uk.org.riseley.puttySessionManager.control.options.UpdateOptionsControl();
-            this.generalOptionsControl1 = new uk.org.riseley.puttySessionManager.control.options.GeneralOptionsControl();
             this.tabsTableLayout.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.generalOptionsTab.SuspendLayout();
@@ -87,7 +87,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tabsTableLayout.RowCount = 2;
             this.tabsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.7284F));
             this.tabsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.2716F));
-            this.tabsTableLayout.Size = new System.Drawing.Size(428, 267);
+            this.tabsTableLayout.Size = new System.Drawing.Size(399, 249);
             this.tabsTableLayout.TabIndex = 1;
             // 
             // okButton
@@ -96,7 +96,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.okButton.AutoSize = true;
             this.okButton.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(145, 237);
+            this.okButton.Location = new System.Drawing.Point(130, 220);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(66, 23);
             this.okButton.TabIndex = 1;
@@ -117,7 +117,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(422, 225);
+            this.tabControl1.Size = new System.Drawing.Size(393, 209);
             this.tabControl1.TabIndex = 2;
             // 
             // generalOptionsTab
@@ -126,7 +126,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.generalOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.generalOptionsTab.Name = "generalOptionsTab";
             this.generalOptionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.generalOptionsTab.Size = new System.Drawing.Size(414, 199);
+            this.generalOptionsTab.Size = new System.Drawing.Size(385, 183);
             this.generalOptionsTab.TabIndex = 0;
             this.generalOptionsTab.Text = "General";
             this.generalOptionsTab.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.treeOptionsTab.Controls.Add(this.treeOptionsControl);
             this.treeOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.treeOptionsTab.Name = "treeOptionsTab";
-            this.treeOptionsTab.Size = new System.Drawing.Size(414, 199);
+            this.treeOptionsTab.Size = new System.Drawing.Size(385, 183);
             this.treeOptionsTab.TabIndex = 5;
             this.treeOptionsTab.Text = "Tree";
             this.treeOptionsTab.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.pageantOptionsTab.Controls.Add(this.pageantOptionsControl);
             this.pageantOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.pageantOptionsTab.Name = "pageantOptionsTab";
-            this.pageantOptionsTab.Size = new System.Drawing.Size(414, 199);
+            this.pageantOptionsTab.Size = new System.Drawing.Size(385, 183);
             this.pageantOptionsTab.TabIndex = 2;
             this.pageantOptionsTab.Text = "Pageant";
             this.pageantOptionsTab.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.filezillaOptionsTab.Controls.Add(this.fileZillaOptionsControl);
             this.filezillaOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.filezillaOptionsTab.Name = "filezillaOptionsTab";
-            this.filezillaOptionsTab.Size = new System.Drawing.Size(414, 199);
+            this.filezillaOptionsTab.Size = new System.Drawing.Size(385, 183);
             this.filezillaOptionsTab.TabIndex = 3;
             this.filezillaOptionsTab.Text = "FileZilla";
             this.filezillaOptionsTab.UseVisualStyleBackColor = true;
@@ -166,7 +166,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.winSCPOptionsTab.Controls.Add(this.winSCPOptionsControl);
             this.winSCPOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.winSCPOptionsTab.Name = "winSCPOptionsTab";
-            this.winSCPOptionsTab.Size = new System.Drawing.Size(414, 199);
+            this.winSCPOptionsTab.Size = new System.Drawing.Size(385, 183);
             this.winSCPOptionsTab.TabIndex = 4;
             this.winSCPOptionsTab.Text = "WinSCP";
             this.winSCPOptionsTab.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.updateOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.updateOptionsTab.Name = "updateOptionsTab";
             this.updateOptionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.updateOptionsTab.Size = new System.Drawing.Size(414, 199);
+            this.updateOptionsTab.Size = new System.Drawing.Size(385, 183);
             this.updateOptionsTab.TabIndex = 1;
             this.updateOptionsTab.Text = "Update";
             this.updateOptionsTab.UseVisualStyleBackColor = true;
@@ -187,7 +187,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cancelButton.AutoSize = true;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(217, 237);
+            this.cancelButton.Location = new System.Drawing.Point(202, 220);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(66, 23);
             this.cancelButton.TabIndex = 3;
@@ -195,12 +195,21 @@ namespace uk.org.riseley.puttySessionManager.form
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // generalOptionsControl1
+            // 
+            this.generalOptionsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.generalOptionsControl1.Location = new System.Drawing.Point(3, 3);
+            this.generalOptionsControl1.Name = "generalOptionsControl1";
+            this.generalOptionsControl1.Size = new System.Drawing.Size(379, 177);
+            this.generalOptionsControl1.TabIndex = 0;
+            this.generalOptionsControl1.DialogFontChanged += new System.EventHandler(this.generalOptionsControl1_DialogFontChanged);
+            // 
             // treeOptionsControl
             // 
             this.treeOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.treeOptionsControl.Name = "treeOptionsControl";
-            this.treeOptionsControl.Size = new System.Drawing.Size(414, 199);
+            this.treeOptionsControl.Size = new System.Drawing.Size(385, 183);
             this.treeOptionsControl.TabIndex = 0;
             // 
             // pageantOptionsControl
@@ -208,7 +217,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.pageantOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageantOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.pageantOptionsControl.Name = "pageantOptionsControl";
-            this.pageantOptionsControl.Size = new System.Drawing.Size(414, 199);
+            this.pageantOptionsControl.Size = new System.Drawing.Size(385, 183);
             this.pageantOptionsControl.TabIndex = 0;
             // 
             // fileZillaOptionsControl
@@ -216,7 +225,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.fileZillaOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileZillaOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.fileZillaOptionsControl.Name = "fileZillaOptionsControl";
-            this.fileZillaOptionsControl.Size = new System.Drawing.Size(414, 199);
+            this.fileZillaOptionsControl.Size = new System.Drawing.Size(385, 183);
             this.fileZillaOptionsControl.TabIndex = 0;
             // 
             // winSCPOptionsControl
@@ -224,7 +233,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.winSCPOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.winSCPOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.winSCPOptionsControl.Name = "winSCPOptionsControl";
-            this.winSCPOptionsControl.Size = new System.Drawing.Size(414, 199);
+            this.winSCPOptionsControl.Size = new System.Drawing.Size(385, 183);
             this.winSCPOptionsControl.TabIndex = 0;
             // 
             // updateOptionsControl
@@ -232,16 +241,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.updateOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.updateOptionsControl.Location = new System.Drawing.Point(3, 3);
             this.updateOptionsControl.Name = "updateOptionsControl";
-            this.updateOptionsControl.Size = new System.Drawing.Size(408, 193);
+            this.updateOptionsControl.Size = new System.Drawing.Size(379, 177);
             this.updateOptionsControl.TabIndex = 0;
-            // 
-            // generalOptionsControl1
-            // 
-            this.generalOptionsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.generalOptionsControl1.Location = new System.Drawing.Point(3, 3);
-            this.generalOptionsControl1.Name = "generalOptionsControl1";
-            this.generalOptionsControl1.Size = new System.Drawing.Size(408, 193);
-            this.generalOptionsControl1.TabIndex = 0;
             // 
             // Options
             // 
@@ -249,13 +250,14 @@ namespace uk.org.riseley.puttySessionManager.form
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(428, 267);
+            this.ClientSize = new System.Drawing.Size(399, 249);
             this.Controls.Add(this.tabsTableLayout);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DoubleBuffered = true;
-            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(407, 283);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(407, 283);
             this.Name = "Options";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -119,11 +119,11 @@
     <Compile Include="control\options\WinSCPOptionsControl.Designer.cs">
       <DependentUpon>WinSCPOptionsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="control\synchronize\TableControl.cs">
+    <Compile Include="control\SyncTableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="control\synchronize\TableControl.Designer.cs">
-      <DependentUpon>TableControl.cs</DependentUpon>
+    <Compile Include="control\SyncTableControl.Designer.cs">
+      <DependentUpon>SyncTableControl.cs</DependentUpon>
     </Compile>
     <Compile Include="control\options\SyncOptionsControl.cs">
       <SubType>UserControl</SubType>
@@ -285,9 +285,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>SyncOptionsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="control\synchronize\TableControl.resx">
+    <EmbeddedResource Include="control\SyncTableControl.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TableControl.cs</DependentUpon>
+      <DependentUpon>SyncTableControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\AboutBox.resx">
       <SubType>Designer</SubType>

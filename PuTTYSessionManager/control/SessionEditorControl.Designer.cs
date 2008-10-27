@@ -66,7 +66,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.10962F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.90388F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.15337F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel1.Controls.Add(this.exportButton, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.copySessionAttribButton, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.newSessionButton, 2, 1);
@@ -98,7 +98,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.copySessionAttribButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.copySessionAttribButton.Location = new System.Drawing.Point(84, 347);
             this.copySessionAttribButton.Name = "copySessionAttribButton";
-            this.copySessionAttribButton.Size = new System.Drawing.Size(137, 23);
+            this.copySessionAttribButton.Size = new System.Drawing.Size(136, 23);
             this.copySessionAttribButton.TabIndex = 1;
             this.copySessionAttribButton.Text = "Copy Session Attributes";
             this.copySessionAttribButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // newSessionButton
             // 
             this.newSessionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.newSessionButton.Location = new System.Drawing.Point(229, 347);
+            this.newSessionButton.Location = new System.Drawing.Point(228, 347);
             this.newSessionButton.Name = "newSessionButton";
             this.newSessionButton.Size = new System.Drawing.Size(88, 23);
             this.newSessionButton.TabIndex = 2;
@@ -118,7 +118,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // deleteSesssionsButton
             // 
             this.deleteSesssionsButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.deleteSesssionsButton.Location = new System.Drawing.Point(328, 347);
+            this.deleteSesssionsButton.Location = new System.Drawing.Point(326, 347);
             this.deleteSesssionsButton.Name = "deleteSesssionsButton";
             this.deleteSesssionsButton.Size = new System.Drawing.Size(98, 23);
             this.deleteSesssionsButton.TabIndex = 3;
@@ -130,7 +130,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.closeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(435, 347);
+            this.closeButton.Location = new System.Drawing.Point(434, 347);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(50, 23);
             this.closeButton.TabIndex = 4;
@@ -189,6 +189,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SessionEditorControl";
             this.Size = new System.Drawing.Size(489, 378);
             this.tableLayoutPanel1.ResumeLayout(false);

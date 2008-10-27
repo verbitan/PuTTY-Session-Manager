@@ -35,6 +35,11 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private List<ResetableOptionsControl> optionsControls;
 
+        /// <summary>
+        /// Fired when the dialog font is changed
+        /// </summary>
+        public event System.EventHandler DialogFontChanged;
+
         public Options(Form parentWindow)
         {
             this.parentWindow = parentWindow;
@@ -44,6 +49,9 @@ namespace uk.org.riseley.puttySessionManager.form
             resetState();
         }
 
+        /// <summary>
+        /// Register all the controls
+        /// </summary>
         private void registerControls()
         {
             optionsControls = new List<ResetableOptionsControl>();
@@ -62,14 +70,27 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 control.resetState();
             }
+            resetFont();
         }
 
+        /// <summary>
+        /// Event handler for the okButton click event
+        /// Save the modified settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void okButton_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
             this.Close();
         }
 
+        /// <summary>
+        /// Event handler for the cancelButton click event
+        /// Hide the dialog , and reload the saved settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -78,6 +99,25 @@ namespace uk.org.riseley.puttySessionManager.form
             resetState();
             this.ResumeLayout();
             this.Close();
+        }
+
+        private void generalOptionsControl1_DialogFontChanged(object sender, EventArgs e)
+        {
+            resetFont();
+            OnDialogFontChanged(new EventArgs());
+        }
+
+        private void resetFont()
+        {
+            Font = Properties.Settings.Default.DialogFont; 
+        }
+
+        protected virtual void OnDialogFontChanged(EventArgs e)
+        {
+            if (DialogFontChanged != null)
+            {
+                DialogFontChanged(this, e);
+            }
         }
     }
 }

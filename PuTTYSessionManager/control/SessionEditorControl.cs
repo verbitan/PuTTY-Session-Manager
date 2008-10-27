@@ -37,6 +37,7 @@ namespace uk.org.riseley.puttySessionManager.control
             : base()
         {
             InitializeComponent();
+            resetDialogFont();
         }
 
         
@@ -115,6 +116,10 @@ namespace uk.org.riseley.puttySessionManager.control
             OnCloseSessionEditor(e);
         }
 
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
+        }
     }
 }
 

@@ -385,7 +385,13 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
         }
 
+
         public bool saveSessionnameToHotkey(Form window, HotKeyId hkid, Session s)
+        {
+            return saveSessionnameToHotkey(window, hkid, s, false);
+        }
+        
+        public bool saveSessionnameToHotkey(Form window, HotKeyId hkid, Session s, bool saveSettings)
         {
             bool result = false;
             UnregisterHotKey(window, hkid);
@@ -434,7 +440,13 @@ namespace uk.org.riseley.puttySessionManager.controller
 
             // Fire the refresh event
             if (result)
+            {
                 refreshHotkeys();
+                if (saveSettings)
+                {
+                    Properties.Settings.Default.Save();
+                }
+            }
 
             return result;
         }
@@ -547,11 +559,11 @@ namespace uk.org.riseley.puttySessionManager.controller
 
             modifierDictionary.Add(Modifier.CTRL_ALT, 
                                    new HotkeyModifier((int)Modifier.CTRL_ALT, 
-                                                      "Ctrl+Alt", 
+                                                      "Ctrl+Alt +", 
                                                       new char[]{}));
             modifierDictionary.Add(Modifier.WIN,      
                                    new HotkeyModifier( (int)Modifier.WIN,      
-                                                        "Win"    , 
+                                                        "Win +"    , 
                                                         new char[] {'D','E','F','L','M','R','U'} ));
 
         }

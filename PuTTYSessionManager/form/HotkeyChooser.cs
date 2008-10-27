@@ -52,13 +52,19 @@ namespace uk.org.riseley.puttySessionManager.form
             createComboDictionary();
             createTextboxDictionary();
             createCheckboxDictionary();
-            intialiseTextboxes();
-            setModifierLabels();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
             EventHandler hkHandler = new EventHandler(setHotkeys);
             hkc.HotkeysRefreshed += hkHandler;
-            hkc.registerAllEnabledHotkeys(parentWindow);
+            resetState();
+        }
+
+        private void resetState()
+        {
+            intialiseTextboxes();
+            setModifierLabels();
+            updateModifier();
+            resetDialogFont();
         }
 
         /// <summary>
@@ -173,6 +179,7 @@ namespace uk.org.riseley.puttySessionManager.form
             }
 
             modifierComboBox.BeginUpdate();
+            modifierComboBox.Items.Clear();
             modifierComboBox.Items.AddRange(hkc.getAllModifiers());
             modifierComboBox.Text = hkc.getModifier().Description;
             currentModifierIndex = modifierComboBox.SelectedIndex;
@@ -224,9 +231,8 @@ namespace uk.org.riseley.puttySessionManager.form
             }
         }
 
-
         /// <summary>
-        /// Event handler for the 
+        /// Event handler for the okButton Click event
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -244,6 +250,7 @@ namespace uk.org.riseley.puttySessionManager.form
                 }
             }
             this.Hide();
+            Properties.Settings.Default.Save();
         }
 
         private void hotkeyCheckbox_Click(object sender, EventArgs e)
@@ -424,6 +431,11 @@ namespace uk.org.riseley.puttySessionManager.form
                 return;
             }
 
+            updateModifier();         
+        }
+
+        private void updateModifier()
+        {
             hkc.setModifier((HotkeyModifier)modifierComboBox.SelectedItem);
             setModifierLabels();
             hkc.UnregisterAllHotKeys(parentWindow);
@@ -432,6 +444,26 @@ namespace uk.org.riseley.puttySessionManager.form
 
             // Fire a refresh event
             hkc.refreshHotkeys();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            // Hide the form
+            this.Hide();
+
+            // Unregister the current hotkeys
+            hkc.UnregisterAllHotKeys(parentWindow);
+
+            // Reload all the settings
+            Properties.Settings.Default.Reload();
+
+            // Reset the state of the form
+            resetState();
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }

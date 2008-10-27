@@ -93,7 +93,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sysTrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.sysTrayContextMenu.ShowCheckMargin = true;
             this.sysTrayContextMenu.ShowImageMargin = false;
-            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 258);
+            this.sysTrayContextMenu.Size = new System.Drawing.Size(188, 236);
             // 
             // loadSessionToolStripMenuItem
             // 
@@ -186,7 +186,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionTreeControl1.Enabled = false;
             this.sessionTreeControl1.Location = new System.Drawing.Point(0, 0);
             this.sessionTreeControl1.Name = "sessionTreeControl1";
-            this.sessionTreeControl1.Size = new System.Drawing.Size(264, 545);
+            this.sessionTreeControl1.Size = new System.Drawing.Size(264, 543);
             this.sessionTreeControl1.TabIndex = 5;
             this.sessionTreeControl1.Visible = false;
             this.sessionTreeControl1.ExportSessions += new uk.org.riseley.puttySessionManager.control.SessionControl.ExportSessionEventHandler(this.sessionTreeControl1_ExportSessions);
@@ -200,7 +200,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sessionListControl1.Enabled = false;
             this.sessionListControl1.Location = new System.Drawing.Point(0, 0);
             this.sessionListControl1.Name = "sessionListControl1";
-            this.sessionListControl1.Size = new System.Drawing.Size(264, 545);
+            this.sessionListControl1.Size = new System.Drawing.Size(264, 543);
             this.sessionListControl1.TabIndex = 6;
             this.sessionListControl1.Visible = false;
             this.sessionListControl1.LaunchSession += new uk.org.riseley.puttySessionManager.control.SessionControl.LaunchSessionEventHandler(this.sessionControl_LaunchSession);
@@ -209,7 +209,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 545);
+            this.ClientSize = new System.Drawing.Size(264, 543);
             this.Controls.Add(this.sessionTreeControl1);
             this.Controls.Add(this.sessionListControl1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Opacity", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "TransparencyValueDouble", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));

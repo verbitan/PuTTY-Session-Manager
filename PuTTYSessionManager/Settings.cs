@@ -17,8 +17,6 @@
  */
 namespace uk.org.riseley.puttySessionManager.Properties
 {
-
-
     //  This class allows you to handle specific events on the settings class:
     //  The SettingChanging event is raised before a setting's value is changed.
     //  The PropertyChanged event is raised after a setting's value is changed.
@@ -36,7 +34,6 @@ namespace uk.org.riseley.puttySessionManager.Properties
             this.PropertyChanged += this.PropertyChangedEventHandler;
 
             this.SettingsSaving += this.SettingsSavingEventHandler;
-
         }
 
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e)
@@ -62,8 +59,6 @@ namespace uk.org.riseley.puttySessionManager.Properties
                 if (sz.Height == 0 && sz.Width == 0)
                     e.Cancel = true;
             }
-
-
         }
 
         private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e)
@@ -73,7 +68,6 @@ namespace uk.org.riseley.puttySessionManager.Properties
                 e.Cancel = true;
             else
                 settingsChanged = false;
-
         }
 
         private void PropertyChangedEventHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)

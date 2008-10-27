@@ -46,6 +46,9 @@ namespace uk.org.riseley.puttySessionManager.form
 
             // Create the update form
             uf = new UpdateForm();
+
+            // Reset the font
+            resetDialogFont();
         }
 
         #region Assembly Attribute Accessors
@@ -143,6 +146,11 @@ namespace uk.org.riseley.puttySessionManager.form
         private void button1_Click(object sender, EventArgs e)
         {
             uf.ShowDialog();
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }
