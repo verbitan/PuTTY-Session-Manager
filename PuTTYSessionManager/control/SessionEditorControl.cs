@@ -116,7 +116,7 @@ namespace uk.org.riseley.puttySessionManager.control
             OnCloseSessionEditor(e);
         }
 
-        public void resetDialogFont()
+        public override void resetDialogFont()
         {
             Font = Properties.Settings.Default.DialogFont;
         }

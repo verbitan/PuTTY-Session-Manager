@@ -478,6 +478,8 @@ namespace uk.org.riseley.puttySessionManager.form
             sessionEditor.resetDialogFont();
             hotKeyChooser.resetDialogFont();
             synchronizeForm.resetDialogFont();
+            sessionTreeControl1.resetDialogFont();
+            sessionListControl1.resetDialogFont();
         }
     }
 }

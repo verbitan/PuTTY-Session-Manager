@@ -151,6 +151,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public void resetDialogFont()
         {
             Font = Properties.Settings.Default.DialogFont;
+            uf.resetDialogFont();
         }
     }
 }

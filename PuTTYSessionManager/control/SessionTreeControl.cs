@@ -1334,5 +1334,11 @@ namespace uk.org.riseley.puttySessionManager.control
             return newNode;
         }
 
+        public override void resetDialogFont()
+        {
+            base.resetDialogFont();
+            ed.resetDialogFont();
+            newSessionForm.resetDialogFont();
+        }
     }
 }

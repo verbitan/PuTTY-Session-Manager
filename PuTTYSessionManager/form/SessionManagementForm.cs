@@ -199,6 +199,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public virtual void resetDialogFont()
         {
             Font = Properties.Settings.Default.DialogFont;
+            nsf.resetDialogFont();
         }
     }
 }

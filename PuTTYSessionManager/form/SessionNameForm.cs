@@ -31,6 +31,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public SessionNameForm()
         {
             InitializeComponent();
+            resetDialogFont();
         }
 
         public SessionNameForm(string sessionName)
@@ -42,6 +43,11 @@ namespace uk.org.riseley.puttySessionManager.form
         public string getSessionName()
         {
             return sessionNameTextBox.Text;
-        }     
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
+        }
     }
 }

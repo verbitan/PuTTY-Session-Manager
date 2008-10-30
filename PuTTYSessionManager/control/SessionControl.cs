@@ -194,5 +194,9 @@ namespace uk.org.riseley.puttySessionManager.control
                 enterPressed = true;
             }
         }
+
+        public virtual void resetDialogFont()
+        {
+        }
     }
 }

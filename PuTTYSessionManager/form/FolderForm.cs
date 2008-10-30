@@ -30,6 +30,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public FolderForm()
         {
             InitializeComponent();
+            resetDialogFont();
         }
 
         public FolderForm(string foldername)
@@ -41,6 +42,11 @@ namespace uk.org.riseley.puttySessionManager.form
         public string getFolderName()
         {
             return textBox1.Text;
-        }     
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
+        }
     }
 }

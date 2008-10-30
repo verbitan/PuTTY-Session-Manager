@@ -70,7 +70,7 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 control.resetState();
             }
-            resetFont();
+            resetDialogFont();
         }
 
         /// <summary>
@@ -103,13 +103,14 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void generalOptionsControl1_DialogFontChanged(object sender, EventArgs e)
         {
-            resetFont();
+            resetDialogFont();            
             OnDialogFontChanged(new EventArgs());
         }
 
-        private void resetFont()
+        private void resetDialogFont()
         {
-            Font = Properties.Settings.Default.DialogFont; 
+            Font = Properties.Settings.Default.DialogFont;
+            updateOptionsControl.resetDialogFont();
         }
 
         protected virtual void OnDialogFontChanged(EventArgs e)

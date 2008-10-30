@@ -262,11 +262,15 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         private Dictionary<Modifier, HotkeyModifier> modifierDictionary;
 
+        private HotkeyModifier currentHotkeyModifier;
+
         private HotkeyController()
         {
             sc = SessionController.getInstance();
             intitialiseModifierDictionary();
             initialiseHotkeyDictionary();
+            currentHotkeyModifier = getModifier();
+
         }
 
         public static HotkeyController getInstance()
@@ -669,13 +673,16 @@ namespace uk.org.riseley.puttySessionManager.controller
         public void setModifier(HotkeyModifier m)
         {
             // Remove any protected hotkeys for the old modifier
-            removeProtectedHotkeys(getModifier());
+            removeProtectedHotkeys(currentHotkeyModifier);
 
             // Set the new modifier
             Properties.Settings.Default.HotkeyModifier = m.Modifier;
 
+            // Save the current modifier
+            currentHotkeyModifier = getModifier();
+
             // Add in any protected keys for the new modifier
-            addProtectedHotkeys(getModifier());
+            addProtectedHotkeys(currentHotkeyModifier);
         }
 
         public HotkeyModifier[] getAllModifiers()
@@ -696,10 +703,13 @@ namespace uk.org.riseley.puttySessionManager.controller
 
         private void removeProtectedHotkeys ( HotkeyModifier modifier )
         {
-            foreach (char c in modifier.ProtectedKeys)
+            if (modifier != null)
             {
-                // Remove any protected keys
-                hotkeyDictionary.Remove(c);             
+                foreach (char c in modifier.ProtectedKeys)
+                {
+                    // Remove any protected keys
+                    hotkeyDictionary.Remove(c);
+                }
             }
         }
 

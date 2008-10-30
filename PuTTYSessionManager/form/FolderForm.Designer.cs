@@ -123,11 +123,11 @@ namespace uk.org.riseley.puttySessionManager.form
             this.ClientSize = new System.Drawing.Size(299, 61);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(305, 93);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(305, 93);
             this.Name = "FolderForm";

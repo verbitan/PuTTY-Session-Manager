@@ -97,5 +97,10 @@ namespace uk.org.riseley.puttySessionManager.control.options
             proxyServerTextBox.ReadOnly = !userProxyRadioButton.Checked;
             proxyPortTextBox.ReadOnly = !userProxyRadioButton.Checked;
         }
+
+        public void resetDialogFont()
+        {
+            uf.resetDialogFont();
+        }
     }
 }

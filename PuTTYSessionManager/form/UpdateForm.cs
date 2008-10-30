@@ -40,6 +40,7 @@ namespace uk.org.riseley.puttySessionManager.form
             InitializeComponent();
             currVersionTextBox.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             urlToolTip.SetToolTip(sfLinkLabel, sfLinkLabel.Text);
+            resetDialogFont();
         }
 
         /// <summary>
@@ -246,6 +247,11 @@ namespace uk.org.riseley.puttySessionManager.form
         private void sfLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(sfLinkLabel.Text);
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }

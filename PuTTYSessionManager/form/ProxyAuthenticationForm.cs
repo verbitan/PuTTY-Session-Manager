@@ -38,6 +38,7 @@ namespace uk.org.riseley.puttySessionManager.form
         public ProxyAuthenticationForm()
         {
             InitializeComponent();
+            resetDialogFont();
         }
 
         /// <summary>
@@ -56,6 +57,11 @@ namespace uk.org.riseley.puttySessionManager.form
         public NetworkCredential getCredentials()
         {
             return new NetworkCredential(usernameTextBox.Text, passwordTextBox.Text);
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }

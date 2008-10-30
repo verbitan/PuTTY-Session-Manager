@@ -47,51 +47,63 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.usernameLabel = new System.Windows.Forms.Label();
+            this.passwordLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.promptLabel = new System.Windows.Forms.Label();
             this.realmLabel = new System.Windows.Forms.Label();
+            this.proxyTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.proxyTableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Location = new System.Drawing.Point(100, 65);
+            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.proxyTableLayout.SetColumnSpan(this.usernameTextBox, 2);
+            this.usernameTextBox.Location = new System.Drawing.Point(100, 57);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(186, 21);
+            this.usernameTextBox.Size = new System.Drawing.Size(206, 21);
             this.usernameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(100, 98);
+            this.passwordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.proxyTableLayout.SetColumnSpan(this.passwordTextBox, 2);
+            this.passwordTextBox.Location = new System.Drawing.Point(100, 84);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(186, 21);
+            this.passwordTextBox.Size = new System.Drawing.Size(206, 21);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
-            // label1
+            // usernameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Username";
+            this.usernameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Location = new System.Drawing.Point(39, 61);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(55, 13);
+            this.usernameLabel.TabIndex = 2;
+            this.usernameLabel.Text = "Username";
             // 
-            // label2
+            // passwordLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Password";
+            this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Location = new System.Drawing.Point(41, 88);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(53, 13);
+            this.passwordLabel.TabIndex = 3;
+            this.passwordLabel.Text = "Password";
             // 
             // okButton
             // 
+            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.proxyTableLayout.SetColumnSpan(this.okButton, 2);
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(84, 133);
+            this.okButton.Location = new System.Drawing.Point(84, 111);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 4;
@@ -101,29 +113,59 @@ namespace uk.org.riseley.puttySessionManager.form
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(165, 133);
+            this.cancelButton.Location = new System.Drawing.Point(165, 111);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // promptLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(205, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Enter username and password for proxy:";
+            this.promptLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.promptLabel.AutoSize = true;
+            this.proxyTableLayout.SetColumnSpan(this.promptLabel, 3);
+            this.promptLabel.Location = new System.Drawing.Point(3, 7);
+            this.promptLabel.Name = "promptLabel";
+            this.promptLabel.Size = new System.Drawing.Size(205, 13);
+            this.promptLabel.TabIndex = 6;
+            this.promptLabel.Text = "Enter username and password for proxy:";
             // 
             // realmLabel
             // 
+            this.realmLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.realmLabel.AutoSize = true;
-            this.realmLabel.Location = new System.Drawing.Point(12, 35);
+            this.proxyTableLayout.SetColumnSpan(this.realmLabel, 3);
+            this.realmLabel.Location = new System.Drawing.Point(163, 34);
             this.realmLabel.Name = "realmLabel";
             this.realmLabel.Size = new System.Drawing.Size(0, 13);
             this.realmLabel.TabIndex = 7;
+            // 
+            // proxyTableLayout
+            // 
+            this.proxyTableLayout.ColumnCount = 3;
+            this.proxyTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.proxyTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.proxyTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.proxyTableLayout.Controls.Add(this.promptLabel, 0, 0);
+            this.proxyTableLayout.Controls.Add(this.realmLabel, 0, 1);
+            this.proxyTableLayout.Controls.Add(this.usernameLabel, 0, 2);
+            this.proxyTableLayout.Controls.Add(this.passwordTextBox, 1, 3);
+            this.proxyTableLayout.Controls.Add(this.passwordLabel, 0, 3);
+            this.proxyTableLayout.Controls.Add(this.usernameTextBox, 1, 2);
+            this.proxyTableLayout.Controls.Add(this.cancelButton, 2, 4);
+            this.proxyTableLayout.Controls.Add(this.okButton, 0, 4);
+            this.proxyTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.proxyTableLayout.Location = new System.Drawing.Point(0, 0);
+            this.proxyTableLayout.Name = "proxyTableLayout";
+            this.proxyTableLayout.RowCount = 5;
+            this.proxyTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.proxyTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.proxyTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.proxyTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.proxyTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.proxyTableLayout.Size = new System.Drawing.Size(326, 137);
+            this.proxyTableLayout.TabIndex = 8;
             // 
             // ProxyAuthenticationForm
             // 
@@ -131,29 +173,25 @@ namespace uk.org.riseley.puttySessionManager.form
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(324, 168);
+            this.ClientSize = new System.Drawing.Size(326, 137);
             this.ControlBox = false;
-            this.Controls.Add(this.realmLabel);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.usernameTextBox);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Font = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.DialogFont;
+            this.Controls.Add(this.proxyTableLayout);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(332, 169);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(332, 169);
             this.Name = "ProxyAuthenticationForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter Web Proxy Password...";
             this.TopMost = true;
+            this.proxyTableLayout.ResumeLayout(false);
+            this.proxyTableLayout.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -161,11 +199,12 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label usernameLabel;
+        private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label promptLabel;
         private System.Windows.Forms.Label realmLabel;
+        private System.Windows.Forms.TableLayoutPanel proxyTableLayout;
     }
 }

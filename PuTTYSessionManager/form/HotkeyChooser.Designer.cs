@@ -47,21 +47,6 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.optionsGroupBox = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.modifierLabel = new System.Windows.Forms.Label();
-            this.modifierComboBox = new System.Windows.Forms.ComboBox();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.minimizeWindowHKCheckbox = new System.Windows.Forms.CheckBox();
-            this.favSessCheckBox = new System.Windows.Forms.CheckBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.newSessionHKCheckbox = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -92,10 +77,25 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk8TextBox = new System.Windows.Forms.TextBox();
             this.hk9TextBox = new System.Windows.Forms.TextBox();
             this.hk10TextBox = new System.Windows.Forms.TextBox();
+            this.newSessionHKCheckbox = new System.Windows.Forms.CheckBox();
+            this.minimizeWindowHKCheckbox = new System.Windows.Forms.CheckBox();
+            this.favSessCheckBox = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.comboBox9 = new System.Windows.Forms.ComboBox();
+            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.modifierLabel = new System.Windows.Forms.Label();
             this.newSessionHKLabel = new System.Windows.Forms.Label();
             this.minimizeWindowHKLabel = new System.Windows.Forms.Label();
             this.newSessionHKTextbox = new System.Windows.Forms.TextBox();
             this.minimizeWindowHKTextbox = new System.Windows.Forms.TextBox();
+            this.modifierComboBox = new System.Windows.Forms.ComboBox();
             this.hotkeyTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -195,231 +195,6 @@ namespace uk.org.riseley.puttySessionManager.form
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(429, 377);
             this.tableLayoutPanel1.TabIndex = 52;
-            // 
-            // modifierLabel
-            // 
-            this.modifierLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.modifierLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.modifierLabel, 3);
-            this.modifierLabel.Location = new System.Drawing.Point(71, 7);
-            this.modifierLabel.Name = "modifierLabel";
-            this.modifierLabel.Size = new System.Drawing.Size(121, 13);
-            this.modifierLabel.TabIndex = 51;
-            this.modifierLabel.Text = "Choose Hotkey Modifier";
-            // 
-            // modifierComboBox
-            // 
-            this.modifierComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.modifierComboBox, 2);
-            this.modifierComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.modifierComboBox.Location = new System.Drawing.Point(198, 3);
-            this.modifierComboBox.Name = "modifierComboBox";
-            this.modifierComboBox.Size = new System.Drawing.Size(145, 21);
-            this.modifierComboBox.TabIndex = 50;
-            this.modifierComboBox.SelectedIndexChanged += new System.EventHandler(this.modifierComboBox_SelectedIndexChanged);
-            // 
-            // comboBox10
-            // 
-            this.comboBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox10, 3);
-            this.comboBox10.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox10.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(114, 350);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(229, 21);
-            this.comboBox10.TabIndex = 15;
-            this.comboBox10.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox10.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox9, 3);
-            this.comboBox9.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox9.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(114, 323);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(229, 21);
-            this.comboBox9.TabIndex = 14;
-            this.comboBox9.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox9.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox8, 3);
-            this.comboBox8.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox8.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(114, 296);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(229, 21);
-            this.comboBox8.TabIndex = 13;
-            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox7
-            // 
-            this.comboBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox7, 3);
-            this.comboBox7.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox7.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(114, 269);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(229, 21);
-            this.comboBox7.TabIndex = 12;
-            this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox6, 3);
-            this.comboBox6.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox6.DisplayMember = "Default Settings";
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(114, 242);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(229, 21);
-            this.comboBox6.TabIndex = 11;
-            this.comboBox6.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // minimizeWindowHKCheckbox
-            // 
-            this.minimizeWindowHKCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.minimizeWindowHKCheckbox.AutoSize = true;
-            this.minimizeWindowHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyMinimizeEnabled;
-            this.minimizeWindowHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tableLayoutPanel1.SetColumnSpan(this.minimizeWindowHKCheckbox, 3);
-            this.minimizeWindowHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyMinimizeEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.minimizeWindowHKCheckbox.Location = new System.Drawing.Point(14, 59);
-            this.minimizeWindowHKCheckbox.Name = "minimizeWindowHKCheckbox";
-            this.minimizeWindowHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.minimizeWindowHKCheckbox.Size = new System.Drawing.Size(178, 17);
-            this.minimizeWindowHKCheckbox.TabIndex = 3;
-            this.minimizeWindowHKCheckbox.Text = "Enable Minimize Window Hotkey";
-            this.minimizeWindowHKCheckbox.UseVisualStyleBackColor = true;
-            this.minimizeWindowHKCheckbox.Click += new System.EventHandler(this.hotkeyCheckbox_Click);
-            // 
-            // favSessCheckBox
-            // 
-            this.favSessCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.favSessCheckBox.AutoSize = true;
-            this.favSessCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.favSessCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tableLayoutPanel1.SetColumnSpan(this.favSessCheckBox, 3);
-            this.favSessCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.favSessCheckBox.Location = new System.Drawing.Point(4, 84);
-            this.favSessCheckBox.Name = "favSessCheckBox";
-            this.favSessCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.favSessCheckBox.Size = new System.Drawing.Size(188, 17);
-            this.favSessCheckBox.TabIndex = 5;
-            this.favSessCheckBox.Text = "Enable Favourite Session Hotkeys";
-            this.favSessCheckBox.UseVisualStyleBackColor = true;
-            this.favSessCheckBox.CheckedChanged += new System.EventHandler(this.favSessCheckBox_CheckedChanged);
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox5, 3);
-            this.comboBox5.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(114, 215);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(229, 21);
-            this.comboBox5.TabIndex = 10;
-            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox4, 3);
-            this.comboBox4.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(114, 188);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(229, 21);
-            this.comboBox4.TabIndex = 9;
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox3, 3);
-            this.comboBox3.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(114, 161);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(229, 21);
-            this.comboBox3.TabIndex = 8;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox2, 3);
-            this.comboBox2.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(114, 134);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(229, 21);
-            this.comboBox2.TabIndex = 7;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBox1, 3);
-            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.comboBox1.DisplayMember = "Default Settings";
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(114, 107);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(229, 21);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
-            // 
-            // newSessionHKCheckbox
-            // 
-            this.newSessionHKCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.newSessionHKCheckbox.AutoSize = true;
-            this.newSessionHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyNewEnabled;
-            this.newSessionHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tableLayoutPanel1.SetColumnSpan(this.newSessionHKCheckbox, 3);
-            this.newSessionHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyNewEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.newSessionHKCheckbox.Location = new System.Drawing.Point(34, 32);
-            this.newSessionHKCheckbox.Name = "newSessionHKCheckbox";
-            this.newSessionHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.newSessionHKCheckbox.Size = new System.Drawing.Size(158, 17);
-            this.newSessionHKCheckbox.TabIndex = 1;
-            this.newSessionHKCheckbox.Text = "Enable New Session Hotkey";
-            this.newSessionHKCheckbox.UseVisualStyleBackColor = true;
-            this.newSessionHKCheckbox.Click += new System.EventHandler(this.hotkeyCheckbox_Click);
             // 
             // checkBox10
             // 
@@ -851,6 +626,220 @@ namespace uk.org.riseley.puttySessionManager.form
             this.hk10TextBox.Text = "0";
             this.hk10TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // newSessionHKCheckbox
+            // 
+            this.newSessionHKCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.newSessionHKCheckbox.AutoSize = true;
+            this.newSessionHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyNewEnabled;
+            this.newSessionHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.newSessionHKCheckbox, 3);
+            this.newSessionHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyNewEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.newSessionHKCheckbox.Location = new System.Drawing.Point(34, 32);
+            this.newSessionHKCheckbox.Name = "newSessionHKCheckbox";
+            this.newSessionHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.newSessionHKCheckbox.Size = new System.Drawing.Size(158, 17);
+            this.newSessionHKCheckbox.TabIndex = 1;
+            this.newSessionHKCheckbox.Text = "Enable New Session Hotkey";
+            this.newSessionHKCheckbox.UseVisualStyleBackColor = true;
+            this.newSessionHKCheckbox.Click += new System.EventHandler(this.hotkeyCheckbox_Click);
+            // 
+            // minimizeWindowHKCheckbox
+            // 
+            this.minimizeWindowHKCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.minimizeWindowHKCheckbox.AutoSize = true;
+            this.minimizeWindowHKCheckbox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyMinimizeEnabled;
+            this.minimizeWindowHKCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.minimizeWindowHKCheckbox, 3);
+            this.minimizeWindowHKCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyMinimizeEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.minimizeWindowHKCheckbox.Location = new System.Drawing.Point(14, 59);
+            this.minimizeWindowHKCheckbox.Name = "minimizeWindowHKCheckbox";
+            this.minimizeWindowHKCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.minimizeWindowHKCheckbox.Size = new System.Drawing.Size(178, 17);
+            this.minimizeWindowHKCheckbox.TabIndex = 3;
+            this.minimizeWindowHKCheckbox.Text = "Enable Minimize Window Hotkey";
+            this.minimizeWindowHKCheckbox.UseVisualStyleBackColor = true;
+            this.minimizeWindowHKCheckbox.Click += new System.EventHandler(this.hotkeyCheckbox_Click);
+            // 
+            // favSessCheckBox
+            // 
+            this.favSessCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.favSessCheckBox.AutoSize = true;
+            this.favSessCheckBox.Checked = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.favSessCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.favSessCheckBox, 3);
+            this.favSessCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.favSessCheckBox.Location = new System.Drawing.Point(4, 84);
+            this.favSessCheckBox.Name = "favSessCheckBox";
+            this.favSessCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.favSessCheckBox.Size = new System.Drawing.Size(188, 17);
+            this.favSessCheckBox.TabIndex = 5;
+            this.favSessCheckBox.Text = "Enable Favourite Session Hotkeys";
+            this.favSessCheckBox.UseVisualStyleBackColor = true;
+            this.favSessCheckBox.CheckedChanged += new System.EventHandler(this.favSessCheckBox_CheckedChanged);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox1, 3);
+            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox1.DisplayMember = "Default Settings";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(114, 107);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(229, 21);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox2, 3);
+            this.comboBox2.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(114, 134);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(229, 21);
+            this.comboBox2.TabIndex = 7;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox3, 3);
+            this.comboBox3.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(114, 161);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(229, 21);
+            this.comboBox3.TabIndex = 8;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox4, 3);
+            this.comboBox4.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(114, 188);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(229, 21);
+            this.comboBox4.TabIndex = 9;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox5, 3);
+            this.comboBox5.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox5.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(114, 215);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(229, 21);
+            this.comboBox5.TabIndex = 10;
+            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox6, 3);
+            this.comboBox6.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox6.DisplayMember = "Default Settings";
+            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox6.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(114, 242);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(229, 21);
+            this.comboBox6.TabIndex = 11;
+            this.comboBox6.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox7, 3);
+            this.comboBox7.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox7.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(114, 269);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(229, 21);
+            this.comboBox7.TabIndex = 12;
+            this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox8
+            // 
+            this.comboBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox8, 3);
+            this.comboBox8.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox8.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(114, 296);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(229, 21);
+            this.comboBox8.TabIndex = 13;
+            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox9
+            // 
+            this.comboBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox9, 3);
+            this.comboBox9.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox9.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox9.FormattingEnabled = true;
+            this.comboBox9.Location = new System.Drawing.Point(114, 323);
+            this.comboBox9.Name = "comboBox9";
+            this.comboBox9.Size = new System.Drawing.Size(229, 21);
+            this.comboBox9.TabIndex = 14;
+            this.comboBox9.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox9.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // comboBox10
+            // 
+            this.comboBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBox10, 3);
+            this.comboBox10.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "HotkeyFavouriteEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox10.Enabled = global::uk.org.riseley.puttySessionManager.Properties.Settings.Default.HotkeyFavouriteEnabled;
+            this.comboBox10.FormattingEnabled = true;
+            this.comboBox10.Location = new System.Drawing.Point(114, 350);
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(229, 21);
+            this.comboBox10.TabIndex = 15;
+            this.comboBox10.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox10.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyUp);
+            // 
+            // modifierLabel
+            // 
+            this.modifierLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.modifierLabel.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.modifierLabel, 3);
+            this.modifierLabel.Location = new System.Drawing.Point(71, 7);
+            this.modifierLabel.Name = "modifierLabel";
+            this.modifierLabel.Size = new System.Drawing.Size(121, 13);
+            this.modifierLabel.TabIndex = 51;
+            this.modifierLabel.Text = "Choose Hotkey Modifier";
+            // 
             // newSessionHKLabel
             // 
             this.newSessionHKLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -898,6 +887,17 @@ namespace uk.org.riseley.puttySessionManager.form
             this.minimizeWindowHKTextbox.TabStop = false;
             this.minimizeWindowHKTextbox.Text = "Q";
             this.minimizeWindowHKTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // modifierComboBox
+            // 
+            this.modifierComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.modifierComboBox, 2);
+            this.modifierComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modifierComboBox.Location = new System.Drawing.Point(198, 3);
+            this.modifierComboBox.Name = "modifierComboBox";
+            this.modifierComboBox.Size = new System.Drawing.Size(145, 21);
+            this.modifierComboBox.TabIndex = 50;
+            this.modifierComboBox.SelectedIndexChanged += new System.EventHandler(this.modifierComboBox_SelectedIndexChanged);
             // 
             // hotkeyTableLayout
             // 

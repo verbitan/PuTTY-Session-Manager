@@ -39,6 +39,7 @@ namespace uk.org.riseley.puttySessionManager.form
             InitializeComponent();
             SessionController.SessionsRefreshedEventHandler scHandler = new SessionController.SessionsRefreshedEventHandler(this.SessionsRefreshed);
             sc.SessionsRefreshed += scHandler;
+            resetDialogFont();
         }
 
         private void loadList()
@@ -155,6 +156,11 @@ namespace uk.org.riseley.puttySessionManager.form
         private void sessionComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             sessionFolderComboBox.SelectedItem = ((Session)sessionComboBox.SelectedItem).FolderName;
+        }
+
+        public void resetDialogFont()
+        {
+            Font = Properties.Settings.Default.DialogFont;
         }
     }
 }
