@@ -102,7 +102,9 @@ namespace uk.org.riseley.puttySessionManager.model
         /// This method strips hex encoded characters from the session
         /// name stored in the registry
         /// Based on the unmungestr() method in WINDOWS\WINSTORE.c
-        /// from the PuTTY v0.60 src tree 
+        /// from the PuTTY v0.60 src tree
+        /// Support for different codepages has been added to attempt to 
+        /// match the PuTTY encoding
         /// </summary>
         /// <param name="key">The registry key name to convert</param>
         /// <returns>The display formatted session name</returns>
@@ -110,6 +112,7 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             CharEnumerator ce = key.GetEnumerator();
             StringBuilder sb = new StringBuilder();
+            Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ANSICodePage);
             while (ce.MoveNext())
             {
                 if (ce.Current == '%')
@@ -121,9 +124,9 @@ namespace uk.org.riseley.puttySessionManager.model
                     if ( clone.MoveNext())
                         hexVal.Append(clone.Current);
                     if (hexVal.Length == 2)
-                    {
-                        int intVal = Int32.Parse(hexVal.ToString(), System.Globalization.NumberStyles.HexNumber);
-                        sb.Append((char)intVal);
+                    {                        
+                        Byte byteVal = Byte.Parse(hexVal.ToString(), System.Globalization.NumberStyles.HexNumber);
+                        sb.Append(enc.GetString(new byte[] { byteVal }));
                         ce.MoveNext();
                         ce.MoveNext();
                     }
@@ -153,6 +156,7 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             CharEnumerator ce = display.GetEnumerator();
             StringBuilder sb = new StringBuilder();
+            Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ANSICodePage);
             int i = 0;
             while (ce.MoveNext())
             {
@@ -160,7 +164,8 @@ namespace uk.org.riseley.puttySessionManager.model
                 if (c == ' ' || c == '\\' || c == '*' || c == '?' ||
                     c == '%' || c < ' ' || c > '~' || (c == '.' && i == 0))
                 {
-                    sb.Append("%" + Convert.ToString((int)c, 16).ToUpper());
+                    byte[] b = enc.GetBytes(new char[]{ c });
+                    sb.Append("%" + Convert.ToString((int)b[0], 16).ToUpper());
                 }
                 else
                 {
