@@ -61,6 +61,18 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void tableControl1_SyncSessionsRequested(object sender, SyncSessionsRequestedEventArgs e)
         {
+            // Double check that the template session still exists
+            // or else that will cause issues later
+            if (sc.findSession(e.SessionTemplate) == null)
+            {
+                MessageBox.Show("Template session:\n" + e.SessionTemplate.SessionDisplayText 
+                    + "\nhas been removed.\n"
+                    + "Please clear your selection and try again." 
+                    , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Attempt to backup the existing sessions
             DialogResult dr = backupSessions(sc.getSessionList());
             if (( dr == DialogResult.Yes ) ||
                 ( dr == DialogResult.No) )
