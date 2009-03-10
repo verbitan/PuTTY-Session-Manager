@@ -176,14 +176,17 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// Save the session folder to the registry
         /// </summary>
         /// <param name="s"></param>
-        public void saveFolder(Session s)
+        public bool updateFolder(Session s)
         {
+            bool result = false;
             RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, true);
             if (rk != null)
             {
                 rk.SetValue(PUTTY_PSM_FOLDER_ATTRIB, s.FolderName, RegistryValueKind.String);
                 rk.Close();
+                result = true;
             }
+            return result;
         }
 
         /// <summary>
@@ -415,6 +418,27 @@ namespace uk.org.riseley.puttySessionManager.controller
         {
             return saveSessionsToFile(sessionList, fileName);
         }
+
+
+        /// <summary>
+        /// Update the session hostname
+        /// </summary>
+        /// <param name="s"></param>
+        public bool updateHostname(Session s)
+        {
+            bool result = false;
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, true);
+
+            if (rk != null)
+            {
+                rk.SetValue(PUTTY_HOSTNAME_ATTRIB, s.Hostname, RegistryValueKind.String);
+                rk.Close();
+                result = true;
+            }
+
+            return result;
+        }
+
 
         #endregion     
     

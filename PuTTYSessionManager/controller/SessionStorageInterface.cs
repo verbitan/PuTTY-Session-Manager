@@ -28,45 +28,53 @@ namespace uk.org.riseley.puttySessionManager.controller
     interface SessionStorageInterface
     {
         /// <summary>
-        /// 
+        /// Gets the list of available sessions
         /// </summary>
         /// <returns></returns>
         List<Session> getSessionList();
 
         /// <summary>
-        /// 
+        /// Gets the attributes for the available session
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
         List<string> getSessionAttributes(Session s);
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s"></param>
-        void saveFolder(Session s);
-
-        /// <summary>
-        /// 
+        /// Create a new session given the information
+        /// supplied in the NewSessionRequest
         /// </summary>
         /// <param name="nsr"></param>
         /// <returns></returns>
         bool createNewSession(NewSessionRequest nsr);
 
         /// <summary>
-        /// 
+        /// Deletes the list of sessions
         /// </summary>
         /// <param name="sl"></param>
         /// <returns></returns>
         bool deleteSessions(List<Session> sl);
 
         /// <summary>
-        /// 
+        /// Renames the session
         /// </summary>
         /// <param name="s"></param>
         /// <param name="newSessionName"></param>
         /// <returns></returns>
         bool renameSession(Session s, string newSessionName);
+
+        /// <summary>
+        /// Updates the folder for a given session
+        /// </summary>
+        /// <param name="s"></param>
+        bool updateFolder(Session s);
+
+        /// <summary>
+        /// Updates the sessions hostname
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        bool updateHostname(Session s);
 
         /// <summary>
         /// 

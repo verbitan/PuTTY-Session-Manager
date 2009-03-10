@@ -55,7 +55,24 @@ namespace uk.org.riseley.puttySessionManager.form
         private void optionsControl1_SyncSessionsLoaded(object sender, SyncSessionsLoadedEventArgs e)
         {
             tableControl1.LoadSessions(e);
-            tabControl1.SelectTab(1);
+            if ( e.SessionList.Count > 0 )
+                tabControl1.SelectTab(1);
+        }
+
+        private void tableControl1_SyncSessionsRequested(object sender, SyncSessionsRequestedEventArgs e)
+        {
+            DialogResult dr = backupSessions(sc.getSessionList());
+            if (( dr == DialogResult.Yes ) ||
+                ( dr == DialogResult.No) )
+            {
+                int modifiedCount = sc.syncSessions(this, e);
+                MessageBox.Show("Succesfully modified " + modifiedCount + " sessions"
+                    , "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Reset the controls
+                optionsControl1.clearButton_Click(this, new EventArgs());
+                tabControl1.SelectTab(0);
+            }
         }
     }
 }

@@ -235,12 +235,12 @@ namespace uk.org.riseley.puttySessionManager.control
             if (s.IsFolder == false)
             {
                 s.FolderName = parent.FullPath;
-                getSessionController().saveFolder(s);
+                getSessionController().updateFolder(s);
             }
             else
             {
                 s.FolderName = parent.FullPath + treeView.PathSeparator + node.Text ;
-                node.Name = s.getKey();
+                node.Name = s.NodeKey;
 
                 System.Collections.IEnumerator nodeEnumerator = node.Nodes.GetEnumerator();
                 while (nodeEnumerator.MoveNext())
@@ -334,7 +334,7 @@ namespace uk.org.riseley.puttySessionManager.control
             {
                 Session rootSession = new Session(rootPath, rootPath, true);
                 rootNode.Tag = rootSession;
-                rootNode.Name = rootSession.getKey();
+                rootNode.Name = rootSession.NodeKey;
             }
 
             foreach (Session s in getSessionController().getSessionList())
@@ -649,7 +649,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 Session sess = new Session(folder, newpath, true);
                 selectedNode.Tag = sess;
                 selectedNode.Text = sess.SessionDisplayText;
-                selectedNode.Name = sess.getKey();
+                selectedNode.Name = sess.NodeKey;
                 parent.Nodes.Add(selectedNode);
 
                 // Refresh the paths of all the child nodes
@@ -664,10 +664,16 @@ namespace uk.org.riseley.puttySessionManager.control
 
         }
 
-        public override void getSessionMenuItems(ToolStripMenuItem parent)
+        public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
         {
+            // Suspend the layout before modification
+            cms.SuspendLayout();
+            
             parent.DropDownItems.Clear();
             addSessionMenuItemsFolder(parent, treeView.Nodes[0].Nodes);
+
+            // Now resume the layout
+            cms.ResumeLayout();
         }
 
         private void addSessionMenuItemsFolder(ToolStripMenuItem parent, TreeNodeCollection nodes)
@@ -767,7 +773,7 @@ namespace uk.org.riseley.puttySessionManager.control
             else
             {
                 // Try to get the default session
-                s = sc.findDefaultSession(true);
+                s = sc.findDefaultSession();
 
                 // If that doesn't work get the first child session, if 
                 // one exists
@@ -855,7 +861,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
             // Check we are not renaming the default session
             Session defaultSession = getSessionController().findDefaultSession();
-            if (defaultSession != null && defaultSession.SessionKey.Equals(s.SessionKey))
+            if (defaultSession != null && defaultSession.Equals(s))
             {
                 MessageBox.Show("Cannot rename the default session"
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -891,7 +897,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 // Update the selected node
                 treeView.SelectedNode.Tag = newSession;
                 treeView.SelectedNode.Text = newSession.SessionDisplayText;
-                treeView.SelectedNode.Name = newSession.getKey();
+                treeView.SelectedNode.Name = newSession.NodeKey;
 
                 // Begin repainting the TreeView.
                 treeView.EndUpdate();
@@ -1218,6 +1224,14 @@ namespace uk.org.riseley.puttySessionManager.control
                     }
                 }
             }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                // Deletes only allowed if the sessions are unlocked
+                if (lockSessionsToolStripMenuItem.Checked == false)
+                {
+                    deleteSessionToolStripMenuItem_Click(this, new EventArgs());
+                }
+            }
         }
 
         /// <summary>
@@ -1329,7 +1343,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
 
             // Setup the key so that we can find the node again
-            newNode.Name = s.getKey();
+            newNode.Name = s.NodeKey;
 
             return newNode;
         }

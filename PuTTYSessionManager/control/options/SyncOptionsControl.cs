@@ -40,7 +40,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
         public delegate void SyncSessionsLoadedEventHandler(object sender, SyncSessionsLoadedEventArgs e);
 
         /// <summary>
-        /// This event is fired when a list of session to sync has been loaded 
+        /// This event is fired when a list of sessions to sync has been loaded 
         /// </summary>
         [Description("Fires when sessions have been successfully loaded")]
         public event SyncSessionsLoadedEventHandler SyncSessionsLoaded;
@@ -52,6 +52,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
         public SyncOptionsControl()
         {
             InitializeComponent();
+            setSessionsLoaded(false);
             csvImporter = new CsvSessionImportImpl();            
         }
 
@@ -82,11 +83,14 @@ namespace uk.org.riseley.puttySessionManager.control.options
         /// <param name="selectedSession"></param>
         internal void loadList(Session[] sessionList, Session selectedSession )
         {
+            sessionComboBox.BeginUpdate();
+            sessionComboBox.Items.Clear();
             sessionComboBox.Items.AddRange(sessionList);
             if (selectedSession != null)
             {
                 sessionComboBox.SelectedItem = selectedSession;
             }
+            sessionComboBox.EndUpdate();
         }
 
         /// <summary>
@@ -140,6 +144,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
                 Session sessionTemplate = (Session)sessionComboBox.SelectedItem;
                 SyncSessionsLoadedEventArgs ea = new SyncSessionsLoadedEventArgs(sl, sessionTemplate,ignoreCheckBox.Checked);
                 OnSyncSessionsLoaded (this, ea);
+                setSessionsLoaded(true);
             }
         }
 
@@ -152,6 +157,27 @@ namespace uk.org.riseley.puttySessionManager.control.options
         {
             if (SyncSessionsLoaded != null)
                 SyncSessionsLoaded(sender, e);
+        }
+
+        public void clearButton_Click(object sender, EventArgs e)
+        {
+            List<Session> sl = new List<Session>();
+            outputTextBox.Text = "";
+            SyncSessionsLoadedEventArgs ea = new SyncSessionsLoadedEventArgs(sl, null, true);
+            OnSyncSessionsLoaded(this, ea);
+            setSessionsLoaded(false);
+        }
+
+        private void setSessionsLoaded(bool b)
+        {
+            clearButton.Enabled = b;
+
+            validateButton.Enabled = !b;
+            sessionGroupBox.Enabled = !b;
+            fileGroupBox.Enabled = !b;
+            urlGroupBox.Enabled = !b;
+            sessionComboBox.Enabled = !b;
+            ignoreCheckBox.Enabled = !b;            
         }
     }
 }

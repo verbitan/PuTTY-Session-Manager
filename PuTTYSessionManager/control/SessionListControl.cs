@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006,2007 David Riseley 
+ * Copyright (C) 2006-2009 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,12 +104,19 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <summary>
         /// Add the array of menu items to the system tray
         /// </summary>
+        /// <param name="cms">The menu</param>
         /// <param name="parent">The root of the systray menu</param>
-        public override void getSessionMenuItems(ToolStripMenuItem parent)
+        public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
         {
+            // Suspend the layout before modification
+            cms.SuspendLayout();
+
             parent.DropDownItems.Clear();
             if ( tsmiArray != null )
                 parent.DropDownItems.AddRange(tsmiArray);            
+
+            // Now resume the layout
+            cms.ResumeLayout();
         }
 
         /// <summary>

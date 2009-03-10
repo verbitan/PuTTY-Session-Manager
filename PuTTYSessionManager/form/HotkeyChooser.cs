@@ -42,6 +42,8 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private int currentModifierIndex = -1;
 
+        private Boolean suspendHotkeyUpdate = false;
+
         public HotkeyChooser(Form parent)
         {
             parentWindow = parent;
@@ -201,6 +203,9 @@ namespace uk.org.riseley.puttySessionManager.form
             if ( reloadSessions )
                 sa = sc.getSessionList().ToArray();
 
+            // Suspend hotkey updates
+            suspendHotkeyUpdate = true;
+
             foreach (HotkeyController.HotKeyId hkid in comboDictionary.Keys)
             {
                 comboDictionary.TryGetValue(hkid, out c);
@@ -208,6 +213,10 @@ namespace uk.org.riseley.puttySessionManager.form
                     c.Items.AddRange(sa);
                 c.SelectedItem = hkc.getSessionFromHotkey(hkid);
             }
+
+            // Resume hotkey updates
+            suspendHotkeyUpdate = false;
+
         }
 
         /// <summary>
@@ -347,6 +356,10 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Do nothing if we have suspended updates
+            if (suspendHotkeyUpdate == true)
+                return;
+
             ComboBox c = (ComboBox)sender;
             Session s = (Session)c.SelectedItem;
             HotkeyController.HotKeyId hkid = (HotkeyController.HotKeyId)c.Tag;

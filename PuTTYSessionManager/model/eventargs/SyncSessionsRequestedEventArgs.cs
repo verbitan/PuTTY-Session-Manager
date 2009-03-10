@@ -23,19 +23,19 @@ namespace uk.org.riseley.puttySessionManager.model.eventargs
 {
     public class SyncSessionsRequestedEventArgs : EventArgs 
     {
-        public SyncSessionsRequestedEventArgs(List<Session> sessionList
+        public SyncSessionsRequestedEventArgs(List<SessionAction> sessionActionList
                                             , Session sessionTemplate
                                             , bool ignoreExistingSessions)
         {
-            this.sessionList = sessionList;
+            this.sessionActionList = sessionActionList;
             this.ignoreExistingSessions = ignoreExistingSessions;
             this.sessionTemplate = sessionTemplate;
         }
 
-        private List<Session> sessionList;
-        public List<Session> SessionList
+        private List<SessionAction> sessionActionList;
+        public List<SessionAction> SessionActionList
         {
-            get { return sessionList; }       
+            get { return sessionActionList; }       
         }
 
         private Session sessionTemplate;

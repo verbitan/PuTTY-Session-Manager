@@ -104,8 +104,12 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public void SessionsRefreshed(Object sender, EventArgs e)
         {
+            sessionComboBox.BeginUpdate();
+            attributeListBox.BeginUpdate();
             clearList();
             loadList();
+            sessionComboBox.EndUpdate();
+            attributeListBox.EndUpdate();            
         }
 
         public CopySessionRequest getCopySessionRequest()

@@ -58,8 +58,12 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public void SessionsRefreshed(Object sender, EventArgs e)
         {
+            sessionComboBox.BeginUpdate();
+            sessionFolderComboBox.BeginUpdate();
             clearList();
             loadList();
+            sessionComboBox.EndUpdate();
+            sessionFolderComboBox.EndUpdate();
         }
 
         private void hostnameTextBox_TextChanged(object sender, EventArgs e)
@@ -88,7 +92,7 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 // use the session controller to find the session as the objects held
                 // held in the session control may not be the same
-                sessionComboBox.SelectedItem = sc.findSessionByKey(nsr.SessionTemplate.SessionKey);
+                sessionComboBox.SelectedItem = sc.findSession(nsr.SessionTemplate);
                 if (nsr.SessionFolder == null)
                     sessionFolderComboBox.SelectedItem = nsr.SessionTemplate.FolderName;
                 else

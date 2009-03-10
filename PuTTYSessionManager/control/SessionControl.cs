@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006,2007 David Riseley 
+ * Copyright (C) 2006-2009 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -135,7 +135,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        public virtual void getSessionMenuItems(ToolStripMenuItem parent)
+        public virtual void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
         {
         }
 

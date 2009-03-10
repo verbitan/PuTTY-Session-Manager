@@ -39,11 +39,6 @@ namespace uk.org.riseley.puttySessionManager.controller
     public class SessionController
     {
         /// <summary>
-        /// The registry key of the "Default Session"
-        /// </summary>
-        private const string PUTTY_DEFAULT_SESSION = "Default%20Settings";
-
-        /// <summary>
         /// The registry key ( relative to HKCU ) that stores the Autostart entries
         /// </summary>
         public const string AUTOSTART_REG_KEY = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -73,6 +68,16 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// organise sessions. Must be kept in sync with <code>sessionList</code>
         /// </summary>
         private static List<string> folderList = new List<string>();
+
+        /// <summary>
+        /// The registry key of the "Default Session"
+        /// </summary>
+        private const string DEFAULT_SESSION_KEY = "Default%20Settings";
+
+        /// <summary>
+        /// A session instance that has the key of the default session
+        /// </summary>
+        private static Session DEFAULT_SESSION = new Session(DEFAULT_SESSION_KEY, "", false);
 
         /// <summary>
         /// The singleton instance of this class
@@ -161,6 +166,15 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
+        /// Return the root folder name
+        /// </summary>
+        /// <returns></returns>
+        public string findDefaultFolder()
+        {
+            return Session.SESSIONS_FOLDER_NAME;
+        }
+
+        /// <summary>
         /// Find the default session
         /// </summary>
         /// <returns>The default session, or null if it can't be found</returns>
@@ -184,15 +198,6 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
-        /// Return the root folder name
-        /// </summary>
-        /// <returns></returns>
-        public string findDefaultFolder()
-        {
-            return Session.SESSIONS_FOLDER_NAME;
-        }
-
-        /// <summary>
         /// Find the default session
         /// </summary>
         /// <param name="sl">The list of sessions to search</param>
@@ -204,7 +209,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns></returns>
         public Session findDefaultSession(List<Session> sl, bool defaultSessionOnly)
         {
-            Session s = findSession(sl, PUTTY_DEFAULT_SESSION, true);
+            Session s = findSession(sl, DEFAULT_SESSION);
 
             // If we can't find the default session
             // return the first one in the list
@@ -235,6 +240,16 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
+        /// Try to find a session
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <returns>The session if found, null if not</returns>
+        public Session findSession(Session session)
+        {
+            return findSession(sessionList,session);
+        }
+
+        /// <summary>
         /// Try to find a session by name
         /// </summary>
         /// <param name="sl">The session list to search</param>
@@ -249,11 +264,23 @@ namespace uk.org.riseley.puttySessionManager.controller
                 key = Session.convertDisplayToSessionKey(sessionName);
 
             Session s = new Session(key, "", false);
-            int index = sl.BinarySearch(s);
+            return findSession(sl,s);
+        }
+
+        /// <summary>
+        /// Try to find a session
+        /// </summary>
+        /// <param name="sl">The session list to search</param>
+        /// <param name="session">The session</param>
+        /// <returns>The session if found, null if not</returns>
+        private Session findSession(List<Session> sl, Session session)
+        {
+            Session s = null;
+            int index = sl.BinarySearch(session);
             if (index >= 0)
+            {
                 s = sessionList[index];
-            else
-                s = null;
+            }
             return s;
         }
 
@@ -323,9 +350,9 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// using the provider
         /// </summary>
         /// <param name="s"></param>
-        public void saveFolder(Session s)
+        public void updateFolder(Session s)
         {
-            sessionProvider.saveFolder(s);
+            sessionProvider.updateFolder(s);
         }
 
         /// <summary>
@@ -414,7 +441,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="nsr">The new session request</param>
         /// <param name="sender"></param>
         /// <returns></returns>
-        public bool createNewSession(NewSessionRequest nsr, object sender)
+        public bool createNewSession(NewSessionRequest nsr, Object sender)
         {
             bool result = sessionProvider.createNewSession(nsr);
 
@@ -432,7 +459,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="sl">The</param>
         /// <param name="sender"></param>
         /// <returns></returns>
-        public bool deleteSessions(List<Session> sl, object sender)
+        public bool deleteSessions(List<Session> sl, Object sender)
         {
             bool result = sessionProvider.deleteSessions(sl);
 
@@ -508,7 +535,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="s">The session to rename</param>
         /// <param name="newSessionName">It's new name</param>
         /// <returns>true if sucessful, false otherwise</returns>
-        public bool renameSession(Session s, string newSessionName, object sender)
+        public bool renameSession(Session s, string newSessionName, Object sender)
         {
             bool result = sessionProvider.renameSession(s, newSessionName);
         
@@ -525,7 +552,7 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <returns></returns>
         public bool isDefaultSessionName(string sessionName)
         {
-            if (Session.convertDisplayToSessionKey(sessionName).Equals(PUTTY_DEFAULT_SESSION))
+            if (Session.convertDisplayToSessionKey(sessionName).Equals(DEFAULT_SESSION_KEY))
                 return true;
             else
                 return false;
@@ -824,6 +851,53 @@ namespace uk.org.riseley.puttySessionManager.controller
         public bool isPuTTYExecutableAccessible()
         {
             return File.Exists(Properties.Settings.Default.PuttyLocation);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public int syncSessions(Object sender , SyncSessionsRequestedEventArgs e)
+        {
+            int modifiedCount = 0;
+            List<Session> delList = new List<Session>();
+            foreach ( SessionAction sa in e.SessionActionList )
+            {
+
+                if ( sa.Action == SessionAction.ACTION.ADD )
+                {
+                    NewSessionRequest nsr = new NewSessionRequest(e.SessionTemplate
+                                                                , sa.NewSession.FolderName
+                                                                , sa.NewSession.Hostname
+                                                                , sa.NewSession.SessionDisplayText
+                                                                , false, false);
+                    createNewSession(nsr, sender);
+                    modifiedCount++;
+                }
+                else if ( sa.Action == SessionAction.ACTION.DELETE )
+                {
+                    delList.Add(sa.ExistingSession);
+                    modifiedCount++;
+                }
+                else if ( sa.Action == SessionAction.ACTION.UPDATE )
+                {
+                    Session existingSession = findSession(sa.NewSession);
+                    if (existingSession != null)
+                    {
+                        sessionProvider.updateHostname(sa.NewSession);
+                        sessionProvider.updateFolder(sa.NewSession);
+                        modifiedCount++;
+                    }
+                }
+            }
+
+            if (delList.Count > 0)
+                deleteSessions(delList, sender);
+
+            return modifiedCount;
         }
     }
 }

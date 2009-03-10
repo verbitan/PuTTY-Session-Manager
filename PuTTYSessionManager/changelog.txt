@@ -1,19 +1,43 @@
-PuTTY Session Manager v0.32 ( XX-XX-2008 )
+PuTTY Session Manager v0.40 ( 10-03-2009 )
 =============================================
 Eighth release of PuTTY Session Manager
 
 Feature requests / enhancements:
+
+1529194 : Implement synchronise sessions feature.  If you use the CSV export
+		  facility, you can now share your session list with others.  PSM can
+		  now parse the file and offer you the ability to review and sync changes.
+		  Support for reading the CSV file from an http url is included
+
 Not Tracked: Allow the application icon to be customised. If an icon file called 
              "psm.ico" exists in the executable directory this will be used instead
              of the default icon
 
+Not Tracked: Allow the DEL key to be used to delete sessions from the tree when 
+			 unlocked
+			 
+Not Tracked: Profiled the application and added some performance enhancements		 			              
+
 Bugs:
+2183658: Re-implemented all major controls and forms to use a proper layout 
+		 manager.  This should now make changing the font behave in a sensible
+		 fashion.
+
+1806695: Again(!). Re-implemented the architecture for saving settings, to allow
+		 you to cancel settings changes and really make sure all your settings are
+		 saved before the application exits.
+
 Not Tracked: Avoid unhandled exception if the About or Options dialogs are 
              requested twice from the systray menu
              
 Not Tracked: Attempt to re-register the hotkeys after the taskbar icon visibility
              is changed, as hotkey registration appears to be lost.  Fixed for 
-             all but one scenario.             
+             all but one scenario.   
+             
+Not Tracked: Support for non european codepages. Ensure that settings in the 
+			 registry are converted to the current codepage.
+
+
 
 PuTTY Session Manager v0.31 ( 29-06-2008 )
 =============================================

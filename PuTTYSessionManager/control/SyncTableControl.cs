@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2008 David Riseley 
+ * Copyright (C) 2008,2009 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,25 +86,34 @@ namespace uk.org.riseley.puttySessionManager.control
             dataGridView1.SuspendLayout();
             dataGridView1.Rows.Clear();
 
-            foreach (Session s in sessionList)
+            foreach (Session newSession in sessionList)
             {
-                Session existingSession = sc.findSessionByKey(s.SessionKey);
-                dgvr = new DataGridViewRow();
-                dgvr.CreateCells(dataGridView1, getCellValues(s,existingSession));
-                dgvr.Tag = s;
-                dataGridView1.Rows.Add(dgvr);
-                sessionsDictionary.Add(s.SessionKey,s);
+                Session existingSession = sc.findSession(newSession);
+                SessionAction action = new SessionAction(existingSession, newSession);
+
+                // Make sure we skip over duplicate sessions
+                if (!sessionsDictionary.ContainsKey(newSession.SessionKey))
+                {
+                    sessionsDictionary.Add(newSession.SessionKey, newSession);
+
+                    dgvr = new DataGridViewRow();
+                    dgvr.CreateCells(dataGridView1, getCellValues(action));
+                    dgvr.Tag = action;
+                    dataGridView1.Rows.Add(dgvr);
+                }                
             }
 
             if (ea.IgnoreExistingSessions == false)
             {
-                foreach (Session s in sc.getSessionList())
+                foreach (Session existingSession in sc.getSessionList())
                 {
-                    if (!sessionsDictionary.ContainsKey(s.SessionKey))
+                    if (!sessionsDictionary.ContainsKey(existingSession.SessionKey))
                     {
+                        SessionAction action = new SessionAction(existingSession, null);
+
                         dgvr = new DataGridViewRow();
-                        dgvr.CreateCells(dataGridView1, getCellValues(null,s));
-                        dgvr.Tag = s;
+                        dgvr.CreateCells(dataGridView1, getCellValues(action));
+                        dgvr.Tag = action;
                         dataGridView1.Rows.Add(dgvr);
                     }
                 }
@@ -119,28 +128,26 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <param name="newSession">The session from the file</param>
         /// <param name="existingSession">The current session that matches newSession</param>
         /// <returns></returns>
-        private String [] getCellValues( Session newSession , Session existingSession )
+        private String [] getCellValues( SessionAction action )
         {
-            STATUS s = getStatus(newSession, existingSession);
-
             string sessionName = "";
             string newSessionFolder = "";
             string existingSessionFolder = "";
             string newSessionHostname = "";
             string existingSessionHostname = "";
 
-            if (newSession != null)
+            if (action.NewSession != null)
             {
-                sessionName = newSession.SessionDisplayText;
-                newSessionFolder = newSession.FolderDisplayText;
-                newSessionHostname = newSession.Hostname;
+                sessionName = action.NewSession.SessionDisplayText;
+                newSessionFolder = action.NewSession.FolderDisplayText;
+                newSessionHostname = action.NewSession.Hostname;
             }
 
-            if (existingSession != null)
+            if (action.ExistingSession != null)
             {
-                sessionName = existingSession.SessionDisplayText;
-                existingSessionFolder = existingSession.FolderDisplayText;
-                existingSessionHostname = existingSession.Hostname;
+                sessionName = action.ExistingSession.SessionDisplayText;
+                existingSessionFolder = action.ExistingSession.FolderDisplayText;
+                existingSessionHostname = action.ExistingSession.Hostname;
             }
 
             String[] cellValues = new String[] {    sessionName
@@ -148,52 +155,24 @@ namespace uk.org.riseley.puttySessionManager.control
                                                   , newSessionFolder
                                                   , existingSessionHostname
                                                   , newSessionHostname
-                                                  , getStatusDescription(s)
-                                                  , getAction(s)
+                                                  , action.getActionDescription()
+                                                  , getAction(action.Action)
                                                 };
             return cellValues;                                                              
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        private String getStatusDescription (STATUS s)
-        {
-            switch (s)
-            {
-                case STATUS.DELETED:    { return "Deleted"; }
-                case STATUS.NEW:        { return "New"; }
-                case STATUS.MODIFIED:   { return "Changed"; }
-                case STATUS.UNMODIFIED: { return "Unchanged"; }
-                default:                { return "Unchanged"; }
-            }
-        }
 
-        private String getAction(STATUS s)
-        {
-            switch (s)
-            {
-                case STATUS.DELETED:    { return ACTION_UPDATE; }
-                case STATUS.NEW:        { return ACTION_UPDATE; }
-                case STATUS.MODIFIED:   { return ACTION_UPDATE; }
-                case STATUS.UNMODIFIED: { return ACTION_IGNORE; }
-                default:                { return ACTION_IGNORE; }
-            }
-        }
 
-        private STATUS getStatus( Session newSession , Session existingSession )
+        private String getAction(SessionAction.ACTION a)
         {
-            if ( newSession == null )
-                return STATUS.DELETED;
-            else if ( existingSession == null )
-                return STATUS.NEW;
-            else if ( (newSession.Hostname.Equals   ( existingSession.Hostname ) ) &&
-                      (newSession.FolderName.Equals ( existingSession.FolderName)) )
-                return STATUS.UNMODIFIED;
-            else
-                return STATUS.MODIFIED;
+            switch (a)
+            {
+                case SessionAction.ACTION.DELETE: { return ACTION_UPDATE; }
+                case SessionAction.ACTION.ADD:    { return ACTION_UPDATE; }
+                case SessionAction.ACTION.UPDATE: { return ACTION_UPDATE; }
+                case SessionAction.ACTION.NONE:   { return ACTION_IGNORE; }
+                default:                          { return ACTION_IGNORE; }
+            }
         }
 
         private void amendActions(string action)
@@ -244,8 +223,30 @@ namespace uk.org.riseley.puttySessionManager.control
             dataGridView1.ResumeLayout();
         }
 
+        private List<SessionAction> getSessionsToUpdate()
+        {
+            List<SessionAction> sl = new List<SessionAction>();
+            foreach (DataGridViewRow dvgr in dataGridView1.Rows)
+            {
+                if (dvgr.Cells["actionColumn"].Value.Equals(ACTION_UPDATE))
+                {
+                    sl.Add((SessionAction)dvgr.Tag);
+                }
+            }
+
+            return sl;
+        }
+
         private void syncButton_Click(object sender, EventArgs e)
         {
+            SyncSessionsRequestedEventArgs ssre = new SyncSessionsRequestedEventArgs(getSessionsToUpdate(),templateSession,ignoreExistingSessions);
+            if ( ssre.SessionActionList.Count > 0 )
+                OnSyncSessionsRequested(this, ssre);
+            else
+                MessageBox.Show("No sessions selected for modification"
+                    , "Warning"
+                    , MessageBoxButtons.OK
+                    , MessageBoxIcon.Warning);
 
         }
 

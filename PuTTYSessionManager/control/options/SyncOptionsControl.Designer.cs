@@ -1,3 +1,20 @@
+/* 
+ * Copyright (C) 2009 David Riseley 
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 namespace uk.org.riseley.puttySessionManager.control.options
 {
     partial class SyncOptionsControl
@@ -31,9 +48,11 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.locateFileButton = new System.Windows.Forms.Button();
             this.fileTextBox = new System.Windows.Forms.TextBox();
             this.sessionGroupBox = new System.Windows.Forms.GroupBox();
-            this.urlRadioButton = new System.Windows.Forms.RadioButton();
+            this.sessionLocationTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.fileRadioButton = new System.Windows.Forms.RadioButton();
+            this.urlRadioButton = new System.Windows.Forms.RadioButton();
             this.fileGroupBox = new System.Windows.Forms.GroupBox();
+            this.fileLocationTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.urlGroupBox = new System.Windows.Forms.GroupBox();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.optionsGroupBox = new System.Windows.Forms.GroupBox();
@@ -43,15 +62,14 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.optionsTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.validateButton = new System.Windows.Forms.Button();
             this.outputTextBox = new System.Windows.Forms.TextBox();
-            this.sessionLocationTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.fileLocationTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.clearButton = new System.Windows.Forms.Button();
             this.sessionGroupBox.SuspendLayout();
+            this.sessionLocationTableLayout.SuspendLayout();
             this.fileGroupBox.SuspendLayout();
+            this.fileLocationTableLayoutPanel.SuspendLayout();
             this.urlGroupBox.SuspendLayout();
             this.optionsGroupBox.SuspendLayout();
             this.optionsTableLayout.SuspendLayout();
-            this.sessionLocationTableLayout.SuspendLayout();
-            this.fileLocationTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // locateFileButton
@@ -86,19 +104,20 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.sessionGroupBox.TabStop = false;
             this.sessionGroupBox.Text = "Choose Session Location";
             // 
-            // urlRadioButton
+            // sessionLocationTableLayout
             // 
-            this.urlRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.urlRadioButton.AutoSize = true;
-            this.urlRadioButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.urlRadioButton.Location = new System.Drawing.Point(102, 52);
-            this.urlRadioButton.Name = "urlRadioButton";
-            this.urlRadioButton.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.urlRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.urlRadioButton.Size = new System.Drawing.Size(70, 25);
-            this.urlRadioButton.TabIndex = 1;
-            this.urlRadioButton.Text = "HTTP Url";
-            this.urlRadioButton.UseVisualStyleBackColor = true;
+            this.sessionLocationTableLayout.ColumnCount = 1;
+            this.sessionLocationTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.sessionLocationTableLayout.Controls.Add(this.fileRadioButton, 0, 0);
+            this.sessionLocationTableLayout.Controls.Add(this.urlRadioButton, 0, 1);
+            this.sessionLocationTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sessionLocationTableLayout.Location = new System.Drawing.Point(3, 16);
+            this.sessionLocationTableLayout.Name = "sessionLocationTableLayout";
+            this.sessionLocationTableLayout.RowCount = 2;
+            this.sessionLocationTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.sessionLocationTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.sessionLocationTableLayout.Size = new System.Drawing.Size(175, 87);
+            this.sessionLocationTableLayout.TabIndex = 2;
             // 
             // fileRadioButton
             // 
@@ -117,6 +136,20 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.fileRadioButton.UseVisualStyleBackColor = true;
             this.fileRadioButton.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
+            // urlRadioButton
+            // 
+            this.urlRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.urlRadioButton.AutoSize = true;
+            this.urlRadioButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.urlRadioButton.Location = new System.Drawing.Point(102, 52);
+            this.urlRadioButton.Name = "urlRadioButton";
+            this.urlRadioButton.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.urlRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.urlRadioButton.Size = new System.Drawing.Size(70, 25);
+            this.urlRadioButton.TabIndex = 1;
+            this.urlRadioButton.Text = "HTTP Url";
+            this.urlRadioButton.UseVisualStyleBackColor = true;
+            // 
             // fileGroupBox
             // 
             this.fileGroupBox.Controls.Add(this.fileLocationTableLayoutPanel);
@@ -127,6 +160,21 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.fileGroupBox.TabIndex = 3;
             this.fileGroupBox.TabStop = false;
             this.fileGroupBox.Text = "File Location";
+            // 
+            // fileLocationTableLayoutPanel
+            // 
+            this.fileLocationTableLayoutPanel.ColumnCount = 2;
+            this.fileLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.fileLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.fileLocationTableLayoutPanel.Controls.Add(this.fileTextBox, 1, 0);
+            this.fileLocationTableLayoutPanel.Controls.Add(this.locateFileButton, 0, 0);
+            this.fileLocationTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileLocationTableLayoutPanel.Location = new System.Drawing.Point(3, 16);
+            this.fileLocationTableLayoutPanel.Name = "fileLocationTableLayoutPanel";
+            this.fileLocationTableLayoutPanel.RowCount = 1;
+            this.fileLocationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fileLocationTableLayoutPanel.Size = new System.Drawing.Size(479, 32);
+            this.fileLocationTableLayoutPanel.TabIndex = 2;
             // 
             // urlGroupBox
             // 
@@ -159,7 +207,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.optionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.optionsGroupBox.Location = new System.Drawing.Point(3, 115);
             this.optionsGroupBox.Name = "optionsGroupBox";
-            this.optionsGroupBox.Size = new System.Drawing.Size(672, 46);
+            this.optionsGroupBox.Size = new System.Drawing.Size(672, 50);
             this.optionsGroupBox.TabIndex = 5;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Synchronization Options";
@@ -207,21 +255,23 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.optionsTableLayout.Controls.Add(this.optionsGroupBox, 0, 2);
             this.optionsTableLayout.Controls.Add(this.fileGroupBox, 1, 0);
             this.optionsTableLayout.Controls.Add(this.sessionGroupBox, 0, 0);
+            this.optionsTableLayout.Controls.Add(this.clearButton, 0, 4);
             this.optionsTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.optionsTableLayout.Location = new System.Drawing.Point(0, 0);
             this.optionsTableLayout.Name = "optionsTableLayout";
-            this.optionsTableLayout.RowCount = 4;
+            this.optionsTableLayout.RowCount = 5;
             this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.optionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.optionsTableLayout.Size = new System.Drawing.Size(678, 264);
             this.optionsTableLayout.TabIndex = 6;
             // 
             // validateButton
             // 
-            this.validateButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.validateButton.Location = new System.Drawing.Point(8, 202);
+            this.validateButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.validateButton.Location = new System.Drawing.Point(8, 188);
             this.validateButton.MaximumSize = new System.Drawing.Size(170, 23);
             this.validateButton.MinimumSize = new System.Drawing.Size(170, 23);
             this.validateButton.Name = "validateButton";
@@ -234,43 +284,25 @@ namespace uk.org.riseley.puttySessionManager.control.options
             // outputTextBox
             // 
             this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outputTextBox.Location = new System.Drawing.Point(190, 167);
+            this.outputTextBox.Location = new System.Drawing.Point(190, 171);
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
+            this.optionsTableLayout.SetRowSpan(this.outputTextBox, 2);
             this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputTextBox.Size = new System.Drawing.Size(485, 94);
-            this.outputTextBox.TabIndex = 1;
+            this.outputTextBox.Size = new System.Drawing.Size(485, 90);
+            this.outputTextBox.TabIndex = 0;
             // 
-            // sessionLocationTableLayout
+            // clearButton
             // 
-            this.sessionLocationTableLayout.ColumnCount = 1;
-            this.sessionLocationTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.sessionLocationTableLayout.Controls.Add(this.fileRadioButton, 0, 0);
-            this.sessionLocationTableLayout.Controls.Add(this.urlRadioButton, 0, 1);
-            this.sessionLocationTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sessionLocationTableLayout.Location = new System.Drawing.Point(3, 16);
-            this.sessionLocationTableLayout.Name = "sessionLocationTableLayout";
-            this.sessionLocationTableLayout.RowCount = 2;
-            this.sessionLocationTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.sessionLocationTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.sessionLocationTableLayout.Size = new System.Drawing.Size(175, 87);
-            this.sessionLocationTableLayout.TabIndex = 2;
-            // 
-            // fileLocationTableLayoutPanel
-            // 
-            this.fileLocationTableLayoutPanel.ColumnCount = 2;
-            this.fileLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.fileLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.fileLocationTableLayoutPanel.Controls.Add(this.fileTextBox, 1, 0);
-            this.fileLocationTableLayoutPanel.Controls.Add(this.locateFileButton, 0, 0);
-            this.fileLocationTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileLocationTableLayoutPanel.Location = new System.Drawing.Point(3, 16);
-            this.fileLocationTableLayoutPanel.Name = "fileLocationTableLayoutPanel";
-            this.fileLocationTableLayoutPanel.RowCount = 1;
-            this.fileLocationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.fileLocationTableLayoutPanel.Size = new System.Drawing.Size(479, 32);
-            this.fileLocationTableLayoutPanel.TabIndex = 2;
+            this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.clearButton.Location = new System.Drawing.Point(9, 217);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(169, 23);
+            this.clearButton.TabIndex = 6;
+            this.clearButton.Text = "Clear session list";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // SyncOptionsControl
             // 
@@ -280,17 +312,17 @@ namespace uk.org.riseley.puttySessionManager.control.options
             this.Name = "SyncOptionsControl";
             this.Size = new System.Drawing.Size(678, 264);
             this.sessionGroupBox.ResumeLayout(false);
+            this.sessionLocationTableLayout.ResumeLayout(false);
+            this.sessionLocationTableLayout.PerformLayout();
             this.fileGroupBox.ResumeLayout(false);
+            this.fileLocationTableLayoutPanel.ResumeLayout(false);
+            this.fileLocationTableLayoutPanel.PerformLayout();
             this.urlGroupBox.ResumeLayout(false);
             this.urlGroupBox.PerformLayout();
             this.optionsGroupBox.ResumeLayout(false);
             this.optionsGroupBox.PerformLayout();
             this.optionsTableLayout.ResumeLayout(false);
             this.optionsTableLayout.PerformLayout();
-            this.sessionLocationTableLayout.ResumeLayout(false);
-            this.sessionLocationTableLayout.PerformLayout();
-            this.fileLocationTableLayoutPanel.ResumeLayout(false);
-            this.fileLocationTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -314,5 +346,6 @@ namespace uk.org.riseley.puttySessionManager.control.options
         private System.Windows.Forms.ComboBox sessionComboBox;
         private System.Windows.Forms.TableLayoutPanel sessionLocationTableLayout;
         private System.Windows.Forms.TableLayoutPanel fileLocationTableLayoutPanel;
+        private System.Windows.Forms.Button clearButton;
     }
 }

@@ -30,11 +30,21 @@ namespace uk.org.riseley.puttySessionManager.model
         private const string KEY_SESSION = "SESSION|";
         private const string KEY_FOLDER = "FOLDER|";
 
+        private static Encoding systemEncoding = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ANSICodePage);
+        private static int SESSIONS_FOLDER_LEN = SESSIONS_FOLDER_NAME.Length + PATH_SEPARATOR.Length;
+
         private string sessionKey = "";
         public string SessionKey
         {
             get { return sessionKey; }
             private set { sessionKey = value; }
+        }
+
+        private string nodeKey = "";
+        public string NodeKey
+        {
+            get { return nodeKey; }
+            private set { nodeKey = value; }
         }
 
         private string sessionDisplayText = "";
@@ -77,10 +87,16 @@ namespace uk.org.riseley.puttySessionManager.model
             else
             {
                 FolderName = folderName;
-                FolderDisplayText = FolderName.Remove(0, (SESSIONS_FOLDER_NAME.Length + PATH_SEPARATOR.Length));
+                FolderDisplayText = FolderName.Remove(0, SESSIONS_FOLDER_LEN);
             }
+
             IsFolder = isFolder;
             cellValues = new String[] { SessionDisplayText, FolderDisplayText, "" };
+
+            if (isFolder == true)
+                NodeKey = KEY_FOLDER + FolderName;
+            else
+                NodeKey = KEY_SESSION + SessionKey;
         }
 
         public override string ToString()
@@ -108,17 +124,17 @@ namespace uk.org.riseley.puttySessionManager.model
         /// </summary>
         /// <param name="key">The registry key name to convert</param>
         /// <returns>The display formatted session name</returns>
-        public static String convertSessionKeyToDisplay(string key)
+        private String convertSessionKeyToDisplay(string key)
         {
             CharEnumerator ce = key.GetEnumerator();
-            StringBuilder sb = new StringBuilder();
-            Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ANSICodePage);
+            StringBuilder sb = new StringBuilder(key.Length);
+
             while (ce.MoveNext())
             {
                 if (ce.Current == '%')
                 {
                     CharEnumerator clone = (CharEnumerator)ce.Clone();
-                    StringBuilder hexVal = new StringBuilder();
+                    StringBuilder hexVal = new StringBuilder(2);
                     if ( clone.MoveNext() )
                         hexVal.Append(clone.Current);
                     if ( clone.MoveNext())
@@ -126,7 +142,7 @@ namespace uk.org.riseley.puttySessionManager.model
                     if (hexVal.Length == 2)
                     {                        
                         Byte byteVal = Byte.Parse(hexVal.ToString(), System.Globalization.NumberStyles.HexNumber);
-                        sb.Append(enc.GetString(new byte[] { byteVal }));
+                        sb.Append(systemEncoding.GetString(new byte[] { byteVal }));
                         ce.MoveNext();
                         ce.MoveNext();
                     }
@@ -156,7 +172,6 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             CharEnumerator ce = display.GetEnumerator();
             StringBuilder sb = new StringBuilder();
-            Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ANSICodePage);
             int i = 0;
             while (ce.MoveNext())
             {
@@ -164,7 +179,7 @@ namespace uk.org.riseley.puttySessionManager.model
                 if (c == ' ' || c == '\\' || c == '*' || c == '?' ||
                     c == '%' || c < ' ' || c > '~' || (c == '.' && i == 0))
                 {
-                    byte[] b = enc.GetBytes(new char[]{ c });
+                    byte[] b = systemEncoding.GetBytes(new char[] { c });
                     sb.Append("%" + Convert.ToString((int)b[0], 16).ToUpper());
                 }
                 else
@@ -180,14 +195,6 @@ namespace uk.org.riseley.puttySessionManager.model
         public string[] getCellValues()
         {
             return cellValues;
-        }
-
-        public string getKey()
-        {
-            if (IsFolder == true)
-                return KEY_FOLDER + FolderName;
-            else
-                return KEY_SESSION + SessionKey;
         }
 
         public static string getFolderKey(string folder)
