@@ -30,22 +30,36 @@ namespace uk.org.riseley.puttySessionManager.control
 {
     public partial class TableControl : UserControl
     {
+        /// <summary>
+        /// The session controller
+        /// </summary>
         private SessionController sc;
 
+        /// <summary>
+        /// The original list of sessions to sync
+        /// Used to support reset functionality
+        /// </summary>
         private List<Session> sessionList;
+
+        /// <summary>
+        /// The template session for new sessions
+        /// </summary>
         private Session templateSession;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private bool ignoreExistingSessions = false;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private const string ACTION_UPDATE = "Update";
-        private const string ACTION_IGNORE = "Ignore";
 
-        private enum STATUS
-        {
-             NEW
-           , DELETED
-           , MODIFIED
-           , UNMODIFIED
-        };
+        /// <summary>
+        /// 
+        /// </summary>
+        private const string ACTION_IGNORE = "Ignore";
 
         /// <summary>
         /// Event handler for the SyncSessionsRequested event
@@ -125,9 +139,8 @@ namespace uk.org.riseley.puttySessionManager.control
         /// <summary>
         /// Get the values to populate each row of the table
         /// </summary>
-        /// <param name="newSession">The session from the file</param>
-        /// <param name="existingSession">The current session that matches newSession</param>
-        /// <returns></returns>
+        /// <param name="action">The session action to process</param>
+        /// <returns>The row data</returns>
         private String [] getCellValues( SessionAction action )
         {
             string sessionName = "";
@@ -151,7 +164,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
                 else
                 {
-                    sessionName = action.NewSession.SessionDisplayText + "[" +
+                    sessionName = action.NewSession.SessionDisplayText + " [" +
                                   action.ExistingSession.SessionDisplayText + "]";
                 }
                 existingSessionFolder = action.ExistingSession.FolderDisplayText;
@@ -169,8 +182,11 @@ namespace uk.org.riseley.puttySessionManager.control
             return cellValues;                                                              
         }
 
-
-
+        /// <summary>
+        /// Decide whether to update or ignore the row
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         private String getAction(SessionAction.ACTION a)
         {
             switch (a)
@@ -184,6 +200,10 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
         private void amendActions(string action)
         {
             dataGridView1.SuspendLayout();
@@ -197,21 +217,41 @@ namespace uk.org.riseley.puttySessionManager.control
             dataGridView1.ResumeLayout();
         }       
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void resetButton_Click(object sender, EventArgs e)
         {
             LoadSessions(new SyncSessionsLoadedEventArgs(sessionList, templateSession, ignoreExistingSessions));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void updateButton_Click(object sender, EventArgs e)
         {
             amendActions(ACTION_UPDATE);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ignoreButton_Click(object sender, EventArgs e)
         {
             amendActions(ACTION_IGNORE);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void removeUnchangedButton_Click(object sender, EventArgs e)
         {
             List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
@@ -232,6 +272,10 @@ namespace uk.org.riseley.puttySessionManager.control
             dataGridView1.ResumeLayout();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private List<SessionAction> getSessionsToUpdate()
         {
             List<SessionAction> sl = new List<SessionAction>();
@@ -246,6 +290,11 @@ namespace uk.org.riseley.puttySessionManager.control
             return sl;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void syncButton_Click(object sender, EventArgs e)
         {
             SyncSessionsRequestedEventArgs ssre = new SyncSessionsRequestedEventArgs(getSessionsToUpdate(),templateSession,ignoreExistingSessions);
@@ -270,6 +319,11 @@ namespace uk.org.riseley.puttySessionManager.control
                 SyncSessionsRequested(sender, e);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void renameButton_Click(object sender, EventArgs e)
         {
             int matchCount = 0;
