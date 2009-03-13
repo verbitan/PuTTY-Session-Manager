@@ -25,7 +25,7 @@ namespace uk.org.riseley.puttySessionManager.controller
     /// <summary>
     /// The contract for a session storage provider
     /// </summary>
-    interface SessionStorageInterface
+    interface ISessionStorage
     {
         /// <summary>
         /// Gets the list of available sessions

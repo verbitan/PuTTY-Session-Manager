@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2008 David Riseley 
+ * Copyright (C) 2007 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@ using uk.org.riseley.puttySessionManager.model;
 namespace uk.org.riseley.puttySessionManager.controller
 {
     /// <summary>
-    /// The contract for a session import provider
+    /// The contract for a session export provider
     /// </summary>
-    interface SessionImportInterface
+    interface ISessionExport
     {
         /// <summary>
         /// Return a description of the export file type
@@ -40,12 +40,13 @@ namespace uk.org.riseley.puttySessionManager.controller
         string getFileTypeExtension();
 
         /// <summary>
-        /// Load the session list from the specified Uri
+        /// Save the session list to the specified filename
         /// This may throw an exception if there is some issue
         /// with the file I/O
         /// </summary>
-        /// <param name="location"></param>
+        /// <param name="sessionList"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        List<Session> loadSessions(String location);
+        int saveSessionsToFile(List<Session> sessionList, String fileName);
     }
 }

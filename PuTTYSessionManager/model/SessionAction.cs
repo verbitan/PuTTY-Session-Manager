@@ -23,7 +23,7 @@ namespace uk.org.riseley.puttySessionManager.model
 {
     public class SessionAction
     {
-        public enum ACTION { ADD, UPDATE, DELETE, NONE };
+        public enum ACTION { ADD, UPDATE, DELETE, RENAME, NONE };
 
         public SessionAction(Session existingSession, Session newSession)
         {
@@ -81,6 +81,7 @@ namespace uk.org.riseley.puttySessionManager.model
                 case ACTION.DELETE:     { return "Deleted"; }
                 case ACTION.ADD:        { return "New"; }
                 case ACTION.UPDATE:     { return "Changed"; }
+                case ACTION.RENAME:     { return "Renamed"; }
                 case ACTION.NONE:       { return "Unchanged"; }
                 default:                { return "Unchanged"; }
             }

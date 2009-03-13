@@ -27,7 +27,7 @@ using System.Windows.Forms;
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
-    class CsvSessionImportImpl : SessionImportInterface
+    class CsvSessionImportImpl : ISessionImport
     {
         /// <summary>
         /// The file type for this provider

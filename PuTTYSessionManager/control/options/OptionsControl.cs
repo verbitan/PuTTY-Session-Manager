@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2008 David Riseley 
+ * Copyright (C) 2008,2009 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,11 @@ namespace uk.org.riseley.puttySessionManager.control.options
 
         protected void setupOpenFileDialogue(FileDialogType fdt)
         {
+            setupOpenFileDialogue(fdt, "");
+        }
+
+        protected void setupOpenFileDialogue(FileDialogType fdt, string lastknownfile)
+        {
             String filename = "";
             String fileFilter = "";
             String currentFile = "";
@@ -71,6 +76,11 @@ namespace uk.org.riseley.puttySessionManager.control.options
                     currentFile = Properties.Settings.Default.WinSCPIniLocation;
                     break;
             }
+
+            // Override the default current file if we have supplied 
+            // an existing file
+            if (lastknownfile != null && !lastknownfile.Equals(""))
+                currentFile = lastknownfile;
 
             // Attempt to set the working directory
             string directory = "";

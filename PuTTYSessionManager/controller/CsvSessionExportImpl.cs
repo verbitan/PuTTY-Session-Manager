@@ -24,7 +24,7 @@ using FileHelpers;
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
-    class CsvSessionExportImpl : SessionExportInterface
+    class CsvSessionExportImpl : ISessionExport
     {
         /// <summary>
         /// The file type for this provider

@@ -32,7 +32,7 @@ namespace uk.org.riseley.puttySessionManager.controller
     /// <summary>
     /// 
     /// </summary>
-    class RegistrySessionStorageImpl : SessionAttributesInterface, SessionStorageInterface, SessionExportInterface
+    class RegistrySessionStorageImpl : SessionAttributesInterface, ISessionStorage, ISessionExport
     {
 
         /// <summary>
@@ -287,10 +287,12 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// Rename the session.
         /// </summary>
         /// <param name="s">The session to rename</param>
-        /// <param name="newSessionName">It's new name</param>
+        /// <param name="newSessionName">The new session display name</param>
         /// <returns>true if sucessful, false otherwise</returns>
         public bool renameSession(Session s, string newSessionName)
         {
+            string newSessionKey = Session.convertDisplayToSessionKey(newSessionName);
+
             // Check the old session isn't the default session
             if (s.SessionKey.Equals(PUTTY_DEFAULT_SESSION))
                 return false;
@@ -301,7 +303,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                 return false;
 
             // Check no-one has created a new session with the same name
-            RegistryKey newSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionName, false);
+            RegistryKey newSession = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionKey, false);
             if (newSession != null)
             {
                 current.Close();
@@ -310,7 +312,7 @@ namespace uk.org.riseley.puttySessionManager.controller
             }
 
             // Create the new session
-            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + Session.convertDisplayToSessionKey(newSessionName));
+            newSession = Registry.CurrentUser.CreateSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + newSessionKey);
             if (newSession == null)
             {
                 current.Close();

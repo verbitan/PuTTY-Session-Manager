@@ -145,7 +145,15 @@ namespace uk.org.riseley.puttySessionManager.control
 
             if (action.ExistingSession != null)
             {
-                sessionName = action.ExistingSession.SessionDisplayText;
+                if (action.Action != SessionAction.ACTION.RENAME)
+                {
+                    sessionName = action.ExistingSession.SessionDisplayText;
+                }
+                else
+                {
+                    sessionName = action.NewSession.SessionDisplayText + "[" +
+                                  action.ExistingSession.SessionDisplayText + "]";
+                }
                 existingSessionFolder = action.ExistingSession.FolderDisplayText;
                 existingSessionHostname = action.ExistingSession.Hostname;
             }
@@ -170,6 +178,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 case SessionAction.ACTION.DELETE: { return ACTION_UPDATE; }
                 case SessionAction.ACTION.ADD:    { return ACTION_UPDATE; }
                 case SessionAction.ACTION.UPDATE: { return ACTION_UPDATE; }
+                case SessionAction.ACTION.RENAME: { return ACTION_UPDATE; }
                 case SessionAction.ACTION.NONE:   { return ACTION_IGNORE; }
                 default:                          { return ACTION_IGNORE; }
             }
@@ -259,6 +268,103 @@ namespace uk.org.riseley.puttySessionManager.control
         {
             if (SyncSessionsRequested != null)
                 SyncSessionsRequested(sender, e);
+        }
+
+        private void renameButton_Click(object sender, EventArgs e)
+        {
+            int matchCount = 0;
+
+            if (dataGridView1.Rows.Count == 0)
+                return;
+
+            DialogResult r = MessageBox.Show("This will attempt to identify renamed \n"
+                            + "sessions based on matching the hostnames.\n"
+                            + "Do you want restrict the matching to sessions\n"
+                            + "with the same folder names?"
+                            , "Question"
+                            , MessageBoxButtons.YesNoCancel
+                            , MessageBoxIcon.Question);
+            
+            if (r == DialogResult.Yes || r == DialogResult.No)
+            {
+                List<SessionAction> deletedSessions = new List<SessionAction>();
+                Dictionary <String , SessionAction> newSessionsDict = new Dictionary<String , SessionAction>();
+                Dictionary <SessionAction, DataGridViewRow> rowDict = new Dictionary<SessionAction,DataGridViewRow>();
+
+                bool includeFoldersInMatch = (r == DialogResult.Yes);
+
+                // First indentify all the new and deleted sessions
+                foreach (DataGridViewRow dvgr in dataGridView1.Rows)
+                {
+                    SessionAction sa = (SessionAction)dvgr.Tag;
+                    if (sa.Action == SessionAction.ACTION.ADD ||
+                        sa.Action == SessionAction.ACTION.DELETE)
+                    {
+                        rowDict.Add(sa, dvgr);
+                        if (sa.Action == SessionAction.ACTION.ADD)
+                        {
+                            string key = sa.NewSession.Hostname;
+                            if ( includeFoldersInMatch )
+                                key += "|" + sa.NewSession.FolderName;
+
+                            // Only use the first instance of each key
+                            if ( ! newSessionsDict.ContainsKey(key) )
+                                newSessionsDict.Add(key,sa);
+                        }
+                        else
+                        {
+                            deletedSessions.Add(sa);                        
+                        }
+                    }
+                }
+
+                dataGridView1.SuspendLayout();
+                // Then try to match a new session to each deleted session
+                foreach (SessionAction delSession in deletedSessions)
+                {
+                    string key = delSession.ExistingSession.Hostname;
+                    if ( includeFoldersInMatch )
+                        key += "|" + delSession.ExistingSession.FolderName;
+
+                    if ( newSessionsDict.ContainsKey(key) )
+                    {
+                        SessionAction newSession = null;
+                        newSessionsDict.TryGetValue(key,out newSession);
+                        if ( newSession != null )
+                        {
+                            DataGridViewRow dvgr;
+                            rowDict.TryGetValue(newSession, out dvgr);
+                            if (dvgr != null)
+                            {
+                                dataGridView1.Rows.Remove(dvgr);
+                                newSessionsDict.Remove(key);
+                                delSession.NewSession = newSession.NewSession;
+                                delSession.Action = SessionAction.ACTION.RENAME;
+                                rowDict.TryGetValue(delSession, out dvgr);
+                                if (dvgr != null)
+                                {
+                                    dataGridView1.Rows.Remove(dvgr);
+                                    dvgr = new DataGridViewRow();
+                                    dvgr.CreateCells(dataGridView1,getCellValues(delSession));
+                                    dvgr.Tag = delSession;
+                                    dataGridView1.Rows.Add(dvgr);
+                                    rowDict.Remove(delSession);
+                                    rowDict.Add(delSession,dvgr);
+                                    matchCount++;
+                                }
+                            }
+                        }
+                    }                
+                }
+                dataGridView1.ResumeLayout();
+
+                MessageBox.Show("Matched " + matchCount + " sessions"
+                            , "Information"
+                            , MessageBoxButtons.OK
+                            , MessageBoxIcon.Information);
+            }
+
+            return;
         }
     }
 }

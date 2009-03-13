@@ -100,7 +100,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
         /// <param name="e"></param>
         private void locateFileButton_Click(object sender, EventArgs e)
         {
-            setupOpenFileDialogue(FileDialogType.CSV);
+            setupOpenFileDialogue(FileDialogType.CSV, fileTextBox.Text);
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 fileTextBox.Text = openFileDialog.FileName;
@@ -115,6 +115,14 @@ namespace uk.org.riseley.puttySessionManager.control.options
         private void validateButton_Click(object sender, EventArgs e)
         {
             List<Session> sl = null;
+
+            Session sessionTemplate = (Session)sessionComboBox.SelectedItem;
+            if (sessionTemplate == null)
+            {
+                outputTextBox.Text = "You must have at least " +
+                                     "one template session to choose from";
+                return;
+            }
 
             try
             {
@@ -141,7 +149,6 @@ namespace uk.org.riseley.puttySessionManager.control.options
             {
                 count = sl.Count;
                 outputTextBox.Text = count + " sessions loaded...";
-                Session sessionTemplate = (Session)sessionComboBox.SelectedItem;
                 SyncSessionsLoadedEventArgs ea = new SyncSessionsLoadedEventArgs(sl, sessionTemplate,ignoreCheckBox.Checked);
                 OnSyncSessionsLoaded (this, ea);
                 setSessionsLoaded(true);
@@ -179,5 +186,6 @@ namespace uk.org.riseley.puttySessionManager.control.options
             sessionComboBox.Enabled = !b;
             ignoreCheckBox.Enabled = !b;            
         }
+        
     }
 }

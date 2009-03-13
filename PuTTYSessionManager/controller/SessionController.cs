@@ -25,6 +25,7 @@ using System.Diagnostics;
 using uk.org.riseley.puttySessionManager.model;
 using uk.org.riseley.puttySessionManager.model.eventargs;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
  ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.AUTOSTART_REG_KEY)]
@@ -87,22 +88,27 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <summary>
         /// The session provider
         /// </summary>
-        private SessionStorageInterface sessionProvider = null;
+        private ISessionStorage sessionProvider = null;
 
         /// <summary>
         /// CSV Export provider
         /// </summary>
-        private SessionExportInterface csvExportProvider = null;
+        private ISessionExport csvExportProvider = null;
 
         /// <summary>
         /// Registry Export provider
         /// </summary>
-        private SessionExportInterface regExportProvider = null;
+        private ISessionExport regExportProvider = null;
 
         /// <summary>
         /// Session Attribute Provider
         /// </summary>
         private SessionAttributesInterface sessionAttribProvider = null;
+
+        /// <summary>
+        /// Are updating a batch of sessions
+        /// </summary>
+        private bool batchUpdate = false;
 
         /// <summary>
         /// This event is fired when the list of sessions has been altered
@@ -291,6 +297,10 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="refreshSender">Should the sender refresh itself</param>
         public void invalidateSessionList(Object sender, bool refreshSender)
         {
+            // If we have disabled session updates - just return
+            if (batchUpdate == true)
+                return;
+
             // Make sure no two threads could call this at the same time
             lock (sessionList)
             {
@@ -860,10 +870,14 @@ namespace uk.org.riseley.puttySessionManager.controller
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        public int syncSessions(Object sender , SyncSessionsRequestedEventArgs e)
+        public int syncSessions(BackgroundWorker worker, SyncSessionsRequestedEventArgs e)
         {
             int modifiedCount = 0;
             List<Session> delList = new List<Session>();
+
+            // Disable session refreshes
+            BeginUpdate();
+
             foreach ( SessionAction sa in e.SessionActionList )
             {
 
@@ -874,7 +888,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                                                                 , sa.NewSession.Hostname
                                                                 , sa.NewSession.SessionDisplayText
                                                                 , false, false);
-                    createNewSession(nsr, sender);
+                    createNewSession(nsr, worker);
                     modifiedCount++;
                 }
                 else if ( sa.Action == SessionAction.ACTION.DELETE )
@@ -892,12 +906,36 @@ namespace uk.org.riseley.puttySessionManager.controller
                         modifiedCount++;
                     }
                 }
+                else if (sa.Action == SessionAction.ACTION.RENAME)
+                {
+                    Session existingSession = findSession(sa.ExistingSession);
+                    sessionProvider.renameSession(existingSession, sa.NewSession.SessionDisplayText);
+                    existingSession.FolderName = sa.NewSession.FolderName;
+                    sessionProvider.updateFolder(existingSession);
+                }
+                worker.ReportProgress(modifiedCount);
             }
 
             if (delList.Count > 0)
-                deleteSessions(delList, sender);
+                deleteSessions(delList, worker);
+
+            worker.ReportProgress(e.SessionActionList.Count);
+
+            // Re-enable session refreshes
+            EndUpdate();
 
             return modifiedCount;
         }
+
+        private void BeginUpdate()
+        {
+            batchUpdate = true;
+        }
+
+        private void EndUpdate()
+        {
+            batchUpdate = false;
+        }
+
     }
 }
