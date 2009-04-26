@@ -48,14 +48,18 @@ namespace uk.org.riseley.puttySessionManager.control
             dataGridView1.SuspendLayout();
             dataGridView1.Rows.Clear();
 
+            DataGridViewRow[] arr = new DataGridViewRow[getSessionController().getSessionList().Count];
+            int i=0;
             foreach (Session s in getSessionController().getSessionList())
-            {
+            {                
                 dgvr = new DataGridViewRow();
                 dgvr.CreateCells(dataGridView1, s.getCellValues());
                 dgvr.Tag = s;
-                dataGridView1.Rows.Add(dgvr);
+                arr[i] = dgvr;
+                i++;
             }
 
+            dataGridView1.Rows.AddRange(arr);
             dataGridView1.ResumeLayout();
         }
 

@@ -325,6 +325,7 @@ namespace uk.org.riseley.puttySessionManager.control
             TreeNode rootNode = treeView.Nodes[0];
             string rootPath = rootNode.FullPath;
             string pathSep = treeView.PathSeparator;
+            char[] pathSepArr = pathSep.ToCharArray();
 
             // Clear out the current tree
             rootNode.Nodes.Clear();
@@ -349,7 +350,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 {
                     TreeNode currnode = rootNode;
                     string path = null;
-                    foreach (string folder in s.FolderName.Split(pathSep.ToCharArray()))
+                    foreach (string folder in s.FolderName.Split(pathSepArr))
                     {
                         // Is this folder the root folder,
                         // if so, skip to the next one
@@ -364,9 +365,10 @@ namespace uk.org.riseley.puttySessionManager.control
                         }
 
                         // Does this folder exist as a child of the current node
-                        if (currnode.Nodes.ContainsKey(Session.getFolderKey(path)))
+                        string folderKey = Session.getFolderKey(path);
+                        if (currnode.Nodes.ContainsKey(folderKey))
                         {
-                            currnode = currnode.Nodes[Session.getFolderKey(path)];
+                            currnode = currnode.Nodes[folderKey];
                         }
                         else
                         {
@@ -666,14 +668,8 @@ namespace uk.org.riseley.puttySessionManager.control
 
         public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
         {
-            // Suspend the layout before modification
-            cms.SuspendLayout();
-            
             parent.DropDownItems.Clear();
             addSessionMenuItemsFolder(parent, treeView.Nodes[0].Nodes);
-
-            // Now resume the layout
-            cms.ResumeLayout();
         }
 
         private void addSessionMenuItemsFolder(ToolStripMenuItem parent, TreeNodeCollection nodes)
