@@ -887,7 +887,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                                                                 , sa.NewSession.FolderName
                                                                 , sa.NewSession.Hostname
                                                                 , sa.NewSession.SessionDisplayText
-                                                                , false, false);
+                                                                , true, false);
                     createNewSession(nsr, worker);
                     modifiedCount++;
                 }
@@ -912,6 +912,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                     sessionProvider.renameSession(existingSession, sa.NewSession.SessionDisplayText);
                     existingSession.FolderName = sa.NewSession.FolderName;
                     sessionProvider.updateFolder(existingSession);
+                    modifiedCount++;
                 }
                 worker.ReportProgress(modifiedCount);
             }
