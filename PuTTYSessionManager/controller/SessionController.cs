@@ -431,6 +431,24 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
+        /// Copy the hostnames to the clipboard
+        /// </summary>
+        /// <param name="sessionList">The list of sessions to export</param>
+        /// <returns>Count of sessions successfully exported</returns>
+        public int copyHostnamesToClipboard(List<Session> sessionList)
+        {
+            int sessionCount = 0;
+            StringBuilder sb = new StringBuilder();
+            foreach ( Session s in sessionList )
+            {               
+                sb.AppendLine(s.getCleanHostname());
+                sessionCount++;
+            }
+            Clipboard.SetText(sb.ToString());
+            return sessionCount;
+        }
+
+        /// <summary>
         /// Backup the sessions to a file
         /// Use the current sessionProvider to implement this
         /// This method may throw an exception if there are File I/O issues

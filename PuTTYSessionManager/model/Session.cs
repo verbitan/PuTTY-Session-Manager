@@ -304,5 +304,13 @@ namespace uk.org.riseley.puttySessionManager.model
                 ToolTipText = ToolTipText.Remove(ToolTipText.LastIndexOf(Environment.NewLine));
 
         }
+
+        public String getCleanHostname()
+        {
+            if ( hostname != null && hostname.Contains("@") && !(hostname.EndsWith("@")) )
+                return hostname.Substring(hostname.IndexOf('@')+1);
+            else
+                return hostname;
+        }
     }
 }

@@ -25,7 +25,8 @@ namespace uk.org.riseley.puttySessionManager.model.eventargs
     {
         public enum ExportType {
             REG_TYPE ,
-            CSV_TYPE 
+            CSV_TYPE ,
+            CLIP_TYPE
         }
         public ExportSessionEventArgs()
             : this(ExportType.REG_TYPE)

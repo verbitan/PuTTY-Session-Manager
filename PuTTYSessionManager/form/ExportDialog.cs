@@ -49,6 +49,10 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             if (registryRadioButton.Checked)
                 return ExportSessionEventArgs.ExportType.REG_TYPE;
+            else if ( csvRadioButton.Checked )
+                return ExportSessionEventArgs.ExportType.CSV_TYPE;
+            else if ( clipRadioButton.Checked )
+                return ExportSessionEventArgs.ExportType.CLIP_TYPE;
             else
                 return ExportSessionEventArgs.ExportType.CSV_TYPE;
         }

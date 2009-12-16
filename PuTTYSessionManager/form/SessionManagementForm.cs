@@ -67,6 +67,23 @@ namespace uk.org.riseley.puttySessionManager.form
                     , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (se.type == ExportSessionEventArgs.ExportType.CLIP_TYPE)
+            {
+                int copiedCount = sc.copyHostnamesToClipboard(selectedSessions);
+                if (copiedCount != selectedSessions.Count)
+                {
+                    MessageBox.Show("Only copied "+ copiedCount +" sessions" 
+                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Successfully copied " + copiedCount + " hostnames"
+                        , "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                return;
+            }
             else
             {
                 filetype = sc.getExportFileTypeExtension(se.type);
