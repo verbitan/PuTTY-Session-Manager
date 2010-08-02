@@ -1228,6 +1228,10 @@ namespace uk.org.riseley.puttySessionManager.control
                     deleteSessionToolStripMenuItem_Click(this, new EventArgs());
                 }
             }
+            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            {
+                OnExportSessions(new ExportSessionEventArgs(ExportSessionEventArgs.ExportType.CLIP_TYPE));
+            }
         }
 
         /// <summary>

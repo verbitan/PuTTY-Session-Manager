@@ -250,7 +250,8 @@ namespace uk.org.riseley.puttySessionManager.controller
         private enum Modifier
         {
             WIN = User32.Modifiers.MOD_WIN,
-            CTRL_ALT = User32.Modifiers.MOD_CONTROL | User32.Modifiers.MOD_ALT
+            CTRL_ALT = User32.Modifiers.MOD_CONTROL | User32.Modifiers.MOD_ALT,
+            ALT = User32.Modifiers.MOD_ALT
         };
 
         private static HotkeyController instance = null;
@@ -565,11 +566,15 @@ namespace uk.org.riseley.puttySessionManager.controller
                                    new HotkeyModifier((int)Modifier.CTRL_ALT, 
                                                       "Ctrl+Alt +", 
                                                       new char[]{}));
-            modifierDictionary.Add(Modifier.WIN,      
-                                   new HotkeyModifier( (int)Modifier.WIN,      
-                                                        "Win +"    , 
-                                                        new char[] {'D','E','F','L','M','R','U'} ));
+            modifierDictionary.Add(Modifier.ALT,
+                                   new HotkeyModifier((int)Modifier.ALT,
+                                                      "Alt +",
+                                                      new char[] { }));
 
+            modifierDictionary.Add(Modifier.WIN,      
+                                   new HotkeyModifier((int)Modifier.WIN,      
+                                                       "Win +"    , 
+                                                       new char[] {'D','E','F','L','M','R','U'} ));
         }
 
         public void registerAllEnabledHotkeys( Form form )

@@ -1,3 +1,30 @@
+PuTTY Session Manager v0.41 ( 02-08-2010 )
+=============================================
+Ninth release of PuTTY Session Manager
+
+Minor release with bugfixes and small enhancements
+
+Feature requests / enhancements:
+
+Not Tracked:  Added ALT as a hotkey modifier.
+
+Not Tracked:  Attempt to make Options dialog readable when using non standard DPI
+
+Not Tracked:  Added suppport for copy a list of hostnames to the clipboard.
+              This can either be done using the Export Session dialog
+              or by pressing CTRL-C in the tree view
+              
+Bugs:
+
+Not Tracked:  Fix to make sure processing renamed sessions in the sync session process
+			  cause the progress bar to increment.
+			  Make sure the default user name is copied when create new sessions as
+			  part of the sync process
+			  
+Not Tracked:  Added Try/Catch around browser launch when update link is clicked
+
+Not Tracked:  Make sure disabling transparency really does turn it off
+			  
 PuTTY Session Manager v0.40 ( 26-04-2009 )
 =============================================
 Eighth release of PuTTY Session Manager

@@ -246,7 +246,14 @@ namespace uk.org.riseley.puttySessionManager.form
         /// <param name="e"></param>
         private void sfLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(sfLinkLabel.Text);
+            try
+            {
+                Process.Start(sfLinkLabel.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void resetDialogFont()

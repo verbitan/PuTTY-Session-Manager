@@ -70,6 +70,16 @@ namespace uk.org.riseley.puttySessionManager.form
             {
                 control.resetState();
             }
+            Graphics graphics;
+            graphics = this.CreateGraphics();
+            if (graphics.DpiX != 96)
+            {
+                int newWidth =  (int)(this.Width * (graphics.DpiX / 90));
+                int newHeight = (int)(this.Height * (graphics.DpiX / 90));
+                this.MinimumSize = new System.Drawing.Size(newWidth, newHeight);
+                this.MaximumSize = this.MaximumSize;
+            }
+            graphics.Dispose(); // don’t forget to release the unnecessary resources
             resetDialogFont();
         }
 

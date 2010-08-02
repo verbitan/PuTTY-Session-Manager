@@ -96,9 +96,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.okButton.AutoSize = true;
             this.okButton.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::uk.org.riseley.puttySessionManager.Properties.Settings.Default, "DialogFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(130, 220);
+            this.okButton.Location = new System.Drawing.Point(130, 218);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(66, 23);
+            this.okButton.Size = new System.Drawing.Size(66, 27);
             this.okButton.TabIndex = 1;
             this.okButton.Text = "&OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -135,6 +135,7 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.generalOptionsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.generalOptionsControl1.Location = new System.Drawing.Point(3, 3);
+            this.generalOptionsControl1.Margin = new System.Windows.Forms.Padding(5);
             this.generalOptionsControl1.Name = "generalOptionsControl1";
             this.generalOptionsControl1.Size = new System.Drawing.Size(379, 177);
             this.generalOptionsControl1.TabIndex = 0;
@@ -145,7 +146,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.treeOptionsTab.Controls.Add(this.treeOptionsControl);
             this.treeOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.treeOptionsTab.Name = "treeOptionsTab";
-            this.treeOptionsTab.Size = new System.Drawing.Size(385, 183);
+            this.treeOptionsTab.Size = new System.Drawing.Size(385, 178);
             this.treeOptionsTab.TabIndex = 5;
             this.treeOptionsTab.Text = "Tree";
             this.treeOptionsTab.UseVisualStyleBackColor = true;
@@ -154,8 +155,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.treeOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOptionsControl.Location = new System.Drawing.Point(0, 0);
+            this.treeOptionsControl.Margin = new System.Windows.Forms.Padding(5);
             this.treeOptionsControl.Name = "treeOptionsControl";
-            this.treeOptionsControl.Size = new System.Drawing.Size(385, 183);
+            this.treeOptionsControl.Size = new System.Drawing.Size(385, 178);
             this.treeOptionsControl.TabIndex = 0;
             // 
             // pageantOptionsTab
@@ -163,7 +165,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.pageantOptionsTab.Controls.Add(this.pageantOptionsControl);
             this.pageantOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.pageantOptionsTab.Name = "pageantOptionsTab";
-            this.pageantOptionsTab.Size = new System.Drawing.Size(385, 183);
+            this.pageantOptionsTab.Size = new System.Drawing.Size(385, 178);
             this.pageantOptionsTab.TabIndex = 2;
             this.pageantOptionsTab.Text = "Pageant";
             this.pageantOptionsTab.UseVisualStyleBackColor = true;
@@ -172,8 +174,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.pageantOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageantOptionsControl.Location = new System.Drawing.Point(0, 0);
+            this.pageantOptionsControl.Margin = new System.Windows.Forms.Padding(5);
             this.pageantOptionsControl.Name = "pageantOptionsControl";
-            this.pageantOptionsControl.Size = new System.Drawing.Size(385, 183);
+            this.pageantOptionsControl.Size = new System.Drawing.Size(385, 178);
             this.pageantOptionsControl.TabIndex = 0;
             // 
             // filezillaOptionsTab
@@ -181,7 +184,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.filezillaOptionsTab.Controls.Add(this.fileZillaOptionsControl);
             this.filezillaOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.filezillaOptionsTab.Name = "filezillaOptionsTab";
-            this.filezillaOptionsTab.Size = new System.Drawing.Size(385, 183);
+            this.filezillaOptionsTab.Size = new System.Drawing.Size(385, 178);
             this.filezillaOptionsTab.TabIndex = 3;
             this.filezillaOptionsTab.Text = "FileZilla";
             this.filezillaOptionsTab.UseVisualStyleBackColor = true;
@@ -190,8 +193,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.fileZillaOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileZillaOptionsControl.Location = new System.Drawing.Point(0, 0);
+            this.fileZillaOptionsControl.Margin = new System.Windows.Forms.Padding(5);
             this.fileZillaOptionsControl.Name = "fileZillaOptionsControl";
-            this.fileZillaOptionsControl.Size = new System.Drawing.Size(385, 183);
+            this.fileZillaOptionsControl.Size = new System.Drawing.Size(385, 178);
             this.fileZillaOptionsControl.TabIndex = 0;
             // 
             // winSCPOptionsTab
@@ -199,7 +203,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.winSCPOptionsTab.Controls.Add(this.winSCPOptionsControl);
             this.winSCPOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.winSCPOptionsTab.Name = "winSCPOptionsTab";
-            this.winSCPOptionsTab.Size = new System.Drawing.Size(385, 183);
+            this.winSCPOptionsTab.Size = new System.Drawing.Size(385, 178);
             this.winSCPOptionsTab.TabIndex = 4;
             this.winSCPOptionsTab.Text = "WinSCP";
             this.winSCPOptionsTab.UseVisualStyleBackColor = true;
@@ -208,8 +212,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.winSCPOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.winSCPOptionsControl.Location = new System.Drawing.Point(0, 0);
+            this.winSCPOptionsControl.Margin = new System.Windows.Forms.Padding(5);
             this.winSCPOptionsControl.Name = "winSCPOptionsControl";
-            this.winSCPOptionsControl.Size = new System.Drawing.Size(385, 183);
+            this.winSCPOptionsControl.Size = new System.Drawing.Size(385, 178);
             this.winSCPOptionsControl.TabIndex = 0;
             // 
             // updateOptionsTab
@@ -218,7 +223,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.updateOptionsTab.Location = new System.Drawing.Point(4, 22);
             this.updateOptionsTab.Name = "updateOptionsTab";
             this.updateOptionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.updateOptionsTab.Size = new System.Drawing.Size(385, 183);
+            this.updateOptionsTab.Size = new System.Drawing.Size(385, 178);
             this.updateOptionsTab.TabIndex = 1;
             this.updateOptionsTab.Text = "Update";
             this.updateOptionsTab.UseVisualStyleBackColor = true;
@@ -227,8 +232,9 @@ namespace uk.org.riseley.puttySessionManager.form
             // 
             this.updateOptionsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.updateOptionsControl.Location = new System.Drawing.Point(3, 3);
+            this.updateOptionsControl.Margin = new System.Windows.Forms.Padding(5);
             this.updateOptionsControl.Name = "updateOptionsControl";
-            this.updateOptionsControl.Size = new System.Drawing.Size(379, 177);
+            this.updateOptionsControl.Size = new System.Drawing.Size(379, 172);
             this.updateOptionsControl.TabIndex = 0;
             // 
             // cancelButton
@@ -236,9 +242,9 @@ namespace uk.org.riseley.puttySessionManager.form
             this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cancelButton.AutoSize = true;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(202, 220);
+            this.cancelButton.Location = new System.Drawing.Point(202, 218);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(66, 23);
+            this.cancelButton.Size = new System.Drawing.Size(66, 27);
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;

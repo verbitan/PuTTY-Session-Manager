@@ -1,3 +1,3 @@
-LatestVersion|0.40.161.0
-ReleaseDate|26/04/2009
-UpdateUrl|http://sourceforge.net/project/showfiles.php?group_id=169031&package_id=192873&release_id=678547
+LatestVersion|0.41.166.0
+ReleaseDate|02/08/2010
+UpdateUrl|http://sourceforge.net/projects/puttysm/files/Development%20builds/0.41

@@ -46,7 +46,7 @@ namespace uk.org.riseley.puttySessionManager.Properties
             {
                 if ((bool)e.NewValue == false )
                 {
-                    TransparencyValueDouble = 0.99;
+                    TransparencyValueDouble = 1.00;
                 }
                 else
                 {

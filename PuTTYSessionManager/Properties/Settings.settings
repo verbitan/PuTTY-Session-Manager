@@ -15,10 +15,10 @@
       <Value Profile="(Default)">264, 545</Value>
     </Setting>
     <Setting Name="TransparencyValueDouble" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.99</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="TransparencyValueInt" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">99</Value>
+      <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">0, 0</Value>
