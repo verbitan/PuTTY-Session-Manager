@@ -67,6 +67,14 @@ namespace uk.org.riseley.puttySessionManager.model
             get { return folderDisplayText; }
             set { folderDisplayText = value; }
         }
+
+        private string privateKeyLocation = "";
+        public string PrivateKeyLocation
+        {
+            get { return privateKeyLocation; }
+            set { privateKeyLocation = value; }
+        }
+
         private bool isFolder = false;
         public bool IsFolder
         {

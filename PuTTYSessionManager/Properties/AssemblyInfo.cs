@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2006,2007 David Riseley 
+ * Copyright (C) 2006-2010 David Riseley 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,5 +54,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.40.0.0")]
-[assembly: AssemblyFileVersion("0.40.0.0")]
+[assembly: AssemblyVersion("0.42.0.0")]
+[assembly: AssemblyFileVersion("0.42.0.0")]

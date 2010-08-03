@@ -46,6 +46,12 @@ namespace uk.org.riseley.puttySessionManager.controller
         private const string PUTTY_HOSTNAME_ATTRIB = "HostName";
 
         /// <summary>
+        /// The private key location for the session
+        /// Strangely named PublicKeyFile ... 
+        /// </summary>
+        private const string PUTTY_PRIVATE_KEY_ATTRIB = "PublicKeyFile";
+
+        /// <summary>
         /// The default username registry value
         /// </summary>
         private const string PUTTY_USERNAME_ATTRIB = "UserName";
@@ -124,6 +130,7 @@ namespace uk.org.riseley.puttySessionManager.controller
                     s.Protocol = (string)sessKey.GetValue("Protocol");
                     s.Portforwards = (string)sessKey.GetValue("PortForwardings");
                     s.Remotecommand = (string)sessKey.GetValue("RemoteCommand");
+                    s.PrivateKeyLocation = (string)sessKey.GetValue(PUTTY_PRIVATE_KEY_ATTRIB);
                     
                     // Setup the portnumber 
                     object portnumberObject = sessKey.GetValue("PortNumber");

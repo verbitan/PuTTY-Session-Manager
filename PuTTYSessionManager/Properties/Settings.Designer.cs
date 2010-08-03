@@ -947,5 +947,17 @@ namespace uk.org.riseley.puttySessionManager.Properties {
                 this["SessionSyncFileLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int FileZillaVersion {
+            get {
+                return ((int)(this["FileZillaVersion"]));
+            }
+            set {
+                this["FileZillaVersion"] = value;
+            }
+        }
     }
 }

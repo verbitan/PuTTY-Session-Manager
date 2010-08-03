@@ -708,8 +708,6 @@ namespace uk.org.riseley.puttySessionManager.controller
                 }
                 else
                 {
-
-
                     // Setup the protocol and port
                     Protocol fp = (Protocol)Properties.Settings.Default.FileZillaProtocol;
                     switch (fp)
@@ -741,18 +739,28 @@ namespace uk.org.riseley.puttySessionManager.controller
                             break;
                     }
 
-                    // Setup Pageaent auth if requested and the protocol is sftp
                     String password = "";
-                    if (protocol.Equals("sftp://") &&
-                         Properties.Settings.Default.FileZillaAttemptKeyAuth == true)
-                        password = ":";
+                    if (Properties.Settings.Default.FileZillaVersion == 2)
+                    {
+                        // Setup Pageaent auth if requested and the protocol is sftp
+                        if (protocol.Equals("sftp://") &&
+                            Properties.Settings.Default.FileZillaAttemptKeyAuth == true)
+                        {
+                            password = ":";
+                        }
+                    }
+                    else if (Properties.Settings.Default.FileZillaVersion == 3)
+                    {
+                        execArgs = "-l interactive ";
+                    }
+
 
                     // Finalise the auth string
                     String auth = "";
                     if (username != null && !(username.Equals("")))
                         auth = username + password + "@";
 
-                    execArgs = protocol + auth + hostname + ":" + portnumber;
+                    execArgs = execArgs + protocol + auth + hostname + ":" + portnumber;
                 }
                 execLocation = Properties.Settings.Default.FileZillaLocation;
 
@@ -760,13 +768,19 @@ namespace uk.org.riseley.puttySessionManager.controller
             else if (program == LaunchSessionEventArgs.PROGRAM.WINSCP)
             {
                 // Setup the /ini option
-
                 if (Properties.Settings.Default.WinSCPIniEnabled == true &&
                     Properties.Settings.Default.WinSCPIniLocation != null &&
                     !Properties.Settings.Default.WinSCPIniLocation.Equals("") )
                 {
                     execArgs = "/ini=\"" + Properties.Settings.Default.WinSCPIniLocation + "\" ";
                 }
+
+                // Setup the /privatekey option 
+                if ( !(s.PrivateKeyLocation.Equals("")) )
+                {
+                    execArgs = "/privatekey=\"" + s.PrivateKeyLocation + "\" ";
+                }
+
                 // Only bother if we have a hostname set
                 if (hostname != null && hostname.Length != 0)
                 {

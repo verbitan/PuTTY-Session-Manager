@@ -39,6 +39,17 @@ namespace uk.org.riseley.puttySessionManager.control.options
 
         public void resetState()
         {
+            // Reset the FileZilla Version buttons to the saved pref
+            int fzVer = Properties.Settings.Default.FileZillaVersion;
+            if (fzVer == 2)
+            {
+                fzVer2RadioButton.Checked = true;
+            }
+            else if (fzVer == 3)
+            {
+                fzVer3RadioButton.Checked = true;
+            }
+
             // Reset the filezilla protocol button to the save pref
             SessionController.Protocol fp = (SessionController.Protocol)Properties.Settings.Default.FileZillaProtocol;
             if (fp == SessionController.Protocol.FTP)
@@ -96,6 +107,24 @@ namespace uk.org.riseley.puttySessionManager.control.options
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 filezillaTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Listener for the Checked Changed event from the
+        /// FileZilla Version radio buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void fzVerRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fzVer2RadioButton.Checked == true)
+            {
+                Properties.Settings.Default.FileZillaVersion = 2;                
+            }
+            else if (fzVer3RadioButton.Checked == true)
+            {
+                Properties.Settings.Default.FileZillaVersion = 3;
             }
         }
     }
