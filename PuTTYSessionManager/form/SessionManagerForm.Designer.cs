@@ -62,6 +62,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSessionContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sessionTreeControl1 = new uk.org.riseley.puttySessionManager.control.SessionTreeControl();
             this.sessionListControl1 = new uk.org.riseley.puttySessionManager.control.SessionListControl();
             this.sysTrayContextMenu.SuspendLayout();
@@ -72,7 +73,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.systrayIcon.ContextMenuStrip = this.sysTrayContextMenu;
             this.systrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systrayIcon.Icon")));
             this.systrayIcon.Text = "PuTTY Session Manager";
-            this.systrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            this.systrayIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.systrayIcon_MouseClick);
+            this.systrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.systrayIcon_MouseDoubleClick);
             // 
             // sysTrayContextMenu
             // 
@@ -179,6 +181,13 @@ namespace uk.org.riseley.puttySessionManager.form
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // loadSessionContextMenu
+            // 
+            this.loadSessionContextMenu.Name = "loadSessionContextMenu";
+            this.loadSessionContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.loadSessionContextMenu.ShowImageMargin = false;
+            this.loadSessionContextMenu.Size = new System.Drawing.Size(128, 26);
+            // 
             // sessionTreeControl1
             // 
             this.sessionTreeControl1.ContextMenuVisible = true;
@@ -249,6 +258,7 @@ namespace uk.org.riseley.puttySessionManager.form
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newSessionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem synchronizeSessionsToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip loadSessionContextMenu;
     }
 }
 

@@ -11,6 +11,8 @@ Not Tracked:  Added support for FileZilla 3.x.  Tested with v3.3.3
 2991054:  Add support to WinSCP launch to use private key specified in the
           saved PuTTY session
 
+2799317:  Allow sessions to be launched by right clicking on the tray icon          
+
 PuTTY Session Manager v0.41 ( 02-08-2010 )
 =============================================
 Ninth release of PuTTY Session Manager

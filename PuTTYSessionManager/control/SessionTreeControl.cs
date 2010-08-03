@@ -666,13 +666,13 @@ namespace uk.org.riseley.puttySessionManager.control
 
         }
 
-        public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
+        public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripItemCollection parent)
         {
-            parent.DropDownItems.Clear();
-            addSessionMenuItemsFolder(parent, treeView.Nodes[0].Nodes);
+            parent.Clear();
+            addSessionMenuItemsFolder(cms,parent,treeView.Nodes[0].Nodes);
         }
 
-        private void addSessionMenuItemsFolder(ToolStripMenuItem parent, TreeNodeCollection nodes)
+        private void addSessionMenuItemsFolder(ContextMenuStrip cms, ToolStripItemCollection parent, TreeNodeCollection nodes)
         {
             IEnumerator ie = nodes.GetEnumerator();
 
@@ -685,15 +685,22 @@ namespace uk.org.riseley.puttySessionManager.control
                     ToolStripMenuItem folder = new ToolStripMenuItem(s.SessionDisplayText);
                     folder.Tag = s;
                     folder.DisplayStyle = ToolStripItemDisplayStyle.Text;
-                    parent.DropDownItems.Add(folder);
-                    addSessionMenuItemsFolder(folder, node.Nodes);
+                    // Copy the style of the parent context menu
+                    if (folder.DropDown is ToolStripDropDownMenu)
+                    {
+                        ToolStripDropDownMenu dropDown = folder.DropDown as ToolStripDropDownMenu;
+                        dropDown.ShowCheckMargin = cms.ShowCheckMargin;
+                        dropDown.ShowImageMargin = cms.ShowImageMargin;
+                    }
+                    parent.Add(folder);                    
+                    addSessionMenuItemsFolder(cms, folder.DropDownItems, node.Nodes);
                 }
                 else
                 {
                     ToolStripMenuItem session = new ToolStripMenuItem(s.SessionDisplayText, null, launchSessionSystrayMenuItem_Click);
                     session.Tag = s;
                     session.DisplayStyle = ToolStripItemDisplayStyle.Text;
-                    parent.DropDownItems.Add(session);
+                    parent.Add(session);
                 }
             }
         }

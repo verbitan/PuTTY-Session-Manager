@@ -49,9 +49,17 @@ namespace uk.org.riseley.puttySessionManager.form
             [DllImport("user32.dll")]
             private static extern bool SetForegroundWindow(IntPtr hWnd);
 
+            [DllImport("User32.dll", ExactSpelling = true, CharSet = CharSet.Auto)]
+            public static extern bool SetForegroundWindow(HandleRef hWnd);
+
             public static void SetForegroundWindow()
             {
                 SetForegroundWindow(System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle);
+            }
+
+            public static void SetForegroundWindow(Form form)
+            {
+                SetForegroundWindow(new HandleRef(form, form.Handle));
             }
 
         }
@@ -202,14 +210,40 @@ namespace uk.org.riseley.puttySessionManager.form
         }
 
         /// <summary>
-        /// Event handler for double click event on th
+        /// Event handler for double click event on the
         /// system tray icon
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void systrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            showApplication(!this.Visible);            
+            if (loadSessionContextMenu.Visible == true)
+            {
+                loadSessionContextMenu.Visible = false;
+            }
+            showApplication(!this.Visible);
+        }
+
+        /// <summary>
+        /// Event handler for mouse click event on the
+        /// system tray icon
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void systrayIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {   
+                // This is a work around to prevent the taskbar icon
+                // from displaying
+                User32.SetForegroundWindow(this);
+                loadSessionContextMenu.Show(Cursor.Position,ToolStripDropDownDirection.AboveLeft);
+                loadSessionContextMenu.Visible = true;
+            }
+            else if (e.Button == MouseButtons.Middle)
+            {
+                showApplication(!this.Visible);
+            }
         }
 
         /// <summary>
@@ -307,7 +341,8 @@ namespace uk.org.riseley.puttySessionManager.form
                        
             this.ResumeLayout(true);
 
-            currentSessionControl.getSessionMenuItems(sysTrayContextMenu, loadSessionToolStripMenuItem);
+            currentSessionControl.getSessionMenuItems(sysTrayContextMenu,     loadSessionToolStripMenuItem.DropDownItems);
+            currentSessionControl.getSessionMenuItems(loadSessionContextMenu, loadSessionContextMenu.Items);          
 
             Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
 
@@ -364,7 +399,8 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public void SessionsRefreshed(object sender, RefreshSessionsEventArgs re)
         {
-            currentSessionControl.getSessionMenuItems(sysTrayContextMenu, loadSessionToolStripMenuItem);
+            currentSessionControl.getSessionMenuItems(sysTrayContextMenu, loadSessionToolStripMenuItem.DropDownItems);
+            currentSessionControl.getSessionMenuItems(loadSessionContextMenu, loadSessionContextMenu.Items);
         }
 
         private void refreshSessionsToolStripMenuItem_Click(object sender, EventArgs e)

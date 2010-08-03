@@ -33,8 +33,6 @@ namespace uk.org.riseley.puttySessionManager.control
     public partial class SessionListControl : SessionControl
     {
 
-        ToolStripMenuItem[] tsmiArray;
-
         /// <summary>
         /// Default constructor for the list control
         /// </summary>
@@ -68,16 +66,6 @@ namespace uk.org.riseley.puttySessionManager.control
             // Begin repainting the TreeView.
             listBox1.EndUpdate();
 
-            // Setup the System tray array of menu items
-            tsmiArray = new ToolStripMenuItem[getSessionController().getSessionList().Count];
-            int i=0;
-            foreach (Session s in getSessionController().getSessionList())
-            {
-                tsmiArray[i] = new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick);
-                // Make sure the menu item is tagged with the session
-                tsmiArray[i].Tag = s;
-                i++;
-            }
         }
 
         /// <summary>
@@ -106,14 +94,26 @@ namespace uk.org.riseley.puttySessionManager.control
         /// </summary>
         /// <param name="cms">The menu</param>
         /// <param name="parent">The root of the systray menu</param>
-        public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
+        public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripItemCollection parent)
         {
             // Suspend the layout before modification
             cms.SuspendLayout();
 
-            parent.DropDownItems.Clear();
+            parent.Clear();
+
+            // Setup the System tray array of menu items
+            ToolStripMenuItem[] tsmiArray = new ToolStripMenuItem[getSessionController().getSessionList().Count];
+            int i = 0;
+            foreach (Session s in getSessionController().getSessionList())
+            {
+                tsmiArray[i] = new ToolStripMenuItem(s.SessionDisplayText, null, listBox1_DoubleClick);
+                // Make sure the menu item is tagged with the session
+                tsmiArray[i].Tag = s;
+                i++;
+            }
+
             if ( tsmiArray != null )
-                parent.DropDownItems.AddRange(tsmiArray);            
+                parent.AddRange(tsmiArray);            
 
             // Now resume the layout
             cms.ResumeLayout();

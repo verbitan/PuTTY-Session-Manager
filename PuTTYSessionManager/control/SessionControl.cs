@@ -135,7 +135,7 @@ namespace uk.org.riseley.puttySessionManager.control
             }
         }
 
-        public virtual void getSessionMenuItems(ContextMenuStrip cms, ToolStripMenuItem parent)
+        public virtual void getSessionMenuItems(ContextMenuStrip cms, ToolStripItemCollection parent)
         {
         }
 
