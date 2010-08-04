@@ -89,7 +89,9 @@ namespace uk.org.riseley.puttySessionManager.controller
                 }
                 catch
                 {
-                    throw new Exception("Unable to parse sessions file - is it corrupted?");
+                    throw new Exception("Unable to parse sessions file." + Environment.NewLine +
+                                        "The file may be corrupted or from" + Environment.NewLine +
+                                        "a previous version of PuTTY Session Manager.");
                 }
 
             }
@@ -104,7 +106,9 @@ namespace uk.org.riseley.puttySessionManager.controller
                     }
                     catch
                     {
-                        throw new Exception("Unable to parse sessions file - is it corrupted?");
+                        throw new Exception("Unable to parse sessions file." + Environment.NewLine +
+                                            "The file may be corrupted or from" + Environment.NewLine +
+                                            "a previous version of PuTTY Session Manager.");
                     }
                     finally
                     {
@@ -138,6 +142,8 @@ namespace uk.org.riseley.puttySessionManager.controller
             Session s = new Session(Session.convertDisplayToSessionKey(rec.SessionName), rec.FolderName, false);
             s.Hostname = rec.Hostname;
             s.Username = rec.Username;
+            s.Portnumber = rec.Portnumber;
+            s.Protocol = rec.Protocol;
             return s;
 
         }

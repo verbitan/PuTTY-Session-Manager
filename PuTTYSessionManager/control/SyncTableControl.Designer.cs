@@ -29,20 +29,24 @@ namespace uk.org.riseley.puttySessionManager.control
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.ignoreButton = new System.Windows.Forms.Button();
+            this.removeUnchangedButton = new System.Windows.Forms.Button();
+            this.syncButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.renameButton = new System.Windows.Forms.Button();
             this.sessionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localFolderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remoteFolderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localHostnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remoteHostnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.localProtocolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remoteProtocolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.localPortColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remotePortColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actionColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.syncButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.ignoreButton = new System.Windows.Forms.Button();
-            this.removeUnchangedButton = new System.Windows.Forms.Button();
-            this.renameButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +64,10 @@ namespace uk.org.riseley.puttySessionManager.control
             this.remoteFolderColumn,
             this.localHostnameColumn,
             this.remoteHostnameColumn,
+            this.localProtocolColumn,
+            this.remoteProtocolColumn,
+            this.localPortColumn,
+            this.remotePortColumn,
             this.statusColumn,
             this.actionColumn});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 6);
@@ -68,50 +76,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(687, 267);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // sessionNameColumn
-            // 
-            this.sessionNameColumn.HeaderText = "Session Name";
-            this.sessionNameColumn.Name = "sessionNameColumn";
-            this.sessionNameColumn.ReadOnly = true;
-            // 
-            // localFolderColumn
-            // 
-            this.localFolderColumn.HeaderText = "Local Folder";
-            this.localFolderColumn.Name = "localFolderColumn";
-            this.localFolderColumn.ReadOnly = true;
-            // 
-            // remoteFolderColumn
-            // 
-            this.remoteFolderColumn.HeaderText = "Remote Folder";
-            this.remoteFolderColumn.Name = "remoteFolderColumn";
-            this.remoteFolderColumn.ReadOnly = true;
-            // 
-            // localHostnameColumn
-            // 
-            this.localHostnameColumn.HeaderText = "Local Hostname";
-            this.localHostnameColumn.Name = "localHostnameColumn";
-            this.localHostnameColumn.ReadOnly = true;
-            // 
-            // remoteHostnameColumn
-            // 
-            this.remoteHostnameColumn.HeaderText = "Remote Hostname";
-            this.remoteHostnameColumn.Name = "remoteHostnameColumn";
-            this.remoteHostnameColumn.ReadOnly = true;
-            // 
-            // statusColumn
-            // 
-            this.statusColumn.HeaderText = "Status";
-            this.statusColumn.Name = "statusColumn";
-            this.statusColumn.ReadOnly = true;
-            // 
-            // actionColumn
-            // 
-            this.actionColumn.HeaderText = "Action";
-            this.actionColumn.Items.AddRange(new object[] {
-            "Ignore",
-            "Update"});
-            this.actionColumn.Name = "actionColumn";
             // 
             // tableLayoutPanel1
             // 
@@ -137,28 +101,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.05732F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 314);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // resetButton
-            // 
-            this.resetButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.resetButton.Location = new System.Drawing.Point(493, 282);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(51, 23);
-            this.resetButton.TabIndex = 5;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // syncButton
-            // 
-            this.syncButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.syncButton.Location = new System.Drawing.Point(556, 282);
-            this.syncButton.Name = "syncButton";
-            this.syncButton.Size = new System.Drawing.Size(127, 23);
-            this.syncButton.TabIndex = 6;
-            this.syncButton.Text = "Synchronize Sessions";
-            this.syncButton.UseVisualStyleBackColor = true;
-            this.syncButton.Click += new System.EventHandler(this.syncButton_Click);
             // 
             // updateButton
             // 
@@ -193,6 +135,28 @@ namespace uk.org.riseley.puttySessionManager.control
             this.removeUnchangedButton.UseVisualStyleBackColor = true;
             this.removeUnchangedButton.Click += new System.EventHandler(this.removeUnchangedButton_Click);
             // 
+            // syncButton
+            // 
+            this.syncButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.syncButton.Location = new System.Drawing.Point(556, 282);
+            this.syncButton.Name = "syncButton";
+            this.syncButton.Size = new System.Drawing.Size(127, 23);
+            this.syncButton.TabIndex = 6;
+            this.syncButton.Text = "Synchronize Sessions";
+            this.syncButton.UseVisualStyleBackColor = true;
+            this.syncButton.Click += new System.EventHandler(this.syncButton_Click);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.resetButton.Location = new System.Drawing.Point(493, 282);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(51, 23);
+            this.resetButton.TabIndex = 5;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // renameButton
             // 
             this.renameButton.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -203,6 +167,74 @@ namespace uk.org.riseley.puttySessionManager.control
             this.renameButton.Text = "Identify Renamed Sessions";
             this.renameButton.UseVisualStyleBackColor = true;
             this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
+            // 
+            // sessionNameColumn
+            // 
+            this.sessionNameColumn.HeaderText = "Session Name";
+            this.sessionNameColumn.Name = "sessionNameColumn";
+            this.sessionNameColumn.ReadOnly = true;
+            // 
+            // localFolderColumn
+            // 
+            this.localFolderColumn.HeaderText = "Local Folder";
+            this.localFolderColumn.Name = "localFolderColumn";
+            this.localFolderColumn.ReadOnly = true;
+            // 
+            // remoteFolderColumn
+            // 
+            this.remoteFolderColumn.HeaderText = "Remote Folder";
+            this.remoteFolderColumn.Name = "remoteFolderColumn";
+            this.remoteFolderColumn.ReadOnly = true;
+            // 
+            // localHostnameColumn
+            // 
+            this.localHostnameColumn.HeaderText = "Local Hostname";
+            this.localHostnameColumn.Name = "localHostnameColumn";
+            this.localHostnameColumn.ReadOnly = true;
+            // 
+            // remoteHostnameColumn
+            // 
+            this.remoteHostnameColumn.HeaderText = "Remote Hostname";
+            this.remoteHostnameColumn.Name = "remoteHostnameColumn";
+            this.remoteHostnameColumn.ReadOnly = true;
+            // 
+            // localProtocolColumn
+            // 
+            this.localProtocolColumn.HeaderText = "Local Protocol";
+            this.localProtocolColumn.Name = "localProtocolColumn";
+            this.localProtocolColumn.ReadOnly = true;
+            // 
+            // remoteProtocolColumn
+            // 
+            this.remoteProtocolColumn.HeaderText = "Remote Protocol";
+            this.remoteProtocolColumn.Name = "remoteProtocolColumn";
+            this.remoteProtocolColumn.ReadOnly = true;
+            // 
+            // localPortColumn
+            // 
+            this.localPortColumn.HeaderText = "Local Port";
+            this.localPortColumn.Name = "localPortColumn";
+            this.localPortColumn.ReadOnly = true;
+            // 
+            // remotePortColumn
+            // 
+            this.remotePortColumn.HeaderText = "Remote Port";
+            this.remotePortColumn.Name = "remotePortColumn";
+            this.remotePortColumn.ReadOnly = true;
+            // 
+            // statusColumn
+            // 
+            this.statusColumn.HeaderText = "Status";
+            this.statusColumn.Name = "statusColumn";
+            this.statusColumn.ReadOnly = true;
+            // 
+            // actionColumn
+            // 
+            this.actionColumn.HeaderText = "Action";
+            this.actionColumn.Items.AddRange(new object[] {
+            "Ignore",
+            "Update"});
+            this.actionColumn.Name = "actionColumn";
             // 
             // TableControl
             // 
@@ -225,14 +257,18 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.Button ignoreButton;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button syncButton;
+        private System.Windows.Forms.Button removeUnchangedButton;
+        private System.Windows.Forms.Button renameButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn sessionNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn localFolderColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remoteFolderColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn localHostnameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remoteHostnameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn localProtocolColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remoteProtocolColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn localPortColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remotePortColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn actionColumn;
-        private System.Windows.Forms.Button removeUnchangedButton;
-        private System.Windows.Forms.Button renameButton;
     }
 }

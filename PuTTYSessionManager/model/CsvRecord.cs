@@ -38,6 +38,8 @@ namespace uk.org.riseley.puttySessionManager.model
             FolderName = s.FolderName;
             Username = s.Username;
             Hostname = s.Hostname;
+            Protocol = s.Protocol;
+            Portnumber = s.Portnumber;
         }
 
         [FieldQuoted('"', QuoteMode.OptionalForRead, MultilineMode.AllowForRead)]
@@ -77,6 +79,25 @@ namespace uk.org.riseley.puttySessionManager.model
         {
             get { return mHostname; }
             set { mHostname = value; }
+        }
+
+        [FieldQuoted('"', QuoteMode.OptionalForRead, MultilineMode.AllowForRead)]
+        private String mProtocol;
+
+        public String Protocol
+        {
+            get { return mProtocol; }
+            set { mProtocol = value; }
+        }
+
+
+        [FieldQuoted('"', QuoteMode.OptionalForRead, MultilineMode.AllowForRead)]
+        private int mPortnumber;
+
+        public int Portnumber
+        {
+            get { return mPortnumber; }
+            set { mPortnumber = value; }
         }
     }
 }

@@ -77,6 +77,20 @@ namespace uk.org.riseley.puttySessionManager.controller
         bool updateHostname(Session s);
 
         /// <summary>
+        /// Updates the sessions protocol
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        bool updateProtocol(Session s);
+
+        /// <summary>
+        /// Updates the sessions portnumber
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        bool updatePortnumber(Session s);
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="csr"></param>

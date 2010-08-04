@@ -692,6 +692,7 @@ namespace uk.org.riseley.puttySessionManager.control
                         dropDown.ShowCheckMargin = cms.ShowCheckMargin;
                         dropDown.ShowImageMargin = cms.ShowImageMargin;
                     }
+                    folder.MouseUp += new MouseEventHandler(launchSessionSystrayMenuItem_MouseUp);
                     parent.Add(folder);                    
                     addSessionMenuItemsFolder(cms, folder.DropDownItems, node.Nodes);
                 }
@@ -701,6 +702,32 @@ namespace uk.org.riseley.puttySessionManager.control
                     session.Tag = s;
                     session.DisplayStyle = ToolStripItemDisplayStyle.Text;
                     parent.Add(session);
+                }
+            }
+        }
+
+        void launchSessionSystrayMenuItem_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (sender is ToolStripMenuItem)
+            {
+                ToolStripMenuItem parent = sender as ToolStripMenuItem;
+                bool launchSessions = false;
+                bool launchSubfolders = false;
+                if (e.Button == MouseButtons.Right)
+                {
+                    launchSessions = true;
+                    launchSubfolders = false;
+                }
+                else if ( e.Button == MouseButtons.Middle )
+                {
+                    launchSessions = true;
+                    launchSubfolders = true;
+                }
+                if ( launchSessions == true )
+                {
+                    List<Session> sl = getChildSessions(parent,launchSubfolders);
+                    if (confirmNumberOfSessions(sl))
+                        launchFolderSessions(sl);
                 }
             }
         }
@@ -717,7 +744,7 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private void launchFolderSessions(List<Session> sl)
         {
-            if (sl == null)
+            if (sl == null || sl.Count == 0)
                 return;
 
             foreach (Session s in sl)
@@ -966,6 +993,44 @@ namespace uk.org.riseley.puttySessionManager.control
 
             return sl;
         }
+
+        private List<Session> getChildSessions(ToolStripMenuItem parent, bool includeSubfolders)
+        {
+            List<Session> sl = new List<Session>();
+
+            // Get the session
+            Session s = (Session)parent.Tag;
+
+            if (s.IsFolder == true)
+            {
+                IEnumerator ie = parent.DropDown.Items.GetEnumerator();
+                ToolStripMenuItem curr = null;
+                while (ie.MoveNext())
+                {
+                    curr = (ToolStripMenuItem)ie.Current;
+                    s = (Session)curr.Tag;
+                    if (s.IsFolder == true)
+                    {
+                        if (includeSubfolders == true)
+                        {
+                            sl.AddRange(getChildSessions(curr, includeSubfolders));
+                        }
+                    }
+                    else
+                    {
+                        sl.Add(s);
+                    }
+                }
+
+            }
+            else
+            {
+                sl.Add(s);
+            }
+
+            return sl;
+        }
+
 
         private List<Session> getChildSessions(TreeNode parent, bool includeSubfolders)
         {

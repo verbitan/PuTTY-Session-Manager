@@ -24,11 +24,31 @@ namespace uk.org.riseley.puttySessionManager.model
     public class NewSessionRequest
     {
         public NewSessionRequest(Session sessionTemplate
-                                , string sessionFolder                                
+                                , string sessionFolder
                                 , string hostname
                                 , string sessionName
                                 , bool copyDefaultUsername
-                                , bool launchSession )
+                                , bool launchSession)
+            :
+            this(sessionTemplate
+                 , sessionFolder
+                 , hostname
+                 , sessionName
+                 , sessionTemplate.Protocol
+                 , sessionTemplate.Portnumber
+                 , copyDefaultUsername
+                 , launchSession)
+        {
+        }
+
+        public NewSessionRequest(Session sessionTemplate
+                        , string sessionFolder
+                        , string hostname
+                        , string sessionName
+                        , string protocol
+                        , int portnumber
+                        , bool copyDefaultUsername
+                        , bool launchSession) 
         {
             this.sessionTemplate = sessionTemplate;
             this.copyDefaultUsername = copyDefaultUsername;
@@ -36,6 +56,8 @@ namespace uk.org.riseley.puttySessionManager.model
             this.sessionName = sessionName;
             this.sessionFolder = sessionFolder;
             this.launchSession = launchSession;
+            this.protocol = protocol;
+            this.portnumber = portnumber;
         }
 
         private Session sessionTemplate;
@@ -76,6 +98,20 @@ namespace uk.org.riseley.puttySessionManager.model
         public bool LaunchSession
         {
             get { return launchSession; }
+        }
+
+        private string protocol;
+
+        public string Protocol
+        {
+            get { return protocol; }
+        }
+
+        private int portnumber;
+
+        public int Portnumber
+        {
+            get { return portnumber; }
         }
     }
 }

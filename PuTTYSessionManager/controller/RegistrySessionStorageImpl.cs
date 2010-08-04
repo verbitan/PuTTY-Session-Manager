@@ -46,6 +46,16 @@ namespace uk.org.riseley.puttySessionManager.controller
         private const string PUTTY_HOSTNAME_ATTRIB = "HostName";
 
         /// <summary>
+        /// The protocol registry value
+        /// </summary>
+        private const string PUTTY_PROTOCOL_ATTRIB = "Protocol";
+
+        /// <summary>
+        /// The protocol registry value
+        /// </summary>
+        private const string PUTTY_PORTNUMBER_ATTRIB = "PortNumber";
+
+        /// <summary>
         /// The private key location for the session
         /// Strangely named PublicKeyFile ... 
         /// </summary>
@@ -127,13 +137,13 @@ namespace uk.org.riseley.puttySessionManager.controller
                     // Get all the values from the registry that we are interested in
                     s.Hostname = (string)sessKey.GetValue(PUTTY_HOSTNAME_ATTRIB);
                     s.Username = (string)sessKey.GetValue(PUTTY_USERNAME_ATTRIB);
-                    s.Protocol = (string)sessKey.GetValue("Protocol");
+                    s.Protocol = (string)sessKey.GetValue(PUTTY_PROTOCOL_ATTRIB);
                     s.Portforwards = (string)sessKey.GetValue("PortForwardings");
                     s.Remotecommand = (string)sessKey.GetValue("RemoteCommand");
                     s.PrivateKeyLocation = (string)sessKey.GetValue(PUTTY_PRIVATE_KEY_ATTRIB);
                     
                     // Setup the portnumber 
-                    object portnumberObject = sessKey.GetValue("PortNumber");
+                    object portnumberObject = sessKey.GetValue(PUTTY_PORTNUMBER_ATTRIB);
                     int portnumber = -1;
                     // Only attempt to cast to an int if the object is not null
                     if (portnumberObject != null)
@@ -180,19 +190,76 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
-        /// Save the session folder to the registry
+        /// Update the session folder 
         /// </summary>
         /// <param name="s"></param>
         public bool updateFolder(Session s)
         {
+            return updateAttribute(  s.SessionKey
+                                   , PUTTY_PSM_FOLDER_ATTRIB
+                                   , s.FolderName
+                                   , RegistryValueKind.String); 
+        }
+
+        /// <summary>
+        /// Update the session hostname
+        /// </summary>
+        /// <param name="s"></param>
+        public bool updateHostname(Session s)
+        {
+            return updateAttribute(  s.SessionKey
+                                   , PUTTY_HOSTNAME_ATTRIB
+                                   , s.Hostname
+                                   , RegistryValueKind.String );          
+        }
+
+        /// <summary>
+        /// Update the session portnumber 
+        /// </summary>
+        /// <param name="s"></param>
+        public bool updatePortnumber(Session s)
+        {
+            return updateAttribute(  s.SessionKey
+                                   , PUTTY_PORTNUMBER_ATTRIB
+                                   , s.Portnumber
+                                   , RegistryValueKind.DWord);
+        }
+
+        /// <summary>
+        /// Update the session protocol
+        /// </summary>
+        /// <param name="s"></param>
+        public bool updateProtocol(Session s)
+        {
+            return updateAttribute(  s.SessionKey
+                                   , PUTTY_PROTOCOL_ATTRIB
+                                   , s.Protocol
+                                   , RegistryValueKind.String);
+        }
+        
+        /// <summary>
+        /// Update a session attribute in the registry
+        /// </summary>
+        /// <param name="sessionKey"></param>
+        /// <param name="regAttribute"></param>
+        /// <param name="value"></param>
+        /// <param name="valueKind"></param>
+        /// <returns></returns>
+        private bool updateAttribute(String sessionKey 
+                                   , String regAttribute
+                                   , Object value
+                                   , RegistryValueKind valueKind)
+        {
             bool result = false;
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, true);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + sessionKey, true);
+
             if (rk != null)
             {
-                rk.SetValue(PUTTY_PSM_FOLDER_ATTRIB, s.FolderName, RegistryValueKind.String);
+                rk.SetValue(regAttribute, value, valueKind);
                 rk.Close();
                 result = true;
             }
+
             return result;
         }
 
@@ -222,6 +289,8 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Copy the values
             bool hostnameSet = false;
             bool foldernameSet = false;
+            bool protocolSet = false;
+            bool portnumberSet = false;
 
             object value;
             foreach (string valueName in template.GetValueNames())
@@ -242,6 +311,19 @@ namespace uk.org.riseley.puttySessionManager.controller
                 {
                     value = "";
                 }
+                else if (valueName.Equals(PUTTY_PROTOCOL_ATTRIB) &&
+                         !(nsr.Protocol.Equals("")) )
+                {
+                    protocolSet = true;
+                    value = nsr.Protocol;
+               
+                }
+                else if (valueName.Equals(PUTTY_PORTNUMBER_ATTRIB) &&
+                         nsr.Portnumber > 0 )
+                {
+                    portnumberSet = true;
+                    value = nsr.Portnumber;
+                }
                 else
                 {
                     value = template.GetValue(valueName);
@@ -257,6 +339,14 @@ namespace uk.org.riseley.puttySessionManager.controller
             // Set the foldername if it hasn't already been set
             if (foldernameSet == false)
                 newSession.SetValue(PUTTY_PSM_FOLDER_ATTRIB, nsr.SessionFolder, RegistryValueKind.String);
+
+            // Set the protocol if it hasn't already been set
+            if (protocolSet == false)
+                newSession.SetValue(PUTTY_PROTOCOL_ATTRIB, nsr.Protocol, RegistryValueKind.String);
+
+            // Set the portnumber if it hasn't already been set
+            if (portnumberSet == false)
+                newSession.SetValue(PUTTY_PORTNUMBER_ATTRIB, nsr.Portnumber, RegistryValueKind.DWord);
 
             template.Close();
             newSession.Close();
@@ -427,27 +517,6 @@ namespace uk.org.riseley.puttySessionManager.controller
         {
             return saveSessionsToFile(sessionList, fileName);
         }
-
-
-        /// <summary>
-        /// Update the session hostname
-        /// </summary>
-        /// <param name="s"></param>
-        public bool updateHostname(Session s)
-        {
-            bool result = false;
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_REG_KEY + "\\" + s.SessionKey, true);
-
-            if (rk != null)
-            {
-                rk.SetValue(PUTTY_HOSTNAME_ATTRIB, s.Hostname, RegistryValueKind.String);
-                rk.Close();
-                result = true;
-            }
-
-            return result;
-        }
-
 
         #endregion     
     

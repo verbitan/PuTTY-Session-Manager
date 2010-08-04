@@ -148,12 +148,18 @@ namespace uk.org.riseley.puttySessionManager.control
             string existingSessionFolder = "";
             string newSessionHostname = "";
             string existingSessionHostname = "";
+            string newProtocol = "";
+            string existingProtocol = "";
+            string newPort = "";
+            string existingPort = "";
 
             if (action.NewSession != null)
             {
                 sessionName = action.NewSession.SessionDisplayText;
                 newSessionFolder = action.NewSession.FolderDisplayText;
                 newSessionHostname = action.NewSession.Hostname;
+                newProtocol = action.NewSession.Protocol;
+                newPort = action.NewSession.Portnumber.ToString();
             }
 
             if (action.ExistingSession != null)
@@ -169,6 +175,8 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
                 existingSessionFolder = action.ExistingSession.FolderDisplayText;
                 existingSessionHostname = action.ExistingSession.Hostname;
+                existingProtocol = action.ExistingSession.Protocol;
+                existingPort = action.ExistingSession.Portnumber.ToString();
             }
 
             String[] cellValues = new String[] {    sessionName
@@ -176,6 +184,10 @@ namespace uk.org.riseley.puttySessionManager.control
                                                   , newSessionFolder
                                                   , existingSessionHostname
                                                   , newSessionHostname
+                                                  , existingProtocol
+                                                  , newProtocol
+                                                  , existingPort
+                                                  , newPort
                                                   , action.getActionDescription()
                                                   , getAction(action.Action)
                                                 };

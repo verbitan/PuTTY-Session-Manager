@@ -341,7 +341,6 @@ namespace uk.org.riseley.puttySessionManager.form
                        
             this.ResumeLayout(true);
 
-            currentSessionControl.getSessionMenuItems(sysTrayContextMenu,     loadSessionToolStripMenuItem.DropDownItems);
             currentSessionControl.getSessionMenuItems(loadSessionContextMenu, loadSessionContextMenu.Items);          
 
             Properties.Settings.Default.DisplayTree = displayTreeToolStripMenuItem.Checked;
@@ -399,7 +398,6 @@ namespace uk.org.riseley.puttySessionManager.form
 
         public void SessionsRefreshed(object sender, RefreshSessionsEventArgs re)
         {
-            currentSessionControl.getSessionMenuItems(sysTrayContextMenu, loadSessionToolStripMenuItem.DropDownItems);
             currentSessionControl.getSessionMenuItems(loadSessionContextMenu, loadSessionContextMenu.Items);
         }
 

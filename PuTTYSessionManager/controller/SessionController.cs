@@ -919,14 +919,14 @@ namespace uk.org.riseley.puttySessionManager.controller
                                                                 , sa.NewSession.FolderName
                                                                 , sa.NewSession.Hostname
                                                                 , sa.NewSession.SessionDisplayText
+                                                                , sa.NewSession.Protocol
+                                                                , sa.NewSession.Portnumber
                                                                 , true, false);
                     createNewSession(nsr, worker);
-                    modifiedCount++;
                 }
                 else if ( sa.Action == SessionAction.ACTION.DELETE )
                 {
                     delList.Add(sa.ExistingSession);
-                    modifiedCount++;
                 }
                 else if ( sa.Action == SessionAction.ACTION.UPDATE )
                 {
@@ -935,7 +935,8 @@ namespace uk.org.riseley.puttySessionManager.controller
                     {
                         sessionProvider.updateHostname(sa.NewSession);
                         sessionProvider.updateFolder(sa.NewSession);
-                        modifiedCount++;
+                        sessionProvider.updateProtocol(sa.NewSession);
+                        sessionProvider.updatePortnumber(sa.NewSession);
                     }
                 }
                 else if (sa.Action == SessionAction.ACTION.RENAME)
@@ -944,8 +945,8 @@ namespace uk.org.riseley.puttySessionManager.controller
                     sessionProvider.renameSession(existingSession, sa.NewSession.SessionDisplayText);
                     existingSession.FolderName = sa.NewSession.FolderName;
                     sessionProvider.updateFolder(existingSession);
-                    modifiedCount++;
                 }
+                modifiedCount++;
                 worker.ReportProgress(modifiedCount);
             }
 
