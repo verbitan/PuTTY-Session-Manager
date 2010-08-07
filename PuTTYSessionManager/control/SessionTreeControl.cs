@@ -494,26 +494,11 @@ namespace uk.org.riseley.puttySessionManager.control
             if (lockSessionsToolStripMenuItem.Checked)
             {
                 treeView.AllowDrop = false;
-                setSessionAsHotkeyToolStripMenuItem.Enabled = false;
-                foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
-                {
-                    menuItem.Visible = false;
-                }
-                newFolderMenuItem.Enabled = false;
-                renameFolderMenuItem.Enabled = false;
-                saveNewSessionToolStripMenuItem.Enabled = false;
-                deleteSessionToolStripMenuItem.Enabled = false;
             }
             else
             {
                 treeView.AllowDrop = true;
-                newFolderMenuItem.Enabled = false;
-                renameFolderMenuItem.Enabled = false;
-                saveNewSessionToolStripMenuItem.Enabled = true;
-                deleteSessionToolStripMenuItem.Enabled = true;
             }
-
-
         }
 
         private void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -531,12 +516,12 @@ namespace uk.org.riseley.puttySessionManager.control
 
                 if (s.IsFolder == false)
                 {
-                    newFolderMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
-                    renameSessionToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked;
-                    setSessionAsHotkeyToolStripMenuItem.Enabled = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled;
+                    newFolderMenuItem.Enabled = true;
+                    renameSessionToolStripMenuItem.Enabled = true;
+                    setSessionAsHotkeyToolStripMenuItem.Enabled = hotkeysEnabled;
                     foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
                     {
-                        menuItem.Visible = !lockSessionsToolStripMenuItem.Checked && hotkeysEnabled; ;
+                        menuItem.Visible = hotkeysEnabled; ;
                     }
                     renameFolderMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
@@ -562,23 +547,15 @@ namespace uk.org.riseley.puttySessionManager.control
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
 
-                    if (lockSessionsToolStripMenuItem.Checked == true)
+                    if (treeView.SelectedNode.Parent == null)
                     {
                         newFolderMenuItem.Enabled = false;
                         renameFolderMenuItem.Enabled = false;
                     }
                     else
                     {
-                        if (treeView.SelectedNode.Parent == null)
-                        {
-                            newFolderMenuItem.Enabled = false;
-                            renameFolderMenuItem.Enabled = false;
-                        }
-                        else
-                        {
-                            newFolderMenuItem.Enabled = true;
-                            renameFolderMenuItem.Enabled = true;
-                        }
+                        newFolderMenuItem.Enabled = true;
+                        renameFolderMenuItem.Enabled = true;
                     }
                     expandTreeToolStripMenuItem.Enabled = true;
                     collapseTreeToolStripMenuItem.Enabled = true;

@@ -109,7 +109,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem,
             this.sessionManagementToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 280);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 302);
             // 
             // newSessionMenuItem
             // 
@@ -228,7 +228,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lockSessionsToolStripMenuItem.Name = "lockSessionsToolStripMenuItem";
             this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.lockSessionsToolStripMenuItem.Text = "Lock Sessions";
+            this.lockSessionsToolStripMenuItem.Text = "Lock Session Tree";
             this.lockSessionsToolStripMenuItem.Click += new System.EventHandler(this.lockSessionsToolStripMenuItem_Click);
             // 
             // sessionManagementToolStripMenuItem
@@ -270,7 +270,6 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // deleteSessionToolStripMenuItem
             // 
-            this.deleteSessionToolStripMenuItem.Enabled = false;
             this.deleteSessionToolStripMenuItem.Name = "deleteSessionToolStripMenuItem";
             this.deleteSessionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
@@ -295,7 +294,6 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // saveNewSessionToolStripMenuItem
             // 
-            this.saveNewSessionToolStripMenuItem.Enabled = false;
             this.saveNewSessionToolStripMenuItem.Name = "saveNewSessionToolStripMenuItem";
             this.saveNewSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.saveNewSessionToolStripMenuItem.Text = "Save New Session";
@@ -314,7 +312,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.hotkey8MenuItem,
             this.hotkey9MenuItem,
             this.hotkey10MenuItem});
-            this.setSessionAsHotkeyToolStripMenuItem.Enabled = false;
             this.setSessionAsHotkeyToolStripMenuItem.Name = "setSessionAsHotkeyToolStripMenuItem";
             this.setSessionAsHotkeyToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.setSessionAsHotkeyToolStripMenuItem.Text = "Set Session As Hotkey";
