@@ -8,6 +8,8 @@ Feature requests / enhancements:
 
 Not Tracked:  Added support for FileZilla 3.x.  Tested with v3.3.3
 
+Not Tracked:  Improved drag and drop behaviour
+
 2991054:  Add support to WinSCP launch to use private key specified in the
           saved PuTTY session
 

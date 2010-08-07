@@ -55,6 +55,9 @@ namespace uk.org.riseley.puttySessionManager.control
 
         private ExportDialog ed;
 
+        private TreeNode lastDragDestination = null;
+        private DateTime lastDragDestinationTime = DateTime.Now;
+
         public SessionTreeControl()
             : base()
         {
@@ -134,21 +137,12 @@ namespace uk.org.riseley.puttySessionManager.control
         }
 
         /// <summary>
-        /// Event handler for DragEnterEvent from the tree view.
-        /// Set the target drop effect to the effect 
-        /// specified in the ItemDrag event handler.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treeView_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = e.AllowedEffect;
-        }
-
-        /// <summary>
         /// Event handler for DragOverEvent from the tree view.
         /// Select the node under the mouse pointer to indicate the 
         /// expected drop location.
+        /// Set the effect to show whether a drop is allowed
+        /// Expand the node if it's a folder and we've been there for
+        /// one or more seconds
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -158,22 +152,105 @@ namespace uk.org.riseley.puttySessionManager.control
             Point targetPoint = treeView.PointToClient(new Point(e.X, e.Y));
 
             // Get the node at the mouse position.
-            TreeNode node = treeView.GetNodeAt(targetPoint);
+            TreeNode targetNode = treeView.GetNodeAt(targetPoint);
 
             // Only if there is node under the mouse
-            if (node != null)
+            if (targetNode != null)
             {
                 // Select the node at the mouse position
-                treeView.SelectedNode = node;
+                treeView.SelectedNode = targetNode;
 
                 // Ensure the panel scrolls if we get near the top
-                if (targetPoint.Y < (node.Bounds.Height / 2) &&
-                    node.PrevVisibleNode != null)
+                if (targetPoint.Y < (targetNode.Bounds.Height / 2) &&
+                    targetNode.PrevVisibleNode != null)
                 {
-                    node.PrevVisibleNode.EnsureVisible();
+                    targetNode.PrevVisibleNode.EnsureVisible();
+                }
+
+                // Retrieve the node that was dragged.
+                TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));                
+
+                // Check to see if we have a valid drop target
+                if (validateDropTarget(draggedNode, targetNode))
+                {
+                    e.Effect = DragDropEffects.Move;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+
+                // If we are on a new object, reset our timer
+                // otherwise check to see if enough time has passed and expand the destination node
+                if (targetNode != lastDragDestination)
+                {
+                    lastDragDestination = targetNode;
+                    lastDragDestinationTime = DateTime.Now;
+                }
+                else
+                {
+                    TimeSpan hoverTime = DateTime.Now.Subtract(lastDragDestinationTime);
+                    if (hoverTime.TotalSeconds > 1 && targetNode.IsExpanded == false)
+                    {
+                        targetNode.Expand();
+                    }
                 }
             }
         }
+
+        /// <summary>
+        /// Ensure that the source node is allowed to be dropped 
+        /// onto the target node
+        /// </summary>
+        /// <param name="sourceNode"></param>
+        /// <param name="targetNode"></param>
+        /// <returns></returns>
+        private bool validateDropTarget(TreeNode sourceNode, TreeNode targetNode)        
+        {
+            // If the target node has no children
+            // it's a session, so get it's folder 
+            // parent
+            if ( targetNode.FirstNode == null )
+            {
+                targetNode = targetNode.Parent;
+            }
+
+            // If the nodes are the same 
+            // deny the drop
+            if ( sourceNode == targetNode )
+            {
+                return false;
+            }
+
+            // If the parent of the source node
+            // is the same as the target node
+            // deny the drop
+            if (sourceNode.Parent == targetNode)
+            {
+                return false;
+            }
+
+            // If the source node is a folder
+            if (sourceNode.FirstNode != null)
+            {             
+                // If the source folder is an ancestor of the
+                // target deny the drop
+                TreeNode targetParent = targetNode.Parent;
+                while (targetParent != null)
+                {
+                    if (targetParent == sourceNode)
+                    {
+                        return false;
+                    }
+
+                    targetParent = targetParent.Parent;
+                }
+            } 
+
+            // Otherwise allow the drop
+            return true;
+        }
+
 
         private void treeView_DragDrop(object sender, DragEventArgs e)
         {
@@ -183,15 +260,20 @@ namespace uk.org.riseley.puttySessionManager.control
             // Retrieve the node at the drop location.
             TreeNode targetNode = treeView.GetNodeAt(targetPoint);
 
+            // If the target node isn't a folder
+            // consider this to be a drop onto the parent folder
+            if (targetNode.FirstNode == null)
+            {
+                targetNode = targetNode.Parent;
+            }
+
             // Retrieve the node that was dragged.
             TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
 
             // Confirm that the node at the drop location is not 
             // the dragged node or a descendant of the dragged node, 
             // and the target node is a folder
-            if (!draggedNode.Equals(targetNode) &&
-                !ContainsNode(draggedNode, targetNode) &&
-                ((Session)targetNode.Tag).IsFolder)
+            if (validateDropTarget(draggedNode,targetNode))
             {
                 // If it is a move operation, remove the node from its current 
                 // location and add it to the node at the drop location.
@@ -208,6 +290,9 @@ namespace uk.org.riseley.puttySessionManager.control
                         return;
                     }
 
+                    // Suppress repainting the TreeView until all the objects have been created.
+                    treeView.BeginUpdate();
+
                     // Remove the old node and add it back in
                     // in the new location
                     draggedNode.Remove();
@@ -220,8 +305,14 @@ namespace uk.org.riseley.puttySessionManager.control
                     // Cleanup any hanging folders
                     cleanFolders(oldParent);
 
+                    // Make sure the dragged node is visible
+                    draggedNode.EnsureVisible();
+
                     // Fire a refresh event
                     sc.invalidateSessionList(this, false);
+
+                    // Resume repainting the TreeView
+                    treeView.EndUpdate();
                 }
             }
         }
@@ -286,26 +377,6 @@ namespace uk.org.riseley.puttySessionManager.control
                     }
                 }
             }
-        }
-
-
-        /// <summary>
-        /// Determine whether one node is a parent 
-        /// or ancestor of a second node.
-        /// </summary>
-        /// <param name="node1"></param>
-        /// <param name="node2"></param>
-        /// <returns></returns>
-        private bool ContainsNode(TreeNode node1, TreeNode node2)
-        {
-            // Check the parent node of the second node.
-            if (node2.Parent == null) return false;
-            if (node2.Parent.Equals(node1)) return true;
-
-            // If the parent node is not null or equal to the first node, 
-            // call the ContainsNode method recursively using the parent of 
-            // the second node.
-            return ContainsNode(node1, node2.Parent);
         }
 
         /// <summary>
