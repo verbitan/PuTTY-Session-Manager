@@ -58,7 +58,14 @@ namespace uk.org.riseley.puttySessionManager.model
         public string FolderName
         {
             get { return folderName; }
-            set { folderName = value; }
+            set
+            {
+                folderName = value;
+                if (isFolder == true)
+                {
+                    NodeKey = KEY_FOLDER + folderName;
+                }
+            }
         }
 
         private string folderDisplayText = "";
