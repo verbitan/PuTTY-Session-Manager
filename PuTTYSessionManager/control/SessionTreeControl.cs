@@ -566,7 +566,7 @@ namespace uk.org.riseley.puttySessionManager.control
         private void newFolderMenuItem_Click(object sender, EventArgs e)
         {
 
-            FolderForm ff = new FolderForm();
+            RenameNameForm ff = new RenameNameForm("",true);
             if (ff.ShowDialog() == DialogResult.OK)
             {
                 // Find the selected node
@@ -576,7 +576,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 TreeNode parent = selectedNode.Parent;
 
                 // Get the new folder name and the new full path
-                string folder = ff.getFolderName();
+                string folder = ff.getName();
                 string newpath = parent.FullPath + treeView.PathSeparator + folder;
 
                 // Check the new folder name is valid

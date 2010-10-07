@@ -34,7 +34,7 @@ namespace uk.org.riseley.puttySessionManager.form
             resetDialogFont();
         }
 
-        public RenameNameForm(string sessionName, bool isFolder)
+        public RenameNameForm(string oldName, bool isFolder)
             : this()
         {
             if (isFolder)
@@ -48,7 +48,7 @@ namespace uk.org.riseley.puttySessionManager.form
                 nameLabel.Text = "Session Name";
             }
 
-            nameTextBox.Text = sessionName;
+            nameTextBox.Text = oldName;
         }
 
         public string getName()
