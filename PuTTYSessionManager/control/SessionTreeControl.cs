@@ -517,13 +517,12 @@ namespace uk.org.riseley.puttySessionManager.control
                 if (s.IsFolder == false)
                 {
                     newFolderMenuItem.Enabled = true;
-                    renameSessionToolStripMenuItem.Enabled = true;
                     setSessionAsHotkeyToolStripMenuItem.Enabled = hotkeysEnabled;
                     foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
                     {
                         menuItem.Visible = hotkeysEnabled; ;
                     }
-                    renameFolderMenuItem.Enabled = false;
+                    renameMenuItem.Enabled = true;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = false;
                     launchFolderToolStripMenuItem.Enabled = false;
                     launchSessionMenuItem.Enabled = true;
@@ -534,7 +533,6 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
                 else
                 {
-                    renameSessionToolStripMenuItem.Enabled = false;
                     setSessionAsHotkeyToolStripMenuItem.Enabled = false;
                     foreach (ToolStripMenuItem menuItem in hotkeyDictionary.Values)
                     {
@@ -550,12 +548,12 @@ namespace uk.org.riseley.puttySessionManager.control
                     if (treeView.SelectedNode.Parent == null)
                     {
                         newFolderMenuItem.Enabled = false;
-                        renameFolderMenuItem.Enabled = false;
+                        renameMenuItem.Enabled = false;
                     }
                     else
                     {
                         newFolderMenuItem.Enabled = true;
-                        renameFolderMenuItem.Enabled = true;
+                        renameMenuItem.Enabled = true;
                     }
                     expandTreeToolStripMenuItem.Enabled = true;
                     collapseTreeToolStripMenuItem.Enabled = true;
@@ -647,6 +645,11 @@ namespace uk.org.riseley.puttySessionManager.control
             return true;
         }
 
+        /// <summary>
+        /// Check to see if the session name is valid
+        /// </summary>
+        /// <param name="sessionName"></param>
+        /// <returns></returns>
         private bool validateSessionName(string sessionName)
         {
             if (sessionName.Equals(""))
@@ -665,53 +668,6 @@ namespace uk.org.riseley.puttySessionManager.control
                 return false;
             }
             return true;
-        }
-
-        private void renameFolderMenuItem_Click(object sender, EventArgs e)
-        {
-            // Find the selected node
-            TreeNode selectedNode = treeView.SelectedNode;
-
-            // Display the folder requester
-            FolderForm ff = new FolderForm(selectedNode.Text);
-
-            if (ff.ShowDialog() == DialogResult.OK)
-            {
-                // Find it's parent
-                TreeNode parent = selectedNode.Parent;
-
-                // Get the new folder name and the new full path
-                string folder = ff.getFolderName();
-                string newpath = parent.FullPath + treeView.PathSeparator + folder;
-
-                if (validateFolderName(folder, newpath) == false)
-                {
-                    return;
-                }
-
-                // Suppress repainting the TreeView until all the objects have been created.
-                treeView.BeginUpdate();
-
-                // Remove the selected node from it's current location
-                parent.Nodes.Remove(selectedNode);
-
-                // Set up the new folder node and add it to the parent node
-                Session sess = new Session(folder, newpath, true);
-                selectedNode.Tag = sess;
-                selectedNode.Text = sess.SessionDisplayText;
-                selectedNode.Name = sess.NodeKey;
-                parent.Nodes.Add(selectedNode);
-
-                // Refresh the paths of all the child nodes
-                updateFolders(selectedNode, parent);
-
-                // Fire a refresh event
-                sc.invalidateSessionList(this, false);
-
-                // Begin repainting the TreeView.
-                treeView.EndUpdate();
-            }
-
         }
 
         public override void getSessionMenuItems(ContextMenuStrip cms, ToolStripItemCollection parent)
@@ -932,7 +888,7 @@ namespace uk.org.riseley.puttySessionManager.control
             getSessionController().invalidateSessionList(this, true);
         }
 
-        private void renameSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Get the session
             Session s = getSelectedSession(true);
@@ -946,39 +902,77 @@ namespace uk.org.riseley.puttySessionManager.control
                 return;
             }
 
-            // Display the session name requester
-            SessionNameForm snf = new SessionNameForm(s.SessionDisplayText);
+            // Display the rename requester
+            RenameNameForm rnf = new RenameNameForm(s.SessionDisplayText, s.IsFolder);
 
-            if (snf.ShowDialog() == DialogResult.OK && validateSessionName(snf.getSessionName()))
+            if (rnf.ShowDialog() == DialogResult.OK)
             {
-                // Try to rename the session
-                bool result = getSessionController().renameSession(s, snf.getSessionName(), this);
+                // Get the new name
+                string newName = rnf.getName();
 
-                // Check it worked
-                if (result == false)
+                // Find the selected node
+                TreeNode selectedNode = treeView.SelectedNode;
+
+                // Find it's parent
+                TreeNode parent = selectedNode.Parent;
+                
+                // Create the new session object
+                Session newSession = null;
+
+                if (s.IsFolder == false)
                 {
-                    MessageBox.Show("Failed to rename session"
-                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (validateSessionName(newName))
+                    {
+                        // Try to rename the session
+                        bool result = getSessionController().renameSession(s, newName, this);
+
+                        // Check it worked
+                        if (result == false)
+                        {
+                            MessageBox.Show("Failed to rename session"
+                                , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        // Create the new session object
+                        newSession = getSessionController().findSessionByName(newName);
+
+                    }
+                }
+                else if (s.IsFolder == true)
+                {
+
+                    // Get the new folder name and the new full path
+                    string newPath = parent.FullPath + treeView.PathSeparator + newName;
+
+                    if (validateFolderName(newName, newPath))
+                    {
+                        // Set up the new folder session
+                        newSession = new Session(newName, newPath, true);
+                    }
                 }
 
-                // Create the new session object
-                Session newSession = getSessionController().findSessionByName(snf.getSessionName());
+                if ( newSession != null )
+                {
+                    // Suppress repainting the TreeView until all the objects have been created.
+                    treeView.BeginUpdate();
 
-                // Something's gone wrong here....
-                if (newSession == null)
-                    return;
+                    selectedNode.Tag  = newSession;
+                    selectedNode.Text = newSession.SessionDisplayText;
+                    selectedNode.Name = newSession.NodeKey;
 
-                // Suppress repainting the TreeView until all the objects have been created.
-                treeView.BeginUpdate();
+                    if (newSession.IsFolder)
+                    {
+                        // Refresh the paths of all the child nodes
+                        updateFolders(selectedNode, parent);
+                    }
 
-                // Update the selected node
-                treeView.SelectedNode.Tag = newSession;
-                treeView.SelectedNode.Text = newSession.SessionDisplayText;
-                treeView.SelectedNode.Name = newSession.NodeKey;
+                    // Fire a refresh event
+                    sc.invalidateSessionList(this, false);
 
-                // Begin repainting the TreeView.
-                treeView.EndUpdate();
+                    // Begin repainting the TreeView.
+                    treeView.EndUpdate();                    
+                }
             }
         }
 
@@ -1323,18 +1317,13 @@ namespace uk.org.riseley.puttySessionManager.control
                     // Find the selected node
                     TreeNode selectedNode = treeView.SelectedNode;
 
-                    Session s = null;
-
                     // Renames of the top node aren't allowed
                     if (selectedNode != null && selectedNode.Parent != null)
                     {
-                        s = (Session)selectedNode.Tag;
+                        Session s = (Session)selectedNode.Tag;
                         if (s != null)
                         {
-                            if (s.IsFolder == true)
-                                renameFolderMenuItem_Click(this, EventArgs.Empty);
-                            else
-                                renameSessionToolStripMenuItem_Click(this, EventArgs.Empty);
+                            renameToolStripMenuItem_Click(this, EventArgs.Empty);
                             e.Handled = true;
                         }
                     }

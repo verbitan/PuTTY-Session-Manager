@@ -69,11 +69,9 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renameFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.renameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renameSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveNewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setSessionAsHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkey1MenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -235,11 +233,9 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.sessionManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newFolderMenuItem,
-            this.renameFolderMenuItem,
-            this.toolStripSeparator1,
+            this.renameMenuItem,
             this.deleteSessionToolStripMenuItem,
             this.exportSessionsToolStripMenuItem,
-            this.renameSessionToolStripMenuItem,
             this.saveNewSessionToolStripMenuItem,
             this.setSessionAsHotkeyToolStripMenuItem});
             this.sessionManagementToolStripMenuItem.Name = "sessionManagementToolStripMenuItem";
@@ -248,25 +244,18 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             // newFolderMenuItem
             // 
-            this.newFolderMenuItem.Enabled = false;
             this.newFolderMenuItem.Name = "newFolderMenuItem";
             this.newFolderMenuItem.Size = new System.Drawing.Size(192, 22);
             this.newFolderMenuItem.Text = "New Folder";
             this.newFolderMenuItem.Click += new System.EventHandler(this.newFolderMenuItem_Click);
             // 
-            // renameFolderMenuItem
+            // renameMenuItem
             // 
-            this.renameFolderMenuItem.Enabled = false;
-            this.renameFolderMenuItem.Name = "renameFolderMenuItem";
-            this.renameFolderMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.renameFolderMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.renameFolderMenuItem.Text = "Rename Folder";
-            this.renameFolderMenuItem.Click += new System.EventHandler(this.renameFolderMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
+            this.renameMenuItem.Name = "renameMenuItem";
+            this.renameMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.renameMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.renameMenuItem.Text = "Rename";
+            this.renameMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
             // 
             // deleteSessionToolStripMenuItem
             // 
@@ -282,15 +271,6 @@ namespace uk.org.riseley.puttySessionManager.control
             this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
             this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click_1);
-            // 
-            // renameSessionToolStripMenuItem
-            // 
-            this.renameSessionToolStripMenuItem.Enabled = false;
-            this.renameSessionToolStripMenuItem.Name = "renameSessionToolStripMenuItem";
-            this.renameSessionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.renameSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.renameSessionToolStripMenuItem.Text = "Rename Session";
-            this.renameSessionToolStripMenuItem.Click += new System.EventHandler(this.renameSessionToolStripMenuItem_Click);
             // 
             // saveNewSessionToolStripMenuItem
             // 
@@ -452,10 +432,8 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.ToolStripMenuItem refreshSessionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sessionManagementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newFolderMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renameFolderMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem renameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSessionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renameSessionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveNewSessionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setSessionAsHotkeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hotkey1MenuItem;

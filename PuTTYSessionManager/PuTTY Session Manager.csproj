@@ -174,11 +174,11 @@
     <Compile Include="form\SessionManagementForm.Designer.cs">
       <DependentUpon>SessionManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\SessionNameForm.cs">
+    <Compile Include="form\RenameNameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\SessionNameForm.Designer.cs">
-      <DependentUpon>SessionNameForm.cs</DependentUpon>
+    <Compile Include="form\RenameNameForm.Designer.cs">
+      <DependentUpon>RenameNameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\CopySessionForm.cs">
       <SubType>Form</SubType>
@@ -191,12 +191,6 @@
     </Compile>
     <Compile Include="form\HotkeyChooser.Designer.cs">
       <DependentUpon>HotkeyChooser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\FolderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\FolderForm.Designer.cs">
-      <DependentUpon>FolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\UpdateForm.cs">
       <SubType>Form</SubType>
@@ -320,8 +314,8 @@
       <DependentUpon>SessionManagementForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\SessionNameForm.resx">
-      <DependentUpon>SessionNameForm.cs</DependentUpon>
+    <EmbeddedResource Include="form\RenameNameForm.resx">
+      <DependentUpon>RenameNameForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\CopySessionForm.resx">
@@ -331,10 +325,6 @@
     <EmbeddedResource Include="form\HotkeyChooser.resx">
       <DependentUpon>HotkeyChooser.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\FolderForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\Options.resx">
       <SubType>Designer</SubType>

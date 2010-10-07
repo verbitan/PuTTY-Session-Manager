@@ -17,7 +17,7 @@
  */
 namespace uk.org.riseley.puttySessionManager.form
 {
-    partial class SessionNameForm
+    partial class RenameNameForm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,8 +47,8 @@ namespace uk.org.riseley.puttySessionManager.form
         {
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.sessionNameLabel = new System.Windows.Forms.Label();
-            this.sessionNameTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.sesssionNameTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.sesssionNameTableLayout.SuspendLayout();
             this.SuspendLayout();
@@ -74,25 +74,25 @@ namespace uk.org.riseley.puttySessionManager.form
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // sessionNameLabel
+            // nameLabel
             // 
-            this.sessionNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.sessionNameLabel.AutoSize = true;
-            this.sessionNameLabel.Location = new System.Drawing.Point(5, 10);
-            this.sessionNameLabel.Name = "sessionNameLabel";
-            this.sessionNameLabel.Size = new System.Drawing.Size(73, 13);
-            this.sessionNameLabel.TabIndex = 2;
-            this.sessionNameLabel.Text = "Session Name";
+            this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(5, 10);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(73, 13);
+            this.nameLabel.TabIndex = 2;
+            this.nameLabel.Text = "Session Name";
             // 
-            // sessionNameTextBox
+            // nameTextBox
             // 
-            this.sessionNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.sesssionNameTableLayout.SetColumnSpan(this.sessionNameTextBox, 2);
-            this.sessionNameTextBox.Location = new System.Drawing.Point(84, 6);
-            this.sessionNameTextBox.MaxLength = 60;
-            this.sessionNameTextBox.Name = "sessionNameTextBox";
-            this.sessionNameTextBox.Size = new System.Drawing.Size(279, 21);
-            this.sessionNameTextBox.TabIndex = 0;
+            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.sesssionNameTableLayout.SetColumnSpan(this.nameTextBox, 2);
+            this.nameTextBox.Location = new System.Drawing.Point(84, 6);
+            this.nameTextBox.MaxLength = 60;
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(279, 21);
+            this.nameTextBox.TabIndex = 0;
             // 
             // sesssionNameTableLayout
             // 
@@ -101,8 +101,8 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sesssionNameTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.sesssionNameTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.sesssionNameTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.sesssionNameTableLayout.Controls.Add(this.sessionNameTextBox, 1, 0);
-            this.sesssionNameTableLayout.Controls.Add(this.sessionNameLabel, 0, 0);
+            this.sesssionNameTableLayout.Controls.Add(this.nameTextBox, 1, 0);
+            this.sesssionNameTableLayout.Controls.Add(this.nameLabel, 0, 0);
             this.sesssionNameTableLayout.Controls.Add(this.cancelButton, 2, 1);
             this.sesssionNameTableLayout.Controls.Add(this.okButton, 1, 1);
             this.sesssionNameTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -114,7 +114,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.sesssionNameTableLayout.Size = new System.Drawing.Size(408, 66);
             this.sesssionNameTableLayout.TabIndex = 3;
             // 
-            // SessionNameForm
+            // RenameNameForm
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,7 +130,7 @@ namespace uk.org.riseley.puttySessionManager.form
             this.MaximumSize = new System.Drawing.Size(414, 98);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(414, 98);
-            this.Name = "SessionNameForm";
+            this.Name = "RenameNameForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter Session Name";
@@ -145,8 +145,8 @@ namespace uk.org.riseley.puttySessionManager.form
 
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label sessionNameLabel;
-        private System.Windows.Forms.TextBox sessionNameTextBox;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.TableLayoutPanel sesssionNameTableLayout;
     }
 }

@@ -25,24 +25,35 @@ using System.Windows.Forms;
 
 namespace uk.org.riseley.puttySessionManager.form
 {
-    public partial class SessionNameForm
+    public partial class RenameNameForm
         : Form
     {
-        public SessionNameForm()
+        public RenameNameForm()
         {
             InitializeComponent();
             resetDialogFont();
         }
 
-        public SessionNameForm(string sessionName)
+        public RenameNameForm(string sessionName, bool isFolder)
             : this()
         {
-            sessionNameTextBox.Text = sessionName;
+            if (isFolder)
+            {
+                this.Text = "Enter Folder Name";
+                nameLabel.Text = "Folder Name";
+            }
+            else
+            {
+                this.Text = "Enter Session Name";
+                nameLabel.Text = "Session Name";
+            }
+
+            nameTextBox.Text = sessionName;
         }
 
-        public string getSessionName()
+        public string getName()
         {
-            return sessionNameTextBox.Text;
+            return nameTextBox.Text;
         }
 
         public void resetDialogFont()
