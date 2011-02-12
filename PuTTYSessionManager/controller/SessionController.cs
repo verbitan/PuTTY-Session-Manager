@@ -27,9 +27,6 @@ using uk.org.riseley.puttySessionManager.model.eventargs;
 using System.Windows.Forms;
 using System.ComponentModel;
 
-[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
- ViewAndModify = uk.org.riseley.puttySessionManager.controller.SessionController.AUTOSTART_REG_KEY)]
-
 namespace uk.org.riseley.puttySessionManager.controller
 {
 

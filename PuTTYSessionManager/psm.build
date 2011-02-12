@@ -6,9 +6,9 @@
 
   <property name="configuration" value="release"/>
 
-  <property name="dir.nantcontrib" value="C:/Program Files/nant/nantcontrib-0.85-nightly-2006-10-08"/>
-  <property name="dir.svn" value="C:/Program Files/subversion/bin"/>
-  <property name="dir.nsis" value="C:/Program Files/NSIS"/>
+  <property name="dir.nantcontrib" value="C:/apps/nantcontrib-0.85"/>
+  <property name="dir.svn" value="C:/Program Files (x86)/Subversion/bin"/>
+  <property name="dir.nsis" value="C:/Program Files (x86)/NSIS"/>
 
   <property name="dir.psmbase" value="PuTTYSessionManager"/>
   <property name="dir.buildinfo" value="${dir.psmbase}/buildinfo"/>
@@ -103,6 +103,12 @@
           description="Populate the version properties based on the version.txt file">
     <echo message="${project::get-base-directory()}"/>
     <script language="C#" >
+	  <references>
+		  <include name="System.dll" />
+	  </references>
+	  <imports>
+		  <import namespace="System.Text.RegularExpressions" />
+	  </imports>	
       <code>
         <![CDATA[
     public static void ScriptMain(Project project)
@@ -194,6 +200,12 @@
         depends="setsvnrevision"
         description="Set the build.version.versionstring property">
     <script language="C#">
+	  <references>
+		  <include name="System.dll" />
+	  </references>
+	  <imports>
+		  <import namespace="System.Text.RegularExpressions" />
+	  </imports>	
       <code>
         <![CDATA[
     public static void ScriptMain(Project project)
@@ -224,6 +236,12 @@
       </in>
       <do>
         <script language="C#">
+		  <references>
+			  <include name="System.dll" />
+		  </references>
+		  <imports>
+			  <import namespace="System.Text.RegularExpressions" />
+		  </imports>		
           <code>
             <![CDATA[
      public static void ScriptMain(Project project)
@@ -261,9 +279,10 @@
 
   <target name="build.psm"
          depends="setversion">
-
-    <solution configuration="${configuration}" solutionfile="PuTTY Session Manager.sln">
-    </solution>
+		 
+	<msbuild project="PuTTY Session Manager.sln">
+            <property name="Configuration" value="${configuration}"/>
+    </msbuild>	 
 
     <fail unless="${file::exists(path::combine(dir.build,output.exe))}"
           message="Output file doesn't exist in ${output.exe}"/>

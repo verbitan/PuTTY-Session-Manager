@@ -23,8 +23,6 @@ using Microsoft.Win32;
 using System.IO;
 using System.Security.Permissions;
 
-[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
- ViewAndModify = uk.org.riseley.puttySessionManager.controller.RegistrySessionStorageImpl.PUTTY_SESSIONS_REG_KEY)]
 
 namespace uk.org.riseley.puttySessionManager.controller
 {
