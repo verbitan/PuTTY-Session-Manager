@@ -523,6 +523,34 @@ namespace uk.org.riseley.puttySessionManager.controller
         }
 
         /// <summary>
+        /// Launch PSFTP
+        /// </summary>
+        /// <param name="sessionName">The session name to launch</param>
+        /// <returns>The error message if the process fails to start</returns>
+        public string launchPSFTP(string sessionName)
+        {
+            String psftpExec = Properties.Settings.Default.PSFTPLocation;
+            Process p = new Process();
+            p.StartInfo.FileName = psftpExec;
+            p.StartInfo.Arguments = "-load \"" + sessionName + "\"";
+
+            bool result = false;
+            String errMsg = "";
+            try
+            {
+                result = p.Start();
+            }
+            catch (Exception ex)
+            {
+                result = false;
+                errMsg = ex.Message;
+            }
+            p.Close();
+
+            return errMsg;
+        }
+
+        /// <summary>
         /// Launch Pageant with the saved list of keys
         /// </summary>
         /// <returns>The error message if the process fails to start</returns>

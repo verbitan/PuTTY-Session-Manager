@@ -28,7 +28,7 @@ namespace uk.org.riseley.puttySessionManager.control.options
 {
     public partial class OptionsControl : UserControl
     {
-        protected enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA, WINSCP, WINSCPINI, CSV };
+        protected enum FileDialogType { PUTTY, PAGEANT, PAGEANT_KEYS, FILEZILLA, WINSCP, WINSCPINI, CSV, PSFTP };
 
         public OptionsControl()
         {
@@ -74,6 +74,10 @@ namespace uk.org.riseley.puttySessionManager.control.options
                 case FileDialogType.CSV:
                     filename = "*.csv";
                     currentFile = Properties.Settings.Default.WinSCPIniLocation;
+                    break;
+                case FileDialogType.PSFTP:
+                    filename = "psftp.exe";
+                    currentFile = Properties.Settings.Default.PSFTPLocation;
                     break;
             }
 

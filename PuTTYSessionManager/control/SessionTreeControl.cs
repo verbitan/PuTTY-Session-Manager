@@ -528,6 +528,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     launchSessionMenuItem.Enabled = true;
                     launchFilezillaToolStripMenuItem.Enabled = true;
                     launchWinSCPToolStripMenuItem.Enabled = true;
+                    launchPSFTPToolStripMenuItem.Enabled = true;
                     expandTreeToolStripMenuItem.Enabled = false;
                     collapseTreeToolStripMenuItem.Enabled = false;
                 }
@@ -542,6 +543,7 @@ namespace uk.org.riseley.puttySessionManager.control
                     launchSessionMenuItem.Enabled = false;
                     launchFilezillaToolStripMenuItem.Enabled = false;
                     launchWinSCPToolStripMenuItem.Enabled = false;
+                    launchPSFTPToolStripMenuItem.Enabled = false;
                     launchFolderAndSubfoldersToolStripMenuItem.Enabled = true;
                     launchFolderToolStripMenuItem.Enabled = true;
 
@@ -560,6 +562,7 @@ namespace uk.org.riseley.puttySessionManager.control
                 }
                 launchFilezillaToolStripMenuItem.Visible = Properties.Settings.Default.FileZillaEnabled;
                 launchWinSCPToolStripMenuItem.Visible = Properties.Settings.Default.WinSCPEnabled;
+                launchPSFTPToolStripMenuItem.Visible = Properties.Settings.Default.PSFTPEnabled;
             }
         }
 
@@ -1396,6 +1399,12 @@ namespace uk.org.riseley.puttySessionManager.control
         {
             Session s = getSelectedSession();
             OnLaunchSession(new LaunchSessionEventArgs(s, LaunchSessionEventArgs.PROGRAM.WINSCP));
+        }
+
+        private void launchPSFTPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Session s = getSelectedSession();
+            OnLaunchSession(new LaunchSessionEventArgs(s, LaunchSessionEventArgs.PROGRAM.PSFTP));
         }
 
         private void treeView_KeyDown(object sender, KeyEventArgs e)

@@ -86,6 +86,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.hotkey10MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeImageList = new System.Windows.Forms.ImageList(this.components);
             this.treeView = new System.Windows.Forms.TreeView();
+            this.launchPSFTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,6 +99,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.launchFolderAndSubfoldersToolStripMenuItem,
             this.launchFilezillaToolStripMenuItem,
             this.launchWinSCPToolStripMenuItem,
+            this.launchPSFTPToolStripMenuItem,
             this.toolStripSeparator3,
             this.refreshSessionsToolStripMenuItem,
             this.expandTreeToolStripMenuItem,
@@ -107,60 +109,60 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem,
             this.sessionManagementToolStripMenuItem});
             this.nodeContextMenuStrip.Name = "contextMenuStrip";
-            this.nodeContextMenuStrip.Size = new System.Drawing.Size(228, 302);
+            this.nodeContextMenuStrip.Size = new System.Drawing.Size(232, 324);
             // 
             // newSessionMenuItem
             // 
             this.newSessionMenuItem.Name = "newSessionMenuItem";
-            this.newSessionMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.newSessionMenuItem.Size = new System.Drawing.Size(231, 22);
             this.newSessionMenuItem.Text = "New Session";
             this.newSessionMenuItem.Click += new System.EventHandler(this.newSessionMenuItem_Click);
             // 
             // launchSessionMenuItem
             // 
             this.launchSessionMenuItem.Name = "launchSessionMenuItem";
-            this.launchSessionMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchSessionMenuItem.Size = new System.Drawing.Size(231, 22);
             this.launchSessionMenuItem.Text = "Launch Session";
             this.launchSessionMenuItem.Click += new System.EventHandler(this.launchSessionMenuItem_Click);
             // 
             // launchFolderToolStripMenuItem
             // 
             this.launchFolderToolStripMenuItem.Name = "launchFolderToolStripMenuItem";
-            this.launchFolderToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchFolderToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.launchFolderToolStripMenuItem.Text = "Launch Folder ";
             this.launchFolderToolStripMenuItem.Click += new System.EventHandler(this.launchFolderToolStripMenuItem_Click);
             // 
             // launchFolderAndSubfoldersToolStripMenuItem
             // 
             this.launchFolderAndSubfoldersToolStripMenuItem.Name = "launchFolderAndSubfoldersToolStripMenuItem";
-            this.launchFolderAndSubfoldersToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchFolderAndSubfoldersToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.launchFolderAndSubfoldersToolStripMenuItem.Text = "Launch Folder and Subfolders";
             this.launchFolderAndSubfoldersToolStripMenuItem.Click += new System.EventHandler(this.launchFolderAndSubfoldersToolStripMenuItem_Click);
             // 
             // launchFilezillaToolStripMenuItem
             // 
             this.launchFilezillaToolStripMenuItem.Name = "launchFilezillaToolStripMenuItem";
-            this.launchFilezillaToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchFilezillaToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.launchFilezillaToolStripMenuItem.Text = "Launch Filezilla";
             this.launchFilezillaToolStripMenuItem.Click += new System.EventHandler(this.launchFilezillaToolStripMenuItem_Click);
             // 
             // launchWinSCPToolStripMenuItem
             // 
             this.launchWinSCPToolStripMenuItem.Name = "launchWinSCPToolStripMenuItem";
-            this.launchWinSCPToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchWinSCPToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.launchWinSCPToolStripMenuItem.Text = "Launch WinSCP";
             this.launchWinSCPToolStripMenuItem.Click += new System.EventHandler(this.launchWinSCPToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(224, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(228, 6);
             // 
             // refreshSessionsToolStripMenuItem
             // 
             this.refreshSessionsToolStripMenuItem.Name = "refreshSessionsToolStripMenuItem";
             this.refreshSessionsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.refreshSessionsToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.refreshSessionsToolStripMenuItem.Text = "Refresh Sessions";
             this.refreshSessionsToolStripMenuItem.Click += new System.EventHandler(this.refreshSessionsToolStripMenuItem_Click);
             // 
@@ -168,7 +170,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.expandTreeToolStripMenuItem.Name = "expandTreeToolStripMenuItem";
             this.expandTreeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Right)));
-            this.expandTreeToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.expandTreeToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.expandTreeToolStripMenuItem.Text = "Expand Tree";
             this.expandTreeToolStripMenuItem.Click += new System.EventHandler(this.expandTreeToolStripMenuItem_Click);
             // 
@@ -176,7 +178,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.collapseTreeToolStripMenuItem.Name = "collapseTreeToolStripMenuItem";
             this.collapseTreeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Left)));
-            this.collapseTreeToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.collapseTreeToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.collapseTreeToolStripMenuItem.Text = "Collapse Tree";
             this.collapseTreeToolStripMenuItem.Click += new System.EventHandler(this.collapseTreeToolStripMenuItem_Click);
             // 
@@ -187,14 +189,14 @@ namespace uk.org.riseley.puttySessionManager.control
             this.ignoreFoldersToolStripMenuItem,
             this.foldersLastToolStripMenuItem});
             this.sortByToolStripMenuItem.Name = "sortByToolStripMenuItem";
-            this.sortByToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.sortByToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.sortByToolStripMenuItem.Text = "Sort By";
             // 
             // foldersFirstToolStripMenuItem
             // 
             this.foldersFirstToolStripMenuItem.CheckOnClick = true;
             this.foldersFirstToolStripMenuItem.Name = "foldersFirstToolStripMenuItem";
-            this.foldersFirstToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.foldersFirstToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.foldersFirstToolStripMenuItem.Text = "Folders First";
             this.foldersFirstToolStripMenuItem.Click += new System.EventHandler(this.sortOrderToolStripMenuItem_Click);
             // 
@@ -202,7 +204,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.ignoreFoldersToolStripMenuItem.CheckOnClick = true;
             this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
-            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.ignoreFoldersToolStripMenuItem.Text = "Ignore Folders";
             this.ignoreFoldersToolStripMenuItem.Click += new System.EventHandler(this.sortOrderToolStripMenuItem_Click);
             // 
@@ -210,14 +212,14 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.foldersLastToolStripMenuItem.CheckOnClick = true;
             this.foldersLastToolStripMenuItem.Name = "foldersLastToolStripMenuItem";
-            this.foldersLastToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.foldersLastToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.foldersLastToolStripMenuItem.Text = "Folders Last";
             this.foldersLastToolStripMenuItem.Click += new System.EventHandler(this.sortOrderToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(224, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(228, 6);
             // 
             // lockSessionsToolStripMenuItem
             // 
@@ -225,7 +227,7 @@ namespace uk.org.riseley.puttySessionManager.control
             this.lockSessionsToolStripMenuItem.CheckOnClick = true;
             this.lockSessionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lockSessionsToolStripMenuItem.Name = "lockSessionsToolStripMenuItem";
-            this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.lockSessionsToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.lockSessionsToolStripMenuItem.Text = "Lock Session Tree";
             this.lockSessionsToolStripMenuItem.Click += new System.EventHandler(this.lockSessionsToolStripMenuItem_Click);
             // 
@@ -239,13 +241,13 @@ namespace uk.org.riseley.puttySessionManager.control
             this.saveNewSessionToolStripMenuItem,
             this.setSessionAsHotkeyToolStripMenuItem});
             this.sessionManagementToolStripMenuItem.Name = "sessionManagementToolStripMenuItem";
-            this.sessionManagementToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.sessionManagementToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.sessionManagementToolStripMenuItem.Text = "Session Management";
             // 
             // newFolderMenuItem
             // 
             this.newFolderMenuItem.Name = "newFolderMenuItem";
-            this.newFolderMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.newFolderMenuItem.Size = new System.Drawing.Size(189, 22);
             this.newFolderMenuItem.Text = "New Folder";
             this.newFolderMenuItem.Click += new System.EventHandler(this.newFolderMenuItem_Click);
             // 
@@ -253,7 +255,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.renameMenuItem.Name = "renameMenuItem";
             this.renameMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.renameMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.renameMenuItem.Size = new System.Drawing.Size(189, 22);
             this.renameMenuItem.Text = "Rename";
             this.renameMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
             // 
@@ -261,21 +263,21 @@ namespace uk.org.riseley.puttySessionManager.control
             // 
             this.deleteSessionToolStripMenuItem.Name = "deleteSessionToolStripMenuItem";
             this.deleteSessionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.deleteSessionToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.deleteSessionToolStripMenuItem.Text = "Delete Sessions";
             this.deleteSessionToolStripMenuItem.Click += new System.EventHandler(this.deleteSessionToolStripMenuItem_Click);
             // 
             // exportSessionsToolStripMenuItem
             // 
             this.exportSessionsToolStripMenuItem.Name = "exportSessionsToolStripMenuItem";
-            this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.exportSessionsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.exportSessionsToolStripMenuItem.Text = "Export Sessions";
             this.exportSessionsToolStripMenuItem.Click += new System.EventHandler(this.exportSessionsToolStripMenuItem_Click_1);
             // 
             // saveNewSessionToolStripMenuItem
             // 
             this.saveNewSessionToolStripMenuItem.Name = "saveNewSessionToolStripMenuItem";
-            this.saveNewSessionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.saveNewSessionToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.saveNewSessionToolStripMenuItem.Text = "Save New Session";
             this.saveNewSessionToolStripMenuItem.Click += new System.EventHandler(this.saveNewSessionToolStripMenuItem_Click);
             // 
@@ -293,13 +295,13 @@ namespace uk.org.riseley.puttySessionManager.control
             this.hotkey9MenuItem,
             this.hotkey10MenuItem});
             this.setSessionAsHotkeyToolStripMenuItem.Name = "setSessionAsHotkeyToolStripMenuItem";
-            this.setSessionAsHotkeyToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.setSessionAsHotkeyToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.setSessionAsHotkeyToolStripMenuItem.Text = "Set Session As Hotkey";
             // 
             // hotkey1MenuItem
             // 
             this.hotkey1MenuItem.Name = "hotkey1MenuItem";
-            this.hotkey1MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey1MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey1MenuItem.Text = "Win+1";
             this.hotkey1MenuItem.Visible = false;
             this.hotkey1MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -307,7 +309,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey2MenuItem
             // 
             this.hotkey2MenuItem.Name = "hotkey2MenuItem";
-            this.hotkey2MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey2MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey2MenuItem.Text = "Win+2";
             this.hotkey2MenuItem.Visible = false;
             this.hotkey2MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -315,7 +317,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey3MenuItem
             // 
             this.hotkey3MenuItem.Name = "hotkey3MenuItem";
-            this.hotkey3MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey3MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey3MenuItem.Text = "Win+3";
             this.hotkey3MenuItem.Visible = false;
             this.hotkey3MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -323,7 +325,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey4MenuItem
             // 
             this.hotkey4MenuItem.Name = "hotkey4MenuItem";
-            this.hotkey4MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey4MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey4MenuItem.Text = "Win+4";
             this.hotkey4MenuItem.Visible = false;
             this.hotkey4MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -331,7 +333,7 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey5MenuItem
             // 
             this.hotkey5MenuItem.Name = "hotkey5MenuItem";
-            this.hotkey5MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey5MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey5MenuItem.Text = "Win+5";
             this.hotkey5MenuItem.Visible = false;
             this.hotkey5MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
@@ -339,35 +341,35 @@ namespace uk.org.riseley.puttySessionManager.control
             // hotkey6MenuItem
             // 
             this.hotkey6MenuItem.Name = "hotkey6MenuItem";
-            this.hotkey6MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey6MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey6MenuItem.Text = "Win+6";
             this.hotkey6MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey7MenuItem
             // 
             this.hotkey7MenuItem.Name = "hotkey7MenuItem";
-            this.hotkey7MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey7MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey7MenuItem.Text = "Win+7";
             this.hotkey7MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey8MenuItem
             // 
             this.hotkey8MenuItem.Name = "hotkey8MenuItem";
-            this.hotkey8MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey8MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey8MenuItem.Text = "Win+8";
             this.hotkey8MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey9MenuItem
             // 
             this.hotkey9MenuItem.Name = "hotkey9MenuItem";
-            this.hotkey9MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey9MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey9MenuItem.Text = "Win+9";
             this.hotkey9MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
             // hotkey10MenuItem
             // 
             this.hotkey10MenuItem.Name = "hotkey10MenuItem";
-            this.hotkey10MenuItem.Size = new System.Drawing.Size(117, 22);
+            this.hotkey10MenuItem.Size = new System.Drawing.Size(109, 22);
             this.hotkey10MenuItem.Text = "Win+0";
             this.hotkey10MenuItem.Click += new System.EventHandler(this.hotkeyMenuItem_Click);
             // 
@@ -396,14 +398,21 @@ namespace uk.org.riseley.puttySessionManager.control
             this.treeView.SelectedImageIndex = 1;
             this.treeView.Size = new System.Drawing.Size(205, 414);
             this.treeView.TabIndex = 0;
+            this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView_ItemDrag);
+            this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             this.treeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseDoubleClick);
             this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView_DragDrop);
-            this.treeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseMove);
-            this.treeView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyUp);
-            this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
-            this.treeView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyDown);
-            this.treeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView_ItemDrag);
             this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
+            this.treeView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyDown);
+            this.treeView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyUp);
+            this.treeView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseMove);
+            // 
+            // launchPSFTPToolStripMenuItem
+            // 
+            this.launchPSFTPToolStripMenuItem.Name = "launchPSFTPToolStripMenuItem";
+            this.launchPSFTPToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.launchPSFTPToolStripMenuItem.Text = "Launch PSFTP";
+            this.launchPSFTPToolStripMenuItem.Click += new System.EventHandler(this.launchPSFTPToolStripMenuItem_Click);
             // 
             // SessionTreeControl
             // 
@@ -456,5 +465,6 @@ namespace uk.org.riseley.puttySessionManager.control
         private System.Windows.Forms.ToolStripMenuItem collapseTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchFilezillaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchWinSCPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchPSFTPToolStripMenuItem;
     }
 }

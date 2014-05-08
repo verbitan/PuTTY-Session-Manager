@@ -21,7 +21,7 @@ namespace uk.org.riseley.puttySessionManager.model.eventargs
 {
     public class LaunchSessionEventArgs : EventArgs 
     {
-        public enum PROGRAM { PUTTY, FILEZILLA, WINSCP };
+        public enum PROGRAM { PUTTY, FILEZILLA, WINSCP, PSFTP };
 
         public LaunchSessionEventArgs()
             : this(null, PROGRAM.PUTTY)
