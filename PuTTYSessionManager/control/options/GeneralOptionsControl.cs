@@ -68,6 +68,15 @@ namespace uk.org.riseley.puttySessionManager.control.options
             }
         }
 
+        private void locatePSFTPbutton_Click(object sender, EventArgs e)
+        {
+            setupOpenFileDialogue(FileDialogType.PSFTP);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                psftpTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
         private void chooseFontButton_Click(object sender, EventArgs e)
         {
             fontDialog.Font = Properties.Settings.Default.DialogFont;

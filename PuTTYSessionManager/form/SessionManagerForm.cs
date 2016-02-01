@@ -290,6 +290,16 @@ namespace uk.org.riseley.puttySessionManager.form
                         , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                else if (se.program == LaunchSessionEventArgs.PROGRAM.PSFTP)
+                {
+                    String errMsg = sc.launchPSFTP(se.SessionName());
+                    if (errMsg.Equals("") == false)
+                    {
+                        MessageBox.Show("PSFTP Failed to start.\nCheck the PSFTP location in System Tray -> Options.\n" +
+                                        errMsg
+                        , "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
                 else if (se.program == LaunchSessionEventArgs.PROGRAM.FILEZILLA)
                 {
                     String errMsg = sc.launchOtherSession(se.session, se.program);

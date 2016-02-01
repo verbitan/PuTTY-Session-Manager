@@ -237,5 +237,11 @@
     <Setting Name="FileZillaVersion" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="PSFTPEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PSFTPLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\PuTTY\psftp.exe</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
